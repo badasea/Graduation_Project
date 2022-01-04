@@ -1,5 +1,10 @@
-# Graduation_Project
+# 👨‍🎓 Graduation_Project
 
+# 🖥 화면 정의서
+
+# 📌 요구 사항 분석
+
+# ✔ 요구사항 체크리스트
 
 # ⚙ 기술 스택 
 
@@ -22,3 +27,15 @@ IDE - Visual Studio Code, IntelliJ
 디자인 툴 - Pigma
 
 형상 관리 - Github
+
+# ⚙ 시스템 아키텍처
+
+- 노션에서 따로 배포 예정
+
+# ⚙ ERD
+
+- 노션에서 따로 배포 예정
+
+# 📑 상세기술 정의서
+
+- 노션에서 따로 배포 예정
