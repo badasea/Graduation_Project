@@ -6,7 +6,7 @@
 
 # ✔ 요구사항 체크리스트
 
-# ⚙ 기술 스택 
+# ⚙ 기술 스택
 
 개발언어 : CSS, HTML, JAVASCRIPT(ECMAScript6), REACTJS(JSX)
 
@@ -14,7 +14,7 @@ Front-End : REACT
 
 Back-End : Spring Boot(Maven) or Express(Node.js)
 
-API - Npm( React-dom, Material-Ui, axios... )
+API - Npm( React-router-dom, Material-Ui, axios... )
 
 IDE - Visual Studio Code, IntelliJ
 
