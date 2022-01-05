@@ -12,17 +12,19 @@
 
 Front-End : REACT
 
-Back-End : Express(Node.js)
+Back-End : Express(Node.js v16.13.1)
 
-API
+Package
 
 Front-End : Npm( React-router-dom, Material-Ui, axios... )
 
-Back-End : Npm( Express, mysql, dotenv... )
+Back-End : Npm( Express, mysql, dotenv, swagger... )
 
 IDE - Visual Studio Code
 
-데이터베이스 - Mysql
+데이터베이스 - Mysql v8.0
+
+API 테스트 - Postman
 
 개발 운영체제 환경 - 윈도우10
 
