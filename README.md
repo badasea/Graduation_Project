@@ -14,11 +14,11 @@ Front-End : REACT
 
 Back-End : Express(Node.js)
 
-API 
+API
 
 Front-End : Npm( React-router-dom, Material-Ui, axios... )
 
-Back-End : Npm( Express, mysql... )
+Back-End : Npm( Express, mysql, dotenv... )
 
 IDE - Visual Studio Code
 
@@ -34,9 +34,6 @@ IDE - Visual Studio Code
 
 # ⚙ 시스템 아키텍처
 
-
 # ⚙ ERD
 
-
 # 📑 상세기술 정의서
-
