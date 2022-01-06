@@ -1,13 +1,18 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const path = require("path");
+const morgan = require("morgan");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 const port = process.env.PORT || 3001;
+
 const mysql = require("mysql");
 require("dotenv").config();
 
-const { swaggerUi, specs } = require("./modules/swagger");
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+// const { swaggerUi, specs } = require("./modules/swagger");
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // mysql 연동
 const connection = mysql.createConnection({
@@ -16,6 +21,7 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB,
 });
+app.use(morgan("dev"));
 
 connection.connect();
 
@@ -28,24 +34,25 @@ app.get("/db", (req, res) => {
   });
 });
 
+app.use(express.static(path.join(__dirname, "public")));
+
+app.listen(port, () => {
+  console.log(`server is listening at localhost:` + port);
+});
+
+///// TEST
+// app.get("/", (req, res) => {
+//   res.json({
+//     success: true,
+//   });
+// });
 // Test Data
 // const users = [
 //   { id: 1, name: "user1" },
 //   { id: 2, name: "user2" },
 //   { id: 3, name: "user3" },
 // ];
-
-app.get("/", (req, res) => {
-  res.json({
-    success: true,
-  });
-});
-
 // app.get("/user", (req, res) => {
 //   // user 정보 반환
 //   res.json({ users: users });
 // });
-
-app.listen(port, () => {
-  console.log(`server is listening at localhost:${process.env.PORT}`);
-});

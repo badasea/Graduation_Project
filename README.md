@@ -18,7 +18,7 @@ Package
 
 Front-End : Npm( React-router-dom, Material-Ui, axios... )
 
-Back-End : Npm( Express, mysql, dotenv, swagger... )
+Back-End : Npm( Express, mysql, dotenv, swagger, cors, morgan... )
 
 IDE - Visual Studio Code
 
