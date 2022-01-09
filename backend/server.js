@@ -1,51 +1,53 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 const port = process.env.PORT || 3001;
 
-const mysql = require("mysql");
+// const mysql = require("mysql");
 require("dotenv").config();
 
-// const { swaggerUi, specs } = require("./modules/swagger");
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+const UserRoute = require("./routes/user.routes");
+
+app.use("/api/user", UserRoute);
 
 // mysql 연동
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB,
-});
-app.use(morgan("dev"));
+// const connection = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB,
+// });
 
-connection.connect();
+// connection.connect();
 
-app.get("/db", (req, res) => {
-  var queryString = "SELECT * FROM user";
-  connection.query(queryString, (err, results, fields) => {
-    if (err) throw err;
-    //console.log("results: ", results);
-    res.json(results); // json
-  });
-});
-
-app.use(express.static(path.join(__dirname, "public")));
+// app.get("/db", (req, res) => {
+//   var queryString = "SELECT * FROM user";
+//   connection.query(queryString, (err, results, fields) => {
+//     if (err) throw err;
+//     //console.log("results: ", results);
+//     res.json(results); // json
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`server is listening at localhost:` + port);
 });
 
 ///// TEST
-// app.get("/", (req, res) => {
-//   res.json({
-//     success: true,
-//   });
-// });
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+  });
+});
 // Test Data
 // const users = [
 //   { id: 1, name: "user1" },

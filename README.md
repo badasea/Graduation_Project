@@ -1,4 +1,4 @@
-# 👨‍🎓 Graduation_Project
+# 👨‍🎓 Graduation_Project (Metaverse)
 
 # 🖥 화면 정의서
 
@@ -18,7 +18,7 @@ Package
 
 Front-End : Npm( React-router-dom, Material-Ui, axios... )
 
-Back-End : Npm( Express, mysql, dotenv, swagger, cors, morgan... )
+Back-End : Npm( Express, mysql, dotenv, cors, morgan... )
 
 IDE - Visual Studio Code
 
