@@ -5,19 +5,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const port = process.env.PORT || 3001;
 
-// SSL
-// const https = require("https");
-// const fs = require("fs");
-// const options = {
-//   ca: fs.readFileSync(),
-//   key: fs.readFileSync("key.pem"),
-//   cert: fs.readFileSync("cert.pem"),
-// };
-
-// https.createServer(options, app).listen(port);
-
-///
-
 app.use(morgan("dev"));
 
 app.use(bodyParser.json());
@@ -32,7 +19,6 @@ app.use(cors(corsOptions));
 require("dotenv").config();
 
 const UserRoute = require("./routes/user.routes");
-const { trace } = require("./routes/user.routes");
 
 app.use("/api/user", UserRoute);
 

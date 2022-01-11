@@ -148,7 +148,7 @@ Package
 
 Front-End : Npm( React-router-dom, Material-Ui, axios... )
 
-Back-End : Npm( Express, mysql, dotenv, cors, morgan, express-http-proxy... )
+Back-End : Npm( Express, mysql, dotenv, cors, morgan... )
 
 IDE - Visual Studio Code
 
