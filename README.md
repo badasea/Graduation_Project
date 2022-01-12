@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**👨‍🎓 졸업 작품 작품명 : 클라우드 기반 전통시장 라이브커머스(작품명미정)**
+**👨‍🎓 졸업 작품 작품명 : 리코 마켓(클라우드 기반 전통시장 라이브커머스)**
 
 </div>
 
@@ -38,6 +38,42 @@
 
 # 📌 요구 사항 분석
 
+**요구기술**
+
+### 백 엔드
+
+Express REST API server
+Mysql DB 연동
+배포시 환경 AWS 배포
+socket.io
+
+### 프론트 엔드
+
+리액트 Hook
+리액트 Home 화면 및 Main 화면 scroll 애니메이션
+배포시 Spring boot(maven)이랑 묶어서 환경 Paas_Ta 배포
+socket.io
+웹캠 화면 구성
+
+### 머신러닝
+
+상점 추천 알고리즘
+
+클라우드
+PaasTa, AWS 앱 배포
+
+## !! ⛔ 잇슈 ⛔ !!
+
+### 현재 개발 스터디 및 설계 고려가 필요한 부분
+
+1. 사용자들 취향에 맞는 추천 시스템 알고리즘
+
+2. AWS EC2 배포
+
+3. 리액트 스크롤 애니메이션 이벤트
+
+4. 가게 웹캠 주소 암호화( or 블록체인)
+
 **공통**
 
 로그인 기능
@@ -59,6 +95,8 @@
 이용자간에 전체 채팅 기능
 
 다수 사용자 수용 기능(소켓)
+
+암호화 기능
 
 <!-- 메타버스 어플리케이션 기능
 
@@ -82,8 +120,6 @@
 구매(영수증)
 
 - 구매 목록 조회 기능
-
-사용자 리뷰 기능
 
 **판매자 관점**
 
@@ -148,9 +184,9 @@ Back-End : Express(Node.js v16.13.1)
 
 Package
 
-Front-End : Npm( React-router-dom, Material-Ui, axios... )
+Front-End : Npm( React-router-dom, socket.io, Material-Ui, axios... )
 
-Back-End : Npm( Express, mysql, dotenv, cors, morgan... )
+Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 
 IDE - Visual Studio Code
 
