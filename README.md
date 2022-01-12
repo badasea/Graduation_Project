@@ -2,13 +2,15 @@
 
 <div align="center">
 
-**👨‍🎓 졸업 작품 작품명 : 클라우드 기반 시장메타버스(작품명미정)**
+**👨‍🎓 졸업 작품 작품명 : 클라우드 기반 전통시장 라이브커머스(작품명미정)**
 
 </div>
 
-![image](https://user-images.githubusercontent.com/57929751/148691421-acc02d4d-6b02-4584-aef0-156915acca6f.png)
+<!-- ![image](https://user-images.githubusercontent.com/57929751/148691421-acc02d4d-6b02-4584-aef0-156915acca6f.png) -->
 
 <div align="center">
+
+![image](https://user-images.githubusercontent.com/57929751/149087226-b96d6163-8da9-47a1-9f1b-d241a2afbc80.png)
 
 ==============================
 
@@ -58,11 +60,11 @@
 
 다수 사용자 수용 기능(소켓)
 
-메타버스 어플리케이션 기능
+<!-- 메타버스 어플리케이션 기능
 
 - 아바타 키보드로 이동 기능
 - 아바타 키보드로 이벤트 발생 기능
-- 아바타 마우스 클릭으로 이벤트 발생 기능
+- 아바타 마우스 클릭으로 이벤트 발생 기능 -->
 
 사용자 편의를 위한 사이드바 기능
 
