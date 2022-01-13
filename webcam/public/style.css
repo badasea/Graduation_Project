@@ -24,7 +24,7 @@
 }
 
 .logo > h3 {
-  color: var(--main-light);
+  color: #eeeeee;
 }
 
 .main {
@@ -34,7 +34,7 @@
 }
 
 .main__left {
-  flex: 0.7;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -122,6 +122,7 @@ video {
   border: none;
 }
 
+/* 유저 메세지 창 */
 .messages {
   display: flex;
   flex-direction: column;
@@ -148,8 +149,40 @@ video {
 .message > span {
   background-color: #eeeeee;
   margin: 1rem 0;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 5px;
+}
+
+/* 공지 메세지 창 */
+.admin_messages {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}
+
+.admin_message {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin_message > b {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  color: aquamarine;
+}
+
+.admin_message > b > i {
+  margin-right: 1rem;
+  font-size: 1rem;
+  color: aquamarine;
+}
+
+.admin_message > span {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: aquamarine;
 }
 
 #video-grid {
@@ -182,7 +215,7 @@ video {
 
   video {
     height: auto;
-    width: 100%;
+    width: auto;
   }
 
   #showChat {

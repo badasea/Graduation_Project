@@ -19,7 +19,14 @@ showChat.addEventListener("click", () => {
   document.querySelector(".header__back").style.display = "block";
 });
 
-const user = prompt("Enter your name");
+// const user = prompt("Enter your name");
+function getCookie(name) {
+  var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return value ? value[2] : null;
+}
+
+const user = getCookie("cookie");
+console.log(user);
 
 var peer = new Peer(undefined, {
   path: "/peerjs",
@@ -133,7 +140,7 @@ socket.on("createMessage", (message, userName) => {
     messages.innerHTML +
     `<div class="message">
         <b><i class="far fa-user-circle"></i> <span> ${
-          userName === user ? "me" : userName
+          userName === user ? userName + " (나)" : userName
         }</span> </b>
         <span>${message}</span>
     </div>`;

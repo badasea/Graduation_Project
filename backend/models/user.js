@@ -4,9 +4,11 @@ const mysql = require("../config/mysql");
 
 let User = function (user) {
   this.user_id = user.user_id;
-  this.user_email = user.user_email;
   this.user_name = user.user_name;
+  this.user_email = user.user_email;
   this.user_password = user.user_password;
+  this.user_address = user.user_address;
+  this.user_type = user.user_type;
 };
 
 // 모든 사용자 검색
@@ -61,8 +63,15 @@ User.delete = function (id, result) {
 
 User.update = function (id, user, result) {
   mysql.query(
-    "UPDATE user SET user_name=?,user_email=?,user_password=? WHERE user_id = ?",
-    [user.user_name, user.user_email, user.user_password, id],
+    "UPDATE user SET user_name=?,user_email=?,user_password=?,user_address=?,user_type=? WHERE user_id = ?",
+    [
+      user.user_name,
+      user.user_email,
+      user.user_password,
+      user.user_address,
+      user.user_type,
+      id,
+    ],
     function (err, res) {
       if (err) {
         console.log("error: ", err);

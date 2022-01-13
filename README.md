@@ -184,7 +184,7 @@ Back-End : Express(Node.js v16.13.1)
 
 Package
 
-Front-End : Npm( React-router-dom, socket.io, Material-Ui, axios... )
+Front-End : Npm( React-router-dom, socket.io-client, query-string, Material-Ui, axios... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 
@@ -204,6 +204,8 @@ API 테스트 - Postman
 
 # ⚙ 시스템 아키텍처
 
-# ⚙ ERD
+# ⚙ ERD (~ing)
+
+![image](https://user-images.githubusercontent.com/57929751/149330368-d87eb7f9-3cc8-4bb3-81d9-22c0bdda7b87.png)
 
 # 📑 상세기술 정의서
