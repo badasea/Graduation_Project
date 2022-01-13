@@ -6,8 +6,6 @@
 
 </div>
 
-<!-- ![image](https://user-images.githubusercontent.com/57929751/148691421-acc02d4d-6b02-4584-aef0-156915acca6f.png) -->
-
 <div align="center">
 
 ![image](https://user-images.githubusercontent.com/57929751/149087226-b96d6163-8da9-47a1-9f1b-d241a2afbc80.png)
@@ -59,12 +57,13 @@ socket.io
 
 상점 추천 알고리즘
 
-클라우드
+### 클라우드
+
 PaasTa, AWS 앱 배포
 
-## !! ⛔ 잇슈 ⛔ !!
+## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 1월 13일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 1월 14일 기준)
 
 1. 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -98,15 +97,9 @@ PaasTa, AWS 앱 배포
 
 암호화 기능
 
-<!-- 메타버스 어플리케이션 기능
-
-- 아바타 키보드로 이동 기능
-- 아바타 키보드로 이벤트 발생 기능
-- 아바타 마우스 클릭으로 이벤트 발생 기능 -->
-
 사용자 편의를 위한 사이드바 기능
 
-장바구니 목록 알림바(팝업창) 기능
+장바구니 목록 알림 기능
 
 상품
 
@@ -138,7 +131,7 @@ PaasTa, AWS 앱 배포
 
 시스템 관리자 기능
 
-대시보드 기능
+대시보드 차트 분석(아마 chart.js) 기능
 
 데이터 검색 기능
 
@@ -155,12 +148,6 @@ PaasTa, AWS 앱 배포
 - 삭제 기능
 
 상품
-
-- 등록 기능
-- 수정 기능
-- 삭제 기능
-
-장바구니
 
 - 등록 기능
 - 수정 기능
@@ -184,7 +171,7 @@ Back-End : Express(Node.js v16.13.1)
 
 Package
 
-Front-End : Npm( React-router-dom, socket.io-client, query-string, Material-Ui, axios... )
+Front-End : Npm( React-router-dom, Material-Ui, axios... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 

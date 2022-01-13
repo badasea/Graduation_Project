@@ -1,9 +1,4 @@
-// import React, { useState } from "react";
-import React, { useState, useEffect } from "react";
-import io from "socket.io-client";
-// import queryString from "query-string";
-
-const socketClient = io("http://localhost:443");
+import React, { useState } from "react";
 
 function Home() {
   const [email, setEmail] = useState("");
@@ -12,11 +7,6 @@ function Home() {
     setEmail(event.currentTarget.value);
   };
 
-  // useEffect(() => {
-  //   socketClient.on("connect", () => {
-  //     console.log("connection server");
-  //   });
-  // });
   function setCookie(name, value, exp) {
     var date = new Date();
     date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
@@ -25,9 +15,6 @@ function Home() {
   }
 
   function webcam() {
-    // socketClient.on("connect", () => {
-    //   console.log("connection server");
-    // });
     setCookie("cookie", email, 1);
 
     window.open(
