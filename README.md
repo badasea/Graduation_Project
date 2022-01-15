@@ -73,6 +73,8 @@ PaasTa, AWS 앱 배포
 
 4. 가게 웹캠 주소 암호화( or 블록체인)
 
+5. 카카오,구글,네이버 로그인 API
+
 **공통**
 
 로그인 기능
@@ -171,7 +173,7 @@ Back-End : Express(Node.js v16.13.1)
 
 Package
 
-Front-End : Npm( React-router-dom, Material-Ui, axios... )
+Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, styled-components, dotenv... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 

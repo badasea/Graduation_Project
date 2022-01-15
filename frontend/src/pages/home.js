@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import GoogleLoginBtn from "../login_api/Google";
 function Home() {
   const [email, setEmail] = useState("");
 
@@ -23,6 +23,8 @@ function Home() {
       "toolbar=no, menubar=no, resizable=yes"
     );
   }
+
+  console.log(process.env.REACT_APP_GOOGLE_ID);
   return (
     <div>
       <h1>Home</h1>
@@ -31,6 +33,7 @@ function Home() {
       <br />
       <input type="text" value={email} onChange={onEmailHandler}></input>
       <button onClick={webcam}>웹캠 입장하기</button>
+      <GoogleLoginBtn />
     </div>
   );
 }
