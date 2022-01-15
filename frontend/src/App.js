@@ -5,7 +5,6 @@ import Home from "./pages/home";
 
 // 로그인
 import Login from "./pages/login";
-import KakaoLogin from "./login_api/KakaoLogin";
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/kakaologin" element={<KakaoLogin />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

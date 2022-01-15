@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import GoogleLoginBtn from "../login_api/Google";
+import KakaoLogin from "../login_api/Kakao";
 
 function Login() {
   var [user, setUser] = useState(null);
@@ -26,7 +28,7 @@ function Login() {
     fetchUsers();
   }, []);
 
-  console.log(user);
+  //console.log(user);
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
@@ -35,7 +37,12 @@ function Login() {
   return (
     <div>
       <h1>Login Page</h1>
+      <p>이메일</p>
       <input value={user[0].user_name}></input>
+      <p>비밀번호</p>
+      <input value={user[1].user_name}></input>
+      <GoogleLoginBtn />
+      <KakaoLogin />
     </div>
   );
 }

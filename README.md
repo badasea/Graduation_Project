@@ -44,6 +44,7 @@ Express REST API server
 Mysql DB 연동
 배포시 환경 AWS 배포
 socket.io
+데이터 중복 제거
 
 ### 프론트 엔드
 
@@ -52,6 +53,7 @@ socket.io
 배포시 Spring boot(maven)이랑 묶어서 환경 Paas_Ta 배포
 socket.io
 웹캠 화면 구성
+구글, 카카오, 네이버 로그인
 
 ### 머신러닝
 
@@ -173,7 +175,7 @@ Back-End : Express(Node.js v16.13.1)
 
 Package
 
-Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, styled-components, dotenv... )
+Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, ... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 

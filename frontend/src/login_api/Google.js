@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 const clientId = process.env.REACT_APP_GOOGLE_ID;
 
@@ -12,25 +12,15 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
     console.log(error);
   };
 
-  const logout = () => {
-    window.localStorage.removeItem("user_id");
-    window.localStorage.removeItem("user_email");
-    window.localStorage.removeItem("user_name");
-  };
-
   return (
     <div>
       <GoogleLogin
+        theme="dark"
         clientId={clientId}
         buttonText="구글 로그인"
         responseType={"id_token"}
         onSuccess={onSuccess}
         onFailure={onFailure}
-      />
-      <GoogleLogout
-        clientId={clientId}
-        buttonText="로그아웃"
-        onLogoutSuccess={logout}
       />
     </div>
   );
