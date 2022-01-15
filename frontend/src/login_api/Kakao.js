@@ -26,8 +26,9 @@ const ButtoninnerText = styled.h3`
 class LoginKaKao extends Component {
   render() {
     function login(response) {
-      console.log(response.profile.properties.nickname);
+      console.log(response);
     }
+
     return (
       <div>
         <KaKaoLogin
