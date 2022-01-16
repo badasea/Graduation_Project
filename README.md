@@ -14,7 +14,7 @@
 
 **Front-End : React**
 
-**Back-End : Express**
+**Back-End : Express, Django**
 
 **DB : Mysql**
 
@@ -40,7 +40,7 @@
 
 ### 백 엔드
 
-Express REST API server
+Express REST API Server
 Mysql DB 연동
 배포시 환경 AWS 배포
 socket.io
@@ -48,8 +48,8 @@ socket.io
 
 ### 프론트 엔드
 
-리액트 Hook
-리액트 Home 화면 및 Main 화면 scroll 애니메이션
+React Hook
+React Home 화면 및 Main 화면 scroll 애니메이션
 배포시 Spring boot(maven)이랑 묶어서 환경 Paas_Ta 배포
 socket.io
 웹캠 화면 구성
@@ -57,6 +57,7 @@ socket.io
 
 ### 머신러닝
 
+Django REST API Server
 상점 추천 알고리즘
 
 ### 클라우드
@@ -67,13 +68,21 @@ PaasTa, AWS 앱 배포
 
 ### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 1월 16일 기준)
 
-1. 사용자들 취향에 맞는 추천 시스템 알고리즘
+1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
-2. AWS EC2 배포
+A. Goals of Recommender Systems
 
-3. 리액트 스크롤 애니메이션 이벤트
+Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭킹을 고려해 top-k의 아이템을 선정하는 것이 목적
+**_ 본 프로젝트에서는 랭킹 수치보단 상품의 구매 수치를 고려해 사용자에게 노출 시킬 예정 _**
 
-4. 가게 웹캠 주소 암호화( or 블록체인)
+2. AWS EC2 배포 :
+   백엔드 서버에 경우 Paas-Ta Mysql 연동 잇슈가 있는 관계로 이번 버젼 업데이트에서 해결이 되는 경우 모든 클라우드 서버는 파스타 클라우드로 고려
+
+3. 리액트 스크롤 애니메이션 이벤트 :
+   단순한 웹 기능보다 리액트에 SPA 특성을 활용해 애니메이션을 제공하여 사용자로 하여금 웹 사용에 즐거움 부여
+
+4. 계정 암호화( or 블록체인) :
+   비록 졸업 프로젝트이기 큰 단위에 암호화를 다루는데는 동작면에서는 문제 없으나 실제 배포된다는 가정이면 금전적인 문제가 필연적이기 때문에 암호화는 반드시 필요하다.
 
 **공통**
 
@@ -93,6 +102,22 @@ PaasTa, AWS 앱 배포
 
 광고 기능
 
+사용자 편의를 위한 사이드바 기능
+
+1. 서울시 시장별 구분
+2. 업종별 구분
+3. 가게
+
+   3-1. 등록
+
+   3-2. 가게 등록시 수정 기능 추가
+
+   3-3. 가게 등록시 사용자들과 소통 방송 켜기 기능 추가
+
+4. 장바구니
+5. 주문 목록
+6. 최하단 로그아웃
+
 구매자와 판매자간에 화상 통화를 위한 ZOOM 기능
 
 구매자와 판매자간에 채팅 기능
@@ -100,8 +125,6 @@ PaasTa, AWS 앱 배포
 다수 사용자 수용 기능(소켓)
 
 암호화 기능
-
-사용자 편의를 위한 사이드바 기능
 
 장바구니 목록 알림 기능
 
@@ -163,21 +186,25 @@ PaasTa, AWS 앱 배포
 - 수정 기능
 - 삭제 기능
 
-# ✔ 요구사항 체크리스트
+# ✔ 요구사항 체크리스트(요구사항 정의 후 작성 예정)
 
 # ⚙ 기술 스택
 
-개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js
+개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js, python3
 
 Front-End : REACT
 
 Back-End : Express(Node.js v16.13.1)
+
+ML : Django
 
 Package
 
 Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, ... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
+
+ML : pip(django, djangorestframework, mysqlclient...)
 
 API - google-login, kakao-login, naver-login
 
