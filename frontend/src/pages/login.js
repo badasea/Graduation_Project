@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import GoogleLoginBtn from "../login_api/Google";
 import KakaoLogin from "../login_api/Kakao";
+import NaverLogin from "../login_api/Naver";
 
 function Login() {
   var [user, setUser] = useState(null);
@@ -43,6 +44,7 @@ function Login() {
       <input value={user[1].user_name}></input>
       <GoogleLoginBtn />
       <KakaoLogin />
+      <NaverLogin />
     </div>
   );
 }

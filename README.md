@@ -75,27 +75,27 @@ PaasTa, AWS 앱 배포
 
 4. 가게 웹캠 주소 암호화( or 블록체인)
 
-5. 네이버 로그인 API
-
 **공통**
 
 로그인 기능
 
 회원가입 기능
 
+구글 로그인 기능
+
+카카오 로그인 기능
+
+네이버 로그인 기능
+
 **사용자 관점**
 
 회원 수정 기능
-
-플랫폼 이용 가이드 제공 기능
 
 광고 기능
 
 구매자와 판매자간에 화상 통화를 위한 ZOOM 기능
 
 구매자와 판매자간에 채팅 기능
-
-이용자간에 전체 채팅 기능
 
 다수 사용자 수용 기능(소켓)
 
@@ -167,7 +167,7 @@ PaasTa, AWS 앱 배포
 
 # ⚙ 기술 스택
 
-개발언어 : CSS, HTML, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js
+개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js
 
 Front-End : REACT
 
@@ -178,6 +178,8 @@ Package
 Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, ... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
+
+API - google-login, kakao-login, naver-login
 
 IDE - Visual Studio Code
 
