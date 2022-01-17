@@ -36,6 +36,22 @@ User.findById = function (id, result) {
   });
 };
 
+// 사용자 로그인
+User.login = function (email, result) {
+  mysql.query(
+    "Select user_email, user_password, user_name from user where user_email = ? ",
+    email,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 사용자 등록
 User.create = function (newEmp, result) {
   mysql.query("INSERT INTO user set ?", newEmp, function (err, res) {

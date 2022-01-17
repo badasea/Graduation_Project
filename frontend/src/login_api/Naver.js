@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class NaverLogin extends Component {
   componentDidMount() {
@@ -28,6 +29,22 @@ class NaverLogin extends Component {
       naverLogin.getLoginStatus((status) => {
         if (status) {
           console.log(naverLogin.user);
+          let data = {
+            user_email: naverLogin.user.email,
+            user_name: naverLogin.user.name,
+          };
+          axios.post("/api/user", data).then(function (res) {
+            console.log(res.data);
+          });
+          var url = "/api/user/login/" + data.user_email;
+          axios
+            .get(url)
+            .then(function (response) {
+              console.log(response.data);
+            })
+            .catch(function (error) {
+              //console.log("실패");
+            });
         } else {
           console.log("error");
         }
