@@ -27,8 +27,24 @@ function ItemCard() {
     setExpanded(!expanded);
   };
 
+  function setCookie(name, value, exp) {
+    var date = new Date();
+    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+  }
+
+  function webcam() {
+
+    window.open(
+      "http://localhost:443/12",
+      "",
+      "toolbar=no, menubar=no, resizable=yes"
+    );
+  }
+
   return (
-    <Card sx={{ maxWidth: 245 }}>
+    <Card sx={{ maxWidth: 235 }}>
       <CardHeader title="상품명" subheader="업종" />
       <CardMedia
         component="img"
@@ -46,7 +62,7 @@ function ItemCard() {
           <button>상품 구매하기</button>
         </IconButton>
         <IconButton aria-label="share">
-          <button>방송 보기</button>
+          <button onClick={webcam}>방송 보기</button>
         </IconButton>
         <ExpandMore
           expand={expanded}

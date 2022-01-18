@@ -1,6 +1,8 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import axios from "axios";
+import { width } from "@mui/system";
+import styled from "styled-components";
 
 const clientId = process.env.REACT_APP_GOOGLE_ID;
 
@@ -11,6 +13,7 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
       user_email: response.profileObj.email,
       user_name: response.profileObj.name,
     };
+
     axios.post("/api/user", data).then(function (res) {
       console.log(res.data);
     });
@@ -19,6 +22,8 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
       .get(url)
       .then(function (response) {
         console.log(response.data);
+        setCookie("cookie", response.data[0].user_name, 1);
+
         document.location.href = "/main";
       })
       .catch(function (error) {
@@ -30,12 +35,18 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
     console.log(error);
   };
 
+  function setCookie(name, value, exp) {
+    var date = new Date();
+    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+  }
   return (
     <div>
       <GoogleLogin
         theme="dark"
         clientId={clientId}
-        buttonText="구글 로그인"
+        buttonText="구글 아이디로 로그인"
         responseType={"id_token"}
         onSuccess={onSuccess}
         onFailure={onFailure}

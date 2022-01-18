@@ -7,23 +7,18 @@ const KAKAO_KEY = process.env.REACT_APP_KAKAO_KEY;
 
 const buttonBlock = {
   border: "none",
-  borderRadius: "9px",
-  fontSize: "17px",
-  width: "284px",
+  borderRadius: "12px",
+  fontSize: "20px",
+  width: "100%",
   fontWeight: "500",
-  height: "32px",
+  height: "60px",
   cursor: "pointer",
-  background: "#fae101",
+  background: "#FEE500",
   alignItems: "center",
   display: "flex",
   justifyContent: "center",
-  padding: "4px 0px",
+  collapse: "collapse",
 };
-
-const ButtoninnerText = styled.h3`
-  margin: 0;
-  font-size: 14px;
-`;
 
 function LoginKaKao() {
   function login(response) {
@@ -32,6 +27,7 @@ function LoginKaKao() {
       user_email: response.profile.kakao_account.email,
       user_name: response.profile.kakao_account.profile.nickname,
     };
+
     axios.post("/api/user", data).then(function (res) {
       console.log(res.data);
     });
@@ -40,6 +36,8 @@ function LoginKaKao() {
       .get(url)
       .then(function (response) {
         console.log(response.data);
+        setCookie("cookie", response.data[0].user_name, 1);
+
         document.location.href = "/main";
 
         // console.log(response.data[0].user_email);
@@ -49,18 +47,22 @@ function LoginKaKao() {
         //console.log("실패");
       });
   }
-
+  function setCookie(name, value, exp) {
+    var date = new Date();
+    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+  }
   return (
     <div>
       <KaKaoLogin
         token={KAKAO_KEY}
-        buttonText="kakao"
         onSuccess={login}
         onFail={console.error}
         onLogout={console.info}
         style={buttonBlock}
       >
-        <ButtoninnerText>카카오 계정으로 로그인</ButtoninnerText>
+        <div style={{ color: "black" }}>카카오 로그인</div>
       </KaKaoLogin>
     </div>
   );

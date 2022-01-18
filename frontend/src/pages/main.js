@@ -23,6 +23,9 @@ import Button from "@mui/material/Button";
 import ShopCard from "../components/card/shop_card";
 import ItemCard from "../components/card/item_card";
 
+import ItemList from "../components/List/item_list";
+import ShopList from "../components/List/shop_list";
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -168,15 +171,25 @@ export default function Main() {
         <Typography variant="h3" color="primary">
           가게 리스트
         </Typography>
-        <ShopCard />
+        <ShopList />
+        {/* <ShopCard /> */}
+        <br />
         <Typography variant="h3" color="primary">
           상품 리스트
         </Typography>
-        <ItemCard />
+        <ItemList />
+        {/* <ItemCard /> */}
+        <br />
+        <Typography variant="h3" color="primary">
+          알고리즘 추천 가게 리스트
+        </Typography>
+        <ShopList />
+        <br />
         <Typography variant="h3" color="primary">
           알고리즘 추천 상품 리스트
         </Typography>
-        <ItemCard />
+        <ItemList />
+        {/* <ItemCard /> */}
       </Box>
     </Box>
   );

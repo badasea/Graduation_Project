@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+const Style = {
+  width: "100%",
+};
+
 class NaverLogin extends Component {
   componentDidMount() {
     // Naver sdk import
@@ -33,6 +37,7 @@ class NaverLogin extends Component {
             user_email: naverLogin.user.email,
             user_name: naverLogin.user.name,
           };
+
           axios.post("/api/user", data).then(function (res) {
             console.log(res.data);
           });
@@ -41,6 +46,8 @@ class NaverLogin extends Component {
             .get(url)
             .then(function (response) {
               console.log(response.data);
+              setCookie("cookie", response.data[0].user_name, 1);
+
               document.location.href = "/main";
             })
             .catch(function (error) {
@@ -51,6 +58,12 @@ class NaverLogin extends Component {
         }
       });
     };
+    function setCookie(name, value, exp) {
+      var date = new Date();
+      date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+      document.cookie =
+        name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+    }
   }
 
   render() {

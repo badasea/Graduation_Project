@@ -28,8 +28,8 @@ function ShopCard() {
   };
 
   return (
-    <Card sx={{ maxWidth: 245 }}>
-      <CardHeader title="가게명" subheader="업종" />
+    <Card sx={{ maxWidth: 235 }}>
+      <CardHeader title="가게명" subheader="지역" />
       <CardMedia
         component="img"
         height="194"
@@ -43,7 +43,7 @@ function ShopCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <button>가게 입장하기</button>
+          <button>가게 둘러보기</button>
         </IconButton>
         <IconButton aria-label="share">
           <button>방송 보기</button>

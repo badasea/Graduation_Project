@@ -42,7 +42,7 @@ export default function SignInSide() {
       password: data.get("password"),
     };
     console.log(user);
-
+    setCookie("cookie", data.get("email"), 1);
     var url = "/api/user/login/" + user.email;
     axios
       .get(url)
@@ -67,6 +67,13 @@ export default function SignInSide() {
         //console.log("실패");
       });
   };
+
+  function setCookie(name, value, exp) {
+    var date = new Date();
+    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie =
+      name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+  }
 
   return (
     <ThemeProvider theme={theme}>
