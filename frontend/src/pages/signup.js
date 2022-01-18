@@ -11,6 +11,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import axios from "axios";
+
 function Copyright(props) {
   return (
     <Typography
@@ -30,11 +32,26 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    let user = {
+      user_email: data.get("email"),
+      user_password: data.get("password"),
+      user_name: data.get("Name"),
+      user_address: data.get("address"),
+    };
+    axios
+      .post("/api/user", user, {})
+      .then((res) => {
+        console.log(res.data);
+        if (res.data !== undefined) {
+          // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
+          alert("이미 등록된 이메일 계정입니다.");
+        } else {
+          alert("회원가입이 완료되었습니다.");
+          document.location.href = "/";
+        }
+      })
+      .catch();
   };
 
   return (

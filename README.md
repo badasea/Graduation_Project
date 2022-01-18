@@ -55,25 +55,25 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
 
 ### 백 엔드
 
-Express REST API Server
-Mysql DB 연동
-배포시 환경 AWS 배포
-socket.io
-데이터 중복 제거
+- Express REST API Server
+- Mysql DB 연동
+- 배포시 환경 AWS 배포
+- socket.io
+- 데이터 중복 제거
 
 ### 프론트 엔드
 
-React Hook
-React Home 화면 및 Main 화면 scroll 애니메이션
-배포시 Spring boot(maven)이랑 묶어서 환경 Paas_Ta 배포
-socket.io
-웹캠 화면 구성
-구글, 카카오, 네이버 로그인
+- React Hook
+- React Home 화면 및 Main 화면 scroll 애니메이션
+- 배포시 Spring boot(maven)이랑 묶어서 환경 Paas_Ta 배포
+- socket.io
+- 웹캠 화면 구성
+- 구글, 카카오, 네이버 로그인
 
 ### 머신러닝
 
-Django REST API Server
-상점 추천 알고리즘
+- Django REST API Server
+- 상점 추천 알고리즘
 
 ### 클라우드
 
