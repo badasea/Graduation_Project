@@ -28,8 +28,6 @@
 
 👨 badasea
 
----
-
 </div>
 
 ## ⛔ 잇슈 ⛔
@@ -47,6 +45,9 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
    백엔드 서버에 경우 Paas-Ta Mysql 연동 잇슈가 있는 관계로 이번 버젼 업데이트에서 해결이 되는 경우 모든 클라우드 서버는 파스타 클라우드로 고려
 
 # 🖥 화면 정의서
+
+<img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="40%" height="40%" >
+<img src="https://user-images.githubusercontent.com/57929751/149899965-1efea60b-55a8-47f3-bf64-efad7de8e18d.png" width="40%" height="40%" >
 
 # 📌 요구 사항 분석
 
