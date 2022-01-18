@@ -19,6 +19,7 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
       .get(url)
       .then(function (response) {
         console.log(response.data);
+        document.location.href = "/main";
       })
       .catch(function (error) {
         //console.log("실패");

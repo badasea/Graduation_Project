@@ -40,6 +40,8 @@ function LoginKaKao() {
       .get(url)
       .then(function (response) {
         console.log(response.data);
+        document.location.href = "/main";
+
         // console.log(response.data[0].user_email);
         // console.log(data.user_email);
       })

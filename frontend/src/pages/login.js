@@ -1,52 +1,163 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import axios from "axios";
+
+// 소셜 로그인
 import GoogleLoginBtn from "../login_api/Google";
 import KakaoLogin from "../login_api/Kakao";
 import NaverLogin from "../login_api/Naver";
 
-function Login() {
-  var [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const fetchUsers = async () => {
-    try {
-      // 요청이 시작 할 때에는 error 와 users 를 초기화하고
-      setError(null);
-      setUser(null);
-      // loading 상태를 true 로 바꿉니다.
-      setLoading(true);
-      const response = await axios.get("/api/user");
-      setUser(response.data); // 데이터는 response.data 안에 들어있습니다.
-      //console.log(response.data);
-    } catch (e) {
-      setError(e);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  //console.log(user);
-
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
-  if (!user) return null;
-
+function Copyright(props) {
   return (
-    <div>
-      <h1>Login Page</h1>
-      <p>이메일</p>
-      <input value={user[0].user_name}></input>
-      <p>비밀번호</p>
-      <input value={user[1].user_name}></input>
-      <GoogleLoginBtn />
-      <KakaoLogin />
-      <NaverLogin />
-    </div>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © LICO Market "}
+    </Typography>
   );
 }
 
-export default Login;
+const theme = createTheme();
+
+export default function SignInSide() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let user = {
+      email: data.get("email"),
+      password: data.get("password"),
+    };
+    console.log(user);
+
+    var url = "/api/user/login/" + user.email;
+    axios
+      .get(url)
+      .then(function (res) {
+        if (res.data[0].user_email === undefined) {
+          alert("입력하신 이메일과 비밀번호가 일치하지 않습니다.");
+        } else if (res.data[0].user_email === null) {
+          alert("입력하신 이메일과 비밀번호가 일치하지 않습니다.");
+        } else if (
+          res.data[0].user_email === user.email &&
+          res.data[0].user_email !== "admin" &&
+          res.data[0].user_password === user.password
+        ) {
+          alert(res.data[0].user_name + "님 환영합니다.");
+          document.location.href = "/main";
+        } else if (res.data[0].user_email === "admin") {
+          // 관리자 페이지
+          alert("관리자님 환영합니다.");
+        }
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              리코 마켓 로그인
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                //id="email"
+                label="이메일"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="비밀번호"
+                type="password"
+                //id="password"
+                autoComplete="current-password"
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                로그인
+              </Button>
+
+              <Grid container>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"회원이 아니신가요? 회원 가입"}
+                  </Link>
+                </Grid>
+              </Grid>
+              <br />
+              <GoogleLoginBtn />
+              <br />
+              <KakaoLogin />
+              <br />
+              <NaverLogin />
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
+}

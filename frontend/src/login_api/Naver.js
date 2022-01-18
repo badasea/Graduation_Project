@@ -41,6 +41,7 @@ class NaverLogin extends Component {
             .get(url)
             .then(function (response) {
               console.log(response.data);
+              document.location.href = "/main";
             })
             .catch(function (error) {
               //console.log("실패");
