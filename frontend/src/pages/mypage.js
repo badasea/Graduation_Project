@@ -14,10 +14,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Button from "@mui/material/Button";
 
-import Link from "@mui/material/Link";
-
 // 사이드바 아이콘
-import ListSubheader from "@mui/material/ListSubheader";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -39,13 +36,16 @@ import BrushIcon from "@mui/icons-material/Brush";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
+import ListSubheader from "@mui/material/ListSubheader";
 
-// 카드 컴포넌트
-import ShopCard from "../components/card/shop_card";
-import ItemCard from "../components/card/item_card";
-
-import ItemList from "../components/List/item_list";
-import ShopList from "../components/List/shop_list";
+// 마이페이지 수정
+import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const drawerWidth = 240;
 
@@ -114,12 +114,17 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MainPage() {
+export default function Mypage() {
+  // appbar
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  // sidemenu
   const [sideopen, setOpenside] = React.useState(false);
   const [side2open, setOpenside2] = React.useState(false);
   const [side3open, setOpenside3] = React.useState(false);
+
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const handleClick = () => {
     setOpenside(!sideopen);
@@ -130,7 +135,6 @@ export default function MainPage() {
   const handleClick3 = () => {
     setOpenside3(!side3open);
   };
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -142,27 +146,30 @@ export default function MainPage() {
   const logout = () => {
     document.location.href = "/";
   };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
-  const mypage = () => {
-    document.location.href = "/mypage";
+    let user = {
+      user_email: data.get("email"),
+      user_password: data.get("password"),
+      user_name: data.get("Name"),
+      user_address: data.get("address"),
+    };
+    // axios
+    //   .put("/api/user", user, {})
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if (res.data !== undefined) {
+    //       // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
+    //       alert("이미 등록된 이메일 계정입니다.");
+    //     } else {
+    //       alert("회원가입이 완료되었습니다.");
+    //       document.location.href = "/";
+    //     }
+    //   })
+    //   .catch();
   };
-
-  const localcategory = () => {
-    document.location.href = "/local";
-  };
-
-  const businesscategory = () => {
-    document.location.href = "/businesstype";
-  };
-
-  function webcam() {
-    window.open(
-      "http://localhost:443/12",
-      "",
-      "toolbar=no, menubar=no, resizable=yes"
-    );
-  }
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -200,14 +207,16 @@ export default function MainPage() {
             )}
           </IconButton>
           <List>
-            {["마이 페이지"].map((text, index) => (
-              <ListItem button key={text} onClick={mypage}>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItemButton selected={selectedIndex}>
+              {["마이 페이지"].map((text, index) => (
+                <ListItem button key={text}>
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              ))}
+            </ListItemButton>
           </List>
         </DrawerHeader>
         <Divider />
@@ -235,19 +244,19 @@ export default function MainPage() {
                 <ListItemIcon>
                   <LocationOnIcon />
                 </ListItemIcon>
-                <ListItemText primary="성북구" onClick={localcategory} />
+                <ListItemText primary="성북구" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <LocationOnIcon />
                 </ListItemIcon>
-                <ListItemText primary="영등포구" onClick={localcategory} />
+                <ListItemText primary="영등포구" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <LocationOnIcon />
                 </ListItemIcon>
-                <ListItemText primary="종로구" onClick={localcategory} />
+                <ListItemText primary="종로구" />
               </ListItemButton>
             </List>
           </Collapse>
@@ -271,25 +280,25 @@ export default function MainPage() {
                 <ListItemIcon>
                   <FoodBankIcon />
                 </ListItemIcon>
-                <ListItemText primary="음식점" onClick={businesscategory} />
+                <ListItemText primary="음식점" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <CheckroomIcon />
                 </ListItemIcon>
-                <ListItemText primary="한복" onClick={businesscategory} />
+                <ListItemText primary="한복" />
               </ListItemButton>
               <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <BrushIcon />
                 </ListItemIcon>
-                <ListItemText primary="공방" onClick={businesscategory} />
+                <ListItemText primary="공방" />
               </ListItemButton>
             </List>
           </Collapse>
         </List>
-        {/* 가게 */}
         <Divider />
+        {/* 가게 */}
         <List
           sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
           component="nav"
@@ -331,12 +340,11 @@ export default function MainPage() {
                 <ListItemIcon>
                   <PodcastsIcon />
                 </ListItemIcon>
-                <ListItemText primary="방송 시작하기" onClick={webcam} />
+                <ListItemText primary="방송 시작하기" />
               </ListItemButton>
             </List>
           </Collapse>
         </List>
-
         <Divider />
         <List>
           {["장바구니", "주문 목록"].map((text, index) => (
@@ -360,38 +368,86 @@ export default function MainPage() {
           ))}
         </List>
       </Drawer>
-      <Box
-        style={{ background: "#000000" }}
-        component="main"
-        sx={{ flexGrow: 1, p: 3 }}
-      >
-        <DrawerHeader />
-        <Typography variant="h3" color="primary">
-          여기는 광고 배너 느낌?
-        </Typography>
-        <Typography variant="h3" color="primary">
-          가게 리스트
-        </Typography>
-        <ShopList />
-        {/* <ShopCard /> */}
-        <br />
-        <Typography variant="h3" color="primary">
-          상품 리스트
-        </Typography>
-        <ItemList />
-        {/* <ItemCard /> */}
-        <br />
-        <Typography variant="h3" color="primary">
-          알고리즘 추천 가게 리스트
-        </Typography>
-        <ShopList />
-        <br />
-        <Typography variant="h3" color="primary">
-          알고리즘 추천 상품 리스트
-        </Typography>
-        <ItemList />
-        {/* <ItemCard /> */}
-      </Box>
+
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <AccountCircleIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              마이페이지
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="Name"
+                    required
+                    fullWidth
+                    id="Name"
+                    label="이름"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="이메일 주소"
+                    name="email"
+                    autoComplete="email"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="비밀번호"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="address"
+                    label="주소"
+                    id="address"
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                style={{ background: "#2E3B55" }}
+              >
+                정보 수정 하기
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
     </Box>
   );
 }

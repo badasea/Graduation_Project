@@ -47,7 +47,7 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
 # 🖥 화면 정의서
 
 <img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="40%" height="40%" >
-<img src="https://user-images.githubusercontent.com/57929751/149899965-1efea60b-55a8-47f3-bf64-efad7de8e18d.png" width="40%" height="40%" >
+<img src="https://user-images.githubusercontent.com/57929751/150175343-ac9be9a9-3b50-4db2-851c-45fd3ecad726.png" width="40%" height="40%" >
 
 # 📌 요구 사항 분석
 

@@ -1,31 +1,36 @@
 import * as React from "react";
 
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import "./scroll.css";
 
 import ShopCard from "../card/shop_card";
 
 function ShopList() {
   return (
-    <Box>
-      <Grid container>
-        <Grid item xs={12} md={2.4}>
-          <ShopCard />
-        </Grid>
-        <Grid item xs={12} md={2.4}>
-          <ShopCard />
-        </Grid>
-        <Grid item xs={12} md={2.4}>
-          <ShopCard />
-        </Grid>
-        <Grid item xs={12} md={2.4}>
-          <ShopCard />
-        </Grid>
-        <Grid item xs={12} md={2.4}>
-          <ShopCard />
-        </Grid>
-      </Grid>
-    </Box>
+    <div class="app">
+      <Box>
+        <ul class="hs full">
+          <li class="item">
+            <ShopCard />
+          </li>
+          <li class="item">
+            <ShopCard />
+          </li>
+          <li class="item">
+            <ShopCard />
+          </li>
+          <li class="item">
+            <ShopCard />
+          </li>
+          <li class="item">
+            <ShopCard />
+          </li>
+          <li class="item">
+            <ShopCard />
+          </li>
+        </ul>
+      </Box>
+    </div>
   );
 }
 
