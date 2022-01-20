@@ -12,7 +12,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import AppBar from "@mui/material/AppBar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -45,7 +44,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-const AppAppBar = styled(MuiAppBar, {
+const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
@@ -106,10 +105,24 @@ export default function PersistentDrawerLeft() {
     document.location.href = "/mypage";
   };
 
+  const cart = () => {
+    document.location.href = "/cart";
+  };
+
+  const buylist = () => {
+    document.location.href = "/buylist";
+  };
+  const help = () => {
+    document.location.href = "/help";
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style={{ background: "#2E3B55" }}>
+      <AppBar
+        position="fixed"
+        open={open}
+        style={{ background: "rgb(26, 29, 41)" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -156,6 +169,9 @@ export default function PersistentDrawerLeft() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={mypage}>마이페이지</MenuItem>
+                <MenuItem onClick={cart}>장바구니</MenuItem>
+                <MenuItem onClick={buylist}>주문 목록</MenuItem>
+                <MenuItem onClick={help}>고객센터</MenuItem>
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
             </div>
@@ -188,7 +204,7 @@ export default function PersistentDrawerLeft() {
         <Side />
       </Drawer>
       <Main
-        style={{ background: "#000000" }}
+        style={{ background: "rgb(26, 29, 41)" }}
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
@@ -197,24 +213,25 @@ export default function PersistentDrawerLeft() {
         <Typography variant="h3" color="primary">
           여기는 광고 배너 느낌?
         </Typography>
-        <Typography variant="h3" color="primary">
+        <br />
+        <Typography variant="h4" color="common.white">
           가게 리스트
         </Typography>
         <ShopList />
         {/* <ShopCard /> */}
         <br />
-        <Typography variant="h3" color="primary">
+        <Typography variant="h4" color="common.white">
           상품 리스트
         </Typography>
         <ItemList />
         {/* <ItemCard /> */}
         <br />
-        <Typography variant="h3" color="primary">
+        <Typography variant="h4" color="common.white">
           알고리즘 추천 가게 리스트
         </Typography>
         <ShopList />
         <br />
-        <Typography variant="h3" color="primary">
+        <Typography variant="h4" color="common.white">
           알고리즘 추천 상품 리스트
         </Typography>
         <ItemList />

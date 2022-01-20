@@ -4,11 +4,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/main";
 
 // 로그인 및 회원 가입
-import Login from "./pages/login";
-import SignUp from "./pages/signup";
+import Login from "./pages/Login/login";
+import SignUp from "./pages/Login/signup";
 
 // 마이 페이지
-import Mypage from "./pages/mypage";
+import Mypage from "./pages/Login/mypage";
 
 // 지역별 페이지
 import Local from "./pages/category/local";

@@ -11,6 +11,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { AppBar } from "@mui/material";
+import { Toolbar } from "@mui/material";
+
 import axios from "axios";
 
 function Copyright(props) {
@@ -56,6 +59,16 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
+      <AppBar position="fixed" style={{ background: "rgb(26, 29, 41)" }}>
+        <Toolbar>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            <Link href="/" color="inherit" underline="none">
+              리코 마켓
+            </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -70,7 +83,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            로그인
+            회원 가입
           </Typography>
           <Box
             component="form"
@@ -124,8 +137,10 @@ export default function SignUp() {
             <Button
               type="submit"
               fullWidth
+              size="large"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              style={{ background: "rgb(26, 29, 41)" }}
             >
               회원 가입
             </Button>

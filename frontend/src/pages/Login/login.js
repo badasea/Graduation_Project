@@ -11,12 +11,15 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { AppBar } from "@mui/material";
+import { Toolbar } from "@mui/material";
+
 import axios from "axios";
 
 // 소셜 로그인
-import GoogleLoginBtn from "../login_api/Google";
-import KakaoLogin from "../login_api/Kakao";
-import NaverLogin from "../login_api/Naver";
+import GoogleLoginBtn from "../../login_api/Google";
+import KakaoLogin from "../../login_api/Kakao";
+import NaverLogin from "../../login_api/Naver";
 
 function Copyright(props) {
   return (
@@ -95,6 +98,15 @@ export default function SignInSide() {
             backgroundPosition: "center",
           }}
         />
+        <AppBar position="fixed" style={{ background: "rgb(26, 29, 41)" }}>
+          <Toolbar>
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+              <Link href="/" color="inherit" underline="none">
+                리코 마켓
+              </Link>
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -142,7 +154,9 @@ export default function SignInSide() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                size="large"
                 sx={{ mt: 3, mb: 2 }}
+                style={{ background: "rgb(26, 29, 41)" }}
               >
                 로그인
               </Button>

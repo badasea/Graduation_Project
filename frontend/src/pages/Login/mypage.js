@@ -19,14 +19,13 @@ import { Container } from "@mui/material";
 import { Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import AppBar from "@mui/material/AppBar";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
 import Link from "@mui/material/Link";
 
-import Side from "../components/menu/side";
+import Side from "../../components/menu/side";
 
 const drawerWidth = 240;
 
@@ -49,7 +48,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-const AppAppBar = styled(MuiAppBar, {
+const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
@@ -110,6 +109,16 @@ export default function PersistentDrawerLeft() {
     document.location.href = "/mypage";
   };
 
+  const cart = () => {
+    document.location.href = "/cart";
+  };
+
+  const buylist = () => {
+    document.location.href = "/buylist";
+  };
+  const help = () => {
+    document.location.href = "/help";
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -138,7 +147,11 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} style={{ background: "#2E3B55" }}>
+      <AppBar
+        position="fixed"
+        open={open}
+        style={{ background: "rgb(26, 29, 41)" }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -185,6 +198,9 @@ export default function PersistentDrawerLeft() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={mypage}>마이페이지</MenuItem>
+                <MenuItem onClick={cart}>장바구니</MenuItem>
+                <MenuItem onClick={buylist}>주문 목록</MenuItem>
+                <MenuItem onClick={help}>고객센터</MenuItem>
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
             </div>
@@ -291,11 +307,12 @@ export default function PersistentDrawerLeft() {
                 <Button
                   type="submit"
                   fullWidth
+                  size="large"
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  style={{ background: "#2E3B55" }}
+                  style={{ background: "rgb(26, 29, 41)" }}
                 >
-                  정보 수정 하기
+                  개인 정보 수정 하기
                 </Button>
               </Box>
             </Box>

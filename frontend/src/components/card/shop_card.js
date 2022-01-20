@@ -5,28 +5,12 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 function ShopCard() {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   function webcam() {
     window.open(
       "http://localhost:443/12",
@@ -36,7 +20,7 @@ function ShopCard() {
   }
 
   return (
-    <Card sx={{ maxWidth: 235 }}>
+    <Card sx={{ maxWidth: 310 }}>
       <CardHeader title="가게명" subheader="지역" />
       <CardMedia
         component="img"
@@ -51,23 +35,16 @@ function ShopCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <Stack spacing={0.5} direction="row">
-            <Button href="/store" size="small" variant="contained">
+          <Stack spacing={4} direction="row">
+            <Button href="/store" size="large" variant="contained">
               가게 입장하기
             </Button>
-            <Button onClick={webcam} size="small" variant="contained">
+            <Button onClick={webcam} size="large" variant="contained">
               방송 보기
             </Button>
           </Stack>
         </IconButton>
-        {/* <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        ></ExpandMore> */}
       </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit></Collapse> */}
     </Card>
   );
 }
