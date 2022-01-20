@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const port = process.env.PORT || 3001;
 
@@ -19,8 +18,12 @@ app.use(cors(corsOptions));
 require("dotenv").config();
 
 const UserRoute = require("./routes/user.routes");
+const ShopRoute = require("./routes/shop.routes");
+const ItemRoute = require("./routes/item.routes");
 
 app.use("/api/user", UserRoute);
+//app.use("/api/shop", ShopRoute);
+//app.use("/api/item", ItemRoute);
 
 app.get("/", (req, res) => {
   res.json({
