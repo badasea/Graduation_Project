@@ -191,6 +191,7 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        {/* 이곳에 컴포넌트 추가 */}
       </Main>
     </Box>
   );

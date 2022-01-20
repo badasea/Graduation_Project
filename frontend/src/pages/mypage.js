@@ -216,86 +216,92 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <Side />
       </Drawer>
-
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <AccountCircleIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              마이페이지
-            </Typography>
+      <Main
+        style={{ background: "#FFFFFF" }}
+        component="main"
+        sx={{ flexGrow: 1, p: 3 }}
+        open={open}
+      >
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
             <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
             >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    autoComplete="given-name"
-                    name="Name"
-                    required
-                    fullWidth
-                    id="Name"
-                    label="이름"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="이메일 주소"
-                    name="email"
-                    autoComplete="email"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="비밀번호"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="address"
-                    label="주소"
-                    id="address"
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                style={{ background: "#2E3B55" }}
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <AccountCircleIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                마이페이지
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 3 }}
               >
-                정보 수정 하기
-              </Button>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      autoComplete="given-name"
+                      name="Name"
+                      required
+                      fullWidth
+                      id="Name"
+                      label="이름"
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      label="이메일 주소"
+                      name="email"
+                      autoComplete="email"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="비밀번호"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="address"
+                      label="주소"
+                      id="address"
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  style={{ background: "#2E3B55" }}
+                >
+                  정보 수정 하기
+                </Button>
+              </Box>
             </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
+          </Container>
+        </ThemeProvider>
+      </Main>
     </Box>
   );
 }
