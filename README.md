@@ -269,8 +269,8 @@ API 테스트 - Postman
 
 # ⚙ 시스템 아키텍처
 
-# ⚙ ERD (~ing)
+# ⚙ ERD (~ing 2022. 01. 21)
 
-![image](https://user-images.githubusercontent.com/57929751/149330368-d87eb7f9-3cc8-4bb3-81d9-22c0bdda7b87.png)
+![image](https://user-images.githubusercontent.com/57929751/150375071-381f74c8-ff49-4093-9125-122e6dc3d4e2.png)
 
 # 📑 상세기술 정의서
