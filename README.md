@@ -49,7 +49,7 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
 
 # 🖥 화면 정의서
 
-<img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="40%" height="40%" >
+<img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="80%" height="80%" >
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/57929751/150293856-80d1223f-cd12-495a-b56b-b5209f2a7163.gif)
 
