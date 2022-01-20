@@ -44,10 +44,14 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
 2. AWS EC2 배포 :
    백엔드 서버에 경우 Paas-Ta Mysql 연동 잇슈가 있는 관계로 이번 버젼 업데이트에서 해결이 되는 경우 모든 클라우드 서버는 파스타 클라우드로 고려
 
+3. SNS 로그인 버튼 위치 조정 :
+   기업에 디자인 법으로 인한 로고 디자인 크기 수정 불가 잇슈로 버튼 크기가 다름 조정이 필요함
+
 # 🖥 화면 정의서
 
 <img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="40%" height="40%" >
-<img src="https://user-images.githubusercontent.com/57929751/150175343-ac9be9a9-3b50-4db2-851c-45fd3ecad726.png" width="40%" height="40%" >
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/57929751/150293856-80d1223f-cd12-495a-b56b-b5209f2a7163.gif)
 
 # 📌 요구 사항 분석
 

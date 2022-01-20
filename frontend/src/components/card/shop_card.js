@@ -8,7 +8,8 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -26,13 +27,20 @@ function ShopCard() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  function webcam() {
+    window.open(
+      "http://localhost:443/12",
+      "",
+      "toolbar=no, menubar=no, resizable=yes"
+    );
+  }
 
   return (
     <Card sx={{ maxWidth: 235 }}>
       <CardHeader title="가게명" subheader="지역" />
       <CardMedia
         component="img"
-        height="194"
+        height="100%"
         image="/logo192.png"
         alt="Paella dish"
       />
@@ -43,19 +51,23 @@ function ShopCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <button>가게 둘러보기</button>
+          <Stack spacing={0.5} direction="row">
+            <Button href="/store" size="small" variant="contained">
+              가게 입장하기
+            </Button>
+            <Button onClick={webcam} size="small" variant="contained">
+              방송 보기
+            </Button>
+          </Stack>
         </IconButton>
-        <IconButton aria-label="share">
-          <button>방송 보기</button>
-        </IconButton>
-        <ExpandMore
+        {/* <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-        ></ExpandMore>
+        ></ExpandMore> */}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit></Collapse>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit></Collapse> */}
     </Card>
   );
 }

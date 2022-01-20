@@ -8,6 +8,8 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -35,7 +37,6 @@ function ItemCard() {
   }
 
   function webcam() {
-
     window.open(
       "http://localhost:443/12",
       "",
@@ -48,7 +49,7 @@ function ItemCard() {
       <CardHeader title="상품명" subheader="업종" />
       <CardMedia
         component="img"
-        height="194"
+        height="100%"
         image="/logo192.png"
         alt="Paella dish"
       />
@@ -59,19 +60,23 @@ function ItemCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <button>상품 구매하기</button>
+          <Stack spacing={0.5} direction="row">
+            <Button href="/store" size="small" variant="contained">
+              상품 구매하기
+            </Button>
+            <Button href="/store" size="small" variant="contained">
+              상품 구매하기
+            </Button>
+          </Stack>
         </IconButton>
-        <IconButton aria-label="share">
-          <button onClick={webcam}>방송 보기</button>
-        </IconButton>
-        <ExpandMore
+        {/* <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-        ></ExpandMore>
+        ></ExpandMore> */}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit></Collapse>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit></Collapse> */}
     </Card>
   );
 }

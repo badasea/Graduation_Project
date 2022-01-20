@@ -5,27 +5,21 @@ import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 
-import Button from "@mui/material/Button";
+import AppBar from "@mui/material/AppBar";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 
 import Link from "@mui/material/Link";
 
 import Side from "../components/menu/side";
-
-import ItemList from "../components/List/item_list";
-import ShopList from "../components/List/shop_list";
 
 const drawerWidth = 240;
 
@@ -48,7 +42,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-const AppBar = styled(MuiAppBar, {
+const AppAppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
@@ -86,9 +80,29 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const logout = () => {
     document.location.href = "/";
   };
+
+  const mypage = () => {
+    document.location.href = "/mypage";
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -111,9 +125,38 @@ export default function PersistentDrawerLeft() {
               리코 마켓
             </Link>
           </Typography>
-          <Button color="inherit" onClick={logout}>
-            로그아웃
-          </Button>
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={mypage}>마이페이지</MenuItem>
+                <MenuItem onClick={logout}>로그아웃</MenuItem>
+              </Menu>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -142,37 +185,12 @@ export default function PersistentDrawerLeft() {
         <Side />
       </Drawer>
       <Main
-        style={{ background: "#000000" }}
+        style={{ background: "#FFFFFF" }}
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
       >
         <DrawerHeader />
-        <Typography variant="h3" color="primary">
-          여기는 광고 배너 느낌?
-        </Typography>
-        <Typography variant="h3" color="primary">
-          가게 리스트
-        </Typography>
-        <ShopList />
-        {/* <ShopCard /> */}
-        <br />
-        <Typography variant="h3" color="primary">
-          상품 리스트
-        </Typography>
-        <ItemList />
-        {/* <ItemCard /> */}
-        <br />
-        <Typography variant="h3" color="primary">
-          알고리즘 추천 가게 리스트
-        </Typography>
-        <ShopList />
-        <br />
-        <Typography variant="h3" color="primary">
-          알고리즘 추천 상품 리스트
-        </Typography>
-        <ItemList />
-        {/* <ItemCard /> */}
       </Main>
     </Box>
   );
