@@ -212,6 +212,10 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <Typography variant="h4" color="primary">
+          !! 광고 배너 자리 !!
+        </Typography>
+        <ShopList />
         <Typography variant="h4" color="common.white">
           가게 리스트
         </Typography>
