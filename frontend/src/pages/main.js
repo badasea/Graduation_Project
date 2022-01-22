@@ -23,6 +23,8 @@ import Side from "../components/menu/side";
 import ItemList from "../components/List/item_list";
 import ShopList from "../components/List/shop_list";
 
+import AddSlider from "../components/List/add";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -210,32 +212,22 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <Typography variant="h3" color="primary">
-          여기는 광고 배너 느낌?
-        </Typography>
-        <br />
         <Typography variant="h4" color="common.white">
           가게 리스트
         </Typography>
         <ShopList />
-        {/* <ShopCard /> */}
-        <br />
         <Typography variant="h4" color="common.white">
           상품 리스트
         </Typography>
         <ItemList />
-        {/* <ItemCard /> */}
-        <br />
         <Typography variant="h4" color="common.white">
           알고리즘 추천 가게 리스트
         </Typography>
         <ShopList />
-        <br />
         <Typography variant="h4" color="common.white">
           알고리즘 추천 상품 리스트
         </Typography>
         <ItemList />
-        {/* <ItemCard /> */}
       </Main>
     </Box>
   );

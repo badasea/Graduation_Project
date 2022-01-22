@@ -36,10 +36,10 @@ function ShopCard() {
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <Stack spacing={4} direction="row">
-            <Button href="/store" size="large" variant="contained">
+            <Button href="/store" size="small" variant="contained">
               가게 입장하기
             </Button>
-            <Button onClick={webcam} size="large" variant="contained">
+            <Button onClick={webcam} size="small" variant="contained">
               방송 보기
             </Button>
           </Stack>

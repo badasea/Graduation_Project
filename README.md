@@ -32,7 +32,7 @@
 
 ## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 1월 20일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 1월 23일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -46,6 +46,10 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
 
 3. SNS 로그인 버튼 위치 조정 :
    기업에 디자인 법으로 인한 로고 디자인 크기 수정 불가 잇슈로 버튼 크기가 다름 조정이 필요함
+
+4. 카드 가운데 정렬 혹은 다중 카드 선언:
+   요구사항에 맞는 기능은 구현 했으나, css3 언어에 부족으로 깔끔한 디자인은 구현 x,
+   현재 더 중요한 기능들이 미구현임으로 디자인 보류
 
 # 🖥 화면 정의서
 
@@ -245,7 +249,7 @@ ML : Django
 
 Package
 
-Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, ... )
+Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, slick... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 

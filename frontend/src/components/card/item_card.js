@@ -26,11 +26,11 @@ function ItemCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <Stack spacing={0.5} direction="row">
-            <Button href="/store" size="large" variant="contained">
+          <Stack spacing={1} direction="row">
+            <Button href="/store" size="small" variant="contained">
               상품 구매하기
             </Button>
-            <Button href="/store" size="large" variant="contained">
+            <Button href="/store" size="small" variant="contained">
               가게 입장하기
             </Button>
           </Stack>

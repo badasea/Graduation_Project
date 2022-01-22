@@ -51,6 +51,8 @@ ul {
 
 .app {
   width: 100%;
+  cursor: grab;
+  overflow: auto;
 }
 
 .hs > li {
@@ -59,23 +61,24 @@ ul {
   scroll-snap-align: center;
   padding: calc(var(--gutter) / 2 * 1.5);
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: rgb(26, 29, 41);
   border-radius: 8px;
+  margin: 1rem 0;
+  width: 100%;
 }
 
-/* .no-scrollbar {
+.no-scrollbar {
   scrollbar-width: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-} */
+}
 
 /* 스크롤 숨기기 */
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
-} */
+}

@@ -1,37 +1,42 @@
-import * as React from "react";
-
-import Box from "@mui/material/Box";
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ShopCard from "../card/shop_card";
 import "./scroll.css";
 
-import ShopCard from "../card/shop_card";
-
-function ShopList() {
+export default function SimpleSlider() {
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
-    <div class="app">
-      <Box>
-        <ul class="hs full">
-          <li class="item">
+    <div className="app">
+      <div className="flex">
+        <Slider {...settings}>
+          <div class="item">
             <ShopCard />
-          </li>
-          <li class="item">
+          </div>
+          <div class="item">
             <ShopCard />
-          </li>
-          <li class="item">
+          </div>
+          <div class="item">
             <ShopCard />
-          </li>
-          <li class="item">
+          </div>
+          <div class="item">
             <ShopCard />
-          </li>
-          <li class="item">
+          </div>
+          <div class="item">
             <ShopCard />
-          </li>
-          <li class="item">
+          </div>
+          <div class="item">
             <ShopCard />
-          </li>
-        </ul>
-      </Box>
+          </div>
+        </Slider>
+      </div>
     </div>
   );
 }
-
-export default ShopList;
