@@ -22,8 +22,8 @@ const ShopRoute = require("./routes/shop.routes");
 const ItemRoute = require("./routes/item.routes");
 
 app.use("/api/user", UserRoute);
-//app.use("/api/shop", ShopRoute);
-//app.use("/api/item", ItemRoute);
+app.use("/api/shop", ShopRoute);
+app.use("/api/item", ItemRoute);
 
 app.get("/", (req, res) => {
   res.json({
