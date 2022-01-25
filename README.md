@@ -59,7 +59,16 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
    요구사항에 맞는 기능은 구현 했으나, css3 언어에 부족으로 깔끔한 디자인은 구현 x,
    현재 더 중요한 기능들이 미구현임으로 디자인 보류
 
-# 🖥 화면 정의서
+# 🖥 화면 정의서 (~ing)
+
+<p float="left">
+<img src="https://user-images.githubusercontent.com/57929751/151015623-50ecfb69-2870-482f-9f03-655abe4dbbb1.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/151016314-5ac30596-5be5-47ad-a5cb-1819b7637818.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/151016433-86564773-eb04-42db-9c93-7d2a0f2fb929.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/151016613-100fb215-9d1d-4696-9e03-3e5e63cab62d.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/151016734-d56cb802-6a51-49fc-a609-46b14c75688c.png" width="30%" height="30%" >
+
+</p>
 
 <img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="80%" height="80%" >
 
@@ -281,8 +290,8 @@ API 테스트 - Postman
 
 # ⚙ 시스템 아키텍처
 
-# ⚙ ERD (~ing 2022. 01. 21)
+# ⚙ ERD (~ing 2022. 01. 26)
 
-![image](https://user-images.githubusercontent.com/57929751/150375071-381f74c8-ff49-4093-9125-122e6dc3d4e2.png)
+![image](https://user-images.githubusercontent.com/57929751/151014356-99929edc-51db-4cfe-9c95-0c68cdcaea94.png)
 
 # 📑 상세기술 정의서
