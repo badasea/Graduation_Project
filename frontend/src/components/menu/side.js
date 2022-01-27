@@ -25,6 +25,7 @@ import BrushIcon from "@mui/icons-material/Brush";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 export default function Side() {
   const [sideopen, setOpenside] = React.useState(false);
@@ -56,6 +57,15 @@ export default function Side() {
   const businesscategory = () => {
     document.location.href = "/businesstype";
   };
+
+  const addstore = () => {
+    document.location.href = "/addstore";
+  };
+
+  const additem = () => {
+    document.location.href = "/additem";
+  };
+
   function webcam() {
     window.open(
       "http://localhost:443/12",
@@ -152,6 +162,12 @@ export default function Side() {
               </ListItemIcon>
               <ListItemText primary="공방" onClick={businesscategory} />
             </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <MoreHorizIcon />
+              </ListItemIcon>
+              <ListItemText primary="기타" onClick={businesscategory} />
+            </ListItemButton>
           </List>
         </Collapse>
       </List>
@@ -180,13 +196,13 @@ export default function Side() {
               <ListItemIcon>
                 <AddBusinessIcon />
               </ListItemIcon>
-              <ListItemText primary="등록 및 수정" />
+              <ListItemText primary="등록 및 수정" onClick={addstore} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <AddCircleIcon />
               </ListItemIcon>
-              <ListItemText primary="상품 등록" />
+              <ListItemText primary="상품 등록" onClick={additem} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>

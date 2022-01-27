@@ -27,6 +27,14 @@ import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
+//
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -73,6 +81,20 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const locations = ["성북구", "영등포구", "종로구"];
+
+const likes = ["음식점", "한복", "공방", "기타"];
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
@@ -119,6 +141,31 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
+
+  const [choice_location, setlocation] = React.useState([]);
+
+  const handlelocation = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setlocation(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  const [choice_like, setlike] = React.useState([]);
+
+  const handlelike = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setlike(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -302,6 +349,52 @@ export default function PersistentDrawerLeft() {
                       label="주소"
                       id="address"
                     />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-multiple-checkbox-label">
+                        관심 지역
+                      </InputLabel>
+                      <Select
+                        labelId="demo-multiple-checkbox-label"
+                        id="demo-multiple-checkbox"
+                        multiple
+                        value={choice_location}
+                        onChange={handlelocation}
+                        input={<OutlinedInput label="관심지역" />}
+                        renderValue={(selected) => selected.join(", ")}
+                        MenuProps={MenuProps}
+                      >
+                        {locations.map((locationed) => (
+                          <MenuItem key={locationed} value={locationed}>
+                            <ListItemText primary={locationed} />
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-multiple-checkbox-label">
+                        관심 업종
+                      </InputLabel>
+                      <Select
+                        labelId="demo-multiple-checkbox-label"
+                        id="demo-multiple-checkbox"
+                        multiple
+                        value={choice_like}
+                        onChange={handlelike}
+                        input={<OutlinedInput label="관심업종" />}
+                        renderValue={(selected) => selected.join(", ")}
+                        MenuProps={MenuProps}
+                      >
+                        {likes.map((liked) => (
+                          <MenuItem key={liked} value={liked}>
+                            <ListItemText primary={liked} />
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                   </Grid>
                 </Grid>
                 <Button

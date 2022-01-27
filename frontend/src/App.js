@@ -16,6 +16,10 @@ import Local from "./pages/category/local";
 // 업종별 페이지
 import Businesstype from "./pages/category/businesstype";
 
+// 가게
+import Addstore from "./pages/store/add_store";
+import AddItem from "./pages/store/add_item";
+
 // 테스트
 import Test from "./pages/test";
 
@@ -30,6 +34,8 @@ function App() {
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/local" element={<Local />}></Route>
           <Route path="/businesstype" element={<Businesstype />}></Route>
+          <Route path="/addstore" element={<Addstore />}></Route>
+          <Route path="/additem" element={<AddItem />}></Route>
 
           <Route path="/test" exact element={<Test />}></Route>
         </Routes>
