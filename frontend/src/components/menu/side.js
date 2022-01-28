@@ -61,9 +61,18 @@ export default function Side() {
   const addstore = () => {
     document.location.href = "/addstore";
   };
+  const editstore = () => {
+    document.location.href = "/editstore";
+  };
 
   const additem = () => {
     document.location.href = "/additem";
+  };
+  const cart = () => {
+    document.location.href = "/cart";
+  };
+  const buylist = () => {
+    document.location.href = "/buylist";
   };
 
   function webcam() {
@@ -221,11 +230,20 @@ export default function Side() {
       </List>
       <Divider />
       <List>
-        {["장바구니", "주문 목록"].map((text, index) => (
-          <ListItem button key={text}>
+        {["장바구니"].map((text, index) => (
+          <ListItem button key={text} onClick={cart}>
             <ListItemIcon>
               {index === 0 ? <ShoppingBagIcon /> : <></>}
-              {index === 1 ? <CreditScoreIcon /> : <></>}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <List>
+        {["주문 목록"].map((text, index) => (
+          <ListItem button key={text} onClick={buylist}>
+            <ListItemIcon>
+              {index === 0 ? <CreditScoreIcon /> : <></>}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>

@@ -324,16 +324,6 @@ export default function PersistentDrawerLeft() {
                     <TextField
                       required
                       fullWidth
-                      id="email"
-                      label="이메일 주소"
-                      name="email"
-                      autoComplete="email"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
                       name="password"
                       label="비밀번호"
                       type="password"

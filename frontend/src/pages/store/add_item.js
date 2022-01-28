@@ -27,9 +27,8 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import First from "../../components/store/first";
-import Second from "../../components/store/second";
 import Check from "../../components/store/Check";
 
 const drawerWidth = 240;
