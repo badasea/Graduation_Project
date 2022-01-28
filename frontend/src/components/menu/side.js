@@ -26,6 +26,7 @@ import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function Side() {
   const [sideopen, setOpenside] = React.useState(false);
@@ -50,12 +51,28 @@ export default function Side() {
     document.location.href = "/mypage";
   };
 
-  const localcategory = () => {
-    document.location.href = "/local";
+  const seongbuck = () => {
+    document.location.href = "/local/seongbuck";
+  };
+  const yeongdeungpo = () => {
+    document.location.href = "/local/yeongdeungpo";
+  };
+  const jongno = () => {
+    document.location.href = "/local/jongno";
   };
 
-  const businesscategory = () => {
-    document.location.href = "/businesstype";
+  const restaurant = () => {
+    document.location.href = "/businesstype/restaurant";
+  };
+
+  const hanbok = () => {
+    document.location.href = "/businesstype/hanbok";
+  };
+  const craftshop = () => {
+    document.location.href = "/businesstype/craftshop";
+  };
+  const etc = () => {
+    document.location.href = "/businesstype/etc";
   };
 
   const addstore = () => {
@@ -67,6 +84,9 @@ export default function Side() {
 
   const additem = () => {
     document.location.href = "/additem";
+  };
+  const edititem = () => {
+    document.location.href = "/edititem";
   };
   const cart = () => {
     document.location.href = "/cart";
@@ -82,6 +102,8 @@ export default function Side() {
       "toolbar=no, menubar=no, resizable=yes"
     );
   }
+
+  const user_type = "consumer";
 
   return (
     <div>
@@ -121,19 +143,19 @@ export default function Side() {
               <ListItemIcon>
                 <LocationOnIcon />
               </ListItemIcon>
-              <ListItemText primary="성북구" onClick={localcategory} />
+              <ListItemText primary="성북구" onClick={seongbuck} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <LocationOnIcon />
               </ListItemIcon>
-              <ListItemText primary="영등포구" onClick={localcategory} />
+              <ListItemText primary="영등포구" onClick={yeongdeungpo} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <LocationOnIcon />
               </ListItemIcon>
-              <ListItemText primary="종로구" onClick={localcategory} />
+              <ListItemText primary="종로구" onClick={jongno} />
             </ListItemButton>
           </List>
         </Collapse>
@@ -157,25 +179,25 @@ export default function Side() {
               <ListItemIcon>
                 <FoodBankIcon />
               </ListItemIcon>
-              <ListItemText primary="음식점" onClick={businesscategory} />
+              <ListItemText primary="음식점" onClick={restaurant} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <CheckroomIcon />
               </ListItemIcon>
-              <ListItemText primary="한복" onClick={businesscategory} />
+              <ListItemText primary="한복" onClick={hanbok} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <BrushIcon />
               </ListItemIcon>
-              <ListItemText primary="공방" onClick={businesscategory} />
+              <ListItemText primary="공방" onClick={craftshop} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <MoreHorizIcon />
               </ListItemIcon>
-              <ListItemText primary="기타" onClick={businesscategory} />
+              <ListItemText primary="기타" onClick={etc} />
             </ListItemButton>
           </List>
         </Collapse>
@@ -201,12 +223,22 @@ export default function Side() {
         </ListItemButton>
         <Collapse in={side3open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <AddBusinessIcon />
-              </ListItemIcon>
-              <ListItemText primary="등록 및 수정" onClick={addstore} />
-            </ListItemButton>
+            {user_type !== "seller" ? (
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <AddBusinessIcon />
+                </ListItemIcon>
+                <ListItemText primary="가게 등록" onClick={addstore} />
+              </ListItemButton>
+            ) : (
+              <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary="가게 수정" onClick={editstore} />
+              </ListItemButton>
+            )}
+
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <AddCircleIcon />
@@ -217,7 +249,7 @@ export default function Side() {
               <ListItemIcon>
                 <EditIcon />
               </ListItemIcon>
-              <ListItemText primary="상품 수정" />
+              <ListItemText primary="상품 수정" onClick={edititem} />
             </ListItemButton>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>

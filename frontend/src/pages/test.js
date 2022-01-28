@@ -204,7 +204,7 @@ export default function PersistentDrawerLeft() {
         <Side />
       </Drawer>
       <Main
-        style={{ background: "rgb(26, 29, 41)" }}
+        style={{ background: "#fff" }}
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}

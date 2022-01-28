@@ -1,0 +1,28 @@
+.container {
+  margin: 0 auto;
+  padding: 0px 40px 40px 40px;
+  width: 400px;
+}
+h3 {
+  background: #5f9ea0;
+  color: #fff;
+  font-size: 36px;
+  line-height: 100px;
+  margin: 10px;
+  padding: 2%;
+  position: relative;
+  text-align: center;
+}
+.slick-next:before,
+.slick-prev:before {
+  color: #000;
+}
+.center .slick-center h3 {
+  color: #e67e22;
+  opacity: 1;
+  -ms-transform: scale(1.08);
+  transform: scale(1.08);
+}
+.center h3 {
+  transition: all 0.3s ease;
+}

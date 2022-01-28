@@ -23,7 +23,7 @@ import Side from "../components/menu/side";
 import ItemList from "../components/List/item_list";
 import ShopList from "../components/List/shop_list";
 
-import AddSlider from "../components/List/add";
+import Advertisement from "../components/List/advertisement";
 
 const drawerWidth = 240;
 
@@ -117,6 +117,7 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
+  console.log(window.location.href);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -212,10 +213,8 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <Typography variant="h4" color="primary">
-          !! 광고 배너 자리 !!
-        </Typography>
-        <ShopList />
+        <Advertisement />
+        <br />
         <Typography variant="h4" color="common.white">
           가게 리스트
         </Typography>
