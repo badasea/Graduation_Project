@@ -68,11 +68,14 @@ Ranking version of Problem : 정확한 수치를 예측하는 것이 아닌, 랭
 <p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/151015623-50ecfb69-2870-482f-9f03-655abe4dbbb1.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016314-5ac30596-5be5-47ad-a5cb-1819b7637818.png" width="30%" height="30%" >
+
 <img src="https://user-images.githubusercontent.com/57929751/151016433-86564773-eb04-42db-9c93-7d2a0f2fb929.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016613-100fb215-9d1d-4696-9e03-3e5e63cab62d.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016734-d56cb802-6a51-49fc-a609-46b14c75688c.png" width="30%" height="30%" >
 
 </p>
+
+![image](https://user-images.githubusercontent.com/57929751/152172172-eb4f7782-31ca-4fed-bbbe-6ddc77369138.png)
 
 <img src="https://user-images.githubusercontent.com/57929751/149899911-9cab2de6-5ebd-460d-8ad3-e7a4b8b16fea.png" width="80%" height="80%" >
 
