@@ -213,7 +213,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/main" color="inherit" underline="none">
+            <Link href="/" color="inherit" underline="none">
               리코 마켓
             </Link>
           </Typography>

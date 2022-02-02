@@ -60,7 +60,7 @@ export default function SignInSide() {
           res.data[0].user_password === user.password
         ) {
           alert(res.data[0].user_name + "님 환영합니다.");
-          document.location.href = "/main";
+          document.location.href = "/";
         } else if (res.data[0].user_email === "admin") {
           // 관리자 페이지
           alert("관리자님 환영합니다.");

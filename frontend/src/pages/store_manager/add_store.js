@@ -153,7 +153,7 @@ export default function Addstore() {
   };
 
   const main = () => {
-    document.location.href = "/main";
+    document.location.href = "/";
   };
 
   return (
@@ -178,7 +178,7 @@ export default function Addstore() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/main" color="inherit" underline="none">
+            <Link href="/" color="inherit" underline="none">
               리코 마켓
             </Link>
           </Typography>

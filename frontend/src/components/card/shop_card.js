@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
 function ShopCard() {
   function webcam() {
@@ -21,7 +22,6 @@ function ShopCard() {
 
   return (
     <Card sx={{ maxWidth: 310 }}>
-      <CardHeader title="가게명" subheader="지역" />
       <CardMedia
         component="img"
         height="100%"
@@ -30,17 +30,34 @@ function ShopCard() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          가게 설명 등등
+          <Link color="inherit" underline="none">
+            가게명
+          </Link>
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          <Link color="inherit" underline="none">
+            지역 / 업종
+          </Link>
+        </Typography>
+        <br />
+        <Typography variant="body2" color="text.secondary">
+          <Link color="inherit" underline="none">
+            가게 설명 가게 설명 가게 설명 가게 설명
+          </Link>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <Stack spacing={4} direction="row">
             <Button href="/store" size="small" variant="contained">
-              가게 입장하기
+              <Link color="inherit" underline="none">
+                가게 입장하기
+              </Link>
             </Button>
             <Button onClick={webcam} size="small" variant="contained">
-              방송 보기
+              <Link color="inherit" underline="none">
+                방송 보기
+              </Link>
             </Button>
           </Stack>
         </IconButton>

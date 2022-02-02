@@ -15,6 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
@@ -118,6 +119,9 @@ export default function PersistentDrawerLeft() {
     document.location.href = "/help";
   };
   console.log(window.location.href);
+
+  const login = true;
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -140,11 +144,24 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/main" color="inherit" underline="none">
+            <Link href="/" color="inherit" underline="none">
               리코 마켓
             </Link>
           </Typography>
-          {auth && (
+          {login === true ? (
+            <Button
+              variant="outlined"
+              size="medium"
+              style={{
+                backgroundColor: "#FFF",
+              }}
+              color="primary"
+            >
+              <Link href="/login" color="inherit" underline="none">
+                로그인 하기
+              </Link>
+            </Button>
+          ) : (
             <div>
               <IconButton
                 size="large"
@@ -215,20 +232,29 @@ export default function PersistentDrawerLeft() {
         <DrawerHeader />
         <Advertisement />
         <br />
+
         <Typography variant="h4" color="common.white">
-          가게 리스트
+          <Link color="inherit" underline="none">
+            가게 리스트
+          </Link>
         </Typography>
         <ShopList />
         <Typography variant="h4" color="common.white">
-          상품 리스트
+          <Link color="inherit" underline="none">
+            상품 리스트
+          </Link>
         </Typography>
         <ItemList />
         <Typography variant="h4" color="common.white">
-          알고리즘 추천 가게 리스트
+          <Link color="inherit" underline="none">
+            알고리즘 추천 가게 리스트
+          </Link>
         </Typography>
         <ShopList />
         <Typography variant="h4" color="common.white">
-          알고리즘 추천 상품 리스트
+          <Link color="inherit" underline="none">
+            알고리즘 추천 상품 리스트
+          </Link>
         </Typography>
         <ItemList />
       </Main>

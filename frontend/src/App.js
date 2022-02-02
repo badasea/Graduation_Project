@@ -42,9 +42,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact element={<Login />}></Route>
+          <Route path="/" exact element={<Main />}></Route>
+          <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/main" element={<Main />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/local" element={<Local />}></Route>
           <Route path="/local/:id" element={<Local />}></Route>

@@ -24,7 +24,7 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
         console.log(response.data);
         setCookie("cookie", response.data[0].user_name, 1);
 
-        document.location.href = "/main";
+        document.location.href = "/";
       })
       .catch(function (error) {
         //console.log("실패");

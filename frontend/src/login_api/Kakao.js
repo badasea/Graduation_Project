@@ -38,7 +38,7 @@ function LoginKaKao() {
         console.log(response.data);
         setCookie("cookie", response.data[0].user_name, 1);
 
-        document.location.href = "/main";
+        document.location.href = "/";
 
         // console.log(response.data[0].user_email);
         // console.log(data.user_email);

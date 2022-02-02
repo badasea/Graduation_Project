@@ -15,6 +15,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
@@ -114,6 +115,8 @@ export default function PersistentDrawerLeft() {
     document.location.href = "/help";
   };
 
+  const login = true;
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -136,11 +139,24 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/main" color="inherit" underline="none">
+            <Link href="/" color="inherit" underline="none">
               리코 마켓
             </Link>
           </Typography>
-          {auth && (
+          {login === true ? (
+            <Button
+              variant="outlined"
+              size="medium"
+              style={{
+                backgroundColor: "#FFF",
+              }}
+              color="primary"
+            >
+              <Link href="/login" color="inherit" underline="none">
+                로그인 하기
+              </Link>
+            </Button>
+          ) : (
             <div>
               <IconButton
                 size="large"
@@ -171,7 +187,6 @@ export default function PersistentDrawerLeft() {
                 <MenuItem onClick={cart}>장바구니</MenuItem>
                 <MenuItem onClick={buylist}>주문 목록</MenuItem>
                 <MenuItem onClick={help}>고객센터</MenuItem>
-
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
             </div>
