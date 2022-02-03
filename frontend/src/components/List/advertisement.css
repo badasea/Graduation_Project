@@ -12,6 +12,8 @@ h3 {
   padding: 2%;
   position: relative;
   text-align: center;
+  width: 100%;
+  height: 440px;
 }
 .slick-next:before,
 .slick-prev:before {

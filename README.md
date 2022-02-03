@@ -32,7 +32,7 @@
 
 ## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 3일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 4일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -45,8 +45,6 @@
    프론트(react, ejs), 백(express, django) 총 4개 서버를 배포해야 하기 때문에 도커를 나누어 쿠버네티스에서 관리
 
 3. 기획 및 화면 정의서 수정
-
-4. django와 mysql 연동 잇슈
 
 # 🖥 화면 정의서 (~ing)
 
@@ -284,7 +282,7 @@ Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 
-ML : pip(django, djangorestframework, mysqlclient...)
+ML : pip(django, djangorestframework, mysqlclient, django-cors-headers...)
 
 API - google-login, kakao-login, naver-login
 
