@@ -3,8 +3,8 @@
 :root {
   --main-darklg: #1d2635;
   --main-dark: #161d29;
-  --primary-color: #2f80ec;
-  --main-light: #eeeeee;
+  --primary-color: #a267e7;
+  --main-light: #fff;
   font-family: "Poppins", sans-serif;
 }
 
@@ -221,4 +221,18 @@ video {
   #showChat {
     display: flex;
   }
+}
+
+.main_logo {
+  color: #a267e7;
+}
+
+.main_logo2 {
+  color: #fff;
+}
+
+* {
+  font-family: Gmarket Sans TTF;
+  font-style: normal;
+  font-weight: bold;
 }

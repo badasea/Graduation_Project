@@ -12,6 +12,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
+import { Grid } from "@mui/material";
+
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -20,6 +22,11 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 
 import Side from "../components/menu/side";
+
+import ItemList from "../components/List/item_list";
+import ShopList from "../components/List/shop_list";
+
+import Advertisement from "../components/List/advertisement";
 
 const drawerWidth = 240;
 
@@ -110,10 +117,10 @@ export default function PersistentDrawerLeft() {
   const buylist = () => {
     document.location.href = "/buylist";
   };
-
   const help = () => {
     document.location.href = "/help";
   };
+  console.log(window.location.href);
 
   const login = true;
 
@@ -123,35 +130,41 @@ export default function PersistentDrawerLeft() {
       <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: "36px",
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" color="inherit" underline="none">
-              LI.CO. MARKET
+          <Typography
+            // textAlign={"center"}
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
             </Link>
           </Typography>
           {login === true ? (
-            <Button
-              variant="outlined"
-              size="medium"
-              style={{
-                backgroundColor: "#FFF",
-              }}
-              color="primary"
-            >
-              <Link href="/login" color="inherit" underline="none">
-                로그인 하기
-              </Link>
-            </Button>
+            <div>
+              <Button size="medium">
+                <Link href="/signup" color="common.black" underline="none">
+                  REGISTER
+                </Link>
+              </Button>
+              <Button size="medium">
+                <Link href="/login" color="common.black" underline="none">
+                  LOG IN
+                </Link>
+              </Button>
+            </div>
           ) : (
             <div>
               <IconButton
@@ -219,10 +232,7 @@ export default function PersistentDrawerLeft() {
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
-      >
-        <DrawerHeader />
-        {/* 이곳에 컴포넌트 추가 */}
-      </Main>
-    </Box>
+      ></Main>
+    </Box> 
   );
 }

@@ -69,6 +69,7 @@ function ShopCard() {
                 backgroundColor: "#A267E7",
               }}
               variant="contained"
+              onClick={webcam}
             >
               방송보기
             </Button>

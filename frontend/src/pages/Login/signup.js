@@ -156,7 +156,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2" underline="none">
+                <Link href="/login" variant="body2" underline="none">
                   <p>
                     <span className="main_logo">
                       이미 계정이 있나요? 로그인

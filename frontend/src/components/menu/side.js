@@ -5,6 +5,7 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { deepPurple } from "@mui/material/colors";
 
 // 사이드바 아이콘
 import ListSubheader from "@mui/material/ListSubheader";
@@ -114,9 +115,12 @@ export default function Side() {
           {["마이 페이지"].map((text, index) => (
             <ListItem button key={text} onClick={mypage}>
               <ListItemIcon>
-                <AccountCircleIcon />
+                <AccountCircleIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                마이 페이지
+              </Link>
             </ListItem>
           ))}
         </ListItemButton>
@@ -128,36 +132,50 @@ export default function Side() {
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-            카테고리별 구분
+            <Link color="common.black" underline="none">
+              카테고리별 구분
+            </Link>
           </ListSubheader>
         }
       >
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
-            <MapIcon />
+            <MapIcon color="secondary" />
           </ListItemIcon>
-          <ListItemText primary="지역별 시장" />
+          <Link color="common.black" underline="none">
+            <ListItemText />
+            지역별 시장
+          </Link>
           {sideopen ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={sideopen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={seongbuck} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <LocationOnIcon />
+                <LocationOnIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="성북구" onClick={seongbuck} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                성북구
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={yeongdeungpo} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <LocationOnIcon />
+                <LocationOnIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="영등포구" onClick={yeongdeungpo} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                영등포구
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={jongno} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <LocationOnIcon />
+                <LocationOnIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="종로구" onClick={jongno} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                종로구
+              </Link>
             </ListItemButton>
           </List>
         </Collapse>
@@ -170,36 +188,51 @@ export default function Side() {
       >
         <ListItemButton onClick={handleClick2}>
           <ListItemIcon>
-            <CheckroomIcon />
+            <CheckroomIcon color="secondary" />
           </ListItemIcon>
-          <ListItemText primary="업종" />
+          <Link color="common.black" underline="none">
+            <ListItemText />
+            업종
+          </Link>
           {side2open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={side2open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={restaurant} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <FoodBankIcon />
+                <FoodBankIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="음식점" onClick={restaurant} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                음식점
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={hanbok} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <CheckroomIcon />
+                <CheckroomIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="한복" onClick={hanbok} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                한복
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={craftshop} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <BrushIcon />
+                <BrushIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="공방" onClick={craftshop} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                공방
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={etc} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <MoreHorizIcon />
+                <MoreHorizIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="기타" onClick={etc} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                기타 업종
+              </Link>
             </ListItemButton>
           </List>
         </Collapse>
@@ -212,52 +245,72 @@ export default function Side() {
         aria-labelledby="nested-list-subheader"
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
-            가게 관리
+            <Link color="common.black" underline="none">
+              가게 관리
+            </Link>
           </ListSubheader>
         }
       >
         <ListItemButton onClick={handleClick3}>
           <ListItemIcon>
-            <StoreIcon />
+            <StoreIcon color="secondary" />
           </ListItemIcon>
-          <ListItemText primary="가게" />
+          <Link color="common.black" underline="none">
+            <ListItemText />
+            가게
+          </Link>{" "}
           {side3open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={side3open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {user_type !== "seller" ? (
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
                 <ListItemIcon>
-                  <AddBusinessIcon />
+                  <AddBusinessIcon color="secondary" />
                 </ListItemIcon>
-                <ListItemText primary="가게 등록" onClick={addstore} />
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  가게 등록
+                </Link>
               </ListItemButton>
             ) : (
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton onClick={editstore} sx={{ pl: 4 }}>
                 <ListItemIcon>
-                  <SettingsIcon />
+                  <SettingsIcon color="secondary" />
                 </ListItemIcon>
-                <ListItemText primary="가게 수정" onClick={editstore} />
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  가게 수정
+                </Link>
               </ListItemButton>
             )}
 
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={additem} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <AddCircleIcon />
+                <AddCircleIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="상품 등록" onClick={additem} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                상품 등록
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={edititem} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <EditIcon />
+                <EditIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="상품 수정" onClick={edititem} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                상품 수정
+              </Link>
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton onClick={webcam} sx={{ pl: 4 }}>
               <ListItemIcon>
-                <PodcastsIcon />
+                <PodcastsIcon color="secondary" />
               </ListItemIcon>
-              <ListItemText primary="방송 시작하기" onClick={webcam} />
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                방송 시작하기
+              </Link>
             </ListItemButton>
           </List>
         </Collapse>
@@ -267,9 +320,12 @@ export default function Side() {
         {["장바구니"].map((text, index) => (
           <ListItem button key={text} onClick={cart}>
             <ListItemIcon>
-              {index === 0 ? <ShoppingBagIcon /> : <></>}
+              {index === 0 ? <ShoppingBagIcon color="secondary" /> : <></>}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <Link color="common.black" underline="none">
+              <ListItemText />
+              장바 구니
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -277,9 +333,12 @@ export default function Side() {
         {["주문 목록"].map((text, index) => (
           <ListItem button key={text} onClick={buylist}>
             <ListItemIcon>
-              {index === 0 ? <CreditScoreIcon /> : <></>}
+              {index === 0 ? <CreditScoreIcon color="secondary" /> : <></>}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <Link color="common.black" underline="none">
+              <ListItemText />
+              주문 목록
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -287,9 +346,12 @@ export default function Side() {
         {["로그아웃"].map((text, index) => (
           <ListItem button key={text} onClick={logout}>
             <ListItemIcon>
-              <LogoutIcon />
+              <LogoutIcon color="secondary" />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <Link color="common.black" underline="none">
+              <ListItemText />
+              로그 아웃
+            </Link>
           </ListItem>
         ))}
       </List>
