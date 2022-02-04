@@ -9,6 +9,8 @@ let User = function (user) {
   this.user_password = user.user_password;
   this.user_address = user.user_address;
   this.user_type = user.user_type;
+  this.user_like_place = user.user_like_place;
+  this.user_like_type = user.user_like_type;
 };
 
 // 모든 사용자 검색
@@ -79,13 +81,15 @@ User.delete = function (id, result) {
 
 User.update = function (id, user, result) {
   mysql.query(
-    "UPDATE user SET user_name=?,user_email=?,user_password=?,user_address=?,user_type=? WHERE user_id = ?",
+    "UPDATE user SET user_name=?,user_email=?,user_password=?,user_address=?,user_type=?,user_like_place=?,user_like_type=? WHERE user_id = ?",
     [
       user.user_name,
       user.user_email,
       user.user_password,
       user.user_address,
       user.user_type,
+      user.user_like_place,
+      user.user_like_type,
       id,
     ],
     function (err, res) {
