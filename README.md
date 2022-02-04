@@ -46,6 +46,8 @@
 
 3. 데이터 베이스 이미지 처리
 
+4. Order 테이블 생성 필요
+
 # 🖥 화면 정의서 (~ing)
 
 <p float="left">
@@ -307,7 +309,7 @@ font : Sans TTF
 
 ![image](https://user-images.githubusercontent.com/57929751/152187433-4ec02af1-9085-4b44-87ed-e1ae98e11a89.png)
 
-# ⚙ ERD (~ing 2022. 02. 5)
+# ⚙ ERD (~ing 2022. 02. 05)
 
 ![image](https://user-images.githubusercontent.com/57929751/152569829-121f2eef-a6a1-46b9-8dd5-7bea19b1db11.png)
 
