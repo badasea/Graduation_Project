@@ -305,8 +305,8 @@ font : Sans TTF
 
 ![image](https://user-images.githubusercontent.com/57929751/152187433-4ec02af1-9085-4b44-87ed-e1ae98e11a89.png)
 
-# ⚙ ERD (~ing 2022. 01. 26)
+# ⚙ ERD (~ing 2022. 02. 5)
 
-![image](https://user-images.githubusercontent.com/57929751/151014356-99929edc-51db-4cfe-9c95-0c68cdcaea94.png)
+![image](https://user-images.githubusercontent.com/57929751/152569829-121f2eef-a6a1-46b9-8dd5-7bea19b1db11.png)
 
 # 📑 상세기술 정의서
