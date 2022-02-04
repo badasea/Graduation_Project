@@ -12,6 +12,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
+import { Grid } from "@mui/material";
+
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -125,42 +127,44 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        open={open}
-        style={{ background: "rgb(26, 29, 41)" }}
-      >
+      <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: "36px",
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" color="inherit" underline="none">
-              리코 마켓
+          <Typography
+            // textAlign={"center"}
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
             </Link>
           </Typography>
           {login === true ? (
-            <Button
-              variant="outlined"
-              size="medium"
-              style={{
-                backgroundColor: "#FFF",
-              }}
-              color="primary"
-            >
-              <Link href="/login" color="inherit" underline="none">
-                로그인 하기
-              </Link>
-            </Button>
+            <div>
+              <Button size="medium">
+                <Link href="/signup" color="common.black" underline="none">
+                  REGISTER
+                </Link>
+              </Button>
+              <Button size="medium">
+                <Link href="/login" color="common.black" underline="none">
+                  LOG IN
+                </Link>
+              </Button>
+            </div>
           ) : (
             <div>
               <IconButton
@@ -224,7 +228,7 @@ export default function PersistentDrawerLeft() {
         <Side />
       </Drawer>
       <Main
-        style={{ background: "rgb(26, 29, 41)" }}
+        style={{ background: "#fff" }}
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
@@ -233,27 +237,36 @@ export default function PersistentDrawerLeft() {
         <Advertisement />
         <br />
 
-        <Typography variant="h4" color="common.white">
-          <Link color="inherit" underline="none">
-            가게 리스트
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> MARKET LIST
+            </p>
           </Link>
         </Typography>
         <ShopList />
-        <Typography variant="h4" color="common.white">
-          <Link color="inherit" underline="none">
-            상품 리스트
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> STOCK LIST
+            </p>
           </Link>
         </Typography>
         <ItemList />
-        <Typography variant="h4" color="common.white">
-          <Link color="inherit" underline="none">
-            알고리즘 추천 가게 리스트
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> MARKET 알고리즘 추천
+              LIST
+            </p>
           </Link>
         </Typography>
         <ShopList />
-        <Typography variant="h4" color="common.white">
-          <Link color="inherit" underline="none">
-            알고리즘 추천 상품 리스트
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> STOCK 알고리즘 추천 LIST
+            </p>
           </Link>
         </Typography>
         <ItemList />

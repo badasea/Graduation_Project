@@ -10,6 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { deepPurple } from "@mui/material/colors";
 
 import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
@@ -59,11 +60,18 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="fixed" style={{ background: "rgb(26, 29, 41)" }}>
+      <AppBar position="fixed" style={{ background: "#fff" }}>
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" color="inherit" underline="none">
-              리코 마켓
+          <Typography
+            textAlign={"center"}
+            variant="h7"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
             </Link>
           </Typography>
         </Toolbar>
@@ -79,11 +87,14 @@ export default function SignUp() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <br />
           <Typography component="h1" variant="h5">
-            회원 가입
+            <p>
+              <span className="main_logo">LI.CO.</span> MARKET
+            </p>
+          </Typography>
+          <Typography component="h1" variant="h5">
+            <p>회원 가입</p>
           </Typography>
           <Box
             component="form"
@@ -139,15 +150,18 @@ export default function SignUp() {
               fullWidth
               size="large"
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              style={{ background: "rgb(26, 29, 41)" }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
             >
-              회원 가입
+              <p>회원 가입</p>
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
-                  이미 계정이 있나요? 로그인
+                <Link href="/" variant="body2" underline="none">
+                  <p>
+                    <span className="main_logo">
+                      이미 계정이 있나요? 로그인
+                    </span>
+                  </p>
                 </Link>
               </Grid>
             </Grid>

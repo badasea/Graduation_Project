@@ -194,11 +194,7 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        open={open}
-        style={{ background: "rgb(26, 29, 41)" }}
-      >
+      <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -214,7 +210,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             <Link href="/" color="inherit" underline="none">
-              리코 마켓
+              LI.CO. MARKET
             </Link>
           </Typography>
           {auth && (
@@ -393,7 +389,7 @@ export default function PersistentDrawerLeft() {
                   size="large"
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  style={{ background: "rgb(26, 29, 41)" }}
+                  style={{ background: "#fff" }}
                 >
                   개인 정보 수정 하기
                 </Button>

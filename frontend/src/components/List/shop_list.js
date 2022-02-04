@@ -10,29 +10,29 @@ export default function SimpleSlider() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
   };
   return (
     <div className="app">
       <div className="flex">
         <Slider {...settings}>
-          <div class="item">
+          <div>
             <ShopCard />
           </div>
-          <div class="item">
+          <div>
             <ShopCard />
           </div>
-          <div class="item">
+          <div>
             <ShopCard />
           </div>
-          <div class="item">
+          <div>
             <ShopCard />
           </div>
-          <div class="item">
+          <div>
             <ShopCard />
           </div>
-          <div class="item">
+          <div>
             <ShopCard />
           </div>
         </Slider>

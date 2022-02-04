@@ -117,11 +117,7 @@ export default function PersistentDrawerLeft() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        open={open}
-        style={{ background: "rgb(26, 29, 41)" }}
-      >
+      <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -137,7 +133,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             <Link href="/" color="inherit" underline="none">
-              리코 마켓
+              LI.CO. MARKET
             </Link>
           </Typography>
           {auth && (

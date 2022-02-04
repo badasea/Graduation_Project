@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { deepPurple } from "@mui/material/colors";
 
 import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
@@ -88,7 +89,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url(../../img/login.png)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -98,11 +99,18 @@ export default function SignInSide() {
             backgroundPosition: "center",
           }}
         />
-        <AppBar position="fixed" style={{ background: "rgb(26, 29, 41)" }}>
+        <AppBar position="fixed" style={{ background: "#fff" }}>
           <Toolbar>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              <Link href="/" color="inherit" underline="none">
-                리코 마켓
+            <Typography
+              textAlign={"center"}
+              variant="h7"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              <Link href="/" color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> MARKET
+                </p>
               </Link>
             </Typography>
           </Toolbar>
@@ -117,11 +125,18 @@ export default function SignInSide() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <br />
+            {/* <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
+              LICO
+            </Avatar> */}
+
             <Typography component="h1" variant="h5">
-              리코 마켓 로그인
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
+            </Typography>
+            <Typography component="h1" variant="h5">
+              <p>로그인</p>
             </Typography>
             <Box
               component="form"
@@ -155,16 +170,19 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 size="large"
-                sx={{ mt: 3, mb: 2 }}
-                style={{ background: "rgb(26, 29, 41)" }}
+                sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
               >
-                로그인
+                <p>로그인</p>
               </Button>
 
               <Grid container>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"회원이 아니신가요? 회원 가입"}
+                  <Link href="/signup" variant="body2" underline="none">
+                    <p>
+                      <span className="main_logo">
+                        {"회원이 아니신가요? 회원 가입"}
+                      </span>
+                    </p>
                   </Link>
                 </Grid>
               </Grid>

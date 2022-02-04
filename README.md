@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**👨‍🎓 졸업 작품 작품명 : 리코 마켓(클라우드 기반 전통시장 라이브커머스)**
+**👨‍🎓 졸업 작품 작품명 : LI.CO. MARKET(클라우드 기반 전통시장 라이브커머스)**
 
 </div>
 
@@ -32,7 +32,7 @@
 
 ## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 4일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 5일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -43,8 +43,6 @@
 
 2. 도커 및 쿠버네티스 도입? :
    프론트(react, ejs), 백(express, django) 총 4개 서버를 배포해야 하기 때문에 도커를 나누어 쿠버네티스에서 관리
-
-3. 기획 및 화면 정의서 수정
 
 # 🖥 화면 정의서 (~ing)
 
@@ -60,7 +58,8 @@
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/152172172-eb4f7782-31ca-4fed-bbbe-6ddc77369138.png" width="30%" height="30%" >
-<img src="https://user-images.githubusercontent.com/57929751/152183759-8955fa82-972e-450a-b668-4106f3dee26f.gif" width="50%" height="50%" >
+
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/57929751/152551442-bf7052fc-9ebb-435d-8b4c-ba739a3c0620.gif)
 
 </p>
 
@@ -282,7 +281,7 @@ Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 
-ML : pip(django, djangorestframework, mysqlclient, django-cors-headers...)
+ML : pip(django, djangorestframework, mysqlclient, django-cors-headers, pymysql...)
 
 API - google-login, kakao-login, naver-login
 

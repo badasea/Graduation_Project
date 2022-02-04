@@ -63,7 +63,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(26, 29, 41);
+  background: #fff;
   border-radius: 8px;
   margin: 1rem 0;
   width: 100%;

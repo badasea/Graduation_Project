@@ -18,22 +18,13 @@ export default function SimpleSlider() {
     <div>
       <Slider {...settings}>
         <div>
-          <h3>광고배너1</h3>
+          <img src="../img/ad_banner.png" />
         </div>
         <div>
-          <h3>광고배너2</h3>
+          <img src="../img/ad_banner2.png" />
         </div>
         <div>
-          <h3>광고배너3</h3>
-        </div>
-        <div>
-          <h3>광고배너4</h3>
-        </div>
-        <div>
-          <h3>광고배너5</h3>
-        </div>
-        <div>
-          <h3>광고배너6</h3>
+          <img src="../img/ad_banner1.png" />
         </div>
       </Slider>
     </div>

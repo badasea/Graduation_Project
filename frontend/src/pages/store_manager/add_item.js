@@ -156,11 +156,7 @@ export default function Addstore() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        open={open}
-        style={{ background: "rgb(26, 29, 41)" }}
-      >
+      <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -176,7 +172,7 @@ export default function Addstore() {
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             <Link href="/" color="inherit" underline="none">
-              리코 마켓
+              LI.CO. MARKET
             </Link>
           </Typography>
           {auth && (
@@ -272,10 +268,11 @@ export default function Addstore() {
                 {activeStep === steps.length ? (
                   <React.Fragment>
                     <Typography variant="h5" gutterBottom>
-                      리코 마켓을 이용해 주셔서 감사합니다.
+                      LI.CO. MARKET을 이용해 주셔서 감사합니다.
                     </Typography>
                     <Typography variant="subtitle1">
-                      리코 마켓 속 사장님의 가게가 정상적으로 등록되었습니다.
+                      LI.CO. MARKET 속 사장님의 가게가 정상적으로
+                      등록되었습니다.
                     </Typography>
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                       <Button
