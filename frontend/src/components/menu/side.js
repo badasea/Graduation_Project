@@ -30,6 +30,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 export default function Side() {
   const [sideopen, setOpenside] = React.useState(false);
@@ -47,6 +48,8 @@ export default function Side() {
   };
 
   const logout = () => {
+    sessionStorage.removeItem("data");
+
     document.location.href = "/";
   };
 
@@ -97,6 +100,9 @@ export default function Side() {
   const buylist = () => {
     document.location.href = "/buylist";
   };
+  const loginpage = () => {
+    document.location.href = "/login";
+  };
 
   function webcam() {
     window.open(
@@ -108,23 +114,60 @@ export default function Side() {
 
   const user_type = "consumer";
 
+  var login;
+
+  var img;
+
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  //console.log(session);
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
+
   return (
     <div>
-      <List>
-        <ListItemButton>
-          {["마이 페이지"].map((text, index) => (
-            <ListItem button key={text} onClick={mypage}>
+      {login === true ? (
+        <List>
+          <ListItemButton>
+            {["마이 페이지"].map((text, index) => (
+              <ListItem button key={text} onClick={mypage}>
+                <ListItemIcon>
+                  {img !== undefined ? (
+                    <AccountCircleIcon
+                      sx={{ width: 46, height: 46 }}
+                      color="secondary"
+                    />
+                  ) : (
+                    <Avatar src={session.data.user_img}></Avatar>
+                  )}{" "}
+                </ListItemIcon>
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  마이 페이지
+                </Link>
+              </ListItem>
+            ))}
+          </ListItemButton>
+        </List>
+      ) : (
+        <List>
+          {["로그인"].map((text, index) => (
+            <ListItem button key={text} onClick={loginpage}>
               <ListItemIcon>
-                <AccountCircleIcon color="secondary" />
+                <AccountCircleIcon color="secondary" />{" "}
               </ListItemIcon>
               <Link color="common.black" underline="none">
                 <ListItemText />
-                마이 페이지
+                로그인
               </Link>
             </ListItem>
           ))}
-        </ListItemButton>
-      </List>
+        </List>
+      )}
       <Divider />
       <List
         sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
@@ -238,123 +281,129 @@ export default function Side() {
         </Collapse>
       </List>
       {/* 가게 */}
-      <Divider />
-      <List
-        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            <Link color="common.black" underline="none">
-              가게 관리
-            </Link>
-          </ListSubheader>
-        }
-      >
-        <ListItemButton onClick={handleClick3}>
-          <ListItemIcon>
-            <StoreIcon color="secondary" />
-          </ListItemIcon>
-          <Link color="common.black" underline="none">
-            <ListItemText />
-            가게
-          </Link>{" "}
-          {side3open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={side3open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            {user_type !== "seller" ? (
-              <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <AddBusinessIcon color="secondary" />
-                </ListItemIcon>
+      {login === true ? (
+        <div>
+          <Divider />
+          <List
+            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            subheader={
+              <ListSubheader component="div" id="nested-list-subheader">
                 <Link color="common.black" underline="none">
-                  <ListItemText />
-                  가게 등록
+                  가게 관리
                 </Link>
-              </ListItemButton>
-            ) : (
-              <ListItemButton onClick={editstore} sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <SettingsIcon color="secondary" />
-                </ListItemIcon>
-                <Link color="common.black" underline="none">
-                  <ListItemText />
-                  가게 수정
-                </Link>
-              </ListItemButton>
-            )}
+              </ListSubheader>
+            }
+          >
+            <ListItemButton onClick={handleClick3}>
+              <ListItemIcon>
+                <StoreIcon color="secondary" />
+              </ListItemIcon>
+              <Link color="common.black" underline="none">
+                <ListItemText />
+                가게
+              </Link>{" "}
+              {side3open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={side3open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {user_type !== "seller" ? (
+                  <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <AddBusinessIcon color="secondary" />
+                    </ListItemIcon>
+                    <Link color="common.black" underline="none">
+                      <ListItemText />
+                      가게 등록
+                    </Link>
+                  </ListItemButton>
+                ) : (
+                  <ListItemButton onClick={editstore} sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <SettingsIcon color="secondary" />
+                    </ListItemIcon>
+                    <Link color="common.black" underline="none">
+                      <ListItemText />
+                      가게 수정
+                    </Link>
+                  </ListItemButton>
+                )}
 
-            <ListItemButton onClick={additem} sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <AddCircleIcon color="secondary" />
-              </ListItemIcon>
-              <Link color="common.black" underline="none">
-                <ListItemText />
-                상품 등록
-              </Link>
-            </ListItemButton>
-            <ListItemButton onClick={edititem} sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <EditIcon color="secondary" />
-              </ListItemIcon>
-              <Link color="common.black" underline="none">
-                <ListItemText />
-                상품 수정
-              </Link>
-            </ListItemButton>
-            <ListItemButton onClick={webcam} sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <PodcastsIcon color="secondary" />
-              </ListItemIcon>
-              <Link color="common.black" underline="none">
-                <ListItemText />
-                방송 시작하기
-              </Link>
-            </ListItemButton>
+                <ListItemButton onClick={additem} sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <AddCircleIcon color="secondary" />
+                  </ListItemIcon>
+                  <Link color="common.black" underline="none">
+                    <ListItemText />
+                    상품 등록
+                  </Link>
+                </ListItemButton>
+                <ListItemButton onClick={edititem} sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <EditIcon color="secondary" />
+                  </ListItemIcon>
+                  <Link color="common.black" underline="none">
+                    <ListItemText />
+                    상품 수정
+                  </Link>
+                </ListItemButton>
+                <ListItemButton onClick={webcam} sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <PodcastsIcon color="secondary" />
+                  </ListItemIcon>
+                  <Link color="common.black" underline="none">
+                    <ListItemText />
+                    방송 시작하기
+                  </Link>
+                </ListItemButton>
+              </List>
+            </Collapse>
           </List>
-        </Collapse>
-      </List>
-      <Divider />
-      <List>
-        {["장바구니"].map((text, index) => (
-          <ListItem button key={text} onClick={cart}>
-            <ListItemIcon>
-              {index === 0 ? <ShoppingBagIcon color="secondary" /> : <></>}
-            </ListItemIcon>
-            <Link color="common.black" underline="none">
-              <ListItemText />
-              장바 구니
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-      <List>
-        {["주문 목록"].map((text, index) => (
-          <ListItem button key={text} onClick={buylist}>
-            <ListItemIcon>
-              {index === 0 ? <CreditScoreIcon color="secondary" /> : <></>}
-            </ListItemIcon>
-            <Link color="common.black" underline="none">
-              <ListItemText />
-              주문 목록
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-      <List>
-        {["로그아웃"].map((text, index) => (
-          <ListItem button key={text} onClick={logout}>
-            <ListItemIcon>
-              <LogoutIcon color="secondary" />
-            </ListItemIcon>
-            <Link color="common.black" underline="none">
-              <ListItemText />
-              로그 아웃
-            </Link>
-          </ListItem>
-        ))}
-      </List>
+          <Divider />
+          <List>
+            {["장바구니"].map((text, index) => (
+              <ListItem button key={text} onClick={cart}>
+                <ListItemIcon>
+                  {index === 0 ? <ShoppingBagIcon color="secondary" /> : <></>}
+                </ListItemIcon>
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  장바 구니
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+          <List>
+            {["주문 목록"].map((text, index) => (
+              <ListItem button key={text} onClick={buylist}>
+                <ListItemIcon>
+                  {index === 0 ? <CreditScoreIcon color="secondary" /> : <></>}
+                </ListItemIcon>
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  주문 목록
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+          <List>
+            {["로그아웃"].map((text, index) => (
+              <ListItem button key={text} onClick={logout}>
+                <ListItemIcon>
+                  <LogoutIcon color="secondary" />
+                </ListItemIcon>
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  로그 아웃
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

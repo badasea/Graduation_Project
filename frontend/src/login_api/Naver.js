@@ -47,8 +47,10 @@ class NaverLogin extends Component {
             .then(function (response) {
               console.log(response.data);
               setCookie("cookie", response.data[0].user_name, 1);
-
-              document.location.href = "/";
+              const session = response.data[0];
+              const userObj = { data: session };
+              window.sessionStorage.setItem("data", JSON.stringify(userObj));
+              //document.location.href = "/";
             })
             .catch(function (error) {
               //console.log("실패");

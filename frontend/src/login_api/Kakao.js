@@ -22,10 +22,11 @@ const buttonBlock = {
 
 function LoginKaKao() {
   function login(response) {
-    //console.log(response);
+    console.log(response);
     let data = {
       user_email: response.profile.kakao_account.email,
       user_name: response.profile.kakao_account.profile.nickname,
+      user_img: response.profile.kakao_account.profile.profile_image_url,
     };
 
     axios.post("/api/user", data).then(function (res) {
@@ -36,8 +37,10 @@ function LoginKaKao() {
       .get(url)
       .then(function (response) {
         console.log(response.data);
-        setCookie("cookie", response.data[0].user_name, 1);
-
+        setCookie("cookie", response.data[0].user_email, 1);
+        const session = response.data[0];
+        const userObj = { data: session };
+        window.sessionStorage.setItem("data", JSON.stringify(userObj));
         document.location.href = "/";
 
         // console.log(response.data[0].user_email);

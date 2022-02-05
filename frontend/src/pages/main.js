@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -11,8 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-
-import { Grid } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
@@ -25,6 +26,7 @@ import Side from "../components/menu/side";
 
 import ItemList from "../components/List/item_list";
 import ShopList from "../components/List/shop_list";
+import SkeletonList from "../components/List/skeleton";
 
 import Advertisement from "../components/List/advertisement";
 
@@ -87,12 +89,7 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -103,6 +100,7 @@ export default function PersistentDrawerLeft() {
   };
 
   const logout = () => {
+    sessionStorage.removeItem("data");
     document.location.href = "/";
   };
 
@@ -120,9 +118,20 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-  console.log(window.location.href);
 
-  const login = true;
+  var login;
+
+  var img;
+
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  console.log(session);
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -152,7 +161,7 @@ export default function PersistentDrawerLeft() {
               </p>
             </Link>
           </Typography>
-          {login === true ? (
+          {login === false ? (
             <div>
               <Button size="medium">
                 <Link href="/signup" color="common.black" underline="none">
@@ -173,9 +182,16 @@ export default function PersistentDrawerLeft() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
+                color="secondary"
               >
-                <AccountCircle />
+                {img !== undefined ? (
+                  <AccountCircleIcon
+                    sx={{ width: 46, height: 46 }}
+                    color="secondary"
+                  />
+                ) : (
+                  <Avatar src={session.data.user_img}></Avatar>
+                )}
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -236,7 +252,6 @@ export default function PersistentDrawerLeft() {
         <DrawerHeader />
         <Advertisement />
         <br />
-
         <Typography variant="h6" color="common.white">
           <Link color="common.black" underline="none">
             <p>
@@ -261,7 +276,20 @@ export default function PersistentDrawerLeft() {
             </p>
           </Link>
         </Typography>
-        <ShopList />
+        {login === false ? (
+          <div>
+            <Typography variant="h8" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>로그인 후 확인해보세요.</p>
+              </Link>
+            </Typography>
+            <SkeletonList />
+          </div>
+        ) : (
+          <div>
+            <ShopList />
+          </div>
+        )}
         <Typography variant="h6" color="common.white">
           <Link color="common.black" underline="none">
             <p>
@@ -269,7 +297,20 @@ export default function PersistentDrawerLeft() {
             </p>
           </Link>
         </Typography>
-        <ItemList />
+        {login === false ? (
+          <div>
+            <Typography variant="h8" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>로그인 후 확인해보세요.</p>
+              </Link>
+            </Typography>
+            <SkeletonList />
+          </div>
+        ) : (
+          <div>
+            <ItemList />
+          </div>
+        )}
       </Main>
     </Box>
   );

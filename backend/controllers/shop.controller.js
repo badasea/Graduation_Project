@@ -17,6 +17,13 @@ exports.findById = function (req, res) {
   });
 };
 
+exports.findById2 = function (req, res) {
+  Shop.findById2(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
 exports.create = function (req, res) {
   const new_shop = new Shop(req.body);
   //handles null error

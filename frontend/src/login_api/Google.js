@@ -12,6 +12,7 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
     let data = {
       user_email: response.profileObj.email,
       user_name: response.profileObj.name,
+      user_img: response.profileObj.imageUrl,
     };
 
     axios.post("/api/user", data).then(function (res) {
@@ -23,7 +24,9 @@ export default function GoogleLoginBtn({ onGoogleLogin }) {
       .then(function (response) {
         console.log(response.data);
         setCookie("cookie", response.data[0].user_name, 1);
-
+        const session = response.data[0];
+        const userObj = { data: session };
+        window.sessionStorage.setItem("data", JSON.stringify(userObj));
         document.location.href = "/";
       })
       .catch(function (error) {

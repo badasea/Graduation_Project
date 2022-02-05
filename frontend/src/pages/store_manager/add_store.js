@@ -31,7 +31,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import First from "../../components/store/first";
 import Second from "../../components/store/second";
 import Check from "../../components/store/Check";
-
+import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -155,30 +156,61 @@ export default function Addstore() {
   const main = () => {
     document.location.href = "/";
   };
+  var login;
 
+  var img;
+
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  console.log(session);
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: "36px",
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" color="inherit" underline="none">
-              LI.CO. MARKET
+          <Typography
+            // textAlign={"center"}
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
             </Link>
           </Typography>
-          {auth && (
+          {login === false ? (
+            <div>
+              <Button size="medium">
+                <Link href="/signup" color="common.black" underline="none">
+                  REGISTER
+                </Link>
+              </Button>
+              <Button size="medium">
+                <Link href="/login" color="common.black" underline="none">
+                  LOG IN
+                </Link>
+              </Button>
+            </div>
+          ) : (
             <div>
               <IconButton
                 size="large"
@@ -186,9 +218,16 @@ export default function Addstore() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
+                color="secondary"
               >
-                <AccountCircle />
+                {img !== undefined ? (
+                  <AccountCircleIcon
+                    sx={{ width: 46, height: 46 }}
+                    color="secondary"
+                  />
+                ) : (
+                  <Avatar src={session.data.user_img}></Avatar>
+                )}
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -209,7 +248,6 @@ export default function Addstore() {
                 <MenuItem onClick={cart}>장바구니</MenuItem>
                 <MenuItem onClick={buylist}>주문 목록</MenuItem>
                 <MenuItem onClick={help}>고객센터</MenuItem>
-
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
             </div>
@@ -258,12 +296,14 @@ export default function Addstore() {
               sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
             >
               <Typography component="h1" variant="h4" align="center">
-                가게 등록하기
+                <p>가게 등록하기</p>
               </Typography>
               <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label) => (
                   <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
+                    <p>
+                      <StepLabel>{label}</StepLabel>
+                    </p>
                   </Step>
                 ))}
               </Stepper>
@@ -271,11 +311,16 @@ export default function Addstore() {
                 {activeStep === steps.length ? (
                   <React.Fragment>
                     <Typography variant="h5" gutterBottom>
-                      LI.CO. MARKET을 이용해 주셔서 감사합니다.
+                      <p>
+                        <span className="main_logo">LI.CO.</span> MARKET 을
+                        이용해 주셔서 감사합니다.
+                      </p>
                     </Typography>
                     <Typography variant="subtitle1">
-                      LI.CO. MARKET 속 사장님의 가게가 정상적으로
-                      등록되었습니다.
+                      <p>
+                        LI.CO. MARKET 속 사장님의 가게가 정상적으로
+                        등록되었습니다.
+                      </p>
                     </Typography>
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                       <Button

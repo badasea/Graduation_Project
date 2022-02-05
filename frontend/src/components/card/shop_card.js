@@ -9,8 +9,30 @@ import { deepPurple } from "@mui/material/colors";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function ShopCard() {
+  //const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  const [shop, setShop] = useState([]);
+  function searchshop() {
+    const url = "/api/shop/user/2";
+    axios
+      .get(url)
+      .then(function (response) {
+        //console.log(response);
+        setShop(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
+  useEffect(() => {
+    searchshop();
+  }, []);
+
   function webcam() {
     window.open(
       "http://localhost:443/12",
@@ -37,28 +59,26 @@ function ShopCard() {
               sx={{ width: 24, height: 24, bgcolor: deepPurple[500] }}
             ></Avatar>
             <Link color="common.black" underline="none">
-              성대전통시장
+              {shop.shop_address}
             </Link>
           </Stack>
         </Typography>
         <Divider light />
         <Typography sx={{ fontSize: 18 }} underline="none">
-          <p>프라임유통</p>
+          <p> {shop.shop_name}</p>
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="#B2B2B2" underline="none">
-          <p>동작구 · 정육점</p>
+          <p>
+            {shop.shop_region} · {shop.shop_business_type}
+          </p>
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="#202121" underline="none">
-          <p>
-            내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용
-            내용 내용 내용 내용 내용 내 내용 내용 내용 내용 내용 내용 내용 내용
-            내용 내용 내용 내용 내용 내용 내용 내용
-          </p>
+          <p>{shop.shop_content}</p>
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <Button fullWidth color="secondary" variant="outlined">
-              가게 입장하기
+              <p>가게 입장하기</p>
             </Button>
           </Grid>
           <Grid item xs={6}>
@@ -69,7 +89,7 @@ function ShopCard() {
               }}
               variant="contained"
             >
-              방송보기
+              <p>방송보기</p>
             </Button>
           </Grid>
         </Grid>

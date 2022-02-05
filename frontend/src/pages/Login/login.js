@@ -46,7 +46,7 @@ export default function SignInSide() {
       password: data.get("password"),
     };
     console.log(user);
-    setCookie("cookie", data.get("email"), 1);
+    //setCookie("cookie", data.get("email"), 1);
     var url = "/api/user/login/" + user.email;
     axios
       .get(url)
@@ -61,6 +61,10 @@ export default function SignInSide() {
           res.data[0].user_password === user.password
         ) {
           alert(res.data[0].user_name + "님 환영합니다.");
+          setCookie("cookie", res.data[0].user_email, 1);
+          const session = res.data[0];
+          const userObj = { data: session };
+          window.sessionStorage.setItem("data", JSON.stringify(userObj));
           document.location.href = "/";
         } else if (res.data[0].user_email === "admin") {
           // 관리자 페이지

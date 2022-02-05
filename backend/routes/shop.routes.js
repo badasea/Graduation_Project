@@ -5,6 +5,8 @@ const ShopController = require("../controllers/shop.controller");
 
 router.get("/", ShopController.findAll);
 router.get("/:id", ShopController.findById);
+router.get("/user/:id", ShopController.findById2);
+
 router.post("/", ShopController.create);
 router.delete("/:id", ShopController.delete);
 router.put("/:id", ShopController.update);

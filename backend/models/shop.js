@@ -40,6 +40,18 @@ Shop.findById = function (id, result) {
   });
 };
 
+// 특정 가게 검색2
+Shop.findById2 = function (id, result) {
+  mysql.query("Select * from shop where user_id = ? ", id, function (err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      result(null, res);
+    }
+  });
+};
+
 // 가게 등록
 Shop.create = function (newEmp, result) {
   mysql.query("INSERT INTO shop set ?", newEmp, function (err, res) {

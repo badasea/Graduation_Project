@@ -22,6 +22,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import { useState, useEffect } from "react";
 
 import Link from "@mui/material/Link";
 
@@ -33,7 +34,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
-import Checkbox from "@mui/material/Checkbox";
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -108,12 +109,7 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -166,29 +162,68 @@ export default function PersistentDrawerLeft() {
     );
   };
 
+  var login;
+
+  var img;
+
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  //console.log(session);
+
+  const [user, setUser] = useState([]);
+  function login_form() {
+    const url = "/api/user/login/" + session.data.user_email;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data[0]);
+        setUser(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
+  useEffect(() => {
+    login_form();
+  }, []);
+
+  // const place_str = session.data.user_like_place;
+  // const place_arr = user.user_like_place.split(",");
+  // console.log(user.user_like_place);
+  // console.log(place_arr);
+
+  //const type_str = user.user_like_type;
+  //const type_arr = type_str.split(",");
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
+  const place = choice_location.join(",");
+  const type = choice_like.join(",");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     let user = {
-      user_email: data.get("email"),
       user_password: data.get("password"),
       user_name: data.get("Name"),
       user_address: data.get("address"),
+      user_like_place: place,
+      user_like_type: type,
     };
-    // axios
-    //   .put("/api/user", user, {})
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     if (res.data !== undefined) {
-    //       // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-    //       alert("이미 등록된 이메일 계정입니다.");
-    //     } else {
-    //       alert("회원가입이 완료되었습니다.");
-    //       document.location.href = "/";
-    //     }
-    //   })
-    //   .catch();
+    console.log(user);
+    axios
+      .post("/api/user/" + session.data.user_id, user)
+      .then((res) => {
+        console.log(res.data);
+        alert("개인 정보가 수정 되었습니다.");
+        //document.location.href = "/";
+      })
+      .catch();
   };
 
   return (
@@ -197,23 +232,42 @@ export default function PersistentDrawerLeft() {
       <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: "36px",
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" color="inherit" underline="none">
-              LI.CO. MARKET
+          <Typography
+            // textAlign={"center"}
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
             </Link>
           </Typography>
-          {auth && (
+          {login === false ? (
+            <div>
+              <Button size="medium">
+                <Link href="/signup" color="common.black" underline="none">
+                  REGISTER
+                </Link>
+              </Button>
+              <Button size="medium">
+                <Link href="/login" color="common.black" underline="none">
+                  LOG IN
+                </Link>
+              </Button>
+            </div>
+          ) : (
             <div>
               <IconButton
                 size="large"
@@ -221,9 +275,16 @@ export default function PersistentDrawerLeft() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
+                color="secondary"
               >
-                <AccountCircle />
+                {img !== undefined ? (
+                  <AccountCircleIcon
+                    sx={{ width: 46, height: 46 }}
+                    color="secondary"
+                  />
+                ) : (
+                  <Avatar src={session.data.user_img}></Avatar>
+                )}
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -281,6 +342,7 @@ export default function PersistentDrawerLeft() {
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
       >
+        <DrawerHeader />
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -292,11 +354,13 @@ export default function PersistentDrawerLeft() {
                 alignItems: "center",
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <AccountCircleIcon />
-              </Avatar>
               <Typography component="h1" variant="h5">
-                마이페이지
+                <p>
+                  <span className="main_logo">LI.CO.</span> MARKET
+                </p>
+              </Typography>
+              <Typography component="h1" variant="h5">
+                <p>마이페이지</p>
               </Typography>
               <Box
                 component="form"
@@ -314,6 +378,7 @@ export default function PersistentDrawerLeft() {
                       id="Name"
                       label="이름"
                       autoFocus
+                      defaultValue={session.data.user_name}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -325,6 +390,7 @@ export default function PersistentDrawerLeft() {
                       type="password"
                       id="password"
                       autoComplete="new-password"
+                      defaultValue={session.data.user_password}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -334,6 +400,7 @@ export default function PersistentDrawerLeft() {
                       name="address"
                       label="주소"
                       id="address"
+                      defaultValue={session.data.user_address}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -347,7 +414,8 @@ export default function PersistentDrawerLeft() {
                         multiple
                         value={choice_location}
                         onChange={handlelocation}
-                        input={<OutlinedInput label="관심지역" />}
+                        label="관심지역"
+                        //input={<OutlinedInput label="관심지역" />}
                         renderValue={(selected) => selected.join(", ")}
                         MenuProps={MenuProps}
                       >
@@ -370,13 +438,15 @@ export default function PersistentDrawerLeft() {
                         multiple
                         value={choice_like}
                         onChange={handlelike}
-                        input={<OutlinedInput label="관심업종" />}
+                        label="관심 업종"
+                        //input={<OutlinedInput label="관심업종" />}
                         renderValue={(selected) => selected.join(", ")}
                         MenuProps={MenuProps}
                       >
                         {likes.map((liked) => (
                           <MenuItem key={liked} value={liked}>
-                            <ListItemText primary={liked} />
+                            {liked}
+                            {/* <ListItemText primary={liked} /> */}
                           </MenuItem>
                         ))}
                       </Select>
@@ -388,10 +458,9 @@ export default function PersistentDrawerLeft() {
                   fullWidth
                   size="large"
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                  style={{ background: "#fff" }}
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
                 >
-                  개인 정보 수정 하기
+                  <p>개인 정보 수정 하기</p>
                 </Button>
               </Box>
             </Box>

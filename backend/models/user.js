@@ -11,6 +11,7 @@ let User = function (user) {
   this.user_type = user.user_type;
   this.user_like_place = user.user_like_place;
   this.user_like_type = user.user_like_type;
+  this.user_img = user.user_img;
 };
 
 // 모든 사용자 검색
@@ -41,7 +42,7 @@ User.findById = function (id, result) {
 // 사용자 로그인
 User.login = function (email, result) {
   mysql.query(
-    "Select user_email, user_password, user_name from user where user_email = ? ",
+    "Select * from user where user_email = ? ",
     email,
     function (err, res) {
       if (err) {
@@ -79,15 +80,39 @@ User.delete = function (id, result) {
   });
 };
 
+// 사용자 업데이트
 User.update = function (id, user, result) {
   mysql.query(
-    "UPDATE user SET user_name=?,user_email=?,user_password=?,user_address=?,user_type=?,user_like_place=?,user_like_type=? WHERE user_id = ?",
+    "UPDATE user SET user_name=?,user_email=?,user_password=?,user_address=?,user_type=?,user_like_place=?,user_like_type=?,user_img=? WHERE user_id = ?",
     [
       user.user_name,
       user.user_email,
       user.user_password,
       user.user_address,
       user.user_type,
+      user.user_like_place,
+      user.user_like_type,
+      user.user_img,
+      id,
+    ],
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+User.edit = function (id, user, result) {
+  mysql.query(
+    "UPDATE user SET user_name=?,user_password=?,user_address=?,user_like_place=?,user_like_type=? WHERE user_id = ?",
+    [
+      user.user_name,
+      user.user_password,
+      user.user_address,
       user.user_like_place,
       user.user_like_type,
       id,

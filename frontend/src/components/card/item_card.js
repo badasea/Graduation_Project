@@ -59,7 +59,7 @@ function ShopCard() {
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <Button fullWidth color="secondary" variant="outlined">
-              가게 입장하기
+              <p>가게 입장하기</p>
             </Button>
           </Grid>
           <Grid item xs={6}>
@@ -71,7 +71,7 @@ function ShopCard() {
               variant="contained"
               onClick={webcam}
             >
-              방송보기
+              <p>방송보기</p>
             </Button>
           </Grid>
         </Grid>
