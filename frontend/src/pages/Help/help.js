@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -11,10 +12,13 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
@@ -79,12 +83,7 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -95,6 +94,7 @@ export default function PersistentDrawerLeft() {
   };
 
   const logout = () => {
+    sessionStorage.removeItem("data");
     document.location.href = "/";
   };
 
@@ -109,10 +109,23 @@ export default function PersistentDrawerLeft() {
   const buylist = () => {
     document.location.href = "/buylist";
   };
-
   const help = () => {
     document.location.href = "/help";
   };
+
+  var login;
+
+  var img;
+
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  console.log(session);
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -120,23 +133,42 @@ export default function PersistentDrawerLeft() {
       <AppBar position="fixed" open={open} style={{ background: "#fff" }}>
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="primary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: "36px",
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <MenuIcon color="secondary" />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            <Link href="/" color="inherit" underline="none">
-              LI.CO. MARKET
+          <Typography
+            // textAlign={"center"}
+            variant="h5"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
             </Link>
           </Typography>
-          {auth && (
+          {login === false ? (
+            <div>
+              <Button size="medium">
+                <Link href="/signup" color="common.black" underline="none">
+                  REGISTER
+                </Link>
+              </Button>
+              <Button size="medium">
+                <Link href="/login" color="common.black" underline="none">
+                  LOG IN
+                </Link>
+              </Button>
+            </div>
+          ) : (
             <div>
               <IconButton
                 size="large"
@@ -144,9 +176,16 @@ export default function PersistentDrawerLeft() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
+                color="secondary"
               >
-                <AccountCircle />
+                {img !== undefined ? (
+                  <AccountCircleIcon
+                    sx={{ width: 46, height: 46 }}
+                    color="secondary"
+                  />
+                ) : (
+                  <Avatar src={session.data.user_img}></Avatar>
+                )}
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -167,7 +206,6 @@ export default function PersistentDrawerLeft() {
                 <MenuItem onClick={cart}>장바구니</MenuItem>
                 <MenuItem onClick={buylist}>주문 목록</MenuItem>
                 <MenuItem onClick={help}>고객센터</MenuItem>
-
                 <MenuItem onClick={logout}>로그아웃</MenuItem>
               </Menu>
             </div>
@@ -206,7 +244,6 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        {/* 이곳에 컴포넌트 추가 */}
       </Main>
     </Box>
   );
