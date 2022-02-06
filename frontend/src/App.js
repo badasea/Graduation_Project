@@ -31,6 +31,10 @@ import EditItem from "./pages/store_manager/edit_item";
 import Cart from "./pages/Shopping/cart";
 import BuyList from "./pages/Shopping/buylist";
 
+// 가게 상세 페이지 및 상품 상세 페이지
+import Detail_item from "./pages/Shopping/detail_item";
+import Detail_shop from "./pages/Shopping/detail_shop";
+
 // 고객 센터
 import Help from "./pages/Help/help";
 
@@ -54,6 +58,12 @@ function App() {
 
           <Route path="/shop" element={<Shop />}></Route>
           <Route path="/shop/:id" element={<Shop />}></Route>
+
+          <Route path="/detail_shop" element={<Detail_shop />}></Route>
+          <Route path="/detail_shop/:id" element={<Detail_shop />}></Route>
+
+          <Route path="/detail_item" element={<Detail_item />}></Route>
+          <Route path="/detail_item/:id" element={<Detail_item />}></Route>
 
           <Route path="/item" element={<Item />}></Route>
           <Route path="/item/:id" element={<Item />}></Route>

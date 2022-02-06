@@ -19,6 +19,14 @@ function ShopCard() {
     );
   }
 
+  function detail_shop() {
+    window.open(
+      "http://localhost:3000/detail_shop/12",
+      "",
+      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
+    );
+  }
+
   return (
     <div>
       <Container fixed>
@@ -58,7 +66,12 @@ function ShopCard() {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <Button fullWidth color="secondary" variant="outlined">
+            <Button
+              onClick={detail_shop}
+              fullWidth
+              color="secondary"
+              variant="outlined"
+            >
               <p>가게 입장하기</p>
             </Button>
           </Grid>

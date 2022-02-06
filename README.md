@@ -57,6 +57,7 @@
 <p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/151015623-50ecfb69-2870-482f-9f03-655abe4dbbb1.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016314-5ac30596-5be5-47ad-a5cb-1819b7637818.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/152172172-eb4f7782-31ca-4fed-bbbe-6ddc77369138.png" width="30%" height="30%" >
 
 <img src="https://user-images.githubusercontent.com/57929751/151016433-86564773-eb04-42db-9c93-7d2a0f2fb929.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016613-100fb215-9d1d-4696-9e03-3e5e63cab62d.png" width="30%" height="30%" >
@@ -64,11 +65,13 @@
 
 </p>
 
-<p float="left">
-<img src="https://user-images.githubusercontent.com/57929751/152172172-eb4f7782-31ca-4fed-bbbe-6ddc77369138.png" width="30%" height="30%" >
-
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/57929751/152551442-bf7052fc-9ebb-435d-8b4c-ba739a3c0620.gif)
 
+<p float="left">
+
+<img src="https://user-images.githubusercontent.com/57929751/152690359-0691edf4-692f-402b-8d3e-90ce7f77a30f.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/152691342-f3ce8b84-30f2-445f-bc3d-52a5be72c2ff.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/152692533-9df1cbb2-bb24-4ae6-b00c-a922ef876ea2.png" width="30%" height="30%" >
 </p>
 
 # 📌 요구 사항 분석

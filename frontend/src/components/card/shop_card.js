@@ -17,12 +17,13 @@ function ShopCard() {
 
   const [shop, setShop] = useState([]);
   function searchshop() {
-    const url = "/api/shop/user/2";
+    const url = "/api/shop";
     axios
       .get(url)
       .then(function (response) {
-        //console.log(response);
-        setShop(response.data[0]);
+        console.log(response.data);
+        var rand = Math.floor(Math.random() * response.data.length);
+        setShop(response.data[rand]);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -38,6 +39,13 @@ function ShopCard() {
       "http://localhost:443/12",
       "",
       "toolbar=no, menubar=no, resizable=yes"
+    );
+  }
+  function detail_shop() {
+    window.open(
+      "http://localhost:3000/detail_shop/12",
+      "",
+      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
     );
   }
 
@@ -77,7 +85,12 @@ function ShopCard() {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <Button fullWidth color="secondary" variant="outlined">
+            <Button
+              onClick={detail_shop}
+              fullWidth
+              color="secondary"
+              variant="outlined"
+            >
               <p>가게 입장하기</p>
             </Button>
           </Grid>
