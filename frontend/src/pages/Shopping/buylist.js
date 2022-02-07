@@ -15,10 +15,18 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
+
+//
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 import Link from "@mui/material/Link";
 
@@ -70,6 +78,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+
+// 제거 예정
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("광어", "바다네생선가게", 10000, 10000, 1),
+  createData("도미", "바다네생선가게", 20000, 40000, 2),
+  createData("한돈 앞다리살", "프라임유통", 24000, 24000, 1),
+];
+//
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
@@ -244,6 +264,100 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
+          <p>주문 목록</p>
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <p>상품명</p>
+                </TableCell>
+                <TableCell align="right">
+                  <p>가게명</p>
+                </TableCell>
+                <TableCell align="right">
+                  <p>판매가</p>
+                </TableCell>
+                <TableCell align="right">
+                  <p>수량</p>
+                </TableCell>
+                <TableCell align="right">
+                  <p>주문 날짜</p>
+                </TableCell>
+                <TableCell align="right">
+                  <p>주문금액</p>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <p>{row.name}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{row.calories}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{row.fat}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{row.protein}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>2022. 01. 02</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{row.carbs}</p>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br />
+        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
+          <p>- 리코마켓은 전 상품 무료 배송입니다.</p>
+        </Typography>
+        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
+          <p>- 2개 이상의 브랜드를 주문하신 경우, 개별 배송됩니다.</p>
+        </Typography>
+        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
+          <p>
+            - 장바구니에는 최대 100개의 상품을 보관할 수 있으며, 주문당 한번에
+            주문 가능한 상품수는 100개로 제한됩니다.
+          </p>
+        </Typography>
+        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
+          <p>
+            - 구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내
+            가상계좌 재주문이 불가합니다.
+          </p>
+        </Typography>
+        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
+          <p>
+            - 수량 제한 상품의 경우, 가상계좌를 통한 주문은 최대 2건까지만
+            가능합니다.(미입금 주문 기준, 기존 주문 합산)
+          </p>
+        </Typography>
+        <br />
+        <Box textAlign="center">
+          <Button
+            //fullWidth
+            sx={{
+              width: "50%",
+              backgroundColor: "#A267E7",
+            }}
+            variant="contained"
+          >
+            <p>메인으로 돌아가기</p>
+          </Button>
+        </Box>
       </Main>
     </Box>
   );

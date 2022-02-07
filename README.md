@@ -54,6 +54,12 @@
 
 7. 가게 및 상품 랜덤 호출시 언바운드 랜덤 잇슈 발생
 
+8. Input 태그 고려
+
+9. 상품 등록 페이지, 고객 센터 페이지
+
+10. 어드민 페이지
+
 # 🖥 화면 정의서 (~ing)
 
 <p float="left">
@@ -66,14 +72,23 @@
 <img src="https://user-images.githubusercontent.com/57929751/151016734-d56cb802-6a51-49fc-a609-46b14c75688c.png" width="30%" height="30%" >
 
 </p>
+메인 화면
 
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/57929751/152551442-bf7052fc-9ebb-435d-8b4c-ba739a3c0620.gif)
 
 <p float="left">
 
+가게, 상품 상세 페이지
+
 <img src="https://user-images.githubusercontent.com/57929751/152690359-0691edf4-692f-402b-8d3e-90ce7f77a30f.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152691342-f3ce8b84-30f2-445f-bc3d-52a5be72c2ff.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152692533-9df1cbb2-bb24-4ae6-b00c-a922ef876ea2.png" width="30%" height="30%" >
+
+가게 관리 수주 매출 페이지
+
+<img src="https://user-images.githubusercontent.com/57929751/152842842-43cde642-2db2-49c9-b412-5b2d4b27c037.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/152842915-09615471-918c-4ab7-8858-4711b656a6fc.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
 </p>
 
 # 📌 요구 사항 분석
@@ -258,15 +273,15 @@ PaasTa, AWS 앱 배포
 - [x] 개인정보 수정을 위한 마이 페이지
 - [ ] 고객센터 게시판 페이지
 - [x] 상품 구매 페이지
-- [ ] 장바구니 페이지
-- [ ] 영수증 페이지
-- [ ] 구매 목록 페이지
+- [x] 장바구니 페이지
+- [x] 구매 목록 페이지
 
 - 가게 운영자 관점
 - [x] 가게 등록 페이지
 - [x] 가게 수정 페이지
-- [x] 상품 등록 페이지
+- [] 상품 등록 페이지
 - [x] 상품 수정/삭제 페이지
+- [x] 수주 매출 페이지
 - [ ] 사용자가 구매한 상품 리스트 페이지(영수증)
 
 - 시스템 관리자 관점
@@ -290,7 +305,7 @@ ML : Django
 
 Package
 
-Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, slick... )
+Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 

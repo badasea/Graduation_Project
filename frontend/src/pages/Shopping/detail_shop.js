@@ -307,7 +307,7 @@ export default function Shop() {
                 <img
                   style={{ width: "100%", height: "100%" }}
                   src="../img/test1.jpg"
-                />{" "}
+                />
               </Grid>
             </Grid>
             <br />

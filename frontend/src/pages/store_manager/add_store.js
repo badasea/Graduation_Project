@@ -12,7 +12,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
@@ -33,6 +32,7 @@ import Second from "../../components/store/second";
 import Check from "../../components/store/Check";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -118,12 +118,7 @@ export default function Addstore() {
     setOpen(false);
   };
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -295,18 +290,33 @@ export default function Addstore() {
               variant="outlined"
               sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
             >
+              <Typography
+                textAlign={"center"}
+                variant="h3"
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
+                <Link color="common.black" underline="none">
+                  <p>
+                    <span className="main_logo">LI.CO.</span> MARKET
+                  </p>
+                </Link>
+              </Typography>
               <Typography component="h1" variant="h4" align="center">
                 <p>가게 등록하기</p>
               </Typography>
               <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label) => (
                   <Step key={label}>
-                    <p>
-                      <StepLabel>{label}</StepLabel>
-                    </p>
+                    <StepLabel color="common.black">
+                      <Link color="common.black" underline="none">
+                        {label}
+                      </Link>
+                    </StepLabel>
                   </Step>
                 ))}
               </Stepper>
+
               <React.Fragment>
                 {activeStep === steps.length ? (
                   <React.Fragment>
@@ -324,11 +334,13 @@ export default function Addstore() {
                     </Typography>
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                       <Button
-                        variant="contained"
                         onClick={main}
-                        sx={{ mt: 3, ml: 1 }}
+                        sx={{
+                          backgroundColor: "#A267E7",
+                        }}
+                        variant="contained"
                       >
-                        메인으로 돌아가기
+                        <p>메인 화면으로 돌아가기</p>
                       </Button>
                     </Box>
                   </React.Fragment>
@@ -337,18 +349,26 @@ export default function Addstore() {
                     {getStepContent(activeStep)}
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                       {activeStep !== 0 && (
-                        <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                          이전 단계
+                        <Button
+                          onClick={handleBack}
+                          sx={{ color: "#A267E7", mt: 3, ml: 1 }}
+                        >
+                          <Link color="secondary" underline="none">
+                            이전 단계
+                          </Link>
                         </Button>
                       )}
                       <Button
+                        size="small"
                         variant="contained"
                         onClick={handleNext}
-                        sx={{ mt: 3, ml: 1 }}
+                        sx={{ backgroundColor: "#A267E7", mt: 3, ml: 1 }}
                       >
-                        {activeStep === steps.length - 1
-                          ? "가게 등록 완료하기"
-                          : "다음 단계"}
+                        <p>
+                          {activeStep === steps.length - 1
+                            ? "가게 등록 완료하기"
+                            : "다음 단계"}
+                        </p>
                       </Button>
                     </Box>
                   </React.Fragment>

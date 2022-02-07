@@ -406,7 +406,9 @@ export default function PersistentDrawerLeft() {
                   <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-multiple-checkbox-label">
-                        관심 지역
+                        <Link color="common.black" underline="none">
+                          관심 지역
+                        </Link>
                       </InputLabel>
                       <Select
                         labelId="demo-multiple-checkbox-label"
@@ -430,7 +432,9 @@ export default function PersistentDrawerLeft() {
                   <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-multiple-checkbox-label">
-                        관심 업종
+                        <Link color="common.black" underline="none">
+                          관심 업종
+                        </Link>
                       </InputLabel>
                       <Select
                         labelId="demo-multiple-checkbox-label"

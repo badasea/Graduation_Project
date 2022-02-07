@@ -1,9 +1,11 @@
 // import axios from "axios";
 import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// 메인 페이지
 import Main from "./pages/main";
 
-// 로그인 및 회원 가입
+// 로그인 및 회원 가입 페이지
 import Login from "./pages/Login/login";
 import SignUp from "./pages/Login/signup";
 
@@ -16,11 +18,11 @@ import Local from "./pages/category/local";
 // 업종별 페이지
 import Businesstype from "./pages/category/businesstype";
 
-// 가게 및 상품
+// 가게 및 상품 페이지
 import Shop from "./pages/Shopping/shop";
 import Item from "./pages/Shopping/item";
 
-// 가게 관리
+// 가게 관리 페이지
 import Addstore from "./pages/store_manager/add_store";
 import Editstore from "./pages/store_manager/edit_store";
 
@@ -34,6 +36,9 @@ import BuyList from "./pages/Shopping/buylist";
 // 가게 상세 페이지 및 상품 상세 페이지
 import Detail_item from "./pages/Shopping/detail_item";
 import Detail_shop from "./pages/Shopping/detail_shop";
+
+// 수주 매출 페이지
+import Order_sales from "./pages/store_manager/order_sales";
 
 // 고객 센터
 import Help from "./pages/Help/help";
@@ -73,6 +78,8 @@ function App() {
 
           <Route path="/additem" element={<AddItem />}></Route>
           <Route path="/edititem" element={<EditItem />}></Route>
+
+          <Route path="/order_sales" element={<Order_sales />}></Route>
 
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="/BuyList" element={<BuyList />}></Route>

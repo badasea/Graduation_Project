@@ -31,6 +31,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 export default function Side() {
   const [sideopen, setOpenside] = React.useState(false);
@@ -103,7 +104,9 @@ export default function Side() {
   const loginpage = () => {
     document.location.href = "/login";
   };
-
+  const order_sales = () => {
+    document.location.href = "/order_sales";
+  };
   function webcam() {
     window.open(
       "http://localhost:443/12",
@@ -308,55 +311,67 @@ export default function Side() {
             </ListItemButton>
             <Collapse in={side3open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {user_type !== "seller" ? (
-                  <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <AddBusinessIcon color="secondary" />
-                    </ListItemIcon>
-                    <Link color="common.black" underline="none">
-                      <ListItemText />
-                      가게 등록
-                    </Link>
-                  </ListItemButton>
+                {user_type === "seller" ? (
+                  <div>
+                    <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <AddBusinessIcon color="secondary" />
+                      </ListItemIcon>
+                      <Link color="common.black" underline="none">
+                        <ListItemText />
+                        가게 등록
+                      </Link>
+                    </ListItemButton>
+                  </div>
                 ) : (
-                  <ListItemButton onClick={editstore} sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <SettingsIcon color="secondary" />
-                    </ListItemIcon>
-                    <Link color="common.black" underline="none">
-                      <ListItemText />
-                      가게 수정
-                    </Link>
-                  </ListItemButton>
+                  <div>
+                    <ListItemButton onClick={editstore} sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <SettingsIcon color="secondary" />
+                      </ListItemIcon>
+                      <Link color="common.black" underline="none">
+                        <ListItemText />
+                        가게 수정
+                      </Link>
+                    </ListItemButton>
+                    <ListItemButton onClick={additem} sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <AddCircleIcon color="secondary" />
+                      </ListItemIcon>
+                      <Link color="common.black" underline="none">
+                        <ListItemText />
+                        상품 등록
+                      </Link>
+                    </ListItemButton>
+                    <ListItemButton onClick={edititem} sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <EditIcon color="secondary" />
+                      </ListItemIcon>
+                      <Link color="common.black" underline="none">
+                        <ListItemText />
+                        상품 수정
+                      </Link>
+                    </ListItemButton>
+                    <ListItemButton onClick={order_sales} sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <MonetizationOnIcon color="secondary" />
+                      </ListItemIcon>
+                      <Link color="common.black" underline="none">
+                        <ListItemText />
+                        수주 · 매출
+                      </Link>
+                    </ListItemButton>
+                    <ListItemButton onClick={webcam} sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <PodcastsIcon color="secondary" />
+                      </ListItemIcon>
+                      <Link color="common.black" underline="none">
+                        <ListItemText />
+                        방송 시작하기
+                      </Link>
+                    </ListItemButton>
+                  </div>
                 )}
-
-                <ListItemButton onClick={additem} sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <AddCircleIcon color="secondary" />
-                  </ListItemIcon>
-                  <Link color="common.black" underline="none">
-                    <ListItemText />
-                    상품 등록
-                  </Link>
-                </ListItemButton>
-                <ListItemButton onClick={edititem} sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <EditIcon color="secondary" />
-                  </ListItemIcon>
-                  <Link color="common.black" underline="none">
-                    <ListItemText />
-                    상품 수정
-                  </Link>
-                </ListItemButton>
-                <ListItemButton onClick={webcam} sx={{ pl: 4 }}>
-                  <ListItemIcon>
-                    <PodcastsIcon color="secondary" />
-                  </ListItemIcon>
-                  <Link color="common.black" underline="none">
-                    <ListItemText />
-                    방송 시작하기
-                  </Link>
-                </ListItemButton>
               </List>
             </Collapse>
           </List>

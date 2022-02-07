@@ -14,13 +14,15 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Grid from "@mui/material/Grid";
 
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 
 //
+import { Container } from "@mui/material";
+import { Stack } from "@mui/material";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -28,11 +30,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Grid } from "@mui/material";
 
 import Link from "@mui/material/Link";
+import { useRef, useEffect } from "react";
+
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 import Side from "../../components/menu/side";
-
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -86,9 +95,9 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("광어", "바다네생선가게", 10000, 10000, 1),
-  createData("도미", "바다네생선가게", 20000, 40000, 2),
-  createData("한돈 앞다리살", "프라임유통", 24000, 24000, 1),
+  createData("광어", "바다", 10000, 10000, 1),
+  createData("도미", "준영", 20000, 40000, 2),
+  createData("한돈 앞다리살", "성민", 24000, 24000, 1),
 ];
 //
 
@@ -147,6 +156,63 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
+
+  const canvasDom = useRef(null);
+  useEffect(() => {
+    const ctx = canvasDom.current.getContext("2d");
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Red", "Blue", "Yellow"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [300, 50, 100],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      },
+    });
+  }, []);
+
+  const canvasDom2 = useRef(null);
+  useEffect(() => {
+    const ctx = canvasDom2.current.getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [
+          "1월",
+          "2월",
+          "3월",
+          "4월",
+          "5월",
+          "6월",
+          "7월",
+          "8월",
+          "9월",
+          "10월",
+          "11월",
+          "12월",
+        ],
+        datasets: [
+          {
+            label: "월별 매출",
+            data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: "#A267E7",
+            tension: 0.1,
+          },
+        ],
+      },
+    });
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -265,11 +331,175 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <Typography sx={{ fontSize: 18 }} color="#202121" underline="none">
-          <p>
-            장바구니 <span className="main_logo">{rows.length}</span>
-          </p>
+        <Typography sx={{ fontSize: 32 }} color="#202121" underline="none">
+          <p>매출</p>
         </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={6} align="center">
+            <Typography
+              textAlign={"center"}
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              <Link color="common.black" underline="none">
+                이번 달 HIT 상품
+              </Link>
+            </Typography>
+          </Grid>
+          <Grid item xs={6} align="center">
+            <Typography
+              textAlign={"center"}
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              <Link color="common.black" underline="none">
+                이번달 매출
+              </Link>
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={6} align="left">
+            <Container fixed>
+              <Paper
+                variant="outlined"
+                sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+              >
+                <img
+                  style={{ width: "100%", height: "350px" }}
+                  src="../img/test1.jpg"
+                />
+
+                <Divider light />
+                <Typography
+                  sx={{ fontSize: 18 }}
+                  color="#202121"
+                  underline="none"
+                >
+                  <p>한돈 앞다리살</p>
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="#B2B2B2"
+                  underline="none"
+                >
+                  <p>500g</p>
+                </Typography>
+                <Typography
+                  sx={{ fontSize: 24 }}
+                  color="#A267E7"
+                  underline="none"
+                >
+                  <p>24,000원</p>
+                </Typography>
+              </Paper>
+            </Container>
+          </Grid>
+          <Grid item xs={6} align="center">
+            {" "}
+            <Container fixed>
+              <Paper
+                variant="outlined"
+                sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+              >
+                <Typography
+                  sx={{ fontSize: 24 }}
+                  color="#A267E7"
+                  underline="none"
+                >
+                  <p>총 24,000원 달성</p>
+                </Typography>
+              </Paper>
+            </Container>
+          </Grid>
+        </Grid>
+        <br />
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <FormControl sx={{ width: "20%" }}>
+              <InputLabel required id="demo-simple-select-label">
+                <Link color="common.black" underline="none">
+                  연도 선택하기
+                </Link>
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+              >
+                <MenuItem value={2022}>
+                  <Link color="common.black" underline="none">
+                    2022
+                  </Link>
+                </MenuItem>
+                <MenuItem value={2023}>
+                  <Link color="common.black" underline="none">
+                    2023
+                  </Link>
+                </MenuItem>
+                <MenuItem value={2024}>
+                  <Link color="common.black" underline="none">
+                    2024
+                  </Link>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+        <br />
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <canvas ref={canvasDom} width="50%" height="50%"></canvas>
+          </Grid>
+          <Grid item xs={6}>
+            <canvas ref={canvasDom2} width="50%" height="50%"></canvas>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={6} align="right">
+            <p>(상품 판매 비율)</p>
+          </Grid>
+          <Grid item xs={6} align="right">
+            <p>단위: 십만원(월 매출)</p>
+          </Grid>
+        </Grid>
+        <br />
+
+        <Typography sx={{ fontSize: 32 }} color="#202121" underline="none">
+          <p>주문 목록</p>
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <FormControl sx={{ width: "20%" }}>
+              <InputLabel required id="demo-simple-select-label">
+                <Link color="common.black" underline="none">
+                  연도 선택하기
+                </Link>
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+              >
+                <MenuItem value={2022}>
+                  <Link color="common.black" underline="none">
+                    2022
+                  </Link>
+                </MenuItem>
+                <MenuItem value={2023}>
+                  <Link color="common.black" underline="none">
+                    2023
+                  </Link>
+                </MenuItem>
+                <MenuItem value={2024}>
+                  <Link color="common.black" underline="none">
+                    2024
+                  </Link>
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -278,7 +508,7 @@ export default function PersistentDrawerLeft() {
                   <p>상품명</p>
                 </TableCell>
                 <TableCell align="right">
-                  <p>가게명</p>
+                  <p>고객명</p>
                 </TableCell>
                 <TableCell align="right">
                   <p>판매가</p>
@@ -287,10 +517,10 @@ export default function PersistentDrawerLeft() {
                   <p>수량</p>
                 </TableCell>
                 <TableCell align="right">
-                  <p>주문금액</p>
+                  <p>주문 날짜</p>
                 </TableCell>
                 <TableCell align="right">
-                  <p>삭제</p>
+                  <p>주문금액</p>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -313,17 +543,10 @@ export default function PersistentDrawerLeft() {
                     <p>{row.protein}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.carbs}</p>
+                    <p>2022. 01. 02</p>
                   </TableCell>
                   <TableCell align="right">
-                    <Button
-                      sx={{
-                        backgroundColor: "#F00",
-                      }}
-                      variant="contained"
-                    >
-                      x
-                    </Button>
+                    <p>{row.carbs}</p>
                   </TableCell>
                 </TableRow>
               ))}
@@ -331,52 +554,6 @@ export default function PersistentDrawerLeft() {
           </Table>
         </TableContainer>
         <br />
-        <Typography sx={{ fontSize: 24 }} align="left" underline="none">
-          <p>총 주문 금액</p>
-        </Typography>
-        <Divider light />
-        <Typography sx={{ fontSize: 18 }} align="right" underline="none">
-          <p>
-            <span className="main_logo">24000</span> 원
-          </p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>- 리코마켓은 전 상품 무료 배송입니다.</p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>- 2개 이상의 브랜드를 주문하신 경우, 개별 배송됩니다.</p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>
-            - 장바구니에는 최대 100개의 상품을 보관할 수 있으며, 주문당 한번에
-            주문 가능한 상품수는 100개로 제한됩니다.
-          </p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>
-            - 구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내
-            가상계좌 재주문이 불가합니다.
-          </p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>
-            - 수량 제한 상품의 경우, 가상계좌를 통한 주문은 최대 2건까지만
-            가능합니다.(미입금 주문 기준, 기존 주문 합산)
-          </p>
-        </Typography>
-        <br />
-        <Box textAlign="center">
-          <Button
-            //fullWidth
-            sx={{
-              width: "50%",
-              backgroundColor: "#A267E7",
-            }}
-            variant="contained"
-          >
-            <p>주문하기</p>
-          </Button>
-        </Box>
       </Main>
     </Box>
   );

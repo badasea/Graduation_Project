@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -12,18 +11,26 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Avatar from "@mui/material/Avatar";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
+// addstort
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import { ThemeProvider } from "@mui/material/styles";
+import First from "../../components/store/first";
+import Second from "../../components/store/second";
+import Check from "../../components/store/Check";
+import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+import { Grid } from "@mui/material";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -71,7 +78,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+export default function Addstore() {
+  // add
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const handleNext = () => {
+    setActiveStep(activeStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep(activeStep - 1);
+  };
+  //
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -94,7 +112,6 @@ export default function PersistentDrawerLeft() {
   };
 
   const logout = () => {
-    sessionStorage.removeItem("data");
     document.location.href = "/";
   };
 
@@ -109,10 +126,14 @@ export default function PersistentDrawerLeft() {
   const buylist = () => {
     document.location.href = "/buylist";
   };
+
   const help = () => {
     document.location.href = "/help";
   };
 
+  const main = () => {
+    document.location.href = "/";
+  };
   var login;
 
   var img;
@@ -126,7 +147,6 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -238,12 +258,123 @@ export default function PersistentDrawerLeft() {
         <Side />
       </Drawer>
       <Main
-        style={{ background: "#fff" }}
+        style={{ background: "#FFF" }}
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
       >
         <DrawerHeader />
+
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+
+          <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+            <Paper
+              variant="outlined"
+              sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+            >
+              <Typography
+                textAlign={"center"}
+                variant="h3"
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
+                <Link color="common.black" underline="none">
+                  <p>
+                    <span className="main_logo">LI.CO.</span> MARKET
+                  </p>
+                </Link>
+              </Typography>
+              <Typography component="h1" variant="h4" align="center">
+                <p>상품 수정하기</p>
+              </Typography>
+              <Divider />
+              <Grid container xs={12}>
+                <Grid container xs={6}>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 18 }}
+                        align="left"
+                        underline="none"
+                      >
+                        <p>한돈 앞다리살</p>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        align="left"
+                        underline="none"
+                      >
+                        <p>설명 : 500g</p>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        align="left"
+                        underline="none"
+                      >
+                        <p>재고 : 100 개</p>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        align="left"
+                        underline="none"
+                      >
+                        <p>판매가 : 24000 원</p>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                          <Button
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#A267E7",
+                            }}
+                            variant="contained"
+                          >
+                            <p>수정</p>
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#f00",
+                            }}
+                            variant="contained"
+                          >
+                            <p>삭제</p>
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={6}>
+                  <img
+                    style={{ width: "100%", height: "100%" }}
+                    src="../img/test1.jpg"
+                  />
+                </Grid>
+              </Grid>
+              <br />
+            </Paper>
+          </Container>
+        </ThemeProvider>
       </Main>
     </Box>
   );

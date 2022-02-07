@@ -12,7 +12,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
@@ -23,16 +22,15 @@ import Side from "../../components/menu/side";
 // addstort
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
 import First from "../../components/store/first";
+import Second from "../../components/store/second";
 import Check from "../../components/store/Check";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import { Grid } from "@mui/material";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -80,19 +78,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-const steps = ["상품 정보 입력", "입력 정보 확인"];
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <First />;
-    case 1:
-      return <Check />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
-
 export default function Addstore() {
   // add
   const [activeStep, setActiveStep] = React.useState(0);
@@ -116,12 +101,7 @@ export default function Addstore() {
     setOpen(false);
   };
 
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -293,58 +273,21 @@ export default function Addstore() {
               variant="outlined"
               sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
             >
-              <Typography component="h1" variant="h4" align="center">
-                가게 등록하기
+              <Typography
+                textAlign={"center"}
+                variant="h3"
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
+                <Link color="common.black" underline="none">
+                  <p>
+                    <span className="main_logo">LI.CO.</span> MARKET
+                  </p>
+                </Link>
               </Typography>
-              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-              <React.Fragment>
-                {activeStep === steps.length ? (
-                  <React.Fragment>
-                    <Typography variant="h5" gutterBottom>
-                      LI.CO. MARKET을 이용해 주셔서 감사합니다.
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      LI.CO. MARKET 속 사장님의 가게가 정상적으로
-                      등록되었습니다.
-                    </Typography>
-                    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                      <Button
-                        variant="contained"
-                        onClick={main}
-                        sx={{ mt: 3, ml: 1 }}
-                      >
-                        메인으로 돌아가기
-                      </Button>
-                    </Box>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    {getStepContent(activeStep)}
-                    <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                      {activeStep !== 0 && (
-                        <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                          이전 단계
-                        </Button>
-                      )}
-                      <Button
-                        variant="contained"
-                        onClick={handleNext}
-                        sx={{ mt: 3, ml: 1 }}
-                      >
-                        {activeStep === steps.length - 1
-                          ? "상품 등록 완료하기"
-                          : "다음 단계"}
-                      </Button>
-                    </Box>
-                  </React.Fragment>
-                )}
-              </React.Fragment>
+              <Typography component="h1" variant="h4" align="center">
+                <p>상품 등록하기</p>
+              </Typography>
             </Paper>
           </Container>
         </ThemeProvider>
