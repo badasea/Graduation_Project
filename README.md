@@ -329,9 +329,9 @@ font : Sans TTF
 
 형상 관리 - Github
 
-# ⚙ 시스템 아키텍처 (~ing 2022. 02. 03)
+# ⚙ 시스템 아키텍처 (~ing 2022. 02. 08)
 
-![image](https://user-images.githubusercontent.com/57929751/152187433-4ec02af1-9085-4b44-87ed-e1ae98e11a89.png)
+![image](https://user-images.githubusercontent.com/57929751/152846393-dfb27536-d21a-4cb7-835f-85fbd940584f.png)
 
 # ⚙ ERD (~ing 2022. 02. 05)
 
