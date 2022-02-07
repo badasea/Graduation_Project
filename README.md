@@ -76,16 +76,17 @@
 
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/57929751/152551442-bf7052fc-9ebb-435d-8b4c-ba739a3c0620.gif)
 
-<p float="left">
-
 가게, 상품 상세 페이지
 
+<p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/152690359-0691edf4-692f-402b-8d3e-90ce7f77a30f.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152691342-f3ce8b84-30f2-445f-bc3d-52a5be72c2ff.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152692533-9df1cbb2-bb24-4ae6-b00c-a922ef876ea2.png" width="30%" height="30%" >
+</p>
 
 가게 관리 수주 매출 페이지
 
+<p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/152842842-43cde642-2db2-49c9-b412-5b2d4b27c037.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152842915-09615471-918c-4ab7-8858-4711b656a6fc.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
