@@ -92,6 +92,10 @@
 <img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
 </p>
 
+# ⚙ 시스템 아키텍처 (~ing 2022. 02. 08)
+
+![image](https://user-images.githubusercontent.com/57929751/152846393-dfb27536-d21a-4cb7-835f-85fbd940584f.png)
+
 # 📌 요구 사항 분석
 
 **요구기술**
@@ -328,10 +332,6 @@ API 테스트 - Postman
 font : Sans TTF
 
 형상 관리 - Github
-
-# ⚙ 시스템 아키텍처 (~ing 2022. 02. 08)
-
-![image](https://user-images.githubusercontent.com/57929751/152846393-dfb27536-d21a-4cb7-835f-85fbd940584f.png)
 
 # ⚙ ERD (~ing 2022. 02. 05)
 
