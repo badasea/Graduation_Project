@@ -1,76 +1,84 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef } from "react";
+import NaverLogin from "react-login-by-naver";
+import { IconButton } from "@mui/material";
+import { Avatar } from "@mui/material";
 import axios from "axios";
 
-const Style = {
-  width: "100%",
-};
-
-class NaverLogin extends Component {
-  componentDidMount() {
-    // Naver sdk import
+function LoginNaver() {
+  const naverRef = useRef();
+  useEffect(() => {
     const naverScript = document.createElement("script");
     naverScript.src =
       "https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js";
     naverScript.type = "text/javascript";
     document.head.appendChild(naverScript);
 
-    // Naver sdk 스크립트 로드 완료시
     naverScript.onload = () => {
       const naverLogin = new window.naver.LoginWithNaverId({
         clientId: process.env.REACT_APP_NAVER_KEY,
         callbackUrl: process.env.REACT_APP_CLLBACK_URI,
         callbackHandle: true,
-        isPopup: false, // 로그인 팝업여부
+        isPopup: false,
         loginButton: {
-          color: "green", // 색상(white, green)
-          type: 3, // 버튼타입(1,2,3)
-          height: 60, // 배너 및 버튼 높이
+          color: "green",
+          type: 3,
+          height: 55,
         },
       });
-
       naverLogin.init();
-      naverLogin.logout(); // 네이버 로그인이 계속 유지되는 경우가 있다. 초기화시 로그아웃
-      naverLogin.getLoginStatus((status) => {
-        if (status) {
-          console.log(naverLogin.user);
-          let data = {
-            user_email: naverLogin.user.email,
-            user_name: naverLogin.user.name,
-          };
-
-          axios.post("/api/user", data).then(function (res) {
-            console.log(res.data);
-          });
-          var url = "/api/user/login/" + data.user_email;
-          axios
-            .get(url)
-            .then(function (response) {
-              console.log(response.data);
-              setCookie("cookie", response.data[0].user_name, 1);
-              const session = response.data[0];
-              const userObj = { data: session };
-              window.sessionStorage.setItem("data", JSON.stringify(userObj));
-              //document.location.href = "/";
-            })
-            .catch(function (error) {
-              //console.log("실패");
-            });
-        } else {
-          console.log("error");
-        }
-      });
+      naverLogin.logout(); //네이버 로그인이 계속 유지되는 경우가 있음, 초기화시 로그아웃
     };
-    function setCookie(name, value, exp) {
-      var date = new Date();
-      date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-      document.cookie =
-        name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
-    }
+  }, []);
+
+  function login(naverUser) {
+    console.log(naverUser.user);
+    let data = {
+      user_email: naverUser.user.email,
+      user_name: naverUser.user.name,
+    };
+
+    axios.post("/api/user", data).then(function (res) {
+      console.log(res.data);
+    });
+    var url = "/api/user/login/" + data.user_email;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data);
+        // setCookie("cookie", response.data[0].user_name, 1);
+        const session = response.data[0];
+        const userObj = { data: session };
+        window.sessionStorage.setItem("data", JSON.stringify(userObj));
+        //document.location.href = "/";
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
   }
 
-  render() {
-    return <div id="naverIdLogin"></div>;
-  }
+  return (
+    <>
+      <NaverLogin
+        clientId={process.env.REACT_APP_NAVER_KEY}
+        callbackUrl={process.env.REACT_APP_CLLBACK_URI}
+        render={(props) => (
+          <div onClick={props.onClick}>
+            <IconButton
+              aria-label="naver"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+              sx={{ background: "#06BC00" }}
+            >
+              <Avatar src="../img/naver.png"></Avatar>
+            </IconButton>
+          </div>
+        )}
+        onSuccess={login}
+        //onFailure={() => console.error(result)}
+      />
+    </>
+  );
 }
 
-export default NaverLogin;
+export default LoginNaver;

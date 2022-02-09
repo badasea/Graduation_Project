@@ -1,5 +1,4 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -7,10 +6,8 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { deepPurple } from "@mui/material/colors";
 
 import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
@@ -21,19 +18,6 @@ import axios from "axios";
 import GoogleLoginBtn from "../../login_api/Google";
 import KakaoLogin from "../../login_api/Kakao";
 import NaverLogin from "../../login_api/Naver";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © LICO Market "}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -130,9 +114,6 @@ export default function SignInSide() {
             }}
           >
             <br />
-            {/* <Avatar sx={{ width: 56, height: 56, bgcolor: deepPurple[500] }}>
-              LICO
-            </Avatar> */}
 
             <Typography component="h1" variant="h5">
               <p>
@@ -191,12 +172,50 @@ export default function SignInSide() {
                 </Grid>
               </Grid>
               <br />
+              <Typography
+                textAlign={"center"}
+                variant="h7"
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
+                <Link color="common.black" underline="none">
+                  <p>SNS계정으로 로그인하기</p>
+                </Link>
+              </Typography>
+
+              <Grid align="center" container spacing={2}>
+                <Grid item xs={4}>
+                  {/* <IconButton
+                    aria-label="google"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    color="inherit"
+                    sx={{ background: "#fff" }}
+                  >
+                    <Avatar src="../img/google.png"></Avatar>
+                  </IconButton> */}
+                  <GoogleLoginBtn />
+                </Grid>
+                <Grid item xs={4}>
+                  <KakaoLogin />
+                </Grid>
+                <Grid item xs={4}>
+                  {/* <IconButton
+                    aria-label="naver"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    color="inherit"
+                    sx={{ background: "#06BC00" }}
+                  >
+                    <Avatar src="../img/naver.png"></Avatar>
+                  </IconButton> */}
+                  <NaverLogin />
+                </Grid>
+              </Grid>
+              {/* <br />
               <GoogleLoginBtn />
               <br />
-              <KakaoLogin />
-              <br />
-              <NaverLogin />
-              <Copyright sx={{ mt: 5 }} />
+              <NaverLogin /> */}
             </Box>
           </Box>
         </Grid>

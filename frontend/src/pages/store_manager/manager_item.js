@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { useState, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -35,6 +35,8 @@ import Link from "@mui/material/Link";
 import Side from "../../components/menu/side";
 
 import axios from "axios";
+
+import Modal from "../../components/store/modal";
 
 const drawerWidth = 240;
 
@@ -144,6 +146,22 @@ export default function PersistentDrawerLeft() {
   };
   const help = () => {
     document.location.href = "/help";
+  };
+  const edit = () => {
+    window.open(
+      "/edititem",
+      "",
+      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
+    );
+  };
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   var login;
@@ -365,11 +383,17 @@ export default function PersistentDrawerLeft() {
                         backgroundColor: "#A267E7",
                       }}
                       variant="contained"
+                      onClick={openModal}
                     >
                       <Link color="common.white" underline="none">
                         수정
                       </Link>
                     </Button>
+                    <Modal
+                      open={modalOpen}
+                      close={closeModal}
+                      header="Modal heading"
+                    ></Modal>
                   </TableCell>
                   <TableCell align="right">
                     <Button

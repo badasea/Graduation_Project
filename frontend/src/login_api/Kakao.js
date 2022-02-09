@@ -1,7 +1,8 @@
 import React from "react";
 import KaKaoLogin from "react-kakao-login";
-import styled from "styled-components";
 import axios from "axios";
+import { IconButton } from "@mui/material";
+import { Avatar } from "@mui/material";
 
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_KEY;
 
@@ -13,7 +14,8 @@ const buttonBlock = {
   fontWeight: "500",
   height: "60px",
   cursor: "pointer",
-  background: "#FEE500",
+  // background: "#FEE500",
+  background: "#Fff",
   alignItems: "center",
   display: "flex",
   justifyContent: "center",
@@ -65,7 +67,16 @@ function LoginKaKao() {
         onLogout={console.info}
         style={buttonBlock}
       >
-        <div style={{ color: "black" }}>카카오 로그인</div>
+        <IconButton
+          aria-label="kakao"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          color="inherit"
+          sx={{ background: "#FFDD33" }}
+        >
+          <Avatar src="../img/kakao.png"></Avatar>
+        </IconButton>
+        {/* <div style={{ color: "black" }}>카카오 로그인</div> */}
       </KaKaoLogin>
     </div>
   );
