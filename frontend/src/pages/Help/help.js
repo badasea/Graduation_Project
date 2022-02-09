@@ -290,19 +290,29 @@ export default function PersistentDrawerLeft() {
             <TableHead>
               <TableRow>
                 <StyledTableCell>
-                  <p>번호</p>
+                  <Link color="common.white" underline="none">
+                    번호
+                  </Link>
                 </StyledTableCell>
                 <StyledTableCell>
-                  <p>고객명</p>
+                  <Link color="common.white" underline="none">
+                    고객명
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell>
-                  <p>제목</p>
+                  <Link color="common.white" underline="none">
+                    제목
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell>
-                  <p>내용</p>
+                  <Link color="common.white" underline="none">
+                    내용
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>상태</p>
+                  <Link color="common.white" underline="none">
+                    상태
+                  </Link>{" "}
                 </StyledTableCell>
               </TableRow>
             </TableHead>

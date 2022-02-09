@@ -515,22 +515,34 @@ export default function PersistentDrawerLeft() {
             <TableHead>
               <TableRow>
                 <StyledTableCell>
-                  <p>상품명</p>
+                  <Link color="common.white" underline="none">
+                    상품명
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>고객명</p>
+                  <Link color="common.white" underline="none">
+                    고객명
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>판매가</p>
+                  <Link color="common.white" underline="none">
+                    판매가
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>수량</p>
+                  <Link color="common.white" underline="none">
+                    수량
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>주문날짜</p>
+                  <Link color="common.white" underline="none">
+                    주문날짜
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>주문금액</p>
+                  <Link color="common.white" underline="none">
+                    주문금액
+                  </Link>{" "}
                 </StyledTableCell>
               </TableRow>
             </TableHead>
