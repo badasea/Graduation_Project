@@ -26,7 +26,7 @@ import PodcastsIcon from "@mui/icons-material/Podcasts";
 import BrushIcon from "@mui/icons-material/Brush";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import EditIcon from "@mui/icons-material/Edit";
+import HelpIcon from "@mui/icons-material/Help";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "@mui/material";
@@ -89,12 +89,10 @@ export default function Side() {
     document.location.href = "/editstore";
   };
 
-  const additem = () => {
-    document.location.href = "/additem";
+  const manageritem = () => {
+    document.location.href = "/manager_item";
   };
-  const edititem = () => {
-    document.location.href = "/edititem";
-  };
+
   const cart = () => {
     document.location.href = "/cart";
   };
@@ -106,6 +104,9 @@ export default function Side() {
   };
   const order_sales = () => {
     document.location.href = "/order_sales";
+  };
+  const help = () => {
+    document.location.href = "/help";
   };
   function webcam() {
     window.open(
@@ -334,22 +335,13 @@ export default function Side() {
                         가게 수정
                       </Link>
                     </ListItemButton>
-                    <ListItemButton onClick={additem} sx={{ pl: 4 }}>
+                    <ListItemButton onClick={manageritem} sx={{ pl: 4 }}>
                       <ListItemIcon>
                         <AddCircleIcon color="secondary" />
                       </ListItemIcon>
                       <Link color="common.black" underline="none">
                         <ListItemText />
-                        상품 등록
-                      </Link>
-                    </ListItemButton>
-                    <ListItemButton onClick={edititem} sx={{ pl: 4 }}>
-                      <ListItemIcon>
-                        <EditIcon color="secondary" />
-                      </ListItemIcon>
-                      <Link color="common.black" underline="none">
-                        <ListItemText />
-                        상품 수정
+                        상품 관리
                       </Link>
                     </ListItemButton>
                     <ListItemButton onClick={order_sales} sx={{ pl: 4 }}>
@@ -398,6 +390,19 @@ export default function Side() {
                 <Link color="common.black" underline="none">
                   <ListItemText />
                   주문 목록
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+          <List>
+            {["고객 센터"].map((text, index) => (
+              <ListItem button key={text} onClick={help}>
+                <ListItemIcon>
+                  {index === 0 ? <HelpIcon color="secondary" /> : <></>}
+                </ListItemIcon>
+                <Link color="common.black" underline="none">
+                  <ListItemText />
+                  고객 센터
                 </Link>
               </ListItem>
             ))}

@@ -15,14 +15,26 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 
+//
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Grid } from "@mui/material";
+import { TextField } from "@mui/material";
+
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
+
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -69,6 +81,27 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
+}));
+
+// 제거 예정
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("유저1", "문의드립니다.", "문의", "문의드립니다.", 1),
+  createData("유저2", "구매오류", "오류", "구매오류", 2),
+  createData("유저3", "프라임유통", "오류건 대해", "프라임유통건으로", 1),
+];
+//
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#A267E7",
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
 }));
 
 export default function PersistentDrawerLeft() {
@@ -244,6 +277,77 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <Typography sx={{ fontSize: 36 }} color="#202121" underline="none">
+          <p>고객 센터</p>
+        </Typography>
+        <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
+          <p>
+            문의 :<span className="main_logo"> {rows.length}건</span>
+          </p>
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>
+                  <p>번호</p>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <p>고객명</p>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <p>제목</p>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <p>내용</p>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <p>상태</p>
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <p>1</p>
+                  </TableCell>
+                  <TableCell>
+                    <p>{row.name}</p>
+                  </TableCell>
+                  <TableCell>
+                    <p>{row.carbs}</p>
+                  </TableCell>
+                  <TableCell>
+                    <p>{row.fat}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{row.protein}</p>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br />
+        {/* 여기 등록 */}
+
+        <br />
+        <Box textAlign="center">
+          <Button
+            type="submit"
+            sx={{
+              width: "50%",
+              backgroundColor: "#A267E7",
+            }}
+            variant="contained"
+          >
+            <p>문의 하기</p>
+          </Button>
+        </Box>
       </Main>
     </Box>
   );

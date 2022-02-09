@@ -24,11 +24,9 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
-import First from "../../components/store/first";
-import Second from "../../components/store/second";
-import Check from "../../components/store/Check";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { TextField } from "@mui/material";
 
 import { Grid } from "@mui/material";
 const drawerWidth = 240;
@@ -288,6 +286,129 @@ export default function Addstore() {
               <Typography component="h1" variant="h4" align="center">
                 <p>상품 등록하기</p>
               </Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={4}>
+                  <Typography
+                    sx={{ fontSize: 26 }}
+                    align="left"
+                    underline="none"
+                  >
+                    <p>상품명</p>
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    //id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={4}>
+                  <Typography
+                    sx={{ fontSize: 26 }}
+                    align="left"
+                    underline="none"
+                  >
+                    <p>상품 설명</p>
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    //id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={4}>
+                  <Typography
+                    sx={{ fontSize: 26 }}
+                    align="left"
+                    underline="none"
+                  >
+                    <p>가격</p>
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    //id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={4}>
+                  <Typography
+                    sx={{ fontSize: 26 }}
+                    align="left"
+                    underline="none"
+                  >
+                    <p>재고</p>
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    //id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={4}>
+                  <Typography
+                    sx={{ fontSize: 26 }}
+                    align="left"
+                    underline="none"
+                  >
+                    <p>상품 이미지</p>
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    //id="email"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                </Grid>
+              </Grid>
+              <br />
+              <Box textAlign="center">
+                <Button
+                  //fullWidth
+                  sx={{
+                    width: "50%",
+                    backgroundColor: "#A267E7",
+                  }}
+                  variant="contained"
+                >
+                  <p>상품 등록하기</p>
+                </Button>
+              </Box>
             </Paper>
           </Container>
         </ThemeProvider>

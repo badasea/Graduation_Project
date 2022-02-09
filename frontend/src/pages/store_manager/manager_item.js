@@ -27,10 +27,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Grid } from "@mui/material";
+import { TextField } from "@mui/material";
 
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
+
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -85,9 +89,9 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-  createData("광어", "바다네생선가게", 10000, 10000, 1),
-  createData("도미", "바다네생선가게", 20000, 40000, 2),
-  createData("한돈 앞다리살", "프라임유통", 24000, 24000, 1),
+  createData("광어", "바다네생선가게", 10000, "1kg", 1),
+  createData("도미", "바다네생선가게", 20000, "1kg", 2),
+  createData("한돈 앞다리살", "프라임유통", 24000, "500g", 1),
 ];
 //
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -99,6 +103,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
+
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -154,7 +159,31 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
 
+    let user = {
+      user_email: data.get("email"),
+      user_password: data.get("password"),
+      user_name: data.get("Name"),
+      user_address: data.get("address"),
+    };
+    console.log(user);
+    // axios
+    //   .post("/api/user", user, {})
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     if (res.data !== undefined) {
+    //       // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
+    //       alert("이미 등록된 이메일 계정입니다.");
+    //     } else {
+    //       alert("회원가입이 완료되었습니다.");
+    //       document.location.href = "/";
+    //     }
+    //   })
+    //   .catch();
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -272,30 +301,39 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <Typography sx={{ fontSize: 36 }} color="#202121" underline="none">
+          <p>상품 관리</p>
+        </Typography>
         <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
-          <p>주문 목록</p>
+          <p>
+            등록 상품 :<span className="main_logo"> {rows.length}개</span>
+          </p>
         </Typography>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 650 }} aria-label="customized table">
             <TableHead>
               <TableRow>
+                <StyledTableCell>
+                  <p>이미지</p>
+                </StyledTableCell>
                 <StyledTableCell>
                   <p>상품명</p>
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>가게명</p>
+                  <p>상품설명</p>
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <p>판매가</p>
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>수량</p>
+                  <p>재고량</p>
+                </StyledTableCell>
+
+                <StyledTableCell align="right">
+                  <p>수정</p>
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>주문날짜</p>
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <p>주문금액</p>
+                  <p>삭제</p>
                 </StyledTableCell>
               </TableRow>
             </TableHead>
@@ -306,10 +344,13 @@ export default function PersistentDrawerLeft() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
+                    <Avatar src="../img/test1.jpg"></Avatar>
+                  </TableCell>
+                  <TableCell>
                     <p>{row.name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.calories}</p>
+                    <p>{row.carbs}</p>
                   </TableCell>
                   <TableCell align="right">
                     <p>{row.fat}</p>
@@ -317,11 +358,30 @@ export default function PersistentDrawerLeft() {
                   <TableCell align="right">
                     <p>{row.protein}</p>
                   </TableCell>
+
                   <TableCell align="right">
-                    <p>2022. 01. 02</p>
+                    <Button
+                      sx={{
+                        backgroundColor: "#A267E7",
+                      }}
+                      variant="contained"
+                    >
+                      <Link color="common.white" underline="none">
+                        수정
+                      </Link>
+                    </Button>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.carbs}</p>
+                    <Button
+                      sx={{
+                        backgroundColor: "#F00",
+                      }}
+                      variant="contained"
+                    >
+                      <Link color="common.white" underline="none">
+                        삭제
+                      </Link>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -329,42 +389,77 @@ export default function PersistentDrawerLeft() {
           </Table>
         </TableContainer>
         <br />
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>- 리코마켓은 전 상품 무료 배송입니다.</p>
+        {/* 여기 등록 */}
+        <Typography sx={{ fontSize: 28 }} color="#202121" underline="none">
+          <p>상품 등록하기</p>
         </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>- 2개 이상의 브랜드를 주문하신 경우, 개별 배송됩니다.</p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>
-            - 장바구니에는 최대 100개의 상품을 보관할 수 있으며, 주문당 한번에
-            주문 가능한 상품수는 100개로 제한됩니다.
-          </p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>
-            - 구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내
-            가상계좌 재주문이 불가합니다.
-          </p>
-        </Typography>
-        <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
-          <p>
-            - 수량 제한 상품의 경우, 가상계좌를 통한 주문은 최대 2건까지만
-            가능합니다.(미입금 주문 기준, 기존 주문 합산)
-          </p>
-        </Typography>
-        <br />
-        <Box textAlign="center">
-          <Button
-            //fullWidth
-            sx={{
-              width: "50%",
-              backgroundColor: "#A267E7",
-            }}
-            variant="contained"
-          >
-            <p>메인으로 돌아가기</p>
-          </Button>
+        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <TextField
+                autoComplete="given-name"
+                name="Name"
+                required
+                fullWidth
+                id="Name"
+                label="상품명"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                label="상품설명"
+                name="email"
+                autoComplete="email"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                label="가격"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                fullWidth
+                name="address"
+                label="재고"
+                id="address"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="email"
+                label="이미지 등록 자리"
+                name="email"
+                autoComplete="email"
+              />
+            </Grid>
+          </Grid>
+          <br />
+          <Box textAlign="center">
+            <Button
+              type="submit"
+              sx={{
+                width: "50%",
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+            >
+              <p>상품 등록하기</p>
+            </Button>
+          </Box>
         </Box>
       </Main>
     </Box>
