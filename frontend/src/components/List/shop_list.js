@@ -20,7 +20,7 @@ export default function SimpleSlider() {
           <div>
             <ShopCard />
           </div>
-          <div>
+          {/* <div>
             <ShopCard />
           </div>
           <div>
@@ -34,7 +34,7 @@ export default function SimpleSlider() {
           </div>
           <div>
             <ShopCard />
-          </div>
+          </div> */}
         </Slider>
       </div>
     </div>

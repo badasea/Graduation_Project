@@ -24,8 +24,8 @@ import Link from "@mui/material/Link";
 
 import Side from "../components/menu/side";
 
-import ItemList from "../components/List/item_list";
-import ShopList from "../components/List/shop_list";
+import ItemList from "../components/card/item_card";
+import ShopList from "../components/card/shop_card";
 import SkeletonList from "../components/List/skeleton";
 
 import Advertisement from "../components/List/advertisement";

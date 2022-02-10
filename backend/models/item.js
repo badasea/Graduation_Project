@@ -14,22 +14,53 @@ let Item = function (item) {
   this.shop_id = item.shop_id;
 };
 
-// 모든 가게 검색
+// 모든 상품 검색
 Item.findAll = function (result) {
   mysql.query("Select * from item", function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(null, err);
     } else {
-      console.log("employees : ", res);
+      //console.log("employees : ", res);
       result(null, res);
     }
   });
 };
 
+// 특정 가게와 상품 검색
+Item.findShop = function (result) {
+  mysql.query(
+    "Select * from item t1, shop t2 where t1.shop_id = t2.shop_id",
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 특정 상품 검색
 Item.findById = function (id, result) {
-  mysql.query("Select * from item where item_id = ? ", id, function (err, res) {
+  mysql.query(
+    "Select * from item t1, shop t2 where t1.shop_id = t2.shop_id and t1.shop_id = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 특정 상품 검색
+Item.findId = function (id, result) {
+  mysql.query("Select * from item where item_id = ?", id, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -40,16 +71,16 @@ Item.findById = function (id, result) {
 };
 
 //특정 가게 상품 검색
-Item.findById_Shop = function (id, result) {
-  mysql.query("Select * from item where shop_id = ? ", id, function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-    } else {
-      result(null, res);
-    }
-  });
-};
+// Item.findById_Shop = function (id, result) {
+//   mysql.query("Select * from item where shop_id = ? ", id, function (err, res) {
+//     if (err) {
+//       console.log("error: ", err);
+//       result(err, null);
+//     } else {
+//       result(null, res);
+//     }
+//   });
+// };
 
 // 상품 등록
 Item.create = function (newEmp, result) {

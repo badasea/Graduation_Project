@@ -13,20 +13,66 @@ import { Toolbar } from "@mui/material";
 import Divider from "@mui/material/Divider";
 
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const theme = createTheme();
 
 export default function Shop() {
-  function webcam() {
-    window.open(
-      "http://localhost:443/12",
-      "",
-      "toolbar=no, menubar=no, resizable=yes"
-    );
+  const place = window.location.href;
+  const arr = place.split("/");
+  //console.log(arr[4]);
+
+  const [shop, setShop] = useState([]);
+  function searchshop() {
+    const url = "/api/shop/" + arr[4];
+    axios
+      .get(url)
+      .then(function (response) {
+        setShop(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
   }
-  const detail_item = () => {
-    document.location.href = "/detail_item/12";
+  //console.log(shop);
+
+  const [item, setItem] = useState([]);
+  function searchitem() {
+    const url = "/api/item/" + arr[4];
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response);
+        setItem(response.data);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+  console.log(item);
+
+  useEffect(() => {
+    searchshop();
+    searchitem();
+  }, []);
+
+  const webcam = (id, e) => {
+    e.preventDefault();
+    window.open(
+      "http://localhost:443/" + id,
+      "",
+      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
+    );
   };
+
+  const detail_item = (id, e) => {
+    e.preventDefault();
+    document.location.href = "/detail_item/" + arr[4] + "/" + id;
+  };
+
+  // const detail_item = () => {
+  //   document.location.href = "/detail_item/12";
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,10 +108,10 @@ export default function Shop() {
             src="../img/test.jpg"
           />
           <Typography sx={{ fontSize: 24 }} align="left" underline="none">
-            <p>바다네 생선가게</p>
+            <p>{shop.shop_name}</p>
           </Typography>
           <Typography sx={{ fontSize: 18 }} align="left" underline="none">
-            <p>싱싱한 영등포 활어 전문점</p>
+            <p>{shop.shop_content}</p>
           </Typography>
           <Divider light />
           <Grid container spacing={3}>
@@ -86,7 +132,7 @@ export default function Shop() {
                 align="right"
                 underline="none"
               >
-                <p>영등포구</p>
+                <p>{shop.shop_region}</p>
               </Typography>
             </Grid>
           </Grid>
@@ -108,7 +154,7 @@ export default function Shop() {
                 align="right"
                 underline="none"
               >
-                <p>영등포시장</p>
+                <p>{shop.shop_address}</p>
               </Typography>
             </Grid>
           </Grid>{" "}
@@ -130,7 +176,7 @@ export default function Shop() {
                 align="right"
                 underline="none"
               >
-                <p>음식점</p>
+                <p>{shop.shop_business_type}</p>
               </Typography>
             </Grid>
           </Grid>{" "}
@@ -152,7 +198,7 @@ export default function Shop() {
                 align="right"
                 underline="none"
               >
-                <p>010-1234-5678</p>
+                <p>{shop.shop_phone}</p>
               </Typography>
             </Grid>
           </Grid>
@@ -163,6 +209,9 @@ export default function Shop() {
               backgroundColor: "#A267E7",
             }}
             variant="contained"
+            onClick={(e) => {
+              webcam(shop.shop_id, e);
+            }}
           >
             <p>LIVE 방송 보러 가기</p>
           </Button>
@@ -171,149 +220,63 @@ export default function Shop() {
           <Typography sx={{ fontSize: 24 }} align="left" underline="none">
             <p>상품 목록</p>
           </Typography>
-          <Container fixed onClick={detail_item}>
-            <Grid container xs={12}>
-              <Grid container xs={6}>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 18 }}
-                      align="left"
-                      underline="none"
-                    >
-                      <p>한돈 앞다리살</p>
-                    </Typography>
+          {item.map((items) => (
+            <Container
+              fixed
+              onClick={(e) => {
+                detail_item(items.item_id, e);
+              }}
+              //onClick={detail_item}
+            >
+              <Grid container xs={12}>
+                <Grid container xs={6}>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 18 }}
+                        align="left"
+                        underline="none"
+                      >
+                        <p>{items.item_name}</p>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 14 }}
+                        align="left"
+                        underline="none"
+                        color="#B2B2B2"
+                      >
+                        <p>{items.item_content}</p>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container item xs={12}>
+                    <Grid item>
+                      <Typography
+                        sx={{ fontSize: 24 }}
+                        color="#A267E7"
+                        underline="none"
+                      >
+                        <p>{items.item_price}</p>
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      align="left"
-                      underline="none"
-                      color="#B2B2B2"
-                    >
-                      <p>500g</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="#A267E7"
-                      underline="none"
-                    >
-                      <p>24,000</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
-                <img
-                  style={{ width: "100%", height: "100%" }}
-                  src="../img/test1.jpg"
-                />{" "}
-              </Grid>
-            </Grid>
-            <br />
-            <Divider />
-            <br />
-            <Grid container xs={12}>
-              <Grid container xs={6}>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 18 }}
-                      align="left"
-                      underline="none"
-                    >
-                      <p>한돈 앞다리살</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      align="left"
-                      underline="none"
-                      color="#B2B2B2"
-                    >
-                      <p>500g</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="#A267E7"
-                      underline="none"
-                    >
-                      <p>24,000</p>
-                    </Typography>
-                  </Grid>
+                <Grid item xs={6}>
+                  <img
+                    style={{ width: "100%", height: "100%" }}
+                    src="../img/test1.jpg"
+                  />{" "}
                 </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <img
-                  style={{ width: "100%", height: "100%" }}
-                  src="../img/test1.jpg"
-                />{" "}
-              </Grid>
-            </Grid>
-            <br />
-            <Divider />
-            <br />
-            <Grid container xs={12}>
-              <Grid container xs={6}>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 18 }}
-                      align="left"
-                      underline="none"
-                    >
-                      <p>한돈 앞다리살</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      align="left"
-                      underline="none"
-                      color="#B2B2B2"
-                    >
-                      <p>500g</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid container item xs={12}>
-                  <Grid item>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="#A267E7"
-                      underline="none"
-                    >
-                      <p>24,000</p>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
-                <img
-                  style={{ width: "100%", height: "100%" }}
-                  src="../img/test1.jpg"
-                />
-              </Grid>
-            </Grid>
-            <br />
-            <Divider />
-            <br />
-          </Container>
+              <br />
+              <Divider />
+              <br />
+            </Container>
+          ))}
         </Box>
       </Container>
     </ThemeProvider>

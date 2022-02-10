@@ -14,20 +14,37 @@ import Divider from "@mui/material/Divider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const theme = createTheme();
 
 export default function Shop() {
-  function webcam() {
-    window.open(
-      "http://localhost:443/12",
-      "",
-      "toolbar=no, menubar=no, resizable=yes"
-    );
+  const place = window.location.href;
+  const arr = place.split("/");
+  console.log(arr[5]);
+  const [item, setItem] = useState([]);
+  function searchitem() {
+    const url = "/api/item/item/" + arr[5];
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response);
+        setItem(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
   }
+  console.log(item);
+
+  useEffect(() => {
+    searchitem();
+  }, []);
+
   const return_shop = () => {
-    document.location.href = "/detail_shop/12";
+    document.location.href = "/detail_shop/" + arr[4];
   };
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="fixed" style={{ background: "#fff" }}>
@@ -60,13 +77,13 @@ export default function Shop() {
         >
           <img
             style={{ width: "100%", height: "100%" }}
-            src="../img/test1.jpg"
+            src="../../img/test1.jpg"
           />
           <Typography sx={{ fontSize: 24 }} align="left" underline="none">
-            <p>한돈 앞다리살</p>
+            <p>{item.item_name}</p>
           </Typography>
           <Typography sx={{ fontSize: 18 }} align="left" underline="none">
-            <p>500g</p>
+            <p>{item.item_content}</p>
           </Typography>
           <Divider />
           <Grid container spacing={3}>
@@ -77,7 +94,7 @@ export default function Shop() {
             </Grid>
             <Grid item xs={9}>
               <Typography sx={{ fontSize: 14 }} align="right" underline="none">
-                <p>24000 원</p>
+                <p>{item.item_price} 원</p>
               </Typography>
             </Grid>
           </Grid>
@@ -107,7 +124,7 @@ export default function Shop() {
             </Grid>
             <Grid item xs={8}>
               <Typography sx={{ fontSize: 14 }} align="right" underline="none">
-                <p>24000 원</p>
+                <p>0 원</p>
               </Typography>
             </Grid>
           </Grid>

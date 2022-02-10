@@ -69,6 +69,7 @@ function App() {
 
           <Route path="/detail_item" element={<Detail_item />}></Route>
           <Route path="/detail_item/:id" element={<Detail_item />}></Route>
+          <Route path="/detail_item/:id/:id" element={<Detail_item />}></Route>
 
           <Route path="/item" element={<Item />}></Route>
           <Route path="/item/:id" element={<Item />}></Route>

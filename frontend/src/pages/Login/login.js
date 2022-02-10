@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
+import { Container } from "@mui/material";
 
 import axios from "axios";
 
@@ -69,7 +70,7 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      {/* <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -86,106 +87,107 @@ export default function SignInSide() {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        />
-        <AppBar position="fixed" style={{ background: "#fff" }}>
-          <Toolbar>
+        /> */}
+      <AppBar position="fixed" style={{ background: "#fff" }}>
+        <Toolbar>
+          <Typography
+            textAlign={"center"}
+            variant="h7"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            <Link href="/" color="common.black" underline="none">
+              <p>
+                <span className="main_logo">LI.CO.</span> MARKET
+              </p>
+            </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      {/* <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square> */}
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <br />
+
+          {/* <Typography component="h1" variant="h5">
+            <p>
+              <span className="main_logo">LI.CO.</span> MARKET
+            </p>
+          </Typography> */}
+          <Typography component="h1" variant="h5">
+            <p>로그인</p>
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              //id="email"
+              label="이메일"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="비밀번호"
+              type="password"
+              //id="password"
+              autoComplete="current-password"
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
+            >
+              <p>로그인</p>
+            </Button>
+
+            <Grid container>
+              <Grid item>
+                <Link href="/signup" variant="body2" underline="none">
+                  <p>
+                    <span className="main_logo">
+                      {"회원이 아니신가요? 회원 가입"}
+                    </span>
+                  </p>
+                </Link>
+              </Grid>
+            </Grid>
+            <br />
             <Typography
               textAlign={"center"}
               variant="h7"
               component="div"
               sx={{ flexGrow: 1 }}
             >
-              <Link href="/" color="common.black" underline="none">
-                <p>
-                  <span className="main_logo">LI.CO.</span> MARKET
-                </p>
+              <Link color="common.black" underline="none">
+                <p>SNS계정으로 로그인하기</p>
               </Link>
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <br />
 
-            <Typography component="h1" variant="h5">
-              <p>
-                <span className="main_logo">LI.CO.</span> MARKET
-              </p>
-            </Typography>
-            <Typography component="h1" variant="h5">
-              <p>로그인</p>
-            </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                //id="email"
-                label="이메일"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="비밀번호"
-                type="password"
-                //id="password"
-                autoComplete="current-password"
-              />
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
-                sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
-              >
-                <p>로그인</p>
-              </Button>
-
-              <Grid container>
-                <Grid item>
-                  <Link href="/signup" variant="body2" underline="none">
-                    <p>
-                      <span className="main_logo">
-                        {"회원이 아니신가요? 회원 가입"}
-                      </span>
-                    </p>
-                  </Link>
-                </Grid>
-              </Grid>
-              <br />
-              <Typography
-                textAlign={"center"}
-                variant="h7"
-                component="div"
-                sx={{ flexGrow: 1 }}
-              >
-                <Link color="common.black" underline="none">
-                  <p>SNS계정으로 로그인하기</p>
-                </Link>
-              </Typography>
-
-              <Grid align="center" container spacing={2}>
-                <Grid item xs={4}>
-                  {/* <IconButton
+            <Grid align="center" container spacing={2}>
+              <Grid item xs={4}>
+                {/* <IconButton
                     aria-label="google"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
@@ -194,13 +196,13 @@ export default function SignInSide() {
                   >
                     <Avatar src="../img/google.png"></Avatar>
                   </IconButton> */}
-                  <GoogleLoginBtn />
-                </Grid>
-                <Grid item xs={4}>
-                  <KakaoLogin />
-                </Grid>
-                <Grid item xs={4}>
-                  {/* <IconButton
+                <GoogleLoginBtn />
+              </Grid>
+              <Grid item xs={4}>
+                <KakaoLogin />
+              </Grid>
+              <Grid item xs={4}>
+                {/* <IconButton
                     aria-label="naver"
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
@@ -209,17 +211,18 @@ export default function SignInSide() {
                   >
                     <Avatar src="../img/naver.png"></Avatar>
                   </IconButton> */}
-                  <NaverLogin />
-                </Grid>
+                <NaverLogin />
               </Grid>
-              {/* <br />
+            </Grid>
+            {/* <br />
               <GoogleLoginBtn />
               <br />
               <NaverLogin /> */}
-            </Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Container>
+      {/* </Grid> */}
+      {/* </Grid> */}
     </ThemeProvider>
   );
 }

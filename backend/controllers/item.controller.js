@@ -17,10 +17,18 @@ exports.findById = function (req, res) {
   });
 };
 
-exports.findById_Shop = function (req, res) {
-  Item.findById_Shop(req.params.id, function (err, item) {
+exports.findId = function (req, res) {
+  Item.findId(req.params.id, function (err, item) {
     if (err) res.send(err);
     res.json(item);
+  });
+};
+
+exports.findShop = function (req, res) {
+  Item.findShop(function (err, item) {
+    if (err) res.send(err);
+    console.log("res", item);
+    res.send(item);
   });
 };
 

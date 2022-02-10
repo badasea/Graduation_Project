@@ -75,11 +75,11 @@ export default function SignUp() {
           }}
         >
           <br />
-          <Typography component="h1" variant="h5">
+          {/* <Typography component="h1" variant="h5">
             <p>
               <span className="main_logo">LI.CO.</span> MARKET
             </p>
-          </Typography>
+          </Typography> */}
           <Typography component="h1" variant="h5">
             <p>회원 가입</p>
           </Typography>
