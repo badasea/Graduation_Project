@@ -58,6 +58,22 @@ Item.findById = function (id, result) {
   );
 };
 
+// 가게 관리하기
+Item.findManage = function (id, result) {
+  mysql.query(
+    "Select * from shop t2, item t3 where t2.user_id = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 특정 상품 검색
 Item.findId = function (id, result) {
   mysql.query("Select * from item where item_id = ?", id, function (err, res) {

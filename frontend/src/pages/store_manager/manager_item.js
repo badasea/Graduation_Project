@@ -85,16 +85,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-// 제거 예정
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("광어", "바다네생선가게", 10000, "1kg", 1),
-  createData("도미", "바다네생선가게", 20000, "1kg", 2),
-  createData("한돈 앞다리살", "프라임유통", 24000, "500g", 1),
-];
 //
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -157,9 +147,18 @@ export default function PersistentDrawerLeft() {
 
   const [modalOpen, setModalOpen] = useState(false);
 
+  // const openModal = (item, e) => {
+  //   e.preventDefault();
+
+  //   const userObj = { item };
+  //   window.sessionStorage.setItem("item", JSON.stringify(userObj));
+
+  //   setModalOpen(true);
+  // };
   const openModal = () => {
     setModalOpen(true);
   };
+
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -170,7 +169,7 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  //console.log(session);
 
   if (session === null) {
     login = false;
@@ -202,6 +201,28 @@ export default function PersistentDrawerLeft() {
     //   })
     //   .catch();
   };
+
+  //console.log(session);
+
+  const [item, setItem] = useState([]);
+  function searchitem() {
+    const url = "/api/item/shop/" + session.data.user_id;
+    axios
+      .get(url)
+      .then(function (response) {
+        //console.log(response.data);
+        setItem(response.data);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+  console.log(item);
+
+  useEffect(() => {
+    searchitem();
+  }, []);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -324,7 +345,7 @@ export default function PersistentDrawerLeft() {
         </Typography>
         <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
           <p>
-            등록 상품 :<span className="main_logo"> {rows.length}개</span>
+            등록 상품 :<span className="main_logo"> {item.length}개</span>
           </p>
         </Typography>
         <TableContainer component={Paper}>
@@ -332,49 +353,63 @@ export default function PersistentDrawerLeft() {
             <TableHead>
               <TableRow>
                 <StyledTableCell>
-                  <p>이미지</p>
+                  <Link color="common.white" underline="none">
+                    이미지
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell>
-                  <p>상품명</p>
+                  <Link color="common.white" underline="none">
+                    상품명
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>상품설명</p>
+                  <Link color="common.white" underline="none">
+                    상품설명
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>판매가</p>
+                  <Link color="common.white" underline="none">
+                    판매가
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>재고량</p>
+                  <Link color="common.white" underline="none">
+                    재고량
+                  </Link>{" "}
                 </StyledTableCell>
 
                 <StyledTableCell align="right">
-                  <p>수정</p>
+                  <Link color="common.white" underline="none">
+                    수정
+                  </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  <p>삭제</p>
+                  <Link color="common.white" underline="none">
+                    삭제
+                  </Link>{" "}
                 </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {item.map((items) => (
                 <TableRow
-                  key={row.name}
+                  key={items.item_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
                     <Avatar src="../img/test1.jpg"></Avatar>
                   </TableCell>
                   <TableCell>
-                    <p>{row.name}</p>
+                    <p>{items.item_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.carbs}</p>
+                    <p>{items.item_content}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.fat}</p>
+                    <p>{items.item_price}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.protein}</p>
+                    <p>{items.item_stock}</p>
                   </TableCell>
 
                   <TableCell align="right">
@@ -383,6 +418,9 @@ export default function PersistentDrawerLeft() {
                         backgroundColor: "#A267E7",
                       }}
                       variant="contained"
+                      // onClick={(e) => {
+                      //   openModal(items, e);
+                      // }}
                       onClick={openModal}
                     >
                       <Link color="common.white" underline="none">

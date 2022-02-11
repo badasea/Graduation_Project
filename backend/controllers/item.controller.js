@@ -17,6 +17,13 @@ exports.findById = function (req, res) {
   });
 };
 
+exports.findManage = function (req, res) {
+  Item.findManage(req.params.id, function (err, item) {
+    if (err) res.send(err);
+    res.json(item);
+  });
+};
+
 exports.findId = function (req, res) {
   Item.findId(req.params.id, function (err, item) {
     if (err) res.send(err);

@@ -7,6 +7,8 @@ router.get("/", ItemController.findShop);
 router.get("/:id", ItemController.findById);
 router.get("/item/:id", ItemController.findId);
 
+router.get("/shop/:id", ItemController.findManage);
+
 // router.get("/shop", ItemController.findShop);
 router.post("/", ItemController.create);
 router.delete("/:id", ItemController.delete);
