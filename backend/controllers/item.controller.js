@@ -48,10 +48,14 @@ exports.create = function (req, res) {
       .send({ error: true, message: "Please provide all required field" });
   } else {
     Item.create(new_item, function (err, item) {
-      if (err) res.send(err);
-      res.json({
-        data: item,
-      });
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.json({
+          data: item,
+        });
+      }
     });
   }
 };

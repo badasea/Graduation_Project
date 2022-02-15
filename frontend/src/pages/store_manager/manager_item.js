@@ -149,10 +149,6 @@ export default function PersistentDrawerLeft() {
 
   // const openModal = (item, e) => {
   //   e.preventDefault();
-
-  //   const userObj = { item };
-  //   window.sessionStorage.setItem("item", JSON.stringify(userObj));
-
   //   setModalOpen(true);
   // };
   const openModal = () => {
@@ -180,26 +176,22 @@ export default function PersistentDrawerLeft() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    let user = {
-      user_email: data.get("email"),
-      user_password: data.get("password"),
-      user_name: data.get("Name"),
-      user_address: data.get("address"),
+    let item_data = {
+      item_stock: data.get("stock"),
+      item_price: data.get("price"),
+      item_name: data.get("Name"),
+      item_content: data.get("content"),
+      shop_id: session.data.shop_id,
     };
-    console.log(user);
-    // axios
-    //   .post("/api/user", user, {})
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     if (res.data !== undefined) {
-    //       // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
-    //       alert("이미 등록된 이메일 계정입니다.");
-    //     } else {
-    //       alert("회원가입이 완료되었습니다.");
-    //       document.location.href = "/";
-    //     }
-    //   })
-    //   .catch();
+    console.log();
+    console.log(item_data);
+    axios
+      .post("/api/item", item_data, {})
+      .then((res) => {
+        //console.log(res.data);
+        document.location.href = "/manager_item";
+      })
+      .catch();
   };
 
   //console.log(session);
@@ -217,7 +209,6 @@ export default function PersistentDrawerLeft() {
         //console.log("실패");
       });
   }
-  console.log(item);
 
   useEffect(() => {
     searchitem();
@@ -427,11 +418,7 @@ export default function PersistentDrawerLeft() {
                         수정
                       </Link>
                     </Button>
-                    <Modal
-                      open={modalOpen}
-                      close={closeModal}
-                      header="Modal heading"
-                    ></Modal>
+                    <Modal open={modalOpen} close={closeModal}></Modal>
                   </TableCell>
                   <TableCell align="right">
                     <Button
@@ -465,37 +452,33 @@ export default function PersistentDrawerLeft() {
                 fullWidth
                 id="Name"
                 label="상품명"
-                autoFocus
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 required
                 fullWidth
-                id="email"
+                id="content"
                 label="상품설명"
-                name="email"
-                autoComplete="email"
+                name="content"
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 required
                 fullWidth
-                name="password"
+                name="price"
                 label="가격"
-                type="password"
-                id="password"
-                autoComplete="new-password"
+                id="price"
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
                 required
                 fullWidth
-                name="address"
+                name="stock"
                 label="재고"
-                id="address"
+                id="stock"
               />
             </Grid>
             <Grid item xs={12}>

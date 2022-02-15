@@ -1,5 +1,9 @@
 # 👨‍🎓 Graduation_Project
 
+(제작중 DB연동 X 클라이언트 화면만 배포)
+
+# 링크 : https://licomarket.paas-ta.org/
+
 <div align="center">
 
 **👨‍🎓 졸업 작품 작품명 : LI.CO. MARKET(클라우드 기반 전통시장 라이브커머스)**
@@ -48,7 +52,7 @@
 
 4. Order 테이블 생성 필요
 
-5. 네이버 로그인 리다이렉트 오류
+5. 네이버 로그인 리다이렉트 오류 (로그인 회원가입을 모달창에서 처리하면 url에 변화가 없기 때문에 리다이렉트 오류를 해결할 수 있을 것으로 판단 현재 로그인 잇슈는 우선순위가 낮은 관계로 우선 순위가 높은 잇슈 부터 해결하고 해당 이슈 해결 예정)
 
 6. 관심 지역, 업종 Array DB 잇슈
 
@@ -292,9 +296,9 @@ PaasTa, AWS 앱 배포
 
 # ⚙ 기술 스택
 
-개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js, python3
+개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js, python3, java8
 
-Front-End : REACT
+Front-End : REACT(Spring Maven)
 
 Back-End : Express(Node.js v16.13.1)
 
