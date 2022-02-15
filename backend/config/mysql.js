@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 
+// 로컬
 var connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
