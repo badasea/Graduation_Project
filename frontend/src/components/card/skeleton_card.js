@@ -13,13 +13,7 @@ import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 
 function Skeleton_Card() {
-  function webcam() {
-    window.open(
-      "http://localhost:443/12",
-      "",
-      "toolbar=no, menubar=no, resizable=yes"
-    );
-  }
+
 
   return (
     <div>

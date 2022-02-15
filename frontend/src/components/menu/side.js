@@ -312,7 +312,7 @@ export default function Side() {
             </ListItemButton>
             <Collapse in={side3open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {user_type === "seller" ? (
+                {session.data.user_type !== "seller" ? (
                   <div>
                     <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
                       <ListItemIcon>

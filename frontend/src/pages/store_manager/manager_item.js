@@ -181,7 +181,7 @@ export default function PersistentDrawerLeft() {
       item_price: data.get("price"),
       item_name: data.get("Name"),
       item_content: data.get("content"),
-      shop_id: session.data.shop_id,
+      shop_id: item[0].shop_id,
     };
     console.log();
     console.log(item_data);
@@ -194,6 +194,15 @@ export default function PersistentDrawerLeft() {
       .catch();
   };
 
+  const item_remove = (id) => {
+    //console.log(item[index].itemId)
+    axios
+      .delete("/api/item/" + id, {})
+      .then((res) => {
+        document.location.href = "/manager_item";
+      })
+      .catch();
+  };
   //console.log(session);
 
   const [item, setItem] = useState([]);
@@ -202,7 +211,6 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        //console.log(response.data);
         setItem(response.data);
       })
       .catch(function (error) {
@@ -425,6 +433,9 @@ export default function PersistentDrawerLeft() {
                       sx={{
                         backgroundColor: "#F00",
                       }}
+                      onClick={(e) => {
+                        item_remove(items.item_id, e);
+                      }}
                       variant="contained"
                     >
                       <Link color="common.white" underline="none">
@@ -488,10 +499,10 @@ export default function PersistentDrawerLeft() {
                 id="email"
                 label="이미지 등록 자리"
                 name="email"
-                autoComplete="email"
               />
             </Grid>
           </Grid>
+
           <br />
           <Box textAlign="center">
             <Button

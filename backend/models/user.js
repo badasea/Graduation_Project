@@ -42,7 +42,7 @@ User.findById = function (id, result) {
 // 사용자 로그인
 User.login = function (email, result) {
   mysql.query(
-    "Select t1.*, t2.shop_id from user t1, shop t2 where t1.user_id = t2.user_id and t1.user_email = ? ",
+    "Select * from user where user_email = ? ",
     email,
     function (err, res) {
       if (err) {

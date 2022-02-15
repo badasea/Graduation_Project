@@ -21,10 +21,10 @@ export default function SimpleSlider() {
           <img src="../img/ad_banner.png" />
         </div>
         <div>
-          <img src="../img/ad_banner2.png" />
+          <img src="../img/ad_banner3.png" />
         </div>
         <div>
-          <img src="../img/ad_banner1.png" />
+          <img src="../img/ad_banner4.png" />
         </div>
       </Slider>
     </div>

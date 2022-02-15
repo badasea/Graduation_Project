@@ -61,7 +61,7 @@ Item.findById = function (id, result) {
 // 가게 관리하기
 Item.findManage = function (id, result) {
   mysql.query(
-    "Select * from shop t2, item t3 where t2.user_id = ?",
+    "Select * from shop t2, item t3 where t2.shop_id = t3.shop_id and t2.user_id = ?",
     id,
     function (err, res) {
       if (err) {
