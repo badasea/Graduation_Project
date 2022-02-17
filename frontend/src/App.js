@@ -25,6 +25,7 @@ import Item from "./pages/Shopping/item";
 // 가게 관리 페이지
 import Addstore from "./pages/store_manager/add_store";
 import Editstore from "./pages/store_manager/edit_store";
+import Check from "./pages/store_manager/check";
 
 import Manager_Item from "./pages/store_manager/manager_item";
 import EditItem from "./pages/store_manager/edit_item";
@@ -76,6 +77,8 @@ function App() {
 
           <Route path="/addstore" element={<Addstore />}></Route>
           <Route path="/editstore" element={<Editstore />}></Route>
+
+          <Route path="/check" element={<Check />}></Route>
 
           <Route path="/manager_item" element={<Manager_Item />}></Route>
           <Route path="/edititem" element={<EditItem />}></Route>

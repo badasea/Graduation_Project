@@ -137,23 +137,24 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-  const edit = () => {
-    window.open(
-      "/edititem",
-      "",
-      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
-    );
-  };
+  // const edit = () => {
+  //   window.open(
+  //     "/edititem",
+  //     "",
+  //     "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
+  //   );
+  // };
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  // const openModal = (item, e) => {
-  //   e.preventDefault();
-  //   setModalOpen(true);
-  // };
-  const openModal = () => {
+  const openModal = (item, e) => {
+    e.preventDefault();
+
     setModalOpen(true);
   };
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -417,10 +418,10 @@ export default function PersistentDrawerLeft() {
                         backgroundColor: "#A267E7",
                       }}
                       variant="contained"
-                      // onClick={(e) => {
-                      //   openModal(items, e);
-                      // }}
-                      onClick={openModal}
+                      onClick={(e) => {
+                        openModal(items, e);
+                      }}
+                      // onClick={openModal}
                     >
                       <Link color="common.white" underline="none">
                         수정

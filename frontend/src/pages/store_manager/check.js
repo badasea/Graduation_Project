@@ -14,8 +14,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CheckIcon from "@mui/icons-material/Check";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -23,6 +23,9 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
+import { Container } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
+import { Grid } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -112,14 +115,16 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-
+  const manageritem = () => {
+    document.location.href = "/manager_item";
+  };
   var login;
 
   var img;
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  //console.log(session);
 
   if (session === null) {
     login = false;
@@ -244,6 +249,205 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <Container component="main" maxWidth="xs">
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ bgcolor: deepPurple[500], width: 56, height: 56 }}>
+              <CheckIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              <p>입점 완료</p>
+            </Typography>
+            <Typography sx={{ fontSize: 15 }}>
+              <Link color="common.black" underline="none">
+                입력한 정보가 정상적으로 처리되었으며, 리코마켓 앱에 노출돼요.
+              </Link>
+            </Typography>
+            <br />
+            <Typography color="#B2B2B2" sx={{ fontSize: 14 }}>
+              광고 시작일은 입점시 바로 등록되고, 입력된 정보는 가게 관리
+              서비스를 통해 언제든지 변경할 수 있어요.{" "}
+            </Typography>
+            <Typography sx={{ fontSize: 24 }} align="left" underline="none">
+              <p>가게 입점 정보</p>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>가게명</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>바다네 생선가게</p>
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>사업자명</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>{session.data.user_name}</p>
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={5}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>사업자번호</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={7}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>1234</p>
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>지역구</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>영등포구</p>
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={5}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>시장 위치</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={7}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>영등포시장</p>
+                </Typography>
+              </Grid>
+            </Grid>{" "}
+            <Grid container spacing={3}>
+              <Grid item xs={5}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>가게 업종</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={7}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>음식점</p>
+                </Typography>
+              </Grid>
+            </Grid>{" "}
+            <Grid container spacing={3}>
+              <Grid item xs={5}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="left"
+                  underline="none"
+                >
+                  <p>가게 번호</p>
+                </Typography>
+              </Grid>
+              <Grid item xs={7}>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <p>01012345678</p>
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box textAlign="center">
+            <Button
+              //fullWidth
+              sx={{
+                width: "50%",
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+              onClick={manageritem}
+            >
+              <p>상품 등록하기</p>
+            </Button>
+            <Link
+              color="common.black"
+              href="/"
+              variant="body2"
+              underline="none"
+            >
+              <p>{"리코마켓 메인으로"}</p>
+            </Link>
+          </Box>
+        </Container>
       </Main>
     </Box>
   );

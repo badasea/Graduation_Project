@@ -250,6 +250,7 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <br />
         <Advertisement />
         <br />
         <Typography variant="h6" color="common.white">

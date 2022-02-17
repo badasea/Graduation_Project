@@ -24,9 +24,6 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
-import First from "../../components/store/first";
-import Second from "../../components/store/second";
-import Check from "../../components/store/Check";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 

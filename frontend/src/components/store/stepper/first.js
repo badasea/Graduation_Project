@@ -9,8 +9,22 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Link } from "@mui/material";
+import { useState } from "react";
+import { Input } from "@mui/material";
 
 export default function PaymentForm() {
+  const [region, setRegion] = useState();
+
+  const onRegionHandler = (event) => {
+    setRegion(event.currentTarget.value);
+    const userObj = event.currentTarget.value;
+    window.sessionStorage.setItem("first", JSON.stringify(userObj));
+  };
+
+  const session = JSON.parse(window.sessionStorage.getItem("first"));
+
+  console.log(session);
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -31,6 +45,8 @@ export default function PaymentForm() {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="지역"
+              value={region}
+              onChange={onRegionHandler}
             >
               <MenuItem value={10}>
                 <Link color="common.black" underline="none">

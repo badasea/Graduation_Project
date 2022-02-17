@@ -18,13 +18,13 @@ export default function SimpleSlider() {
     <div>
       <Slider {...settings}>
         <div>
-          <img src="../img/ad_banner.png" />
+          <img width="100%" height="100%" src="../img/ad_banner.png" />
         </div>
         <div>
-          <img src="../img/ad_banner3.png" />
+          <img width="100%" height="100%" src="../img/ad_banner3.png" />
         </div>
         <div>
-          <img src="../img/ad_banner4.png" />
+          <img width="100%" height="100%" src="../img/ad_banner4.png" />
         </div>
       </Slider>
     </div>

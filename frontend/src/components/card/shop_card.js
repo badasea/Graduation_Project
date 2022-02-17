@@ -101,7 +101,7 @@ function ShopCard() {
             <div>
               <Container fixed>
                 <img
-                  style={{ width: "100%", height: "350px" }}
+                  style={{ width: "100%", height: "100%" }}
                   src="../img/test.jpg"
                 />
                 <Typography

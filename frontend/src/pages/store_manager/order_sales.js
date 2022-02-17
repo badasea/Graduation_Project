@@ -344,40 +344,24 @@ export default function PersistentDrawerLeft() {
           <p>매출</p>
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={6} align="center">
-            <Typography
-              textAlign={"center"}
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
-              <Link color="common.black" underline="none">
-                이번 달 HIT 상품
-              </Link>
-            </Typography>
-          </Grid>
-          <Grid item xs={6} align="center">
-            <Typography
-              textAlign={"center"}
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
-              <Link color="common.black" underline="none">
-                이번달 매출
-              </Link>
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container spacing={3}>
           <Grid item xs={6} align="left">
             <Container fixed>
               <Paper
                 variant="outlined"
                 sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
               >
+                <Typography
+                  textAlign={"center"}
+                  variant="h6"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                >
+                  <Link color="common.black" underline="none">
+                    이번 달 HIT 상품
+                  </Link>
+                </Typography>
                 <img
-                  style={{ width: "100%", height: "350px" }}
+                  style={{ width: "100%", height: "100%" }}
                   src="../img/test1.jpg"
                 />
 
@@ -413,6 +397,16 @@ export default function PersistentDrawerLeft() {
                 variant="outlined"
                 sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
               >
+                <Typography
+                  textAlign={"center"}
+                  variant="h6"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                >
+                  <Link color="common.black" underline="none">
+                    이번달 매출
+                  </Link>
+                </Typography>
                 <Typography
                   sx={{ fontSize: 24 }}
                   color="#A267E7"
