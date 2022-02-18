@@ -50,6 +50,10 @@ export default function SignInSide() {
           const session = res.data[0];
           const userObj = { data: session };
           window.sessionStorage.setItem("data", JSON.stringify(userObj));
+
+          const session_type = res.data[0].user_type;
+          window.sessionStorage.setItem("type", JSON.stringify(session_type));
+
           document.location.href = "/";
         } else if (res.data[0].user_email === "admin") {
           // 관리자 페이지

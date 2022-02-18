@@ -128,4 +128,19 @@ User.edit = function (id, user, result) {
   );
 };
 
+User.type = function (id, user, result) {
+  mysql.query(
+    "UPDATE user SET user_type='seller' WHERE user_id = ?",
+    [id],
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 module.exports = User;

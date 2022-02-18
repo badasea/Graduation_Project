@@ -26,6 +26,8 @@ import Side from "../../components/menu/side";
 import { Container } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 import { Grid } from "@mui/material";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -131,6 +133,43 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
+
+  function login_form() {
+    const url = "/api/shop/user/" + session.data.user_id;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data[0]);
+        setShop_id(response.data[0].shop_id);
+        setShop_name(response.data[0].shop_name);
+        setShop_address(response.data[0].shop_address);
+        setShop_phone(response.data[0].shop_phone);
+        setShop_content(response.data[0].shop_content);
+        setRegisteration_number(response.data[0].shop_registration_num);
+        setShop_business_type(response.data[0].shop_business_type);
+        setShop_region(response.data[0].shop_region);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
+  useEffect(() => {
+    login_form();
+  }, []);
+
+  const [shop_id, setShop_id] = useState("");
+
+  const [shop_name, setShop_name] = useState("");
+  const [shop_address, setShop_address] = useState("");
+  const [shop_phone, setShop_phone] = useState("");
+  const [shop_content, setShop_content] = useState("");
+
+  // const [shop_image, setShop_image] = useState("");
+  const [shop_registeration_number, setRegisteration_number] = useState("");
+  const [shop_business_type, setShop_business_type] = useState("");
+  const [shop_region, setShop_region] = useState("");
+  //const [fileImage, setFileImage] = useState("");
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -295,28 +334,7 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <p>바다네 생선가게</p>
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container spacing={3}>
-              <Grid item xs={4}>
-                <Typography
-                  color="#B2B2B2"
-                  sx={{ fontSize: 14 }}
-                  align="left"
-                  underline="none"
-                >
-                  <p>사업자명</p>
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Typography
-                  sx={{ fontSize: 14 }}
-                  align="right"
-                  underline="none"
-                >
-                  <p>{session.data.user_name}</p>
+                  <p>{shop_name}</p>
                 </Typography>
               </Grid>
             </Grid>
@@ -337,7 +355,7 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <p>1234</p>
+                  <p>{shop_registeration_number}</p>
                 </Typography>
               </Grid>
             </Grid>
@@ -358,7 +376,7 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <p>영등포구</p>
+                  <p>{shop_region}</p>
                 </Typography>
               </Grid>
             </Grid>
@@ -379,7 +397,7 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <p>영등포시장</p>
+                  <p>{shop_address}</p>
                 </Typography>
               </Grid>
             </Grid>{" "}
@@ -400,7 +418,7 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <p>음식점</p>
+                  <p>{shop_business_type}</p>
                 </Typography>
               </Grid>
             </Grid>{" "}
@@ -421,7 +439,7 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <p>01012345678</p>
+                  <p>{shop_phone}</p>
                 </Typography>
               </Grid>
             </Grid>

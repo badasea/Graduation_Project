@@ -10,5 +10,6 @@ router.post("/", UserController.create);
 router.delete("/:id", UserController.delete);
 // router.post("/:id", UserController.update);
 router.post("/:id", UserController.edit);
+router.put("/shop/:id", UserController.type);
 
 module.exports = router;

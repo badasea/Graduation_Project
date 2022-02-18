@@ -208,6 +208,7 @@ export default function PersistentDrawerLeft() {
       shop_business_type: shop_business_type,
       shop_region: shop_region,
       user_id: session.data.user_id,
+      user_type: "seller",
       shop_content: shop_content,
     };
     console.log(shop);
@@ -221,6 +222,19 @@ export default function PersistentDrawerLeft() {
       .then((res) => {
         //console.log(res.data);
         //document.location.href = "/check";
+      })
+      .catch();
+    axios
+      .put("/api/user/shop/" + session.data.user_id, shop, {
+        // headers: {
+        //   "Content-type": "multipart/form-data; charset=utf-8",
+        // },
+      })
+      .then((res) => {
+        //console.log(res.data);
+        const session_type = "seller";
+        window.sessionStorage.setItem("type", JSON.stringify(session_type));
+        document.location.href = "/check";
       })
       .catch();
   };

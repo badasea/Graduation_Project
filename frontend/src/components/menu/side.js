@@ -5,7 +5,6 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { deepPurple } from "@mui/material/colors";
 
 // 사이드바 아이콘
 import ListSubheader from "@mui/material/ListSubheader";
@@ -32,6 +31,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Side() {
   const [sideopen, setOpenside] = React.useState(false);
@@ -123,8 +124,9 @@ export default function Side() {
   var img;
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
+  const session_type = JSON.parse(window.sessionStorage.getItem("type"));
 
-  //console.log(session);
+  //console.log(session_type);
 
   if (session === null) {
     login = false;
@@ -312,7 +314,7 @@ export default function Side() {
             </ListItemButton>
             <Collapse in={side3open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {session.data.user_type !== "seller" ? (
+                {session_type !== "seller" ? (
                   <div>
                     <ListItemButton onClick={addstore} sx={{ pl: 4 }}>
                       <ListItemIcon>

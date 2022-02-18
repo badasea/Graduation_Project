@@ -49,6 +49,9 @@ function LoginNaver() {
         const session = response.data[0];
         const userObj = { data: session };
         window.sessionStorage.setItem("data", JSON.stringify(userObj));
+        const session_type = response.data[0].user_type;
+        window.sessionStorage.setItem("type", JSON.stringify(session_type));
+
         //document.location.href = "/";
       })
       .catch(function (error) {

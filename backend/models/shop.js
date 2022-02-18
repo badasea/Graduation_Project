@@ -55,11 +55,7 @@ Shop.findById2 = function (id, result) {
 
 // 가게 등록
 Shop.create = function (newEmp, result) {
-  const sql1 = "INSERT INTO shop set ?";
-  const sql1s = mysql.format(sql1, newEmp);
-  const sql2 = "UPDATE user SET user_type = 'seller' where user_id = ?";
-  const sql2s = mysql.format(sql2, id);
-  mysql.query(sql1s + sql2s, function (err, res) {
+  mysql.query("INSERT INTO shop set ?", newEmp, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -69,23 +65,6 @@ Shop.create = function (newEmp, result) {
     }
   });
 };
-
-// Shop.create = function (newEmp, result) {
-//   mysql.query(
-//     "INSERT INTO shop set ?" +
-//       "UPDATE user SET user_type = 'seller' where user_id = ?",
-//     newEmp,
-//     function (err, res) {
-//       if (err) {
-//         console.log("error: ", err);
-//         result(err, null);
-//       } else {
-//         console.log(res.insertId);
-//         result(null, res.insertId);
-//       }
-//     }
-//   );
-// };
 
 // 가게 삭제 (사용자는 이용 불가 쿼리문)
 Shop.delete = function (id, result) {
@@ -101,7 +80,7 @@ Shop.delete = function (id, result) {
 
 Shop.update = function (id, shop, result) {
   mysql.query(
-    "UPDATE shop SET shop_name=?,shop_registration_num=?,shop_business_type=?,shop_phone=?,shop_region=?,shop_address=?,shop_image=? WHERE shop_id = ?",
+    "UPDATE shop SET shop_name=?,shop_registration_num=?,shop_business_type=?,shop_phone=?,shop_region=?,shop_address=?,shop_image=?,shop_content=? WHERE shop_id = ?",
     [
       shop.shop_name,
       shop.shop_registration_num,
