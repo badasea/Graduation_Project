@@ -33,10 +33,14 @@ exports.create = function (req, res) {
       .send({ error: true, message: "Please provide all required field" });
   } else {
     Shop.create(new_shop, function (err, shop) {
-      if (err) res.send(err);
-      res.json({
-        data: shop,
-      });
+      if (err) {
+        res.send(err);
+        return;
+      } else {
+        res.json({
+          data: shop,
+        });
+      }
     });
   }
 };

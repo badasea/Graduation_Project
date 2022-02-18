@@ -14,8 +14,8 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import NativeSelect from "@mui/material/NativeSelect";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -23,6 +23,12 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import { Grid } from "@mui/material";
+import { Input } from "@mui/material";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -98,6 +104,10 @@ export default function PersistentDrawerLeft() {
     document.location.href = "/";
   };
 
+  const home = () => {
+    document.location.href = "/";
+  };
+
   const mypage = () => {
     document.location.href = "/mypage";
   };
@@ -119,13 +129,101 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  //console.log(session);
 
   if (session === null) {
     login = false;
   } else {
     login = true;
   }
+
+  const [shop_name, setShop_name] = useState("");
+  const [shop_address, setShop_address] = useState("");
+  const [shop_phone, setShop_phone] = useState("");
+  const [shop_content, setShop_content] = useState("");
+
+  // const [shop_image, setShop_image] = useState("");
+  const [shop_registeration_number, setRegisteration_number] = useState("");
+  const [shop_business_type, setShop_business_type] = useState("");
+  const [shop_region, setShop_region] = useState("");
+  //const [fileImage, setFileImage] = useState("");
+
+  // 가게 업종
+  const onShop_business_typeHandler = (event) => {
+    setShop_business_type(event.currentTarget.value);
+  };
+
+  // 가게 설명
+  const onShop_contentHandler = (event) => {
+    setShop_content(event.currentTarget.value);
+  };
+
+  // 가게 이름
+  const onShop_nameHandler = (event) => {
+    setShop_name(event.currentTarget.value);
+  };
+
+  // 가게 실제 주소
+  const onShop_addressHandler = (event) => {
+    setShop_address(event.currentTarget.value);
+  };
+
+  // 가게 지역구
+  const onShop_regionHandler = (event) => {
+    setShop_region(event.currentTarget.value);
+  };
+
+  // 가게 전화번호
+  const onShop_phoneHandler = (event) => {
+    setShop_phone(event.currentTarget.value);
+  };
+
+  // 가게 상표 이미지
+  // const onShop_imageHandler = (event) => {
+  //   setFileImage(URL.createObjectURL(event.target.files[0]));
+  //   setShop_image(event.currentTarget.files[0]);
+  // };
+
+  // 사업자 번호
+  const onRegisteration_numberHandler = (event) => {
+    setRegisteration_number(event.currentTarget.value);
+  };
+
+  const onClickRegister = () => {
+    //const formData = new FormData();
+
+    // formData.append("image", shop_image);
+    // formData.append("name", shop_name);
+    // formData.append("shop_address", shop_address);
+    // formData.append("phone", shop_phone);
+    // formData.append("registrationNum", shop_registeration_number);
+    // formData.append("businessType", shop_business_type);
+    // formData.append("region", shop_region);
+    // console.log(formData);
+    let shop = {
+      shop_name: shop_name,
+      shop_address: shop_address,
+      shop_phone: shop_phone,
+      shop_registration_num: shop_registeration_number,
+      shop_business_type: shop_business_type,
+      shop_region: shop_region,
+      user_id: session.data.user_id,
+      shop_content: shop_content,
+    };
+    console.log(shop);
+
+    axios
+      .post("/api/shop/", shop, {
+        // headers: {
+        //   "Content-type": "multipart/form-data; charset=utf-8",
+        // },
+      })
+      .then((res) => {
+        //console.log(res.data);
+        //document.location.href = "/check";
+      })
+      .catch();
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -244,6 +342,296 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+          <Paper
+            variant="outlined"
+            sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+          >
+            <Typography component="h1" variant="h4" align="center">
+              <p>가게 등록하기</p>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    지역구
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <NativeSelect
+                    defaultValue={10}
+                    inputProps={{
+                      name: "age",
+                      id: "uncontrolled-native",
+                    }}
+                    fullWidth
+                    value={shop_region}
+                    onChange={onShop_regionHandler}
+                  >
+                    <option value={10}>지역을 선택해주세요</option>
+                    <option value={"성북구"}>성북구</option>
+                    <option value={"영등포구"}>영등포구</option>
+                    <option value={"종로구"}>종로구</option>
+                  </NativeSelect>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    업종
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  {" "}
+                  <NativeSelect
+                    defaultValue={10}
+                    inputProps={{
+                      name: "age",
+                      id: "uncontrolled-native",
+                    }}
+                    fullWidth
+                    value={shop_business_type}
+                    onChange={onShop_business_typeHandler}
+                  >
+                    <option value={10}>업종을 선택해주세요</option>
+                    <option value={"음식점"}>음식점</option>
+                    <option value={"한복점"}>한복점</option>
+                    <option value={"공방"}>공방</option>
+                    <option value={"기타"}>기타</option>
+                  </NativeSelect>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    가게명
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input
+                    value={shop_name}
+                    onChange={onShop_nameHandler}
+                    fullWidth
+                    placeholder="가게명"
+                  ></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    사업자 번호
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input
+                    value={shop_registeration_number}
+                    onChange={onRegisteration_numberHandler}
+                    fullWidth
+                    placeholder="사업자 번호"
+                  ></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    가게 위치
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input
+                    value={shop_address}
+                    onChange={onShop_addressHandler}
+                    fullWidth
+                    placeholder="예) 영등포시장"
+                  ></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    가게 번호
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input
+                    value={shop_phone}
+                    onChange={onShop_phoneHandler}
+                    fullWidth
+                    placeholder="-빼고 입력해주세요"
+                  ></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    가게 설명
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input
+                    value={shop_content}
+                    onChange={onShop_contentHandler}
+                    fullWidth
+                    placeholder="가게설명"
+                  ></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
+                    가게 이미지
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <Button
+                  fullWidth
+                  sx={{
+                    backgroundColor: "#A267E7",
+                  }}
+                  variant="contained"
+                  onClick={onClickRegister}
+                >
+                  <p>등록 하기</p>
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  onClick={home}
+                  fullWidth
+                  color="secondary"
+                  variant="outlined"
+                >
+                  <p>취소 하기</p>
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Container>
       </Main>
     </Box>
   );

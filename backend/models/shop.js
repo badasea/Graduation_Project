@@ -11,6 +11,7 @@ let Shop = function (shop) {
   this.shop_region = shop.shop_region;
   this.shop_address = shop.shop_address;
   this.shop_image = shop.shop_image;
+  this.shop_content = shop.shop_content;
   // 외래키 user_id
   this.user_id = shop.user_id;
 };
@@ -54,7 +55,11 @@ Shop.findById2 = function (id, result) {
 
 // 가게 등록
 Shop.create = function (newEmp, result) {
-  mysql.query("INSERT INTO shop set ?", newEmp, function (err, res) {
+  const sql1 = "INSERT INTO shop set ?";
+  const sql1s = mysql.format(sql1, newEmp);
+  const sql2 = "UPDATE user SET user_type = 'seller' where user_id = ?";
+  const sql2s = mysql.format(sql2, id);
+  mysql.query(sql1s + sql2s, function (err, res) {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -64,6 +69,23 @@ Shop.create = function (newEmp, result) {
     }
   });
 };
+
+// Shop.create = function (newEmp, result) {
+//   mysql.query(
+//     "INSERT INTO shop set ?" +
+//       "UPDATE user SET user_type = 'seller' where user_id = ?",
+//     newEmp,
+//     function (err, res) {
+//       if (err) {
+//         console.log("error: ", err);
+//         result(err, null);
+//       } else {
+//         console.log(res.insertId);
+//         result(null, res.insertId);
+//       }
+//     }
+//   );
+// };
 
 // 가게 삭제 (사용자는 이용 불가 쿼리문)
 Shop.delete = function (id, result) {
@@ -88,6 +110,7 @@ Shop.update = function (id, shop, result) {
       shop.shop_region,
       shop.shop_address,
       shop.shop_image,
+      shop.shop_content,
       id,
     ],
     function (err, res) {

@@ -1,12 +1,7 @@
 ---
 applications:
-  - instances: 1 # 애플리케이션 인스턴스 개수
-    command: npm start # 애플리케이션 실행 명령어
-    path: / # 배포될 애플리케이션의 위치
-    # services:
-    #- openpaas-sample-mysql
-    #- openpaas-sample-cubrid
-    #- openpaas-sample-mongodb
-    #- openpaas-sample-redis
-    #- openpaas-sample-rabbitmq
-    #- openpaas-sample-glusterfs
+  - name: test
+    instances: 1
+    # command: node server.js
+    # path: /
+    random-route: true

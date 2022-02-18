@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const port = process.env.PORT || 3001;
 
 app.use(morgan("dev"));
+app.use(express.static(__dirname + "/"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
