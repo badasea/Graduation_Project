@@ -28,7 +28,6 @@ import Editstore from "./pages/store_manager/edit_store";
 import Check from "./pages/store_manager/check";
 
 import Manager_Item from "./pages/store_manager/manager_item";
-import EditItem from "./pages/store_manager/edit_item";
 
 // 장바구니 및 주문 목록
 import Cart from "./pages/Shopping/cart";
@@ -81,7 +80,6 @@ function App() {
           <Route path="/check" element={<Check />}></Route>
 
           <Route path="/manager_item" element={<Manager_Item />}></Route>
-          <Route path="/edititem" element={<EditItem />}></Route>
 
           <Route path="/order_sales" element={<Order_sales />}></Route>
 

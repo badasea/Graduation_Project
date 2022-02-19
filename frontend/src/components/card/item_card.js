@@ -78,10 +78,10 @@ function ShopCard() {
     );
   };
 
-  const detail_shop = (id, e) => {
+  const detail_shop = (shop_id, item_id, e) => {
     e.preventDefault();
     window.open(
-      "http://localhost:3000/detail_shop/" + id,
+      "http://localhost:3000/detail_item/" + shop_id + "/" + item_id,
       "",
       "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
     );
@@ -158,13 +158,13 @@ function ShopCard() {
                   <Grid item xs={6}>
                     <Button
                       onClick={(e) => {
-                        detail_shop(items.shop_id, e);
+                        detail_shop(items.shop_id, items.item_id, e);
                       }}
                       fullWidth
                       color="secondary"
                       variant="outlined"
                     >
-                      <p>가게 입장하기</p>
+                      <p>상품 구매하기</p>
                     </Button>
                   </Grid>
                   <Grid item xs={6}>

@@ -166,13 +166,27 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  //console.log(session);
+  console.log(session);
 
   if (session === null) {
     login = false;
   } else {
     login = true;
   }
+  const [user_id, setUser_id] = useState([]);
+  function searchuser() {
+    const url = "/api/shop/user/" + session.data.user_id;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data[0]);
+        setUser_id(response.data[0].shop_id);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -182,9 +196,8 @@ export default function PersistentDrawerLeft() {
       item_price: data.get("price"),
       item_name: data.get("Name"),
       item_content: data.get("content"),
-      shop_id: item[0].shop_id,
+      shop_id: user_id,
     };
-    console.log();
     console.log(item_data);
     axios
       .post("/api/item", item_data, {})
@@ -221,6 +234,7 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => {
     searchitem();
+    searchuser();
   }, []);
 
   return (

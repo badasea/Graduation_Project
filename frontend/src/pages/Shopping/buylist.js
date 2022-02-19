@@ -31,7 +31,8 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
-
+import axios from "axios";
+import { useState, useEffect } from "react";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -140,6 +141,9 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
+  const home = () => {
+    document.location.href = "/";
+  };
 
   var login;
 
@@ -154,6 +158,25 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
+
+  const [order, setOrder] = useState([]);
+  function searchorder() {
+    const url = "/api/order/user/" + session.data.user_id;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response);
+        setOrder(response.data);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+  console.log(order);
+
+  useEffect(() => {
+    searchorder();
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -312,28 +335,27 @@ export default function PersistentDrawerLeft() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {order.map((orders) => (
                 <TableRow
-                  key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <p>{row.name}</p>
+                    <p>{orders.order_item_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.calories}</p>
+                    <p>{orders.order_shop_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.fat}</p>
+                    <p>{orders.order_price}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.protein}</p>
+                    <p>{orders.order_stock}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>2022. 01. 02</p>
+                    <p>{orders.order_date}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.carbs}</p>
+                    <p>{orders.order_price * orders.order_stock}</p>
                   </TableCell>
                 </TableRow>
               ))}
@@ -374,6 +396,7 @@ export default function PersistentDrawerLeft() {
               backgroundColor: "#A267E7",
             }}
             variant="contained"
+            onClick={home}
           >
             <p>메인으로 돌아가기</p>
           </Button>

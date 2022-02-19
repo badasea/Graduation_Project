@@ -21,10 +21,14 @@ require("dotenv").config();
 const UserRoute = require("./routes/user.routes");
 const ShopRoute = require("./routes/shop.routes");
 const ItemRoute = require("./routes/item.routes");
+const OrderRoute = require("./routes/order.routes");
+const HelpRoute = require("./routes/help.routes");
 
 app.use("/api/user", UserRoute);
 app.use("/api/shop", ShopRoute);
 app.use("/api/item", ItemRoute);
+app.use("/api/order", OrderRoute);
+app.use("/api/help", HelpRoute);
 
 app.get("/", (req, res) => {
   res.json({

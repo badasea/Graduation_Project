@@ -10,20 +10,23 @@ let Help = function (help) {
   this.help_user_id = help.help_user_id;
 };
 
-// 모든 문의 검색
+// 모든 사용자 검색
 Help.findAll = function (result) {
-  mysql.query("Select * from help", function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-    } else {
-      console.log("employees : ", res);
-      result(null, res);
+  mysql.query(
+    "Select * from help t1, user t2 where t1.help_user_id = t2.user_id",
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        console.log("employees : ", res);
+        result(null, res);
+      }
     }
-  });
+  );
 };
 
-// 특정 문의 검색
+// 특정 사용자 검색
 Help.findById = function (id, result) {
   mysql.query("Select * from help where help_id = ? ", id, function (err, res) {
     if (err) {
@@ -35,7 +38,7 @@ Help.findById = function (id, result) {
   });
 };
 
-// 문의 등록
+// 사용자 등록
 Help.create = function (newEmp, result) {
   mysql.query("INSERT INTO help set ?", newEmp, function (err, res) {
     if (err) {
@@ -48,7 +51,7 @@ Help.create = function (newEmp, result) {
   });
 };
 
-// 문의 삭제
+// 사용자 삭제
 Help.delete = function (id, result) {
   mysql.query("DELETE FROM help WHERE help_id = ?", [id], function (err, res) {
     if (err) {
@@ -60,8 +63,8 @@ Help.delete = function (id, result) {
   });
 };
 
-// 문의 수정
-Help.update = function (id, help, result) {
+// 사용자 업데이트
+Help.update = function (id, user, result) {
   mysql.query(
     "UPDATE help SET help_title=?,help_content=?,help_state=?,help_user_id=? WHERE order_id = ?",
     [

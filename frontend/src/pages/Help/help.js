@@ -35,6 +35,7 @@ import Link from "@mui/material/Link";
 import Side from "../../components/menu/side";
 
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const drawerWidth = 240;
 
@@ -160,6 +161,24 @@ export default function PersistentDrawerLeft() {
     login = true;
   }
 
+  const [helps, setHelp] = useState([]);
+  function searchhelp() {
+    const url = "/api/help/";
+    axios
+      .get(url)
+      .then(function (response) {
+        setHelp(response.data);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
+  useEffect(() => {
+    searchhelp();
+  }, []);
+  console.log(helps);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -282,7 +301,7 @@ export default function PersistentDrawerLeft() {
         </Typography>
         <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
           <p>
-            문의 :<span className="main_logo"> {rows.length}건</span>
+            문의 :<span className="main_logo"> {helps.length}건</span>
           </p>
         </Typography>
         <TableContainer component={Paper}>
@@ -317,25 +336,24 @@ export default function PersistentDrawerLeft() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {helps.map((help) => (
                 <TableRow
-                  key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <p>1</p>
+                    <p>{help.help_id}</p>
                   </TableCell>
                   <TableCell>
-                    <p>{row.name}</p>
+                    <p>{help.user_name}</p>
                   </TableCell>
                   <TableCell>
-                    <p>{row.carbs}</p>
+                    <p>{help.help_title}</p>
                   </TableCell>
                   <TableCell>
-                    <p>{row.fat}</p>
+                    <p>{help.help_content}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.protein}</p>
+                    <p>{help.help_state}</p>
                   </TableCell>
                 </TableRow>
               ))}

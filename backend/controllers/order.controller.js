@@ -2,36 +2,51 @@
 const Order = require("../models/order");
 
 exports.findAll = function (req, res) {
-  Order.findAll(function (err, order) {
+  Order.findAll(function (err, user) {
     console.log("controller");
     if (err) res.send(err);
-    //console.log("res", item);
-    res.send(order);
+    console.log("res", user);
+    res.send(user);
   });
 };
 
 exports.findById = function (req, res) {
-  Order.findById(req.params.id, function (err, order) {
+  Order.findById(req.params.id, function (err, user) {
     if (err) res.send(err);
-    res.json(order);
+    res.json(user);
+  });
+};
+
+exports.findByUser = function (req, res) {
+  Order.findByUser(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
+exports.findByCart = function (req, res) {
+  Order.findByCart(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
   });
 };
 
 exports.create = function (req, res) {
-  const new_order = new Order(req.body);
+  const new_user = new Order(req.body);
   //handles null error
+
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res
       .status(400)
       .send({ error: true, message: "Please provide all required field" });
   } else {
-    Order.create(new_order, function (err, order) {
+    Order.create(new_user, function (err, user) {
       if (err) {
         res.send(err);
         return;
       } else {
         res.json({
-          data: order,
+          data: user,
         });
       }
     });
@@ -39,9 +54,9 @@ exports.create = function (req, res) {
 };
 
 exports.delete = function (req, res) {
-  Order.delete(req.params.id, function (err, order) {
+  Order.delete(req.params.id, function (err, user) {
     if (err) res.send(err);
-    res.json({ message: "order successfully deleted" });
+    res.json({ message: "User successfully deleted" });
   });
 };
 
@@ -51,9 +66,22 @@ exports.update = function (req, res) {
       .status(400)
       .send({ error: true, message: "Please provide all required field" });
   } else {
-    Order.update(req.params.id, new Order(req.body), function (err, order) {
+    Order.update(req.params.id, new User(req.body), function (err, user) {
       if (err) res.send(err);
-      res.json({ message: "order successfully updated" });
+      res.json({ message: "User successfully updated" });
+    });
+  }
+};
+
+exports.ok = function (req, res) {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res
+      .status(400)
+      .send({ error: true, message: "Please provide all required field" });
+  } else {
+    Order.ok(req.params.id, new User(req.body), function (err, user) {
+      if (err) res.send(err);
+      res.json({ message: "User successfully updated" });
     });
   }
 };

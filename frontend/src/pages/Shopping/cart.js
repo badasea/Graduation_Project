@@ -31,7 +31,8 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
-
+import axios from "axios";
+import { useState, useEffect } from "react";
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -156,6 +157,52 @@ export default function PersistentDrawerLeft() {
     login = true;
   }
 
+  const [order, setOrder] = useState([]);
+  function searchorder() {
+    const url = "/api/order/user/" + session.data.user_id;
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data);
+        setOrder(response.data);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
+  useEffect(() => {
+    searchorder();
+  }, []);
+
+  const item_remove = (id) => {
+    //console.log(item[index].itemId)
+    axios
+      .delete("/api/order/" + id, {})
+      .then((res) => {
+        document.location.href = "/cart";
+      })
+      .catch();
+  };
+
+  let total_price = 0;
+
+  let today = new Date();
+
+  let year = today.getFullYear();
+  let month = ("0" + (today.getMonth() + 1)).slice(-2);
+  let day = ("0" + today.getDate()).slice(-2);
+
+  let dateString = year + "" + month + "" + day;
+
+  let hours = ("0" + today.getHours()).slice(-2);
+  let minutes = ("0" + today.getMinutes()).slice(-2);
+  let seconds = ("0" + today.getSeconds()).slice(-2);
+
+  let timeString = hours + ":" + minutes + ":" + seconds;
+
+  console.log(dateString + " " + timeString);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -275,7 +322,7 @@ export default function PersistentDrawerLeft() {
         <DrawerHeader />
         <Typography sx={{ fontSize: 18 }} color="#202121" underline="none">
           <p>
-            장바구니 <span className="main_logo">{rows.length}</span>
+            장바구니 <span className="main_logo">{order.length}</span>
           </p>
         </Typography>
         <TableContainer component={Paper}>
@@ -315,25 +362,24 @@ export default function PersistentDrawerLeft() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {order.map((orders) => (
                 <TableRow
-                  key={row.name}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <p>{row.name}</p>
+                    <p>{orders.order_item_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.calories}</p>
+                    <p>{orders.order_shop_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.fat}</p>
+                    <p>{orders.order_price}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.protein}</p>
+                    <p>{orders.order_stock}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.carbs}</p>
+                    <p>{orders.order_price * orders.order_stock}</p>
                   </TableCell>
                   <TableCell align="right">
                     <Button
@@ -341,6 +387,9 @@ export default function PersistentDrawerLeft() {
                         backgroundColor: "#F00",
                       }}
                       variant="contained"
+                      onClick={(e) => {
+                        item_remove(orders.order_id, e);
+                      }}
                     >
                       x
                     </Button>
@@ -357,7 +406,7 @@ export default function PersistentDrawerLeft() {
         <Divider light />
         <Typography sx={{ fontSize: 18 }} align="right" underline="none">
           <p>
-            <span className="main_logo">24000</span> 원
+            <span className="main_logo">{total_price}</span> 원
           </p>
         </Typography>
         <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">

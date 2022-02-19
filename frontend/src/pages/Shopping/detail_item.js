@@ -19,6 +19,8 @@ import { useState, useEffect } from "react";
 const theme = createTheme();
 
 export default function Shop() {
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
   const place = window.location.href;
   const arr = place.split("/");
   console.log(arr[5]);
@@ -35,14 +37,113 @@ export default function Shop() {
         //console.log("실패");
       });
   }
-  console.log(item);
-
+  //console.log(item);
+  const [shop, setShop] = useState([]);
+  function searchshop() {
+    const url = "/api/shop/" + arr[4];
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response);
+        setShop(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+  console.log(shop);
   useEffect(() => {
     searchitem();
+    searchshop();
   }, []);
 
   const return_shop = () => {
     document.location.href = "/detail_shop/" + arr[4];
+  };
+
+  const [number, setNumber] = useState(0);
+
+  // const onNumberHandler = (event) => {
+  //   setNumber(event.currentTarget.value);
+  // };
+  const onIncrease = () => {
+    setNumber((prevNumber) => prevNumber + 1);
+  };
+  const onDecrease = () => {
+    setNumber((prevNumber) => prevNumber - 1);
+  };
+  let today = new Date();
+
+  let year = today.getFullYear();
+  let month = ("0" + (today.getMonth() + 1)).slice(-2);
+  let day = ("0" + today.getDate()).slice(-2);
+
+  let dateString = year + "" + month + "" + day;
+
+  let hours = ("0" + today.getHours()).slice(-2);
+  let minutes = ("0" + today.getMinutes()).slice(-2);
+  let seconds = ("0" + today.getSeconds()).slice(-2);
+
+  let timeString = hours + ":" + minutes + ":" + seconds;
+
+  console.log(dateString + " " + timeString);
+
+  const buy = () => {
+    //console.log('click cart')
+    //console.log('itemId : ', item_data_session.item_data.itemId)
+    //console.log('count : ', number)
+    let data = {
+      order_date: dateString + " " + timeString,
+      order_state: "buy_ok",
+      order_item_name: item.item_name,
+      order_price: item.item_price,
+      order_shop_name: shop.shop_name,
+      order_stock: number,
+      order_shop_id: arr[4],
+      order_user_id: session.data.user_id,
+    };
+    console.log(data);
+    axios
+      .post("/api/order/", data, {
+        headers: {
+          "Content-type": "application/json; charset=utf-8",
+        },
+      })
+      .then((res) => {
+        //console.log(res.data)
+        alert("해당 상품이 결재되었습니다.");
+        document.location.href = "/detail_shop/" + arr[4];
+      })
+      .catch();
+  };
+
+  const cart = () => {
+    //console.log('click cart')
+    //console.log('itemId : ', item_data_session.item_data.itemId)
+    //console.log('count : ', number)
+    let data = {
+      order_date: dateString + " " + timeString,
+      order_item_name: item.item_name,
+      order_state: "cart",
+      order_price: item.item_price,
+      order_shop_name: shop.shop_name,
+      order_stock: number,
+      order_shop_id: arr[4],
+      order_user_id: session.data.user_id,
+    };
+    console.log(data);
+    axios
+      .post("/api/order/", data, {
+        headers: {
+          "Content-type": "application/json; charset=utf-8",
+        },
+      })
+      .then((res) => {
+        //console.log(res.data)
+        alert("해당 상품이 장바구니에 담겼습니다.");
+        document.location.href = "/detail_shop/" + arr[4];
+      })
+      .catch();
   };
 
   return (
@@ -108,9 +209,9 @@ export default function Shop() {
             <Grid item xs={9}>
               <Typography sx={{ fontSize: 14 }} align="right" underline="none">
                 <p>
-                  <button>-</button>
-                  <span>&nbsp;&nbsp; 1 &nbsp;&nbsp;</span>
-                  <button>+</button>
+                  <button onClick={onDecrease}>-</button>
+                  <span>&nbsp;&nbsp; {number} &nbsp;&nbsp;</span>
+                  <button onClick={onIncrease}>+</button>
                 </p>
               </Typography>
             </Grid>
@@ -124,13 +225,18 @@ export default function Shop() {
             </Grid>
             <Grid item xs={8}>
               <Typography sx={{ fontSize: 14 }} align="right" underline="none">
-                <p>0 원</p>
+                <p>{item.item_price * number} 원</p>
               </Typography>
             </Grid>
           </Grid>
           <Grid container spacing={3}>
             <Grid item xs={6}>
-              <Button fullWidth color="secondary" variant="outlined">
+              <Button
+                onClick={cart}
+                fullWidth
+                color="secondary"
+                variant="outlined"
+              >
                 <p>장바구니 넣기</p>
               </Button>
             </Grid>
@@ -141,6 +247,7 @@ export default function Shop() {
                   backgroundColor: "#A267E7",
                 }}
                 variant="contained"
+                onClick={buy}
               >
                 <p>주문 하기</p>
               </Button>
