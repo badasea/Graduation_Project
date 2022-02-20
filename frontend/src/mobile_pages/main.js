@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
 
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -16,22 +15,19 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Avatar from "@mui/material/Avatar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { Grid } from "@mui/material";
-
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
-import Side from "../../components/menu/side";
+import Side from "../components/menu/side";
 
-import ItemList from "../../components/card/item_card";
-import ShopList from "../../components/card/shop_card";
-import { Container } from "@mui/material";
-import { Paper } from "@mui/material";
-import axios from "axios";
+import ItemList from "../components/card/item_card_mobile";
+import ShopList from "../components/card/shop_card_mobile";
+import SkeletonList from "../components/List/skeleton_mobile";
+
+import Advertisement from "../components/List/advertisement";
 
 const drawerWidth = 240;
 
@@ -121,7 +117,6 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-  console.log(window.location.href);
 
   var login;
 
@@ -136,29 +131,6 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
-  const type = window.location.href;
-  //console.log(place);
-  const arr = type.split("/");
-  // console.log(session.data[0]);
-
-  // var [logined, setLogin] = useState([]);
-
-  // function login_form() {
-  //   const url = "/api/user/login/" + session.data[0];
-  //   axios
-  //     .get(url)
-  //     .then(function (response) {
-  //       //console.log(response.data);
-  //       setLogin(response.data[0]);
-  //     })
-  //     .catch(function (error) {
-  //       //console.log("실패");
-  //     });
-  // }
-
-  // useEffect(() => {
-  //   login_form();
-  // }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -190,11 +162,11 @@ export default function PersistentDrawerLeft() {
           </Typography>
           {login === false ? (
             <div>
-              <Button size="medium">
+              {/* <Button size="medium">
                 <Link href="/signup" color="common.black" underline="none">
                   REGISTER
                 </Link>
-              </Button>
+              </Button> */}
               <Button size="medium">
                 <Link href="/login" color="common.black" underline="none">
                   LOG IN
@@ -277,87 +249,68 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <Paper variant="outlined" square>
-          <Container maxWidth="sx">
-            <Typography variant="h4" color="common.white">
+        <br />
+        <Advertisement />
+        <br />
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> MARKET LIST
+            </p>
+          </Link>
+        </Typography>
+        <ShopList />
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> STOCK LIST
+            </p>
+          </Link>
+        </Typography>
+        <ItemList />
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> MARKET 알고리즘 추천
+              LIST
+            </p>
+          </Link>
+        </Typography>
+        {login === false ? (
+          <div>
+            <Typography variant="h8" color="common.white">
               <Link color="common.black" underline="none">
-                <p>
-                  <span className="main_logo">LI.CO.</span>{" "}
-                  {arr[4] === "restaurant" ? "음식점" : <></>}
-                  {arr[4] === "hanbok" ? "한복점" : <></>}
-                  {arr[4] === "craftshop" ? "공방" : <></>}
-                  {arr[4] === "etc" ? "기타 업종" : <></>}
-                </p>
+                <p>로그인 후 확인해보세요.</p>
               </Link>
             </Typography>
-            <Typography variant="h6" color="common.white">
+            <SkeletonList />
+          </div>
+        ) : (
+          <div>
+            <ShopList />
+          </div>
+        )}
+        <Typography variant="h6" color="common.white">
+          <Link color="common.black" underline="none">
+            <p>
+              <span className="main_logo">LI.CO.</span> STOCK 알고리즘 추천 LIST
+            </p>
+          </Link>
+        </Typography>
+        {login === false ? (
+          <div>
+            <Typography variant="h8" color="common.white">
               <Link color="common.black" underline="none">
-                <p>
-                  <span className="main_logo">LI.CO.</span> IN 성북
-                </p>
+                <p>로그인 후 확인해보세요.</p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/seongbuck"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
-            <Divider />
-            <Typography variant="h6" color="common.white">
-              <Link color="common.black" underline="none">
-                <p>
-                  <span className="main_logo">LI.CO.</span> IN 영등포
-                </p>
-              </Link>
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/yeongdeungpo"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
-            <Divider />
-            <Typography variant="h6" color="common.white">
-              <Link color="common.black" underline="none">
-                <p>
-                  <span className="main_logo">LI.CO.</span> IN 종로
-                </p>
-              </Link>
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/jongno"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
-            <Divider />
-          </Container>
-        </Paper>
+            <SkeletonList />
+          </div>
+        ) : (
+          <div>
+            <ItemList />
+          </div>
+        )}
       </Main>
     </Box>
   );

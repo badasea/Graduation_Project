@@ -18,7 +18,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { Grid } from "@mui/material";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -27,8 +26,7 @@ import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
-import ItemList from "../../components/card/item_card";
-import ShopList from "../../components/card/shop_card";
+import ShopList from "../../components/card/shop_card_mobile";
 import { Container } from "@mui/material";
 import { Paper } from "@mui/material";
 import axios from "axios";
@@ -190,11 +188,11 @@ export default function PersistentDrawerLeft() {
           </Typography>
           {login === false ? (
             <div>
-              <Button size="medium">
+              {/* <Button size="medium">
                 <Link href="/signup" color="common.black" underline="none">
                   REGISTER
                 </Link>
-              </Button>
+              </Button> */}
               <Button size="medium">
                 <Link href="/login" color="common.black" underline="none">
                   LOG IN
@@ -297,20 +295,17 @@ export default function PersistentDrawerLeft() {
                 </p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/seongbuck"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
+
+            <Link
+              href={type + "/seongbuck"}
+              color="common.black"
+              underline="none"
+            >
+              전체보기
+            </Link>
+
+            <ShopList />
+
             <Divider />
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
@@ -319,20 +314,17 @@ export default function PersistentDrawerLeft() {
                 </p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/yeongdeungpo"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
+
+            <Link
+              href={type + "/yeongdeungpo"}
+              color="common.black"
+              underline="none"
+            >
+              전체보기
+            </Link>
+
+            <ShopList />
+
             <Divider />
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
@@ -341,20 +333,13 @@ export default function PersistentDrawerLeft() {
                 </p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/jongno"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
+
+            <Link href={type + "/jongno"} color="common.black" underline="none">
+              전체보기
+            </Link>
+
+            <ShopList />
+
             <Divider />
           </Container>
         </Paper>

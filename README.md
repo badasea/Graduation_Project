@@ -36,7 +36,9 @@
 
 ## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 19일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 21일 기준)
+
+⛔ 모바일 화면 최적화 진행 중 ⛔
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -304,7 +306,7 @@ ML : Django
 
 Package
 
-Front-End : Npm( React-router-dom, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
+Front-End : Npm( React-router-dom,react-device-detect, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 

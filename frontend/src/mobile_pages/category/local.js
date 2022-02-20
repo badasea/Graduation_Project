@@ -18,7 +18,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { Grid } from "@mui/material";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -27,10 +26,10 @@ import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
-import ItemList from "../../components/card/item_card";
-import ShopList from "../../components/card/shop_card";
+import ItemList from "../../components/card/item_card_mobile";
 import { Container } from "@mui/material";
 import { Paper } from "@mui/material";
+
 import axios from "axios";
 
 const drawerWidth = 240;
@@ -121,7 +120,12 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-  console.log(window.location.href);
+  //console.log(window.location.href);
+
+  const place = window.location.href;
+  //console.log(place);
+  const arr = place.split("/");
+  console.log(arr[4]);
 
   var login;
 
@@ -136,9 +140,7 @@ export default function PersistentDrawerLeft() {
   } else {
     login = true;
   }
-  const type = window.location.href;
-  //console.log(place);
-  const arr = type.split("/");
+
   // console.log(session.data[0]);
 
   // var [logined, setLogin] = useState([]);
@@ -190,11 +192,11 @@ export default function PersistentDrawerLeft() {
           </Typography>
           {login === false ? (
             <div>
-              <Button size="medium">
+              {/* <Button size="medium">
                 <Link href="/signup" color="common.black" underline="none">
                   REGISTER
                 </Link>
-              </Button>
+              </Button> */}
               <Button size="medium">
                 <Link href="/login" color="common.black" underline="none">
                   LOG IN
@@ -282,79 +284,70 @@ export default function PersistentDrawerLeft() {
             <Typography variant="h4" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
-                  <span className="main_logo">LI.CO.</span>{" "}
-                  {arr[4] === "restaurant" ? "음식점" : <></>}
-                  {arr[4] === "hanbok" ? "한복점" : <></>}
-                  {arr[4] === "craftshop" ? "공방" : <></>}
-                  {arr[4] === "etc" ? "기타 업종" : <></>}
+                  <span className="main_logo">LI.CO.</span> IN{" "}
+                  {arr[4] === "seongbuck" ? "성북" : <></>}
+                  {arr[4] === "yeongdeungpo" ? "영등포" : <></>}
+                  {arr[4] === "jongno" ? "종로" : <></>}
                 </p>
               </Link>
             </Typography>
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
-                  <span className="main_logo">LI.CO.</span> IN 성북
+                  <span className="main_logo">LI.CO.</span> 음식점
                 </p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/seongbuck"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
+            <Link href={place + "/food"} color="common.black" underline="none">
+              전체보기
+            </Link>
+            <ItemList />
             <Divider />
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
-                  <span className="main_logo">LI.CO.</span> IN 영등포
+                  <span className="main_logo">LI.CO.</span> 한복점
                 </p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/yeongdeungpo"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
+            <Link
+              href={place + "/hanbok"}
+              color="common.black"
+              underline="none"
+            >
+              전체보기
+            </Link>
+            <ItemList />
             <Divider />
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
-                  <span className="main_logo">LI.CO.</span> IN 종로
+                  <span className="main_logo">LI.CO.</span> 공방
                 </p>
               </Link>
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <Link
-                  href={type + "/jongno"}
-                  color="common.black"
-                  underline="none"
-                >
-                  전체보기
-                </Link>
-              </Grid>
-              <Grid item xs={10}>
-                <ShopList />
-              </Grid>
-            </Grid>
+            <Link
+              href={place + "/craftshop"}
+              color="common.black"
+              underline="none"
+            >
+              전체보기
+            </Link>
+            <ItemList />
+            <Divider />
+            <Typography variant="h6" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> 기타 업종
+                </p>
+              </Link>
+            </Typography>
+            <Typography sx={{ fontSize: 18 }} align="left" underline="none">
+              <Link href={place + "/etc"} color="common.black" underline="none">
+                전체보기
+              </Link>
+            </Typography>
+            <ItemList />
             <Divider />
           </Container>
         </Paper>

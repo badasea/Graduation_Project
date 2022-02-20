@@ -149,22 +149,33 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  //console.log(session);
 
   if (session === null) {
     login = false;
   } else {
     login = true;
   }
+  //let total_price = 0;
 
   const [order, setOrder] = useState([]);
+  const [total_price, setTotal_price] = useState([]);
   function searchorder() {
     const url = "/api/order/user/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data);
+        //console.log(response.data);
         setOrder(response.data);
+        var price = 0;
+        for (var i = 0; i < response.data.length; i++) {
+          price =
+            price +
+            parseInt(
+              response.data[i].order_price * response.data[i].order_stock
+            );
+        }
+        setTotal_price(price);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -185,7 +196,34 @@ export default function PersistentDrawerLeft() {
       .catch();
   };
 
-  let total_price = 0;
+  const buy = () => {
+    //console.log('click cart')
+    //console.log('itemId : ', item_data_session.item_data.itemId)
+    //console.log('count : ', number)
+    let data = {
+      order_date: dateString + " " + timeString,
+      order_state: "buy_ok",
+      // order_item_name: item.item_name,
+      // order_price: item.item_price,
+      // order_shop_name: shop.shop_name,
+      // order_stock: number,
+      // order_shop_id: arr[4],
+      // order_user_id: session.data.user_id,
+    };
+    console.log(data);
+    axios
+      .post("/api/orders/", data, {
+        headers: {
+          "Content-type": "application/json; charset=utf-8",
+        },
+      })
+      .then((res) => {
+        //console.log(res.data)
+        alert("해당 상품이 결재되었습니다.");
+        document.location.href = "/buylist";
+      })
+      .catch();
+  };
 
   let today = new Date();
 
@@ -201,7 +239,7 @@ export default function PersistentDrawerLeft() {
 
   let timeString = hours + ":" + minutes + ":" + seconds;
 
-  console.log(dateString + " " + timeString);
+  //console.log(dateString + " " + timeString);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -442,6 +480,7 @@ export default function PersistentDrawerLeft() {
               backgroundColor: "#A267E7",
             }}
             variant="contained"
+            onClick={buy}
           >
             <p>주문하기</p>
           </Button>

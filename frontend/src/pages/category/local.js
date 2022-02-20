@@ -18,7 +18,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { Grid } from "@mui/material";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
@@ -27,8 +26,10 @@ import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
-import ItemList from "../../components/List/item_list";
-import ShopList from "../../components/List/shop_list";
+import ItemList from "../../components/card/item_card";
+import ShopList from "../../components/card/shop_card";
+import { Container } from "@mui/material";
+import { Paper } from "@mui/material";
 
 import axios from "axios";
 
@@ -279,49 +280,110 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <Typography variant="h4" color="common.white">
-          <Link color="common.black" underline="none">
-            <p>
-              <span className="main_logo">LI.CO.</span> IN{" "}
-              {arr[4] === "seongbuck" ? "성북" : <></>}
-              {arr[4] === "yeongdeungpo" ? "영등포" : <></>}
-              {arr[4] === "jongno" ? "종로" : <></>}
-            </p>
-          </Link>
-        </Typography>
-
-        <Typography variant="h6" color="common.white">
-          <Link color="common.black" underline="none">
-            <p>
-              <span className="main_logo">LI.CO.</span> 음식점
-            </p>
-          </Link>
-        </Typography>
-        <ItemList />
-        <Typography variant="h6" color="common.white">
-          <Link color="common.black" underline="none">
-            <p>
-              <span className="main_logo">LI.CO.</span> 한복점
-            </p>
-          </Link>
-        </Typography>
-        <ItemList />
-        <Typography variant="h6" color="common.white">
-          <Link color="common.black" underline="none">
-            <p>
-              <span className="main_logo">LI.CO.</span> 공방
-            </p>
-          </Link>
-        </Typography>
-        <ItemList />
-        <Typography variant="h6" color="common.white">
-          <Link color="common.black" underline="none">
-            <p>
-              <span className="main_logo">LI.CO.</span> 기타 업종
-            </p>
-          </Link>
-        </Typography>
-        <ItemList />
+        <Paper variant="outlined" square>
+          <Container maxWidth="sx">
+            <Typography variant="h4" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> IN{" "}
+                  {arr[4] === "seongbuck" ? "성북" : <></>}
+                  {arr[4] === "yeongdeungpo" ? "영등포" : <></>}
+                  {arr[4] === "jongno" ? "종로" : <></>}
+                </p>
+              </Link>
+            </Typography>
+            <Typography variant="h6" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> 음식점
+                </p>
+              </Link>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={2}>
+                <Link
+                  href={place + "/food"}
+                  color="common.black"
+                  underline="none"
+                >
+                  전체보기
+                </Link>
+              </Grid>
+              <Grid item xs={10}>
+                <ItemList />
+              </Grid>
+            </Grid>
+            <Divider />
+            <Typography variant="h6" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> 한복점
+                </p>
+              </Link>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={2}>
+                <Link
+                  href={place + "/hanbok"}
+                  color="common.black"
+                  underline="none"
+                >
+                  전체보기
+                </Link>
+              </Grid>
+              <Grid item xs={10}>
+                <ItemList />
+              </Grid>
+            </Grid>{" "}
+            <Divider />
+            <Typography variant="h6" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> 공방
+                </p>
+              </Link>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={2}>
+                <Link
+                  href={place + "/craftshop"}
+                  color="common.black"
+                  underline="none"
+                >
+                  전체보기
+                </Link>
+              </Grid>
+              <Grid item xs={10}>
+                <ItemList />
+              </Grid>
+            </Grid>{" "}
+            <Divider />
+            <Typography variant="h6" color="common.white">
+              <Link color="common.black" underline="none">
+                <p>
+                  <span className="main_logo">LI.CO.</span> 기타 업종
+                </p>
+              </Link>
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={2}>
+                <Typography sx={{ fontSize: 18 }} align="left" underline="none">
+                  <Link
+                    href={place + "/etc"}
+                    color="common.black"
+                    underline="none"
+                  >
+                    전체보기
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={10}>
+                <ItemList />
+              </Grid>
+            </Grid>{" "}
+            <Divider />
+          </Container>
+        </Paper>
       </Main>
     </Box>
   );

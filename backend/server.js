@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
+  // origin: "https://licomarket.paas-ta.org/",
   origin: "http://localhost:3000",
   credentials: true,
 };
