@@ -329,8 +329,8 @@ font : Sans TTF
 
 형상 관리 - Github
 
-# ⚙ ERD (~ing 2022. 02. 20)
+# ⚙ ERD
 
-![image](https://user-images.githubusercontent.com/57929751/154806583-a7bdc344-de5d-4608-9626-f5510745f30d.png)
+![image](https://user-images.githubusercontent.com/57929751/154897451-2e7d5cc7-bcb8-49e4-a9f6-595adba94e7b.png)
 
 # 📑 상세기술 정의서
