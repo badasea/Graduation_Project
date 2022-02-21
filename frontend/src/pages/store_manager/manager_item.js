@@ -147,10 +147,13 @@ export default function PersistentDrawerLeft() {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = (item, e) => {
+  var openModal = (item, e) => {
     e.preventDefault();
-
     setModalOpen(true);
+
+    var session_edit = item;
+    console.log(session_edit);
+    window.sessionStorage.setItem("edit", JSON.stringify(session_edit));
   };
   // const openModal = () => {
   //   setModalOpen(true);

@@ -17,6 +17,7 @@ import Mypage from "./pages/Login/mypage";
 // 지역별 페이지
 import Local from "./pages/category/local";
 import MobileLocal from "./mobile_pages/category/local";
+import Food from "./pages/category/food";
 
 // 업종별 페이지
 import Businesstype from "./pages/category/businesstype";
@@ -62,7 +63,7 @@ function App() {
             <Route path="/mypage" element={<Mypage />}></Route>
             <Route path="/local" element={<Local />}></Route>
             <Route path="/local/:id" element={<Local />}></Route>
-            <Route path="/local/:id/food" element={<Local />}></Route>
+            <Route path="/local/:id/food" element={<Food />}></Route>
 
             <Route path="/businesstype" element={<Businesstype />}></Route>
             <Route path="/businesstype/:id" element={<Businesstype />}></Route>

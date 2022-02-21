@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 const Modal = (props) => {
   const { open, close } = props;
 
-  // const session = JSON.parse(window.sessionStorage.getItem("item"));
+  // const session = JSON.parse(window.sessionStorage.getItem("edit"));
 
   const [itemName, setItemName] = useState(props.children);
   // const [itemContent, setItemContent] = useState(session.item.item_content);

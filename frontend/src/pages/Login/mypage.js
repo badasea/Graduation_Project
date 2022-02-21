@@ -19,7 +19,6 @@ import { Container } from "@mui/material";
 import { Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useState, useEffect } from "react";
@@ -29,7 +28,6 @@ import Link from "@mui/material/Link";
 import Side from "../../components/menu/side";
 
 //
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
@@ -171,6 +169,12 @@ export default function PersistentDrawerLeft() {
   //console.log(session);
 
   const [user, setUser] = useState([]);
+  const [name, setName] = useState();
+  const [password, setPassword] = useState();
+  const [address, setAddress] = useState();
+  const [like_place, setLike_place] = useState([]);
+  const [like_type, setLike_type] = useState();
+
   function login_form() {
     const url = "/api/user/login/" + session.data.user_email;
     axios
@@ -178,6 +182,11 @@ export default function PersistentDrawerLeft() {
       .then(function (response) {
         console.log(response.data[0]);
         setUser(response.data[0]);
+        setName(response.data[0].user_name);
+        setPassword(response.data[0].user_password);
+        setAddress(response.data[0].user_address);
+        setLike_place(response.data[0].user_like_place);
+        setLike_type(response.data[0].user_like_type);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -187,6 +196,31 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     login_form();
   }, []);
+
+  // 이름
+  const onNameHandler = (event) => {
+    setName(event.currentTarget.value);
+  };
+
+  // 비밀번호
+  const onPasswordHandler = (event) => {
+    setPassword(event.currentTarget.value);
+  };
+
+  // 주소
+  const onAddressHandler = (event) => {
+    setAddress(event.currentTarget.value);
+  };
+
+  // // 관심 지역
+  // const onLike_placeHandler = (event) => {
+  //   setLike_place(event.currentTarget.value);
+  // };
+
+  // // 관심 업종
+  // const onLike_typeHandler = (event) => {
+  //   setLike_type(event.currentTarget.value);
+  // };
 
   // const place_str = session.data.user_like_place;
   // const place_arr = user.user_like_place.split(",");
@@ -378,7 +412,8 @@ export default function PersistentDrawerLeft() {
                       id="Name"
                       label="이름"
                       autoFocus
-                      defaultValue={session.data.user_name}
+                      value={name}
+                      onChange={onNameHandler}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -390,7 +425,8 @@ export default function PersistentDrawerLeft() {
                       type="password"
                       id="password"
                       autoComplete="new-password"
-                      defaultValue={session.data.user_password}
+                      value={password}
+                      onChange={onPasswordHandler}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -400,7 +436,8 @@ export default function PersistentDrawerLeft() {
                       name="address"
                       label="주소"
                       id="address"
-                      defaultValue={session.data.user_address}
+                      value={address}
+                      onChange={onAddressHandler}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -417,7 +454,6 @@ export default function PersistentDrawerLeft() {
                         value={choice_location}
                         onChange={handlelocation}
                         label="관심지역"
-                        //input={<OutlinedInput label="관심지역" />}
                         renderValue={(selected) => selected.join(", ")}
                         MenuProps={MenuProps}
                       >
