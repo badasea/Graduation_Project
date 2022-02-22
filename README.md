@@ -23,7 +23,7 @@
 
 **DB : Mysql**
 
-**Infra : Paas-Ta, AWS**
+**Infra : Paas-Ta, HEROKU**
 
 ==============================
 
@@ -87,9 +87,9 @@
 <img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
 </p>
 
-# ⚙ 시스템 아키텍처 (~ing 2022. 02. 08)
+# ⚙ 시스템 아키텍처 (~ing 2022. 02. 23)
 
-![image](https://user-images.githubusercontent.com/57929751/152846393-dfb27536-d21a-4cb7-835f-85fbd940584f.png)
+![image](https://user-images.githubusercontent.com/57929751/155181153-46ddd73d-5de5-474b-8230-75ad58677a04.png)
 
 # 📌 요구 사항 분석
 
@@ -303,7 +303,7 @@ ML : Django
 
 Package
 
-Front-End : Npm( React-router-dom,react-device-detect, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
+Front-End : Npm( React-router-dom,react-device-detect, cross-env, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
 
@@ -319,7 +319,7 @@ API 테스트 - Postman
 
 개발 운영체제 환경 - 윈도우10
 
-배포 환경 - Paas-Ta, AWS EC2
+배포 환경 - Paas-Ta, HEROKU
 
 디자인 툴 - Pigma
 
