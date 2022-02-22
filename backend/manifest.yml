@@ -5,3 +5,5 @@ applications:
     command: node server.js
     # path: /
     random-route: true
+    services:
+      - licodb

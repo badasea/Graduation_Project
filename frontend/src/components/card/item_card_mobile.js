@@ -81,7 +81,7 @@ function ShopCard() {
   const detail_shop = (shop_id, item_id, e) => {
     e.preventDefault();
     window.open(
-      "http://localhost:3000/detail_item/" + shop_id + "/" + item_id,
+      "/detail_item/" + shop_id + "/" + item_id,
       "",
       "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
     );
