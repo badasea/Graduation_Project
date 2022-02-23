@@ -22,7 +22,7 @@ function ShopCard() {
 
   const [shop, setShop] = useState([]);
   function searchshop() {
-    const url = "/api/shop";
+    const url = process.env.REACT_APP_API_URL + "/api/shop";
     axios
       .get(url)
       .then(function (response) {

@@ -176,7 +176,10 @@ export default function PersistentDrawerLeft() {
   const [like_type, setLike_type] = useState();
 
   function login_form() {
-    const url = "/api/user/login/" + session.data.user_email;
+    const url =
+      process.env.REACT_APP_API_URL +
+      "/api/user/login/" +
+      session.data.user_email;
     axios
       .get(url)
       .then(function (response) {
@@ -251,7 +254,10 @@ export default function PersistentDrawerLeft() {
     };
     console.log(user);
     axios
-      .post("/api/user/" + session.data.user_id, user)
+      .post(
+        process.env.REACT_APP_API_URL + "/api/user/" + session.data.user_id,
+        user
+      )
       .then((res) => {
         console.log(res.data);
         alert("개인 정보가 수정 되었습니다.");

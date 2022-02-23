@@ -178,7 +178,8 @@ export default function PersistentDrawerLeft() {
   }
   const [user_id, setUser_id] = useState([]);
   function searchuser() {
-    const url = "/api/shop/user/" + session.data.user_id;
+    const url =
+      process.env.REACT_APP_API_URL + "/api/shop/user/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {
@@ -203,7 +204,7 @@ export default function PersistentDrawerLeft() {
     };
     console.log(item_data);
     axios
-      .post("/api/item", item_data, {})
+      .post(process.env.REACT_APP_API_URL + "/api/item", item_data, {})
       .then((res) => {
         //console.log(res.data);
         document.location.href = "/manager_item";
@@ -214,7 +215,7 @@ export default function PersistentDrawerLeft() {
   const item_remove = (id) => {
     //console.log(item[index].itemId)
     axios
-      .delete("/api/item/" + id, {})
+      .delete(process.env.REACT_APP_API_URL + "/api/item/" + id, {})
       .then((res) => {
         document.location.href = "/manager_item";
       })
@@ -224,7 +225,8 @@ export default function PersistentDrawerLeft() {
 
   const [item, setItem] = useState([]);
   function searchitem() {
-    const url = "/api/item/shop/" + session.data.user_id;
+    const url =
+      process.env.REACT_APP_API_URL + "/api/item/shop/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {

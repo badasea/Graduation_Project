@@ -31,7 +31,7 @@ export default function SignUp() {
       user_address: data.get("address"),
     };
     axios
-      .post("/api/user", user, {})
+      .post(process.env.REACT_APP_API_URL + "/api/user", user, {})
       .then((res) => {
         console.log(res.data);
         if (res.data === undefined) {

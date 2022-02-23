@@ -47,7 +47,10 @@ export default function Google() {
             axios.post("/api/user", data).then(function (res) {
               console.log(res.data);
             });
-            var url = "/api/user/login/" + data.user_email;
+            var url =
+              process.env.REACT_APP_API_URL +
+              "/api/user/login/" +
+              data.user_email;
             axios
               .get(url)
               .then(function (response) {
@@ -144,7 +147,8 @@ const onSuccess = (response) => {
   axios.post("/api/user", data).then(function (res) {
     console.log(res.data);
   });
-  var url = "/api/user/login/" + data.user_email;
+  var url =
+    process.env.REACT_APP_API_URL + "/api/user/login/" + data.user_email;
   axios
     .get(url)
     .then(function (response) {

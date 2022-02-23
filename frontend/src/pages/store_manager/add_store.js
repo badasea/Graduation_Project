@@ -214,7 +214,7 @@ export default function PersistentDrawerLeft() {
     console.log(shop);
 
     axios
-      .post("/api/shop/", shop, {
+      .post(process.env.REACT_APP_API_URL + "/api/shop/", shop, {
         // headers: {
         //   "Content-type": "multipart/form-data; charset=utf-8",
         // },
@@ -225,11 +225,17 @@ export default function PersistentDrawerLeft() {
       })
       .catch();
     axios
-      .put("/api/user/shop/" + session.data.user_id, shop, {
-        // headers: {
-        //   "Content-type": "multipart/form-data; charset=utf-8",
-        // },
-      })
+      .put(
+        process.env.REACT_APP_API_URL +
+          "/api/user/shop/" +
+          session.data.user_id,
+        shop,
+        {
+          // headers: {
+          //   "Content-type": "multipart/form-data; charset=utf-8",
+          // },
+        }
+      )
       .then((res) => {
         //console.log(res.data);
         const session_type = "seller";

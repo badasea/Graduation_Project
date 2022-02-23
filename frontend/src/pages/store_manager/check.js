@@ -135,7 +135,8 @@ export default function PersistentDrawerLeft() {
   }
 
   function login_form() {
-    const url = "/api/shop/user/" + session.data.user_id;
+    const url =
+      process.env.REACT_APP_API_URL + "/api/shop/user/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {

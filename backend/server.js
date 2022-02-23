@@ -3,30 +3,13 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const port = process.env.PORT || 3001;
-const http = require("http");
-
-/* Prevent Sleep in Heroku Server */
-setInterval(function () {
-  http.get("https://licomarket.herokuapp.com/");
-}, 600000); // every 10 minutes
 
 app.use(morgan("dev"));
 app.use(express.static(__dirname + "/"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-//로컬
-// const corsOptions = {
-//   origin: "https://licomarket.paas-ta.org/",
-//   // origin: "http://localhost:3000",
-//   credentials: true,
-// };
-
-// 배포
 app.use(cors());
-
-// app.use(cors(corsOptions));
 
 require("dotenv").config();
 

@@ -24,7 +24,7 @@ export default function Shop() {
 
   const [shop, setShop] = useState([]);
   function searchshop() {
-    const url = "/api/shop/" + arr[4];
+    const url = process.env.REACT_APP_API_URL + "/api/shop/" + arr[4];
     axios
       .get(url)
       .then(function (response) {
@@ -38,7 +38,7 @@ export default function Shop() {
 
   const [item, setItem] = useState([]);
   function searchitem() {
-    const url = "/api/item/" + arr[4];
+    const url = process.env.REACT_APP_API_URL + "/api/item/" + arr[4];
     axios
       .get(url)
       .then(function (response) {

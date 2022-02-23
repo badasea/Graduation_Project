@@ -161,7 +161,8 @@ export default function PersistentDrawerLeft() {
 
   const [order, setOrder] = useState([]);
   function searchorder() {
-    const url = "/api/order/user/" + session.data.user_id;
+    const url =
+      process.env.REACT_APP_API_URL + "/api/order/user/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {

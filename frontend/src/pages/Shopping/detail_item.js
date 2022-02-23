@@ -26,7 +26,7 @@ export default function Shop() {
   console.log(arr[5]);
   const [item, setItem] = useState([]);
   function searchitem() {
-    const url = "/api/item/item/" + arr[5];
+    const url = process.env.REACT_APP_API_URL + "/api/item/item/" + arr[5];
     axios
       .get(url)
       .then(function (response) {
@@ -40,7 +40,7 @@ export default function Shop() {
   //console.log(item);
   const [shop, setShop] = useState([]);
   function searchshop() {
-    const url = "/api/shop/" + arr[4];
+    const url = process.env.REACT_APP_API_URL + "/api/shop/" + arr[4];
     axios
       .get(url)
       .then(function (response) {
@@ -104,7 +104,7 @@ export default function Shop() {
     };
     console.log(data);
     axios
-      .post("/api/order/", data, {
+      .post(process.env.REACT_APP_API_URL + "/api/order/", data, {
         headers: {
           "Content-type": "application/json; charset=utf-8",
         },
@@ -133,7 +133,7 @@ export default function Shop() {
     };
     console.log(data);
     axios
-      .post("/api/order/", data, {
+      .post(process.env.REACT_APP_API_URL + "/api/order/", data, {
         headers: {
           "Content-type": "application/json; charset=utf-8",
         },

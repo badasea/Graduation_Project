@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 function ItemCard() {
   const [item, setItem] = useState([]);
   function searchitem() {
-    const url = "/api/item";
+    const url = process.env.REACT_APP_API_URL + "/api/item";
     axios
       .get(url)
       .then(function (response) {

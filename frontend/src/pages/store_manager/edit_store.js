@@ -138,7 +138,8 @@ export default function PersistentDrawerLeft() {
   }
 
   function login_form() {
-    const url = "/api/shop/user/" + session.data.user_id;
+    const url =
+      process.env.REACT_APP_API_URL + "/api/shop/user/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {
@@ -240,7 +241,7 @@ export default function PersistentDrawerLeft() {
     console.log(shop);
 
     axios
-      .put("/api/shop/" + shop_id, shop, {
+      .put(process.env.REACT_APP_API_URL + "/api/shop/" + shop_id, shop, {
         // headers: {
         //   "Content-type": "multipart/form-data; charset=utf-8",
         // },

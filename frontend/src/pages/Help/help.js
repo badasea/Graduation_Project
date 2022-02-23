@@ -163,7 +163,7 @@ export default function PersistentDrawerLeft() {
 
   const [helps, setHelp] = useState([]);
   function searchhelp() {
-    const url = "/api/help/";
+    const url = process.env.REACT_APP_API_URL + "/api/help/";
     axios
       .get(url)
       .then(function (response) {

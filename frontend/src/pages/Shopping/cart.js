@@ -161,7 +161,8 @@ export default function PersistentDrawerLeft() {
   const [order, setOrder] = useState([]);
   const [total_price, setTotal_price] = useState([]);
   function searchorder() {
-    const url = "/api/order/user/" + session.data.user_id;
+    const url =
+      process.env.REACT_APP_API_URL + "/api/order/user/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {
@@ -189,7 +190,7 @@ export default function PersistentDrawerLeft() {
   const item_remove = (id) => {
     //console.log(item[index].itemId)
     axios
-      .delete("/api/order/" + id, {})
+      .delete(process.env.REACT_APP_API_URL + "/api/order/" + id, {})
       .then((res) => {
         document.location.href = "/cart";
       })
@@ -212,7 +213,7 @@ export default function PersistentDrawerLeft() {
     };
     console.log(data);
     axios
-      .post("/api/orders/", data, {
+      .post(process.env.REACT_APP_API_URL + "/api/orders/", data, {
         headers: {
           "Content-type": "application/json; charset=utf-8",
         },
