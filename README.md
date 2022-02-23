@@ -1,7 +1,8 @@
 # 👨‍🎓 Graduation_Project
 
-(제작중 DB연동 X 클라이언트 화면만 배포)
 ⛔ 모바일 화면 최적화 진행 중 ⛔
+
+(Lico market Beta. V1.0.0 )
 
 # 링크 : https://licomarket.paas-ta.org/
 
