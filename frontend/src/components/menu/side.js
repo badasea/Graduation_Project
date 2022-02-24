@@ -109,13 +109,23 @@ export default function Side() {
   const help = () => {
     document.location.href = "/help";
   };
-  function webcam() {
+
+  var webcam = (id, e) => {
+    e.preventDefault();
     window.open(
-      "http://localhost:443/12",
+      "https://licolive.paas-ta.org/" + id,
       "",
       "toolbar=no, menubar=no, resizable=yes"
     );
-  }
+  };
+
+  // function webcam(id) {
+  //   window.open(
+  //     "https://licolive.paas-ta.org/" + id,
+  //     "",
+  //     "toolbar=no, menubar=no, resizable=yes"
+  //   );
+  // }
 
   const user_type = "consumer";
 
@@ -126,7 +136,7 @@ export default function Side() {
   const session = JSON.parse(window.sessionStorage.getItem("data"));
   const session_type = JSON.parse(window.sessionStorage.getItem("type"));
 
-  //console.log(session_type);
+  console.log(session);
 
   if (session === null) {
     login = false;
@@ -355,7 +365,12 @@ export default function Side() {
                         수주 · 매출
                       </Link>
                     </ListItemButton>
-                    <ListItemButton onClick={webcam} sx={{ pl: 4 }}>
+                    <ListItemButton
+                      onClick={(e) => {
+                        webcam(session.data.shop_id, e);
+                      }}
+                      sx={{ pl: 4 }}
+                    >
                       <ListItemIcon>
                         <PodcastsIcon color="secondary" />
                       </ListItemIcon>

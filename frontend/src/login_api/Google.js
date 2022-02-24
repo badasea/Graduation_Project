@@ -101,7 +101,7 @@ export default function Google() {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             color="inherit"
-            sx={{ background: "#fff" }}
+            sx={{ background: "#F5F5F5" }}
           >
             <Avatar src="../img/google.png"></Avatar>
           </IconButton>

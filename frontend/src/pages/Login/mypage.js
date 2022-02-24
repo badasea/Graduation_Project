@@ -261,7 +261,7 @@ export default function PersistentDrawerLeft() {
       .then((res) => {
         console.log(res.data);
         alert("개인 정보가 수정 되었습니다.");
-        //document.location.href = "/";
+        document.location.href = "/mypage";
       })
       .catch();
   };
