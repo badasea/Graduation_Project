@@ -88,9 +88,9 @@
 <img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
 </p>
 
-# ⚙ 시스템 아키텍처 (~ing 2022. 02. 23)
+# ⚙ 시스템 아키텍처 (~ing 2022. 02. 26)
 
-![image](https://user-images.githubusercontent.com/57929751/155181153-46ddd73d-5de5-474b-8230-75ad58677a04.png)
+![image](https://user-images.githubusercontent.com/57929751/155839750-3819e4d5-8fe3-4a56-b697-3c7568f0e793.png)
 
 # 📌 요구 사항 분석
 
