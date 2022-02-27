@@ -38,7 +38,7 @@
 
 ## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 21일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 2월 27일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -47,14 +47,11 @@
 - a. 콘텐츠 기반 필터링 (Content-base-filterling)
 - b. 현업 필터링 CF(Collaborative Filtering)
 
-2. 도커 및 쿠버네티스 도입? :
-   프론트(react, ejs), 백(express, django) 총 4개 서버를 배포해야 하기 때문에 도커를 나누어 쿠버네티스에서 관리
+2. 데이터 베이스 이미지 처리
 
-3. 데이터 베이스 이미지 처리
+3. 마이페이지(관심지역, 관심업종 배열 화면상 출력), 장바구니 결재, 고객센터 게시물 등록,수주매출, 사이드메뉴바(방송하기)
 
-4. 네이버 로그인 리다이렉트 오류 (로그인 회원가입을 모달창에서 처리하면 url에 변화가 없기 때문에 리다이렉트 오류를 해결할 수 있을 것으로 판단 현재 로그인 잇슈는 우선순위가 낮은 관계로 우선 순위가 높은 잇슈 부터 해결하고 해당 이슈 해결 예정)
-
-5. 마이페이지(관심지역, 관심업종 배열 화면상 출력), 장바구니 결재, 고객센터 게시물 등록,수주매출, 사이드메뉴바(방송하기)
+4. 방송하기 기능 유저 네임 널값 오류 발견
 
 # 🖥 화면 정의서 (~ing)
 
@@ -100,7 +97,7 @@
 
 - Express REST API Server
 - Mysql DB 연동
-- 배포시 환경 AWS 배포
+- 배포시 환경 Heroku 배포
 - socket.io
 - 데이터 중복 제거
 
@@ -120,7 +117,7 @@
 
 ### 클라우드
 
-PaasTa, AWS 앱 배포
+PaasTa, Heroku docker 앱 배포
 
 **공통**
 
@@ -306,7 +303,7 @@ Package
 
 Front-End : Npm( React-router-dom,react-device-detect, cross-env, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
 
-Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan... )
+Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan, cloudinary, streamifier... )
 
 ML : pip(django, djangorestframework, mysqlclient, django-cors-headers, pymysql...)
 
