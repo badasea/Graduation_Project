@@ -85,7 +85,7 @@
 
 # ⚙ 시스템 아키텍처 (~ing 2022. 02. 26)
 
-![image](https://user-images.githubusercontent.com/57929751/155839750-3819e4d5-8fe3-4a56-b697-3c7568f0e793.png)
+![image](https://user-images.githubusercontent.com/57929751/156031714-8e3c0716-85ff-4770-9ca9-fbf0e578aa78.png)
 
 # 📌 요구 사항 분석
 
