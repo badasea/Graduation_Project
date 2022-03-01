@@ -1,8 +1,6 @@
 # 👨‍🎓 Graduation_Project
 
-⛔ 모바일 화면 최적화 진행 중 ⛔
-
-(Lico market Beta. V1.0.0 )
+(Lico market Beta. V1.0.2 )
 
 # 링크 : https://licomarket.paas-ta.org/
 
@@ -38,7 +36,7 @@
 
 ## ⛔ 잇슈 ⛔
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 1일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 2일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -47,9 +45,9 @@
 - a. 콘텐츠 기반 필터링 (Content-base-filterling)
 - b. 현업 필터링 CF(Collaborative Filtering)
 
-2. 마이페이지(관심지역, 관심업종 배열 화면상 출력), 장바구니 결재, 고객센터 게시물 등록,수주매출, 사이드메뉴바(방송하기)
+2. 마이페이지(관심지역, 관심업종 배열 화면상 출력,유저 프로필 사진 등록), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록),수주매출, 가게 상표 이미지 등록
 
-3. 방송하기 기능 유저 네임 널값 오류 발견
+3. 방송하기 기능 유저 네임, url 링크 NULL값 오류 발견
 
 # 🖥 화면 정의서 (~ing)
 
@@ -83,7 +81,7 @@
 <img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
 </p>
 
-# ⚙ 시스템 아키텍처 (~ing 2022. 02. 26)
+# ⚙ 시스템 아키텍처 (~ing 2022. 03. 01)
 
 ![image](https://user-images.githubusercontent.com/57929751/156031714-8e3c0716-85ff-4770-9ca9-fbf0e578aa78.png)
 
@@ -301,7 +299,7 @@ Package
 
 Front-End : Npm( React-router-dom,react-device-detect, cross-env, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
 
-Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan, cloudinary, streamifier... )
+Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan, cloudinary... )
 
 ML : pip(django, djangorestframework, mysqlclient, django-cors-headers, pymysql...)
 
