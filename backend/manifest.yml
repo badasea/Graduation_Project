@@ -1,9 +1,0 @@
----
-applications:
-  - name: test
-    instances: 1
-    command: node server.js
-    # path: /
-    random-route: true
-    services:
-      - licodb

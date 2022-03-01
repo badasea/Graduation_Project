@@ -110,7 +110,7 @@ export default function Side() {
     document.location.href = "/help";
   };
 
-  var webcam = (id, e) => {
+  const webcam = (id, e) => {
     e.preventDefault();
     window.open(
       "https://licolive.paas-ta.org/" + id,
@@ -119,6 +119,23 @@ export default function Side() {
     );
   };
 
+  const [shop, setShop] = useState([]);
+
+  function searchshop() {
+    const url = process.env.REACT_APP_API_URL + "/api/shop/user/";
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response);
+        setShop(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+  useEffect(() => {
+    searchshop();
+  }, []);
   // function webcam(id) {
   //   window.open(
   //     "https://licolive.paas-ta.org/" + id,
@@ -126,8 +143,6 @@ export default function Side() {
   //     "toolbar=no, menubar=no, resizable=yes"
   //   );
   // }
-
-  const user_type = "consumer";
 
   var login;
 

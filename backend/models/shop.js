@@ -103,4 +103,110 @@ Shop.update = function (id, shop, result) {
   );
 };
 
+// 지역 검색
+Shop.findByjongno = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_region = '종로구' and shop_business_type = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+Shop.findByseongbuck = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_region = '성북구' and shop_business_type = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+Shop.findByyeongdeungpo = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_region = '영등포구' and shop_business_type = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 업종 검색
+Shop.findByfood = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_business_type = '음식점' and shop_region = ? ",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+Shop.findBycraftshop = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_business_type = '공방' and shop_region = ? ",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+Shop.findByetc = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_business_type = '기타' and shop_region = ? ",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+Shop.findByhanbok = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_business_type = 한복 and shop_region = ? ",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
 module.exports = Shop;

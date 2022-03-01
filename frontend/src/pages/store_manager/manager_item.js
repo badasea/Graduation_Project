@@ -37,6 +37,7 @@ import Side from "../../components/menu/side";
 import axios from "axios";
 
 import Modal from "../../components/store/modal";
+import { Image, Video, Transformation } from "cloudinary-react";
 
 const drawerWidth = 240;
 
@@ -191,6 +192,21 @@ export default function PersistentDrawerLeft() {
       });
   }
 
+  var [item_img, setItem_img] = useState();
+
+  var [pre_img, setPreviewImg] = useState("");
+  const onimgHandler = (event) => {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(event.currentTarget.files[0]);
+    fileReader.onload = function (e) {
+      // console.log(e.target.result);
+      setPreviewImg(e.target.result);
+    };
+    // setItem_img(event.currentTarget.file);
+
+    //setItem_img(event.currentTarget.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -200,9 +216,13 @@ export default function PersistentDrawerLeft() {
       item_price: data.get("price"),
       item_name: data.get("Name"),
       item_content: data.get("content"),
+      // item_img: data.get("image"),
+      item_img: pre_img,
       shop_id: user_id,
     };
+
     console.log(item_data);
+
     axios
       .post(process.env.REACT_APP_API_URL + "/api/item", item_data, {})
       .then((res) => {
@@ -416,7 +436,7 @@ export default function PersistentDrawerLeft() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    <Avatar src="../img/test1.jpg"></Avatar>
+                    <Avatar src={items.item_img}></Avatar>
                   </TableCell>
                   <TableCell>
                     <p>{items.item_name}</p>
@@ -513,12 +533,18 @@ export default function PersistentDrawerLeft() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              {/* <TextField
+                type="file"
                 required
                 fullWidth
-                id="email"
-                label="이미지 등록 자리"
-                name="email"
+                id="image"
+                name="image"
+              /> */}
+              <input
+                accept="image/*"
+                type="file"
+                value={item_img}
+                onChange={onimgHandler}
               />
             </Grid>
           </Grid>

@@ -22,7 +22,7 @@ function ShopCard() {
 
   const [shop, setShop] = useState([]);
   function searchshop() {
-    const url = process.env.REACT_APP_API_URL + "/api/shop";
+    const url = process.env.REACT_APP_API_URL + "/api/shop/region/종로구/기타";
     axios
       .get(url)
       .then(function (response) {
@@ -89,7 +89,7 @@ function ShopCard() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
   };
 
@@ -100,12 +100,10 @@ function ShopCard() {
           {shop.map((shops) => (
             <div>
               <Container fixed>
-                <div class="img-wrapper">
-                  <img
-                    // style={{ width: "100%", height: "100%" }}
-                    src={shops.shop_image}
-                  />
-                </div>
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src="../img/test.jpg"
+                />
                 <Typography
                   sx={{ fontSize: 12 }}
                   align="right"

@@ -24,6 +24,58 @@ exports.findById2 = function (req, res) {
   });
 };
 
+// 지역
+exports.findByjongno = function (req, res) {
+  Shop.findByjongno(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+exports.findByseongbuck = function (req, res) {
+  Shop.findByseongbuck(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+exports.findByyeongdeungpo = function (req, res) {
+  Shop.findByyeongdeungpo(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+// 업종
+exports.findByhanbok = function (req, res) {
+  Shop.findByhanbok(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+exports.findByetc = function (req, res) {
+  Shop.findByetc(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+exports.findByfood = function (req, res) {
+  Shop.findByfood(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+exports.findBycraftshop = function (req, res) {
+  Shop.findBycraftshop(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
+// 등록
 exports.create = function (req, res) {
   const new_shop = new Shop(req.body);
   //handles null error

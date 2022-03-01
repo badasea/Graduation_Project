@@ -100,10 +100,12 @@ function ShopCard() {
           {shop.map((shops) => (
             <div>
               <Container fixed>
-                <img
-                  style={{ width: "100%", height: "100%" }}
-                  src="../img/test.jpg"
-                />
+                <div class="img-wrapper">
+                  <img
+                    // style={{ width: "100%", height: "100%" }}
+                    src={shops.shop_image}
+                  />
+                </div>
                 <Typography
                   sx={{ fontSize: 12 }}
                   align="right"

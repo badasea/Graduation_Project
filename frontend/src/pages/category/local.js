@@ -27,7 +27,11 @@ import Link from "@mui/material/Link";
 import Side from "../../components/menu/side";
 
 import ItemList from "../../components/card/item_card";
-import ShopList from "../../components/card/shop_card";
+
+import JongnoFoodList from "../../components/card/type/food/jongno";
+import YeongdeungpoFoodList from "../../components/card/type/food/yeongdeungpo";
+import SeongbuckFoodList from "../../components/card/type/food/seongbuck";
+
 import { Container } from "@mui/material";
 import { Paper } from "@mui/material";
 
@@ -310,7 +314,10 @@ export default function PersistentDrawerLeft() {
                 </Link>
               </Grid>
               <Grid item xs={10}>
-                <ItemList />
+                {/* {arr[4] === "seongbuck" ? <SeongbuckFoodList /> : <div></div>} */}
+                {/* {arr[4] === "yeongdeungpo" ? <YeongdeungpoFoodList /> : <></>} */}
+                {/* {arr[4] === "jongno" ? <JongnoFoodList /> : <></>} */}
+                {/* <ItemList /> */}
               </Grid>
             </Grid>
             <Divider />

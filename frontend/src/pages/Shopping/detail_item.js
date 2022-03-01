@@ -176,10 +176,7 @@ export default function Shop() {
             //alignItems: "center",
           }}
         >
-          <img
-            style={{ width: "100%", height: "100%" }}
-            src="../../img/test1.jpg"
-          />
+          <img style={{ width: "100%", height: "100%" }} src={item.item_img} />
           <Typography sx={{ fontSize: 24 }} align="left" underline="none">
             <p>{item.item_name}</p>
           </Typography>
