@@ -14,7 +14,6 @@ import Divider from "@mui/material/Divider";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import "./index.css";
 
 const theme = createTheme();
 
@@ -278,12 +277,10 @@ export default function Shop() {
                   </Grid>
                 </Grid>
                 <Grid item xs={6}>
-                  <div class="img-wrapper">
-                    <img
-                      // style={{ width: "100%", height: "100%" }}
-                      src={items.item_img}
-                    />
-                  </div>
+                  <img
+                    style={{ width: "100%", height: "100%" }}
+                    src={items.item_img}
+                  />
                 </Grid>
               </Grid>
               <br />
