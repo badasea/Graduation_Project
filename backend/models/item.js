@@ -16,26 +16,14 @@ let Item = function (item) {
 
 // 모든 상품 검색
 Item.findAll = function (result) {
-  mysql.query("Select * from item", function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-    } else {
-      //console.log("employees : ", res);
-      result(null, res);
-    }
-  });
-};
-
-// 특정 가게와 상품 검색
-Item.findShop = function (result) {
   mysql.query(
-    "Select * from item t1, shop t2 where t1.shop_id = t2.shop_id",
+    "Select t1.*, t2.*,t3.user_img from item t1, shop t2, user t3 where t1.shop_id = t2.shop_id and t2.user_id = t3.user_id",
     function (err, res) {
       if (err) {
         console.log("error: ", err);
         result(null, err);
       } else {
+        //console.log("employees : ", res);
         result(null, res);
       }
     }

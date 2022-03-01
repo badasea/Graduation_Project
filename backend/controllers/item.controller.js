@@ -32,17 +32,11 @@ exports.findId = function (req, res) {
   });
 };
 
-exports.findShop = function (req, res) {
-  Item.findShop(function (err, item) {
-    if (err) res.send(err);
-    console.log("res", item);
-    res.send(item);
-  });
-};
-
 exports.create = async function (req, res) {
   const img = await cloudinary.v2.uploader.upload(req.body.item_img, {
     folder: "item/",
+    width: 4032,
+    height: 3024,
   });
   console.log("test :", img);
 

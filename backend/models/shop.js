@@ -18,15 +18,18 @@ let Shop = function (shop) {
 
 // 모든 가게 검색
 Shop.findAll = function (result) {
-  mysql.query("Select * from shop", function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-    } else {
-      console.log("employees : ", res);
-      result(null, res);
+  mysql.query(
+    "Select t2.*,t3.user_img from shop t2, user t3 where t2.user_id = t3.user_id",
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        console.log("employees : ", res);
+        result(null, res);
+      }
     }
-  });
+  );
 };
 
 // 특정 가게 검색
@@ -209,4 +212,20 @@ Shop.findByhanbok = function (id, result) {
     }
   );
 };
+
+Shop.findByhanbok = function (id, result) {
+  mysql.query(
+    "Select * from shop where shop_business_type = 한복 and shop_region = ? ",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 module.exports = Shop;

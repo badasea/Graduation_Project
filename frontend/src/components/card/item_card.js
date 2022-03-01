@@ -52,7 +52,7 @@ function ShopCard() {
       });
   }
 
-  //console.log(item);
+  console.log(item);
 
   useEffect(() => {
     searchitem();
@@ -102,9 +102,10 @@ function ShopCard() {
           {item.map((items) => (
             <div>
               <Container fixed>
-                <div class="img-wrapper">
-                  <img src={items.item_img} />
-                </div>
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src={items.item_img}
+                />
                 <Typography
                   sx={{ fontSize: 13 }}
                   align="right"
@@ -118,7 +119,12 @@ function ShopCard() {
 
                 <Stack direction="row" spacing={2}>
                   <Avatar
-                    sx={{ width: 24, height: 24, bgcolor: deepPurple[500] }}
+                    src={items.user_img}
+                    sx={{
+                      width: 24,
+                      height: 24,
+                      bgcolor: deepPurple[500],
+                    }}
                   ></Avatar>
                   <Typography
                     sx={{ fontSize: 14 }}
