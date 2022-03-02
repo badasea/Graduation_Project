@@ -246,6 +246,6 @@ io.sockets.on("connection", (socket) => {
   });
 });
 
-server.listen(process.env.PORT || 8080, () => {
+server.listen(process.env.PORT || 3002, () => {
   console.log("server running on 8080");
 });
