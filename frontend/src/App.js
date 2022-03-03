@@ -1,5 +1,7 @@
 // import axios from "axios";
 import * as React from "react";
+import "./styles/video.css";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { BrowserView, MobileView } from "react-device-detect";
 
@@ -50,6 +52,7 @@ import Help from "./pages/Help/help";
 
 // 테스트
 import Test from "./pages/test";
+import Video from "./pages/webcam";
 
 function App() {
   return (
@@ -100,6 +103,7 @@ function App() {
             <Route path="/help" element={<Help />}></Route>
 
             <Route path="/test" exact element={<Test />}></Route>
+            <Route path="/webcam/:roomId" element={<Video />} />
           </Routes>
         </BrowserRouter>
       </BrowserView>
@@ -150,6 +154,7 @@ function App() {
             <Route path="/help" element={<Help />}></Route>
 
             <Route path="/test" exact element={<Test />}></Route>
+            <Route path="/webcam/:roomId" element={<Video />} />
           </Routes>
         </BrowserRouter>
       </MobileView>

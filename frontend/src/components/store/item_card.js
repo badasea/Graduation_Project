@@ -39,7 +39,7 @@ function ItemCard() {
   const webcam = (id, e) => {
     e.preventDefault();
     window.open(
-      "https://licolive.paas-ta.org/" + id,
+      "/webcam/" + id,
       "",
       "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
     );

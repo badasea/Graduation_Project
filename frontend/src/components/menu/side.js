@@ -112,11 +112,7 @@ export default function Side() {
 
   const webcam = (id, e) => {
     e.preventDefault();
-    window.open(
-      "https://licolive.paas-ta.org/" + id,
-      "",
-      "toolbar=no, menubar=no, resizable=yes"
-    );
+    window.open("/webcam/" + id, "", "toolbar=no, menubar=no, resizable=yes");
   };
 
   const [shop, setShop] = useState([]);
@@ -136,13 +132,6 @@ export default function Side() {
   useEffect(() => {
     searchshop();
   }, []);
-  // function webcam(id) {
-  //   window.open(
-  //     "https://licolive.paas-ta.org/" + id,
-  //     "",
-  //     "toolbar=no, menubar=no, resizable=yes"
-  //   );
-  // }
 
   var login;
 
@@ -382,7 +371,7 @@ export default function Side() {
                     </ListItemButton>
                     <ListItemButton
                       onClick={(e) => {
-                        webcam(session.data.shop_id, e);
+                        webcam(session.data.user_id, e);
                       }}
                       sx={{ pl: 4 }}
                     >

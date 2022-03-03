@@ -1,37 +1,34 @@
-const express = require("express");
-const app = express();
-const server = require("http").Server(app);
-const { v4: uuidv4 } = require("uuid");
-app.set("view engine", "ejs");
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
-});
-const { ExpressPeerServer } = require("peer");
-const peerServer = ExpressPeerServer(server, {
-  debug: true,
-});
+var app = require("express")();
+var server = require("http").Server(app);
+var io = require("socket.io")(server);
 
-app.use("/peerjs", peerServer);
-app.use(express.static("public"));
+server.listen(process.env.PORT || 3002);
 
-app.get("/", (req, res) => {
-  res.redirect(`/${uuidv4()}`);
-});
-
-app.get("/:room", (req, res) => {
-  res.render("room", { roomId: req.params.room });
-});
-
-io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId, userName) => {
-    socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected", userId);
-    socket.on("message", (message) => {
-      io.to(roomId).emit("createMessage", message, userName);
-    });
+io.on("connection", function (socket) {
+  socket.on("join", function (data) {
+    socket.join(data.roomId);
+    socket.room = data.roomId;
+    console.log(data.roomId);
+    const sockets = io.of("/").in().adapter.rooms[data.roomId];
+    if (sockets.length === 1) {
+      socket.emit("init");
+    } else {
+      if (sockets.length === 2) {
+        io.to(data.roomId).emit("ready");
+      } else {
+        socket.room = null;
+        socket.leave(data.roomId);
+        socket.emit("full");
+      }
+    }
+  });
+  socket.on("signal", (data) => {
+    io.to(data.room).emit("desc", data.desc);
+  });
+  socket.on("disconnect", () => {
+    const roomId = Object.keys(socket.adapter.rooms)[0];
+    if (socket.room) {
+      io.to(socket.room).emit("disconnected");
+    }
   });
 });
-
-server.listen(process.env.PORT || 443);

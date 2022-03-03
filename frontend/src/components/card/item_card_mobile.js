@@ -58,21 +58,11 @@ function ShopCard() {
     searchitem();
   }, []);
 
-  // 로컬
-  // const webcam = (id, e) => {
-  //   e.preventDefault();
-  //   window.open(
-  //     "http://localhost:443/" + id,
-  //     "",
-  //     "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
-  //   );
-  // };
-
   // 배포
   const webcam = (id, e) => {
     e.preventDefault();
     window.open(
-      "https://licolive.paas-ta.org/" + id,
+      "/webcam/" + id,
       "",
       "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
     );
@@ -116,7 +106,7 @@ function ShopCard() {
                   underline="none"
                 >
                   <p>
-                    {items.shop_name} · {items.shop_business_type}
+                    {items.shop_address} · {items.shop_business_type}
                   </p>
                 </Typography>
 
@@ -131,7 +121,7 @@ function ShopCard() {
                     gutterBottom
                   >
                     <Link color="common.black" underline="none">
-                      {items.shop_address}
+                      {items.shop_name}
                     </Link>
                   </Typography>
                 </Stack>
@@ -179,7 +169,7 @@ function ShopCard() {
                       }}
                       variant="contained"
                       onClick={(e) => {
-                        webcam(items.shop_id, e);
+                        webcam(items.user_id, e);
                       }}
                     >
                       <p>방송보기</p>
