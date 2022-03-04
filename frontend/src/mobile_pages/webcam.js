@@ -3,12 +3,13 @@ import VideoCall from "../components/video/access/simple-peer";
 import "../styles/video.css";
 import io from "socket.io-client";
 import { getDisplayStream } from "../components/video/access/media-access";
-import {
-  MicOnIcon,
-  MicOffIcon,
-  CamOnIcon,
-  CamOffIcon,
-} from "../components/video/Icons";
+
+import MicOnIcon from "@mui/icons-material/KeyboardVoice";
+import MicOffIcon from "@mui/icons-material/MicOff";
+import CamOnIcon from "@mui/icons-material/Videocam";
+import CamOffIcon from "@mui/icons-material/VideocamOff";
+
+import Grid from "@mui/material/Grid";
 
 const place = window.location.href;
 var arr = place.split("/");
@@ -37,14 +38,14 @@ class Video extends React.Component {
     this.setState({ socket });
     const { roomId } = arr[4];
     this.getUserMedia().then(() => {
-      socket.emit("join", { roomId: roomId });
+      socket.emit("join", { roomId: arr[4] });
     });
 
     socket.on("init", () => {
       component.setState({ initiator: true });
     });
     socket.on("ready", () => {
-      component.enter(roomId);
+      component.enter(arr[4]);
     });
     socket.on("desc", (data) => {
       if (data.type === "offer" && component.state.initiator) return;
@@ -179,7 +180,11 @@ class Video extends React.Component {
               this.setAudioLocal();
             }}
           >
-            {this.state.micState ? <MicOnIcon /> : <MicOffIcon />}
+            {this.state.micState ? (
+              <MicOnIcon color="secondary" fontSize="large" />
+            ) : (
+              <MicOffIcon color="secondary" fontSize="large" />
+            )}
           </button>
 
           <button
@@ -188,21 +193,28 @@ class Video extends React.Component {
               this.setVideoLocal();
             }}
           >
-            {this.state.camState ? <CamOnIcon /> : <CamOffIcon />}
+            {this.state.camState ? (
+              <CamOnIcon color="secondary" fontSize="large" />
+            ) : (
+              <CamOffIcon color="secondary" fontSize="large" />
+            )}
           </button>
         </div>
 
         {this.state.connecting && (
-          <div className="status">
+          <div className="status_mobile">
             <p>사장님과 소통을 시작합니다.</p>
           </div>
         )}
         {this.state.waiting && (
-          <div className="status">
-            <p>다른 이용자와 거래 중이나 혹은 사장님께서 준비중입니다.</p>
+          <div className="status_mobile">
+            <p>잠시만 기다려주세요.</p>
           </div>
         )}
         {this.renderFull()}
+        <div>
+          {this.state.connecting || this.state.waiting ? "hide" : <p>test</p>}
+        </div>
       </div>
     );
   }

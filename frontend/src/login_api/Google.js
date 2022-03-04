@@ -55,7 +55,6 @@ export default function Google() {
               .get(url)
               .then(function (response) {
                 console.log(response.data);
-                setCookie("cookie", response.data[0].user_name, 1);
                 const session = response.data[0];
                 const userObj = { data: session };
                 window.sessionStorage.setItem("data", JSON.stringify(userObj));
@@ -153,7 +152,6 @@ const onSuccess = (response) => {
     .get(url)
     .then(function (response) {
       console.log(response.data);
-      setCookie("cookie", response.data[0].user_name, 1);
       const session = response.data[0];
       const userObj = { data: session };
       window.sessionStorage.setItem("data", JSON.stringify(userObj));
@@ -163,13 +161,6 @@ const onSuccess = (response) => {
       //console.log("실패");
     });
 };
-
-function setCookie(name, value, exp) {
-  var date = new Date();
-  date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-  document.cookie =
-    name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
-}
 
 // export default function GoogleLoginBtn({ onGoogleLogin }) {
 //   const onSuccess = (response) => {

@@ -50,9 +50,12 @@ import Ordersales from "./pages/store_manager/order_sales";
 // 고객 센터
 import Help from "./pages/Help/help";
 
+// 소통
+import Video from "./pages/communication/webcam";
+import MobileVideo from "./mobile_pages/webcam";
+
 // 테스트
 import Test from "./pages/test";
-import Video from "./pages/webcam";
 
 function App() {
   return (
@@ -154,7 +157,7 @@ function App() {
             <Route path="/help" element={<Help />}></Route>
 
             <Route path="/test" exact element={<Test />}></Route>
-            <Route path="/webcam/:roomId" element={<Video />} />
+            <Route path="/webcam/:roomId" element={<MobileVideo />} />
           </Routes>
         </BrowserRouter>
       </MobileView>

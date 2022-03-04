@@ -9,3 +9,12 @@ services:
       - "3001:3001"
     networks:
       - docker-net
+  webcam:
+    build:
+      context: ./webcam
+    environment:
+      - PORT=3002
+    ports:
+      - "3002:3002"
+    networks:
+      - docker-net

@@ -17,7 +17,7 @@
   background: transparent;
   margin: 0 auto;
   display: block;
-  max-width: 100vw;
+  max-width: 60vw;
   height: 100%;
 }
 #remoteVideo.hide {
@@ -29,6 +29,15 @@
   align-items: center;
   color: #a267e7;
   height: 100vh;
+}
+
+.video-wrapper .status_mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a267e7;
+  height: 100vh;
+  font-size: 20px;
 }
 
 .controls {
@@ -44,7 +53,7 @@
   border: none;
   box-shadow: 1px 1px 8px black;
   border-radius: 50%;
-  background-color: #252839;
+  background-color: #fff;
   height: 64px;
   width: 64px;
 }

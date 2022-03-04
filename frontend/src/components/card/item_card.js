@@ -64,7 +64,7 @@ function ShopCard() {
     window.open(
       "/webcam/" + id,
       "",
-      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
+      "width=1200, height=1200, toolbar=no, menubar=no, resizable=yes"
     );
   };
 

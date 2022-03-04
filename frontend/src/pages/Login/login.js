@@ -46,7 +46,6 @@ export default function SignInSide() {
           res.data[0].user_password === user.password
         ) {
           alert(res.data[0].user_name + "님 환영합니다.");
-          setCookie("cookie", res.data[0].user_email, 1);
           const session = res.data[0];
           const userObj = { data: session };
           window.sessionStorage.setItem("data", JSON.stringify(userObj));
@@ -64,13 +63,6 @@ export default function SignInSide() {
         //console.log("실패");
       });
   };
-
-  function setCookie(name, value, exp) {
-    var date = new Date();
-    date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-    document.cookie =
-      name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
-  }
 
   return (
     <ThemeProvider theme={theme}>

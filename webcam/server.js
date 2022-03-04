@@ -8,10 +8,10 @@ io.on("connection", function (socket) {
   socket.on("join", function (data) {
     socket.join(data.roomId);
     socket.room = data.roomId;
-    console.log(data.roomId);
     const sockets = io.of("/").in().adapter.rooms[data.roomId];
     if (sockets.length === 1) {
       socket.emit("init");
+      // console.log(data.roomId);
     } else {
       if (sockets.length === 2) {
         io.to(data.roomId).emit("ready");
@@ -32,3 +32,5 @@ io.on("connection", function (socket) {
     }
   });
 });
+
+// chat
