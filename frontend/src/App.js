@@ -52,7 +52,7 @@ import Help from "./pages/Help/help";
 
 // 소통
 import Video from "./pages/communication/webcam";
-import MobileVideo from "./mobile_pages/webcam";
+import MobileVideo from "./mobile_pages/communication/webcam";
 
 // 테스트
 import Test from "./pages/test";

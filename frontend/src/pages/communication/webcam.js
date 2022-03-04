@@ -156,7 +156,7 @@ class Video extends React.Component {
   };
   render() {
     return (
-      <Grid container spacing={0.1}>
+      <Grid container>
         <Grid item xs={9}>
           <div className="video-wrapper">
             <div className="local-video-wrapper">
@@ -222,9 +222,7 @@ class Video extends React.Component {
         </Grid>
         <Grid item xs={3}>
           <div className="video-wrapper">
-            <div className="status">
-              <Chat />
-            </div>
+            <Chat />
           </div>
         </Grid>
       </Grid>

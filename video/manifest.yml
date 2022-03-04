@@ -1,0 +1,6 @@
+applications:
+  - name: bada
+    instances: 1
+    command: node server.js
+    # path: /
+    random-route: true

@@ -1,15 +1,19 @@
-import React from "react";
-import VideoCall from "../components/video/access/simple-peer";
-import "../styles/video.css";
+import React, { useState } from "react";
+import VideoCall from "../../components/video/access/simple-peer";
+import "../../styles/video.css";
 import io from "socket.io-client";
-import { getDisplayStream } from "../components/video/access/media-access";
+import { getDisplayStream } from "../../components/video/access/media-access";
+
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
 
 import MicOnIcon from "@mui/icons-material/KeyboardVoice";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import CamOnIcon from "@mui/icons-material/Videocam";
 import CamOffIcon from "@mui/icons-material/VideocamOff";
+import ChatIcon from "@mui/icons-material/Chat";
 
-import Grid from "@mui/material/Grid";
+import Chat from "./chat";
 
 const place = window.location.href;
 var arr = place.split("/");
@@ -153,6 +157,20 @@ class Video extends React.Component {
       return "The room is full";
     }
   };
+
+  state = {
+    openModal: false,
+  };
+
+  onClickButton = (e) => {
+    e.preventDefault();
+    this.setState({ openModal: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ openModal: false });
+  };
+
   render() {
     return (
       <div className="video-wrapper">
@@ -199,22 +217,31 @@ class Video extends React.Component {
               <CamOffIcon color="secondary" fontSize="large" />
             )}
           </button>
+
+          <button className="control-btn" onClick={this.onClickButton}>
+            <ChatIcon color="secondary" fontSize="large" />
+          </button>
+          <Modal
+            showCloseIcon="false"
+            open={this.state.openModal}
+            onClose={this.onCloseModal}
+          >
+            <Chat />
+            {/* <h1>You Did it!</h1> */}
+          </Modal>
         </div>
 
         {this.state.connecting && (
-          <div className="status_mobile">
+          <div className="status">
             <p>사장님과 소통을 시작합니다.</p>
           </div>
         )}
         {this.state.waiting && (
-          <div className="status_mobile">
+          <div className="status">
             <p>잠시만 기다려주세요.</p>
           </div>
         )}
         {this.renderFull()}
-        <div>
-          {this.state.connecting || this.state.waiting ? "hide" : <p>test</p>}
-        </div>
       </div>
     );
   }

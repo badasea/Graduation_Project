@@ -9,12 +9,21 @@ services:
       - "3001:3001"
     networks:
       - docker-net
-  webcam:
+  video:
     build:
-      context: ./webcam
+      context: ./video
     environment:
       - PORT=3002
     ports:
       - "3002:3002"
+    networks:
+      - docker-net
+  chat:
+    build:
+      context: ./chat
+    environment:
+      - PORT=3003
+    ports:
+      - "3003:3003"
     networks:
       - docker-net

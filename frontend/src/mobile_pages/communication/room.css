@@ -1,5 +1,6 @@
 .chat-room-container {
   position: fixed;
+  left: 0;
   right: 0;
   top: 0;
   bottom: 0;
@@ -28,7 +29,7 @@
   height: 10%;
   max-height: 30%;
   font-size: 20px;
-  padding: 2px 5px;
+  padding: 10px 15px;
   resize: none;
 }
 
