@@ -45,7 +45,7 @@
 - a. 콘텐츠 기반 필터링 (Content-base-filterling)
 - b. 현업 필터링 CF(Collaborative Filtering)
 
-2. 마이페이지(관심지역, 관심업종 배열 화면상 출력,유저 프로필 사진 등록), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록),수주매출, 가게 상표 이미지 등록
+2. 마이페이지(관심지역, 관심업종 배열 화면상 출력,유저 프로필 사진 등록), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록 기능),수주매출 기능, 가게 상표 이미지 등록기능
 
 3. 방송하기 채팅 미구현
 
@@ -53,35 +53,67 @@
 
 # 🖥 화면 정의서 (~ing)
 
+## 메인 화면
+
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/57929751/156719229-48c903da-c435-45fc-b201-90654bbfffc5.gif)
+
+<details>
+    <summary>스케치</summary>
 <p float="left">
-<img src="https://user-images.githubusercontent.com/57929751/151015623-50ecfb69-2870-482f-9f03-655abe4dbbb1.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/156716638-77bfde2e-edb1-476d-a654-1a3dae00867d.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016314-5ac30596-5be5-47ad-a5cb-1819b7637818.png" width="30%" height="30%" >
-<img src="https://user-images.githubusercontent.com/57929751/152172172-eb4f7782-31ca-4fed-bbbe-6ddc77369138.png" width="30%" height="30%" >
-
 <img src="https://user-images.githubusercontent.com/57929751/151016433-86564773-eb04-42db-9c93-7d2a0f2fb929.png" width="30%" height="30%" >
-<img src="https://user-images.githubusercontent.com/57929751/151016613-100fb215-9d1d-4696-9e03-3e5e63cab62d.png" width="30%" height="30%" >
+
+<img src="https://user-images.githubusercontent.com/57929751/156716785-aeb6bc26-f931-4796-ac30-e6a2e445c5ba.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/151016734-d56cb802-6a51-49fc-a609-46b14c75688c.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/156716938-4fe19c18-8117-4508-a9b0-dc810a970921.png" width="30%" height="30%" >
 
+<img src="https://user-images.githubusercontent.com/57929751/156717031-b803b8c1-a53a-4c43-bd95-8824e26ddecf.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/156717154-9d7cb397-2638-4a85-87be-f0374bd502de.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/156717079-f3028f64-52d6-4929-8072-bb64cafce9a3.png" width="30%" height="30%" >
+
+<img src="https://user-images.githubusercontent.com/57929751/156717273-bd2d729f-1b76-493b-924d-076dbd488d68.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/156717291-23af238d-ff24-45b7-86ec-c9c04c7d95be.png" width="30%" height="30%" >
 </p>
-메인 화면
+</details>
+<br/>
+<details>
+    <summary>Figma</summary>
 
-![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/57929751/152551442-bf7052fc-9ebb-435d-8b4c-ba739a3c0620.gif)
+![image](https://user-images.githubusercontent.com/57929751/156715085-5339ddfa-b995-426b-a0d3-7ccd8831d9c3.png)
 
-가게, 상품 상세 페이지
+</details>
+<br/>
+<details>
+    <summary>로그인, 회원가입 상세 페이지</summary>
 
 <p float="left">
+<img src="https://user-images.githubusercontent.com/57929751/156719451-b5182ab7-93ce-47ce-82a4-cd793e4c7836.png" width="30%" height="30%" >
+<img src="https://user-images.githubusercontent.com/57929751/156719564-410ebd21-90cc-420e-9601-9b15456ac02a.png" width="30%" height="30%" >
+</p>
+    
+</details>
+<br/>
+<details>
+    <summary>가게, 상품 상세 페이지</summary>
+    <p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/152690359-0691edf4-692f-402b-8d3e-90ce7f77a30f.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152691342-f3ce8b84-30f2-445f-bc3d-52a5be72c2ff.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152692533-9df1cbb2-bb24-4ae6-b00c-a922ef876ea2.png" width="30%" height="30%" >
 </p>
-
-가게 관리 수주 매출 페이지
+</details>
+<br/>
+<details>
+    <summary>가게 관리 수주 매출 페이지</summary>
 
 <p float="left">
 <img src="https://user-images.githubusercontent.com/57929751/152842842-43cde642-2db2-49c9-b412-5b2d4b27c037.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152842915-09615471-918c-4ab7-8858-4711b656a6fc.png" width="30%" height="30%" >
 <img src="https://user-images.githubusercontent.com/57929751/152842948-4ae34455-d4ca-4479-98e0-288efa362710.png" width="30%" height="30%" >
 </p>
+</details>
+<br/>
+<br/>
 
 # ⚙ 시스템 아키텍처 (~ing 2022. 03. 01)
 
