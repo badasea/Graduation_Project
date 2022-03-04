@@ -131,9 +131,9 @@ PC - Mobile(Android) web
 <br/>
 <br/>
 
-# ⚙ 시스템 아키텍처 (~ing 2022. 03. 01)
+# ⚙ 시스템 아키텍처 (~ing 2022. 03. 05)
 
-![image](https://user-images.githubusercontent.com/57929751/156031714-8e3c0716-85ff-4770-9ca9-fbf0e578aa78.png)
+![image](https://user-images.githubusercontent.com/57929751/156815724-1af5365b-20a3-4206-ad44-97057b6a77f7.png)
 
 # 📌 요구 사항 분석
 
