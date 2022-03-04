@@ -36,6 +36,14 @@
 
 ## ⛔ 잇슈 ⛔
 
+구글 로그인 브라우저 호환 잇슈 (403 error)
+
+- 현재 접근 가능한 브라우저
+  (마이크로엣지, 삼성인터넷)
+
+- 접근 불가능한 브라우저
+  (크롬, 사파리, 카카오에서 앱 로그인시)
+
 ### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 4일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
@@ -47,9 +55,7 @@
 
 2. 마이페이지(관심지역, 관심업종 배열 화면상 출력,유저 프로필 사진 등록), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록 기능),수주매출 기능, 가게 상표 이미지 등록기능
 
-3. 방송하기 채팅 미구현
-
-4. docker Compose 묶기
+3. docker Compose 묶기
 
 # 🖥 화면 정의서 (~ing)
 
@@ -94,6 +100,18 @@
     
 </details>
 <br/>
+<details>
+    <summary>소통하기</summary>
+<p float="left">
+PC - Mobile(Android) web
+
+<img src="https://user-images.githubusercontent.com/57929751/156728705-31285299-091e-4a22-b326-d04e5a27bdcd.gif" width="50%" height="50%" >
+<img src="https://user-images.githubusercontent.com/57929751/156728922-b6823df3-5960-4161-8d33-de01cd80420f.gif" width="30%" height="30%" >
+
+</p>
+
+</details>
+<br/>   
 <details>
     <summary>가게, 상품 상세 페이지</summary>
     <p float="left">
