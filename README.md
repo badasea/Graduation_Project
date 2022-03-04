@@ -1,6 +1,6 @@
 # 👨‍🎓 Graduation_Project
 
-(Lico market Beta. V1.0.2 )
+(Lico market Beta. V1.1.1 )
 
 # 링크 : https://licomarket.paas-ta.org/
 
@@ -44,7 +44,7 @@
 - 접근 불가능한 브라우저
   (크롬, 사파리, 카카오에서 앱 로그인시)
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 4일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 5일 기준)
 
 1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘
 
@@ -54,8 +54,6 @@
 - b. 현업 필터링 CF(Collaborative Filtering)
 
 2. 마이페이지(관심지역, 관심업종 배열 화면상 출력,유저 프로필 사진 등록), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록 기능),수주매출 기능, 가게 상표 이미지 등록기능
-
-3. docker Compose 묶기
 
 # 🖥 화면 정의서 (~ing)
 
@@ -346,6 +344,8 @@ Front-End : REACT(Spring Maven)
 Back-End : Express(Node.js v16.13.1)
 
 ML : Django
+
+Dev.Ops : Docker, Docker Compose
 
 Package
 
