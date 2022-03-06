@@ -2,23 +2,27 @@ import React from "react";
 
 import "./room.css";
 import useChat from "./useChat";
-import Grid from "@mui/material/Grid";
 import SendIcon from "@mui/icons-material/Send";
 
 const ChatRoom = (props) => {
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
   const place = window.location.href;
   var arr = place.split("/");
 
   const { roomId } = arr[4];
   const { messages, sendMessage } = useChat(arr[4]);
+
   const [newMessage, setNewMessage] = React.useState("");
+  const [newuser, setNewUser] = React.useState("");
 
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
+    setNewUser(session.data.user_name);
   };
 
   const handleSendMessage = () => {
-    sendMessage(newMessage);
+    sendMessage(newuser + " : " + newMessage);
     setNewMessage("");
   };
 
@@ -37,7 +41,7 @@ const ChatRoom = (props) => {
                 message.ownedByCurrentUser ? "my-message" : "received-message"
               }`}
             >
-              {message.body} : {message.body}
+              {message.body}
             </li>
           ))}
         </ol>

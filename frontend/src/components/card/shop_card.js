@@ -83,6 +83,14 @@ function ShopCard() {
     slidesToScroll: 1,
   };
 
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+  var login;
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
   return (
     <div className="app">
       <div className="flex">
@@ -141,34 +149,66 @@ function ShopCard() {
                 >
                   <p>{shops.shop_content}</p>
                 </Typography>
-                <Grid container spacing={3}>
-                  <Grid item xs={6}>
-                    <Button
-                      onClick={(e) => {
-                        detail_shop(shops.shop_id, e);
-                      }}
-                      fullWidth
-                      color="secondary"
-                      variant="outlined"
-                    >
-                      <p>가게 입장하기</p>
-                    </Button>
+                {login === false ? (
+                  <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                      <Button
+                        onClick={(e) => {
+                          detail_shop(shops.shop_id, e);
+                        }}
+                        fullWidth
+                        color="secondary"
+                        variant="outlined"
+                      >
+                        <p>가게 입장하기</p>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button
+                        disabled
+                        onClick={(e) => {
+                          webcam(shops.user_id, e);
+                        }}
+                        fullWidth
+                        sx={{
+                          backgroundColor: "#A267E7",
+                        }}
+                        variant="contained"
+                      >
+                        <p>로그인 후 소통해보세요.</p>
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={6}>
-                    <Button
-                      onClick={(e) => {
-                        webcam(shops.user_id, e);
-                      }}
-                      fullWidth
-                      sx={{
-                        backgroundColor: "#A267E7",
-                      }}
-                      variant="contained"
-                    >
-                      <p>방송보기</p>
-                    </Button>
+                ) : (
+                  <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                      <Button
+                        onClick={(e) => {
+                          detail_shop(shops.shop_id, e);
+                        }}
+                        fullWidth
+                        color="secondary"
+                        variant="outlined"
+                      >
+                        <p>가게 입장하기</p>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Button
+                        onClick={(e) => {
+                          webcam(shops.user_id, e);
+                        }}
+                        fullWidth
+                        sx={{
+                          backgroundColor: "#A267E7",
+                        }}
+                        variant="contained"
+                      >
+                        <p>방송보기</p>
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
+                )}
               </Container>
             </div>
           ))}

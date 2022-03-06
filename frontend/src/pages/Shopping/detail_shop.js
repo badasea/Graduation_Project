@@ -75,6 +75,16 @@ export default function Shop() {
   //   document.location.href = "/detail_item/12";
   // };
 
+  const session = JSON.parse(window.sessionStorage.getItem("data"));
+
+  var login;
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="fixed" style={{ background: "#fff" }}>
@@ -204,18 +214,38 @@ export default function Shop() {
             </Grid>
           </Grid>
           <br />
-          <Button
-            fullWidth
-            sx={{
-              backgroundColor: "#A267E7",
-            }}
-            variant="contained"
-            onClick={(e) => {
-              webcam(shop.user_id, e);
-            }}
-          >
-            <p>LIVE 방송 보러 가기</p>
-          </Button>
+          {login === true ? (
+            <div>
+              <Button
+                fullWidth
+                sx={{
+                  backgroundColor: "#A267E7",
+                }}
+                variant="contained"
+                onClick={(e) => {
+                  webcam(shop.user_id, e);
+                }}
+              >
+                <p>LIVE 방송 보러 가기</p>
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Button
+                disabled
+                fullWidth
+                sx={{
+                  backgroundColor: "#A267E7",
+                }}
+                variant="contained"
+                onClick={(e) => {
+                  webcam(shop.user_id, e);
+                }}
+              >
+                <p>로그인 후 소통해보세요.</p>
+              </Button>
+            </div>
+          )}
           <br />
           <Divider />
           <Typography sx={{ fontSize: 24 }} align="left" underline="none">

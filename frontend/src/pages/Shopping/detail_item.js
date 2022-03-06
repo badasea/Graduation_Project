@@ -146,6 +146,14 @@ export default function Shop() {
       .catch();
   };
 
+  var login;
+
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="fixed" style={{ background: "#fff" }}>
@@ -226,43 +234,61 @@ export default function Shop() {
               </Typography>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
+          {login === true ? (
+            <div>
+              <Grid container spacing={3}>
+                <Grid item xs={6}>
+                  <Button
+                    onClick={cart}
+                    fullWidth
+                    color="secondary"
+                    variant="outlined"
+                  >
+                    <p>장바구니 넣기</p>
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    fullWidth
+                    sx={{
+                      backgroundColor: "#A267E7",
+                    }}
+                    variant="contained"
+                    onClick={buy}
+                  >
+                    <p>주문 하기</p>
+                  </Button>
+                </Grid>
+              </Grid>
+              <br />
+              <Grid container spacing={0.1}>
+                <Button
+                  onClick={return_shop}
+                  fullWidth
+                  sx={{
+                    backgroundColor: "#A267E7",
+                  }}
+                  variant="contained"
+                >
+                  <p>다른 상품 보러 가기</p>
+                </Button>
+              </Grid>
+            </div>
+          ) : (
+            <Grid container spacing={0.1}>
               <Button
-                onClick={cart}
-                fullWidth
-                color="secondary"
-                variant="outlined"
-              >
-                <p>장바구니 넣기</p>
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
+                disabled
+                onClick={return_shop}
                 fullWidth
                 sx={{
                   backgroundColor: "#A267E7",
                 }}
                 variant="contained"
-                onClick={buy}
               >
-                <p>주문 하기</p>
+                <p>로그인 후 이용가능합니다.</p>
               </Button>
             </Grid>
-          </Grid>
-          <br />
-          <Grid container spacing={0.1}>
-            <Button
-              onClick={return_shop}
-              fullWidth
-              sx={{
-                backgroundColor: "#A267E7",
-              }}
-              variant="contained"
-            >
-              <p>다른 상품 보러 가기</p>
-            </Button>
-          </Grid>
+          )}
           <br />
           <br />
         </Box>
