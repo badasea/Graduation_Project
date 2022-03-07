@@ -14,7 +14,7 @@ def userApi(request,id=0):
     if request.method=='GET':
         users = User.objects.all()
         user_serializer=UserSerializer(users,many=True)
-        return JsonResponse(user_serializer.data,safe=False)
+        return JsonResponse(user_serializer.data,json_dumps_params={'ensure_ascii': False}, status=200,safe=False)
 
 # @csrf_exempt
 # def SaveFile(request):
