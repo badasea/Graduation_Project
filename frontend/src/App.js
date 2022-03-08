@@ -57,6 +57,14 @@ import MobileVideo from "./mobile_pages/communication/webcam";
 // 가게 위치 지도맵
 import Map from "./pages/Shopping/map";
 
+// 관리자 시스템
+import Admin from "./admin/main";
+import AdminUser from "./admin/user";
+import AdminShop from "./admin/shop";
+import AdminItem from "./admin/item";
+import AdminOrder from "./admin/order";
+import AdminHelp from "./admin/help";
+
 // 테스트
 import Test from "./pages/test";
 
@@ -111,6 +119,14 @@ function App() {
             <Route path="/test" exact element={<Test />}></Route>
             <Route path="/webcam/:roomId" element={<Video />} />
             <Route path="/map/:roomId" element={<Map />} />
+
+            {/* admin */}
+            <Route path="/admin" exact element={<Admin />}></Route>
+            <Route path="/admin/user" exact element={<AdminUser />}></Route>
+            <Route path="/admin/shop" exact element={<AdminShop />}></Route>
+            <Route path="/admin/item" exact element={<AdminItem />}></Route>
+            <Route path="/admin/order" exact element={<AdminOrder />}></Route>
+            <Route path="/admin/help" exact element={<AdminHelp />}></Route>
           </Routes>
         </BrowserRouter>
       </BrowserView>
@@ -163,6 +179,14 @@ function App() {
             <Route path="/test" exact element={<Test />}></Route>
             <Route path="/webcam/:roomId" element={<MobileVideo />} />
             <Route path="/map/:roomId" element={<Map />} />
+
+            {/* admin */}
+            <Route path="/admin" exact element={<Admin />}></Route>
+            <Route path="/admin/user" exact element={<AdminUser />}></Route>
+            <Route path="/admin/shop" exact element={<AdminShop />}></Route>
+            <Route path="/admin/item" exact element={<AdminItem />}></Route>
+            <Route path="/admin/order" exact element={<AdminOrder />}></Route>
+            <Route path="/admin/help" exact element={<AdminHelp />}></Route>
           </Routes>
         </BrowserRouter>
       </MobileView>

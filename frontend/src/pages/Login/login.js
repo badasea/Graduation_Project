@@ -38,6 +38,9 @@ export default function SignInSide() {
       .then(function (res) {
         if (res.data[0].user_email === undefined) {
           alert("입력하신 이메일과 비밀번호가 일치하지 않습니다.");
+        } else if (res.data[0].user_email === "admin") {
+          alert("리코 관리자님 환영합니다.");
+          document.location.href = "/admin";
         } else if (res.data[0].user_email === null) {
           alert("입력하신 이메일과 비밀번호가 일치하지 않습니다.");
         } else if (
@@ -54,9 +57,6 @@ export default function SignInSide() {
           window.sessionStorage.setItem("type", JSON.stringify(session_type));
 
           document.location.href = "/";
-        } else if (res.data[0].user_email === "admin") {
-          // 관리자 페이지
-          alert("관리자님 환영합니다.");
         }
       })
       .catch(function (error) {
