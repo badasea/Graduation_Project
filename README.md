@@ -44,16 +44,16 @@
 - 접근 불가능한 브라우저
   (크롬, 사파리, 카카오에서 앱 로그인시)
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 7일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 3월 9일 기준)
 
-1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘 스터디 시작 (22. 03.07.)
+1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘 스터디 시작 (22. 03.09.)
 
 추천 시스템 도입
 
 - a. 콘텐츠 기반 필터링 (Content-base-filterling)
 - b. 현업 필터링 CF(Collaborative Filtering)
 
-2. 마이페이지(관심지역, 관심업종 배열 화면상 출력,유저 프로필 사진 등록), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록 기능),수주매출 기능, 가게 상표 이미지 등록기능
+2. 마이페이지(관심지역, 관심업종 배열 화면상 출력), 장바구니 결재, 고객센터(게시물 등록, 문의 이미지 등록 기능),수주매출 기능
 
 # 🖥 화면 정의서 (~ing)
 
@@ -316,6 +316,7 @@ PaasTa, Heroku docker 앱 배포
 - [x] 업종별 시장 카테고리
 - [x] 개인정보 수정을 위한 마이 페이지
 - [x] 고객센터 게시판 페이지
+- [x] 가게 위치 카카오맵 페이지
 - [x] 상품 구매 페이지
 - [x] 장바구니 페이지
 - [x] 구매 목록 페이지
@@ -355,7 +356,7 @@ Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan, cloudinary... )
 
 ML : pip(django, djangorestframework, mysqlclient, django-cors-headers, pymysql...)
 
-API - google-login, kakao-login, naver-login
+API - google-login, kakao-login, kakao-map, naver-login
 
 IDE - Visual Studio Code, Anaconda Jupyter Notebook
 
