@@ -1,5 +1,6 @@
 "use strict";
 const User = require("../models/user");
+const cloudinary = require("../config/cloudinary");
 
 exports.findAll = function (req, res) {
   User.findAll(function (err, user) {
@@ -66,13 +67,27 @@ exports.update = function (req, res) {
   }
 };
 
-exports.edit = function (req, res) {
+exports.edit = async function (req, res) {
+  const img = await cloudinary.v2.uploader.upload(req.body.user_img, {
+    folder: "user/",
+  });
+  console.log("test :", img);
+  const new_user = new User({
+    user_name: req.body.user_name,
+    user_email: req.body.user_email,
+    user_password: req.body.user_password,
+    user_address: req.body.user_address,
+    user_type: req.body.user_type,
+    user_like_place: req.body.user_like_place,
+    user_like_type: req.body.user_like_type,
+    user_img: img.url,
+  });
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res
       .status(400)
       .send({ error: true, message: "Please provide all required field" });
   } else {
-    User.edit(req.params.id, new User(req.body), function (err, user) {
+    await User.edit(req.params.id, new_user, function (err, user) {
       if (err) res.send(err);
       res.json({ message: "User successfully updated" });
     });

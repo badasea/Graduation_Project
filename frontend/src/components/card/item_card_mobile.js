@@ -122,7 +122,7 @@ function ShopCard() {
                 <Stack direction="row" spacing={2}>
                   <Avatar
                     src={items.user_img}
-                    sx={{ width: 24, height: 24, bgcolor: deepPurple[500] }}
+                    sx={{ width: 24, height: 24 }}
                   ></Avatar>
                   <Typography
                     sx={{ fontSize: 14 }}

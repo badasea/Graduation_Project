@@ -139,10 +139,12 @@ export default function PersistentDrawerLeft() {
 
   const [shop_name, setShop_name] = useState("");
   const [shop_address, setShop_address] = useState("");
+  const [shop_detail_address, setShop_detail_address] = useState("");
+
   const [shop_phone, setShop_phone] = useState("");
   const [shop_content, setShop_content] = useState("");
 
-  // const [shop_image, setShop_image] = useState("");
+  var [shop_img, setshop_img] = useState();
   const [shop_registeration_number, setRegisteration_number] = useState("");
   const [shop_business_type, setShop_business_type] = useState("");
   const [shop_region, setShop_region] = useState("");
@@ -163,9 +165,14 @@ export default function PersistentDrawerLeft() {
     setShop_name(event.currentTarget.value);
   };
 
-  // 가게 실제 주소
+  // 가게 시장 위치
   const onShop_addressHandler = (event) => {
     setShop_address(event.currentTarget.value);
+  };
+
+  // 가게 상세 주소
+  const onShop_detail_addressHandler = (event) => {
+    setShop_detail_address(event.currentTarget.value);
   };
 
   // 가게 지역구
@@ -180,7 +187,6 @@ export default function PersistentDrawerLeft() {
 
   // 가게 상표 이미지
   // const onShop_imageHandler = (event) => {
-  //   setFileImage(URL.createObjectURL(event.target.files[0]));
   //   setShop_image(event.currentTarget.files[0]);
   // };
 
@@ -189,31 +195,32 @@ export default function PersistentDrawerLeft() {
     setRegisteration_number(event.currentTarget.value);
   };
 
-  const onClickRegister = () => {
-    //const formData = new FormData();
+  var [pre_img, setPreviewImg] = useState("");
+  const onimgHandler = (event) => {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(event.currentTarget.files[0]);
+    fileReader.onload = function (e) {
+      setPreviewImg(e.target.result);
+    };
+  };
 
-    // formData.append("image", shop_image);
-    // formData.append("name", shop_name);
-    // formData.append("shop_address", shop_address);
-    // formData.append("phone", shop_phone);
-    // formData.append("registrationNum", shop_registeration_number);
-    // formData.append("businessType", shop_business_type);
-    // formData.append("region", shop_region);
-    // console.log(formData);
+  const onClickRegister = async () => {
     let shop = {
       shop_name: shop_name,
       shop_address: shop_address,
+      shop_detail_address: shop_detail_address,
       shop_phone: shop_phone,
       shop_registration_num: shop_registeration_number,
       shop_business_type: shop_business_type,
       shop_region: shop_region,
       user_id: session.data.user_id,
       user_type: "seller",
+      shop_image: pre_img,
       shop_content: shop_content,
     };
     console.log(shop);
 
-    axios
+    await axios
       .post(process.env.REACT_APP_API_URL + "/api/shop/", shop, {
         // headers: {
         //   "Content-type": "multipart/form-data; charset=utf-8",
@@ -224,7 +231,7 @@ export default function PersistentDrawerLeft() {
         //document.location.href = "/check";
       })
       .catch();
-    axios
+    await axios
       .put(
         process.env.REACT_APP_API_URL +
           "/api/user/shop/" +
@@ -549,6 +556,36 @@ export default function PersistentDrawerLeft() {
                   underline="none"
                 >
                   <Link color="common.black" underline="none">
+                    가게 상세 주소
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography
+                  color="#B2B2B2"
+                  sx={{ fontSize: 14 }}
+                  align="right"
+                  underline="none"
+                >
+                  <Input
+                    value={shop_detail_address}
+                    onChange={onShop_detail_addressHandler}
+                    fullWidth
+                    placeholder="예)서울특별시 성북구 정릉동 서경로124"
+                  ></Input>
+                </Typography>
+              </Grid>
+            </Grid>
+            <br />
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Typography
+                  // color="#B2B2B2"
+                  sx={{ fontSize: 18 }}
+                  align="left"
+                  underline="none"
+                >
+                  <Link color="common.black" underline="none">
                     가게 번호
                   </Link>
                 </Typography>
@@ -620,7 +657,12 @@ export default function PersistentDrawerLeft() {
                   align="right"
                   underline="none"
                 >
-                  <Input></Input>
+                  <input
+                    accept="image/*"
+                    type="file"
+                    value={shop_img}
+                    onChange={onimgHandler}
+                  />
                 </Typography>
               </Grid>
             </Grid>

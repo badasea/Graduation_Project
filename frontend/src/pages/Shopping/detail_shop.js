@@ -34,7 +34,7 @@ export default function Shop() {
         //console.log("실패");
       });
   }
-  //console.log(shop);
+  console.log(shop);
 
   const [item, setItem] = useState([]);
   function searchitem() {
@@ -49,7 +49,7 @@ export default function Shop() {
         //console.log("실패");
       });
   }
-  console.log(item);
+  // console.log(item);
 
   useEffect(() => {
     searchshop();
@@ -71,10 +71,6 @@ export default function Shop() {
     document.location.href = "/detail_item/" + arr[4] + "/" + id;
   };
 
-  // const detail_item = () => {
-  //   document.location.href = "/detail_item/12";
-  // };
-
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
   var login;
@@ -83,6 +79,11 @@ export default function Shop() {
     login = false;
   } else {
     login = true;
+  }
+
+  function map() {
+    const session_map = shop.shop_detail_address;
+    window.sessionStorage.setItem("map", JSON.stringify(session_map));
   }
 
   return (
@@ -165,7 +166,14 @@ export default function Shop() {
                 align="right"
                 underline="none"
               >
-                <p>{shop.shop_address}</p>
+                <Link
+                  href={`/map/${arr[4]}`}
+                  color="common.black"
+                  underline="none"
+                  onClick={map}
+                >
+                  <p>{shop.shop_address}</p>
+                </Link>
               </Typography>
             </Grid>
           </Grid>{" "}

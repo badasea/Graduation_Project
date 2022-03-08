@@ -10,6 +10,7 @@ let Shop = function (shop) {
   this.shop_phone = shop.shop_phone;
   this.shop_region = shop.shop_region;
   this.shop_address = shop.shop_address;
+  this.shop_detail_address = shop.shop_detail_address;
   this.shop_image = shop.shop_image;
   this.shop_content = shop.shop_content;
   // 외래키 user_id
@@ -83,7 +84,7 @@ Shop.delete = function (id, result) {
 
 Shop.update = function (id, shop, result) {
   mysql.query(
-    "UPDATE shop SET shop_name=?,shop_registration_num=?,shop_business_type=?,shop_phone=?,shop_region=?,shop_address=?,shop_image=?,shop_content=? WHERE shop_id = ?",
+    "UPDATE shop SET shop_name=?,shop_registration_num=?,shop_business_type=?,shop_phone=?,shop_region=?,shop_address=?,shop_image=?,shop_content=?,shop_detail_address=? WHERE shop_id = ?",
     [
       shop.shop_name,
       shop.shop_registration_num,
@@ -93,6 +94,7 @@ Shop.update = function (id, shop, result) {
       shop.shop_address,
       shop.shop_image,
       shop.shop_content,
+      shop.shop_detail_address,
       id,
     ],
     function (err, res) {

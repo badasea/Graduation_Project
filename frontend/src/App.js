@@ -54,6 +54,9 @@ import Help from "./pages/Help/help";
 import Video from "./pages/communication/webcam";
 import MobileVideo from "./mobile_pages/communication/webcam";
 
+// 가게 위치 지도맵
+import Map from "./pages/Shopping/map";
+
 // 테스트
 import Test from "./pages/test";
 
@@ -107,6 +110,7 @@ function App() {
 
             <Route path="/test" exact element={<Test />}></Route>
             <Route path="/webcam/:roomId" element={<Video />} />
+            <Route path="/map/:roomId" element={<Map />} />
           </Routes>
         </BrowserRouter>
       </BrowserView>
@@ -158,6 +162,7 @@ function App() {
 
             <Route path="/test" exact element={<Test />}></Route>
             <Route path="/webcam/:roomId" element={<MobileVideo />} />
+            <Route path="/map/:roomId" element={<Map />} />
           </Routes>
         </BrowserRouter>
       </MobileView>

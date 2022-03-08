@@ -25,6 +25,8 @@ import Side from "../components/menu/side";
 
 import axios from "axios";
 
+import Map from "./Shopping/map";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -294,19 +296,7 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <form onSubmit={handleSubmitFile} className="form">
-          <input
-            id="fileInput"
-            type="file"
-            name="image"
-            onChange={handleFileInputChange}
-            value={fileInputState}
-            className="form-input"
-          />
-          <button className="btn" type="submit">
-            Submit
-          </button>
-        </form>
+        <Map />
       </Main>
     </Box>
   );

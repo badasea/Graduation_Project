@@ -174,6 +174,7 @@ export default function PersistentDrawerLeft() {
   const [address, setAddress] = useState();
   const [like_place, setLike_place] = useState([]);
   const [like_type, setLike_type] = useState();
+  const [image, setImage] = useState();
 
   function login_form() {
     const url =
@@ -190,6 +191,7 @@ export default function PersistentDrawerLeft() {
         setAddress(response.data[0].user_address);
         setLike_place(response.data[0].user_like_place);
         setLike_type(response.data[0].user_like_type);
+        setImage(response.data[0].user_img);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -214,24 +216,17 @@ export default function PersistentDrawerLeft() {
   const onAddressHandler = (event) => {
     setAddress(event.currentTarget.value);
   };
+  var [shop_img, setshop_img] = useState();
 
-  // // 관심 지역
-  // const onLike_placeHandler = (event) => {
-  //   setLike_place(event.currentTarget.value);
-  // };
-
-  // // 관심 업종
-  // const onLike_typeHandler = (event) => {
-  //   setLike_type(event.currentTarget.value);
-  // };
-
-  // const place_str = session.data.user_like_place;
-  // const place_arr = user.user_like_place.split(",");
-  // console.log(user.user_like_place);
-  // console.log(place_arr);
-
-  //const type_str = user.user_like_type;
-  //const type_arr = type_str.split(",");
+  var [pre_img, setPreviewImg] = useState("");
+  const onimgHandler = (event) => {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(event.currentTarget.files[0]);
+    fileReader.onload = function (e) {
+      setPreviewImg(e.target.result);
+      console.log(e.target.result);
+    };
+  };
 
   if (session === null) {
     login = false;
@@ -241,7 +236,7 @@ export default function PersistentDrawerLeft() {
   const place = choice_location.join(",");
   const type = choice_like.join(",");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -251,9 +246,10 @@ export default function PersistentDrawerLeft() {
       user_address: data.get("address"),
       user_like_place: place,
       user_like_type: type,
+      user_img: pre_img,
     };
     console.log(user);
-    axios
+    await axios
       .post(
         process.env.REACT_APP_API_URL + "/api/user/" + session.data.user_id,
         user
@@ -395,19 +391,26 @@ export default function PersistentDrawerLeft() {
               }}
             >
               <Typography component="h1" variant="h5">
-                <p>
-                  <span className="main_logo">LI.CO.</span> MARKET
-                </p>
-              </Typography>
-              <Typography component="h1" variant="h5">
                 <p>마이페이지</p>
               </Typography>
+              <Avatar sx={{ width: 100, height: 100 }} src={image}></Avatar>
+
               <Box
                 component="form"
                 noValidate
                 onSubmit={handleSubmit}
                 sx={{ mt: 3 }}
               >
+                <input
+                  align="right"
+                  accept="image/*"
+                  type="file"
+                  value={shop_img}
+                  onChange={onimgHandler}
+                />
+                <br />
+                <br />
+
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField

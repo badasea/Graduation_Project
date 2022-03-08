@@ -121,7 +121,6 @@ function ShopCard() {
                       sx={{
                         width: 24,
                         height: 24,
-                        bgcolor: deepPurple[500],
                       }}
                     ></Avatar>
                     <Link color="common.black" underline="none">
