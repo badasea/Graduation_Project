@@ -122,7 +122,7 @@ export default function Side() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setShop(response.data[0]);
       })
       .catch(function (error) {
@@ -140,7 +140,7 @@ export default function Side() {
   const session = JSON.parse(window.sessionStorage.getItem("data"));
   const session_type = JSON.parse(window.sessionStorage.getItem("type"));
 
-  console.log(session);
+  // console.log(session);
 
   if (session === null) {
     login = false;

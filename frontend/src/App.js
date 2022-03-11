@@ -35,6 +35,8 @@ import Editstore from "./pages/store_manager/edit_store";
 import Check from "./pages/store_manager/check";
 
 import ManagerItem from "./pages/store_manager/manager_item";
+import EditItem from "./pages/store_manager/edit_item";
+import MobileEditItem from "./mobile_pages/store_manager/edit_item";
 
 // 장바구니 및 주문 목록
 import Cart from "./pages/Shopping/cart";
@@ -108,6 +110,7 @@ function App() {
             <Route path="/check" element={<Check />}></Route>
 
             <Route path="/manager_item" element={<ManagerItem />}></Route>
+            <Route path="/edit_item" element={<EditItem />}></Route>
 
             <Route path="/order_sales" element={<Ordersales />}></Route>
 
@@ -168,6 +171,7 @@ function App() {
             <Route path="/check" element={<Check />}></Route>
 
             <Route path="/manager_item" element={<ManagerItem />}></Route>
+            <Route path="/edit_item" element={<MobileEditItem />}></Route>
 
             <Route path="/order_sales" element={<Ordersales />}></Route>
 

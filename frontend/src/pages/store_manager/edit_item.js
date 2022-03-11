@@ -19,14 +19,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 
-//
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
 
@@ -35,9 +27,6 @@ import Link from "@mui/material/Link";
 import Side from "../../components/menu/side";
 
 import axios from "axios";
-
-import Modal from "../../components/store/modal";
-import { Image, Video, Transformation } from "cloudinary-react";
 
 const drawerWidth = 240;
 
@@ -86,17 +75,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-//
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#A267E7",
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -138,12 +116,8 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-
-  const edit = (item, e) => {
-    var session_edit = item;
-    console.log(session_edit);
-    window.sessionStorage.setItem("edit", JSON.stringify(session_edit));
-    document.location.href = "/edit_item";
+  const manager_item = () => {
+    document.location.href = "/manager_item";
   };
 
   var login;
@@ -152,7 +126,7 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  //   console.log(session);
 
   if (session === null) {
     login = false;
@@ -166,39 +140,51 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data[0]);
+        // console.log(response.data[0]);
         setUser_id(response.data[0].shop_id);
       })
       .catch(function (error) {
         //console.log("실패");
       });
   }
+  const session_edit = JSON.parse(window.sessionStorage.getItem("edit"));
+  //   console.log(session_edit);
 
   var [item_img, setItem_img] = useState();
+  var [item_name, setItem_name] = useState();
+  var [item_content, setItem_content] = useState();
+  var [item_price, setItem_price] = useState();
+  var [item_stock, setItem_stock] = useState();
 
+  const handleName = (event) => {
+    setItem_name(event.currentTarget);
+  };
+
+  const handleContent = (event) => {
+    setItem_content(event.currentTarget);
+  };
+
+  const handlePrice = (event) => {
+    setItem_price(event.currentTarget);
+  };
+  const handleStock = (event) => {
+    setItem_stock(event.currentTarget);
+  };
   var [pre_img, setPreviewImg] = useState("");
   const onimgHandler = (event) => {
     var fileReader = new FileReader();
     fileReader.readAsDataURL(event.currentTarget.files[0]);
     fileReader.onload = function (e) {
-      // console.log(e.target.result);
       setPreviewImg(e.target.result);
     };
-    // setItem_img(event.currentTarget.file);
-
-    //setItem_img(event.currentTarget.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    let item_data = {
-      item_stock: data.get("stock"),
-      item_price: data.get("price"),
-      item_name: data.get("Name"),
-      item_content: data.get("content"),
-      // item_img: data.get("image"),
+  const handleSubmit = () => {
+    var item_data = {
+      item_stock: item_stock,
+      item_price: item_price,
+      item_name: item_name,
+      item_content: item_content,
       item_img: pre_img,
       shop_id: user_id,
     };
@@ -206,41 +192,15 @@ export default function PersistentDrawerLeft() {
     console.log(item_data);
 
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/item", item_data, {})
+      .put(process.env.REACT_APP_API_URL + "/api/item/test", item_data, {})
       .then((res) => {
-        //console.log(res.data);
-        document.location.href = "/manager_item";
+        console.log(res.data);
+        //document.location.href = "/manager_item";
       })
       .catch();
   };
-
-  const item_remove = (id) => {
-    //console.log(item[index].itemId)
-    axios
-      .delete(process.env.REACT_APP_API_URL + "/api/item/" + id, {})
-      .then((res) => {
-        document.location.href = "/manager_item";
-      })
-      .catch();
-  };
-  //console.log(session);
-
-  const [item, setItem] = useState([]);
-  function searchitem() {
-    const url =
-      process.env.REACT_APP_API_URL + "/api/item/shop/" + session.data.user_id;
-    axios
-      .get(url)
-      .then(function (response) {
-        setItem(response.data);
-      })
-      .catch(function (error) {
-        //console.log("실패");
-      });
-  }
 
   useEffect(() => {
-    searchitem();
     searchuser();
   }, []);
 
@@ -362,189 +322,188 @@ export default function PersistentDrawerLeft() {
       >
         <DrawerHeader />
         <Typography sx={{ fontSize: 36 }} color="#202121" underline="none">
-          <p>상품 관리</p>
+          <p>상품 수정</p>
         </Typography>
-        <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
-          <p>
-            등록 상품 :<span className="main_logo"> {item.length}개</span>
-          </p>
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>
-                  <Link color="common.white" underline="none">
-                    이미지
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Link color="common.white" underline="none">
-                    상품명
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    상품설명
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    판매가
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    재고량
-                  </Link>{" "}
-                </StyledTableCell>
+        <img
+          align="center"
+          style={{
+            display: "block",
+            margin: "0px auto",
+            width: "10%",
+            height: "10%",
+          }}
+          src={session_edit.item_img}
+        />
 
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    수정
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    삭제
-                  </Link>{" "}
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {item.map((items) => (
-                <TableRow
-                  key={items.item_id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    <Avatar src={items.item_img}></Avatar>
-                  </TableCell>
-                  <TableCell>
-                    <p>{items.item_name}</p>
-                  </TableCell>
-                  <TableCell align="right">
-                    <p>{items.item_content}</p>
-                  </TableCell>
-                  <TableCell align="right">
-                    <p>{items.item_price}</p>
-                  </TableCell>
-                  <TableCell align="right">
-                    <p>{items.item_stock}</p>
-                  </TableCell>
-
-                  <TableCell align="right">
-                    <Button
-                      sx={{
-                        backgroundColor: "#A267E7",
-                      }}
-                      variant="contained"
-                      onClick={(e) => {
-                        edit(items, e);
-                      }}
-                      // onClick={openModal}
-                    >
-                      <Link color="common.white" underline="none">
-                        수정
-                      </Link>
-                    </Button>
-                    {/* <Modal open={modalOpen} close={closeModal}></Modal> */}
-                  </TableCell>
-                  <TableCell align="right">
-                    <Button
-                      sx={{
-                        backgroundColor: "#F00",
-                      }}
-                      onClick={(e) => {
-                        item_remove(items.item_id, e);
-                      }}
-                      variant="contained"
-                    >
-                      <Link color="common.white" underline="none">
-                        삭제
-                      </Link>
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <br />
-        {/* 여기 등록 */}
-        <Typography sx={{ fontSize: 28 }} color="#202121" underline="none">
-          <p>상품 등록하기</p>
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                autoComplete="given-name"
-                name="Name"
-                required
-                fullWidth
-                id="Name"
-                label="상품명"
-              />
+        <Box component="form" noValidate sx={{ mt: 3 }}>
+          <Grid item xs={12}>
+            <input
+              accept="image/*"
+              type="file"
+              value={item_img}
+              onChange={onimgHandler}
+            />
+          </Grid>
+          <br />
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <Typography
+                // color="#B2B2B2"
+                sx={{ fontSize: 18 }}
+                align="left"
+                underline="none"
+              >
+                <Link color="common.black" underline="none">
+                  상품명
+                </Link>
+              </Typography>
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                id="content"
-                label="상품설명"
-                name="content"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                name="price"
-                label="가격"
-                id="price"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                fullWidth
-                name="stock"
-                label="재고"
-                id="stock"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              {/* <TextField
-                type="file"
-                required
-                fullWidth
-                id="image"
-                name="image"
-              /> */}
-              <input
-                accept="image/*"
-                type="file"
-                value={item_img}
-                onChange={onimgHandler}
-              />
+            <Grid item xs={8}>
+              <Typography
+                color="#B2B2B2"
+                sx={{ fontSize: 14 }}
+                align="right"
+                underline="none"
+              >
+                <TextField
+                  autoComplete="given-name"
+                  name="Name"
+                  required
+                  fullWidth
+                  value={session_edit.item_name}
+                  onChange={handleName}
+                  id="Name"
+                />
+              </Typography>
             </Grid>
           </Grid>
-
           <br />
-          <Box textAlign="center">
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <Typography
+                // color="#B2B2B2"
+                sx={{ fontSize: 18 }}
+                align="left"
+                underline="none"
+              >
+                <Link color="common.black" underline="none">
+                  상품설명
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography
+                color="#B2B2B2"
+                sx={{ fontSize: 14 }}
+                align="right"
+                underline="none"
+              >
+                <TextField
+                  value={session_edit.item_content}
+                  onChange={handleContent}
+                  required
+                  fullWidth
+                  id="content"
+                  name="content"
+                />
+              </Typography>
+            </Grid>
+          </Grid>
+          <br />
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <Typography
+                // color="#B2B2B2"
+                sx={{ fontSize: 18 }}
+                align="left"
+                underline="none"
+              >
+                <Link color="common.black" underline="none">
+                  가격
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography
+                color="#B2B2B2"
+                sx={{ fontSize: 14 }}
+                align="right"
+                underline="none"
+              >
+                <TextField
+                  value={session_edit.item_price}
+                  onChange={handlePrice}
+                  required
+                  fullWidth
+                  name="price"
+                  id="price"
+                />
+              </Typography>
+            </Grid>
+          </Grid>
+          <br />
+          <Grid container spacing={3}>
+            <Grid item xs={4}>
+              <Typography
+                // color="#B2B2B2"
+                sx={{ fontSize: 18 }}
+                align="left"
+                underline="none"
+              >
+                <Link color="common.black" underline="none">
+                  재고
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Typography
+                color="#B2B2B2"
+                sx={{ fontSize: 14 }}
+                align="right"
+                underline="none"
+              >
+                <TextField
+                  value={session_edit.item_stock}
+                  onChange={handleStock}
+                  required
+                  fullWidth
+                  name="stock"
+                  id="stock"
+                />
+              </Typography>
+            </Grid>
+          </Grid>
+          <br />
+        </Box>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
             <Button
               type="submit"
+              fullWidth
               sx={{
-                width: "50%",
                 backgroundColor: "#A267E7",
               }}
               variant="contained"
+              onClick={handleSubmit}
             >
-              <p>상품 등록하기</p>
+              <p>상품 수정하기</p>
             </Button>
-          </Box>
-        </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              type="submit"
+              fullWidth
+              sx={{
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+              onClick={manager_item}
+            >
+              <p>취소하기</p>
+            </Button>
+          </Grid>
+        </Grid>
+        <br />
       </Main>
     </Box>
   );
