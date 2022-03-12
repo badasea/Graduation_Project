@@ -18,6 +18,13 @@ exports.findById = function (req, res) {
   });
 };
 
+exports.findItemId = function (req, res) {
+  Item.findItemId(req.params.id, function (err, item) {
+    if (err) res.send(err);
+    res.json(item);
+  });
+};
+
 exports.findManage = function (req, res) {
   Item.findManage(req.params.id, function (err, item) {
     if (err) res.send(err);
@@ -74,15 +81,46 @@ exports.delete = function (req, res) {
   });
 };
 
-exports.update = function (req, res) {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res
-      .status(400)
-      .send({ error: true, message: "Please provide all required field" });
-  } else {
-    Item.update(req.params.id, new Item(req.body), function (err, shop) {
-      if (err) res.send(err);
-      res.json({ message: "Item successfully updated" });
-    });
+exports.update = async function (req, res) {
+  try {
+    var new_item;
+    if (req.body.item_img[0] === "h") {
+      new_item = new Item({
+        item_name: req.body.item_name,
+        item_content: req.body.item_content,
+        item_price: req.body.item_price,
+        item_stock: req.body.item_stock,
+        item_img: req.body.item_img,
+        shop_id: req.body.shop_id,
+      });
+    } else {
+      const img = await cloudinary.v2.uploader.upload(req.body.item_img, {
+        folder: "item/",
+        width: 4032,
+        height: 3024,
+      });
+
+      new_item = new Item({
+        item_name: req.body.item_name,
+        item_content: req.body.item_content,
+        item_price: req.body.item_price,
+        item_stock: req.body.item_stock,
+        item_img: img.url,
+        shop_id: req.body.shop_id,
+      });
+    }
+
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      res
+        .status(400)
+        .send({ error: true, message: "Please provide all required field" });
+    } else {
+      await Item.update(req.params.id, new_item, function (err, shop) {
+        if (err) res.send(err);
+        res.json({ message: "Item successfully updated" });
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };

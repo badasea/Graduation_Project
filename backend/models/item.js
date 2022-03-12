@@ -46,6 +46,18 @@ Item.findById = function (id, result) {
   );
 };
 
+// 특정 상품 검색
+Item.findItemId = function (id, result) {
+  mysql.query("Select * from item where item_id = ?", id, function (err, res) {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+    } else {
+      result(null, res);
+    }
+  });
+};
+
 // 가게 관리하기
 Item.findManage = function (id, result) {
   mysql.query(

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -12,20 +11,27 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Avatar from "@mui/material/Avatar";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { ThemeProvider } from "@mui/material";
+import { Container } from "@mui/material";
+import { Avatar } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import Button from "@mui/material/Button";
-
-import { Grid } from "@mui/material";
-import { TextField } from "@mui/material";
+import { useState, useEffect } from "react";
 
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
+//
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select from "@mui/material/Select";
 import axios from "axios";
 
 const drawerWidth = 240;
@@ -74,6 +80,20 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const locations = ["성북구", "영등포구", "종로구"];
+
+const likes = ["음식점", "한복", "공방", "기타"];
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
@@ -98,7 +118,6 @@ export default function PersistentDrawerLeft() {
   };
 
   const logout = () => {
-    sessionStorage.removeItem("data");
     document.location.href = "/";
   };
 
@@ -125,84 +144,81 @@ export default function PersistentDrawerLeft() {
   var img;
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
-
-  //   console.log(session);
-
-  if (session === null) {
-    login = false;
-  } else {
-    login = true;
-  }
-  const [user_id, setUser_id] = useState([]);
-  function searchuser() {
-    const url =
-      process.env.REACT_APP_API_URL + "/api/shop/user/" + session.data.user_id;
-    axios
-      .get(url)
-      .then(function (response) {
-        // console.log(response.data[0]);
-        setUser_id(response.data[0].shop_id);
-      })
-      .catch(function (error) {
-        //console.log("실패");
-      });
-  }
   const session_edit = JSON.parse(window.sessionStorage.getItem("edit"));
-  //   console.log(session_edit);
 
-  var [item_img, setItem_img] = useState();
-  var [item_name, setItem_name] = useState();
-  var [item_content, setItem_content] = useState();
-  var [item_price, setItem_price] = useState();
-  var [item_stock, setItem_stock] = useState();
+  // console.log(session_edit);
 
-  const handleName = (event) => {
-    setItem_name(event.currentTarget);
+  const [user, setUser] = useState([]);
+  const [name, setName] = useState(session_edit.item_name);
+  const [password, setPassword] = useState(session_edit.item_content);
+  const [address, setAddress] = useState(session_edit.item_price);
+  const [like_place, setLike_place] = useState(session_edit.item_stock);
+  const [image, setImage] = useState(session_edit.item_img);
+
+  // 이름
+  const onNameHandler = (event) => {
+    setName(event.currentTarget.value);
   };
 
-  const handleContent = (event) => {
-    setItem_content(event.currentTarget);
+  // 비밀번호
+  const onPasswordHandler = (event) => {
+    setPassword(event.currentTarget.value);
   };
 
-  const handlePrice = (event) => {
-    setItem_price(event.currentTarget);
+  // 주소
+  const onAddressHandler = (event) => {
+    setAddress(event.currentTarget.value);
   };
-  const handleStock = (event) => {
-    setItem_stock(event.currentTarget);
+
+  // 스톡
+  const onPlaceHandler = (event) => {
+    setLike_place(event.currentTarget.value);
   };
+  var [shop_img, setshop_img] = useState();
+
   var [pre_img, setPreviewImg] = useState("");
   const onimgHandler = (event) => {
     var fileReader = new FileReader();
     fileReader.readAsDataURL(event.currentTarget.files[0]);
     fileReader.onload = function (e) {
       setPreviewImg(e.target.result);
+      console.log(e.target.result);
     };
   };
 
-  const handleSubmit = () => {
-    var item_data = {
-      item_stock: item_stock,
-      item_price: item_price,
-      item_name: item_name,
-      item_content: item_content,
+  if (session === null) {
+    login = false;
+  } else {
+    login = true;
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    if (pre_img === "") {
+      pre_img = session_edit.item_img;
+    }
+    var user = {
+      item_content: data.get("password"),
+      item_name: data.get("Name"),
+      item_price: data.get("address"),
+      item_stock: data.get("stock"),
       item_img: pre_img,
-      shop_id: user_id,
+      shop_id: session_edit.shop_id,
     };
-
-    console.log(item_data);
-
-    axios
-      .put(process.env.REACT_APP_API_URL + "/api/item/test", item_data, {})
+    console.log(user);
+    await axios
+      .put(
+        process.env.REACT_APP_API_URL + "/api/item/" + session_edit.item_id,
+        user
+      )
       .then((res) => {
         console.log(res.data);
-        //document.location.href = "/manager_item";
+        alert("상품 정보가 수정 되었습니다.");
+        document.location.href = "/manager_item";
       })
       .catch();
   };
-
-  useEffect(() => {
-    searchuser();
-  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -315,195 +331,113 @@ export default function PersistentDrawerLeft() {
         <Side />
       </Drawer>
       <Main
-        style={{ background: "#fff" }}
+        style={{ background: "#FFFFFF" }}
         component="main"
         sx={{ flexGrow: 1, p: 3 }}
         open={open}
       >
         <DrawerHeader />
-        <Typography sx={{ fontSize: 36 }} color="#202121" underline="none">
-          <p>상품 수정</p>
-        </Typography>
-        <img
-          align="center"
-          style={{
-            display: "block",
-            margin: "0px auto",
-            width: "10%",
-            height: "10%",
-          }}
-          src={session_edit.item_img}
-        />
 
-        <Box component="form" noValidate sx={{ mt: 3 }}>
-          <Grid item xs={12}>
-            <input
-              accept="image/*"
-              type="file"
-              value={item_img}
-              onChange={onimgHandler}
-            />
-          </Grid>
-          <br />
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Typography
-                // color="#B2B2B2"
-                sx={{ fontSize: 18 }}
-                align="left"
-                underline="none"
-              >
-                <Link color="common.black" underline="none">
-                  상품명
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography
-                color="#B2B2B2"
-                sx={{ fontSize: 14 }}
-                align="right"
-                underline="none"
-              >
-                <TextField
-                  autoComplete="given-name"
-                  name="Name"
-                  required
-                  fullWidth
-                  value={session_edit.item_name}
-                  onChange={handleName}
-                  id="Name"
-                />
-              </Typography>
-            </Grid>
-          </Grid>
-          <br />
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Typography
-                // color="#B2B2B2"
-                sx={{ fontSize: 18 }}
-                align="left"
-                underline="none"
-              >
-                <Link color="common.black" underline="none">
-                  상품설명
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography
-                color="#B2B2B2"
-                sx={{ fontSize: 14 }}
-                align="right"
-                underline="none"
-              >
-                <TextField
-                  value={session_edit.item_content}
-                  onChange={handleContent}
-                  required
-                  fullWidth
-                  id="content"
-                  name="content"
-                />
-              </Typography>
-            </Grid>
-          </Grid>
-          <br />
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Typography
-                // color="#B2B2B2"
-                sx={{ fontSize: 18 }}
-                align="left"
-                underline="none"
-              >
-                <Link color="common.black" underline="none">
-                  가격
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography
-                color="#B2B2B2"
-                sx={{ fontSize: 14 }}
-                align="right"
-                underline="none"
-              >
-                <TextField
-                  value={session_edit.item_price}
-                  onChange={handlePrice}
-                  required
-                  fullWidth
-                  name="price"
-                  id="price"
-                />
-              </Typography>
-            </Grid>
-          </Grid>
-          <br />
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <Typography
-                // color="#B2B2B2"
-                sx={{ fontSize: 18 }}
-                align="left"
-                underline="none"
-              >
-                <Link color="common.black" underline="none">
-                  재고
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item xs={8}>
-              <Typography
-                color="#B2B2B2"
-                sx={{ fontSize: 14 }}
-                align="right"
-                underline="none"
-              >
-                <TextField
-                  value={session_edit.item_stock}
-                  onChange={handleStock}
-                  required
-                  fullWidth
-                  name="stock"
-                  id="stock"
-                />
-              </Typography>
-            </Grid>
-          </Grid>
-          <br />
-        </Box>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <Button
-              type="submit"
-              fullWidth
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
               sx={{
-                backgroundColor: "#A267E7",
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
-              variant="contained"
-              onClick={handleSubmit}
             >
-              <p>상품 수정하기</p>
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              type="submit"
-              fullWidth
-              sx={{
-                backgroundColor: "#A267E7",
-              }}
-              variant="contained"
-              onClick={manager_item}
-            >
-              <p>취소하기</p>
-            </Button>
-          </Grid>
-        </Grid>
-        <br />
+              <Typography component="h1" variant="h5">
+                <p>상품 수정</p>
+              </Typography>
+              <Avatar sx={{ width: 100, height: 100 }} src={image}></Avatar>
+
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 3 }}
+              >
+                <input
+                  align="right"
+                  accept="image/*"
+                  type="file"
+                  value={shop_img}
+                  onChange={onimgHandler}
+                />
+                <br />
+                <br />
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      autoComplete="given-name"
+                      name="Name"
+                      required
+                      fullWidth
+                      id="Name"
+                      autoFocus
+                      value={name}
+                      onChange={onNameHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      id="password"
+                      autoComplete="new-password"
+                      value={password}
+                      onChange={onPasswordHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="address"
+                      id="address"
+                      value={address}
+                      onChange={onAddressHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="stock"
+                      id="stock"
+                      autoComplete="new-password"
+                      value={like_place}
+                      onChange={onPlaceHandler}
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  size="large"
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
+                >
+                  <p>상품 수정 하기</p>
+                </Button>
+              </Box>
+              <Button
+                onClick={manager_item}
+                fullWidth
+                size="large"
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
+              >
+                <p>취소 하기</p>
+              </Button>
+            </Box>
+          </Container>
+        </ThemeProvider>
       </Main>
     </Box>
   );
