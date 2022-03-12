@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MapIcon from "@mui/icons-material/Map";
+import PlaceIcon from "@mui/icons-material/Place";
 
 import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
@@ -172,7 +174,10 @@ export default function Shop() {
                   underline="none"
                   onClick={map}
                 >
-                  <p>{shop.shop_address}</p>
+                  <p>
+                    <PlaceIcon />
+                    {shop.shop_address}
+                  </p>
                 </Link>
               </Typography>
             </Grid>
@@ -217,7 +222,13 @@ export default function Shop() {
                 align="right"
                 underline="none"
               >
-                <p>{shop.shop_phone}</p>
+                <Link
+                  href="tel:${shop.shop_phone}"
+                  color="common.black"
+                  underline="none"
+                >
+                  <p>{shop.shop_phone}</p>
+                </Link>
               </Typography>
             </Grid>
           </Grid>

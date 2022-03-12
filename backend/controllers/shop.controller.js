@@ -128,15 +128,55 @@ exports.delete = function (req, res) {
   });
 };
 
-exports.update = function (req, res) {
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res
-      .status(400)
-      .send({ error: true, message: "Please provide all required field" });
-  } else {
-    Shop.update(req.params.id, new Shop(req.body), function (err, shop) {
-      if (err) res.send(err);
-      res.json({ message: "Shop successfully updated" });
-    });
+exports.update = async function (req, res) {
+  try {
+    var new_shop;
+
+    if (req.body.shop_image[0] === "h") {
+      new_shop = new Shop({
+        shop_name: req.body.shop_name,
+        shop_registration_num: req.body.shop_registration_num,
+        shop_business_type: req.body.shop_business_type,
+        shop_phone: req.body.shop_phone,
+        shop_region: req.body.shop_region,
+        shop_address: req.body.shop_address,
+        shop_detail_address: req.body.shop_detail_address,
+        shop_image: req.body.shop_image,
+        shop_content: req.body.shop_content,
+        user_id: req.body.user_id,
+      });
+    } else {
+      const img = await cloudinary.v2.uploader.upload(req.body.shop_image, {
+        folder: "shop/",
+        width: 4032,
+        height: 3024,
+      });
+      console.log("test :", img);
+
+      new_shop = new Shop({
+        shop_name: req.body.shop_name,
+        shop_registration_num: req.body.shop_registration_num,
+        shop_business_type: req.body.shop_business_type,
+        shop_phone: req.body.shop_phone,
+        shop_region: req.body.shop_region,
+        shop_address: req.body.shop_address,
+        shop_detail_address: req.body.shop_detail_address,
+        shop_image: img.url,
+        shop_content: req.body.shop_content,
+        user_id: req.body.user_id,
+      });
+    }
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      res
+        .status(400)
+        .send({ error: true, message: "Please provide all required field" });
+    } else {
+      Shop.update(req.params.id, new_shop, function (err, shop) {
+        if (err) res.send(err);
+        res.json({ message: "Shop successfully updated" });
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
