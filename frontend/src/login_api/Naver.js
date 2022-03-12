@@ -35,6 +35,7 @@ function LoginNaver() {
     let data = {
       user_email: naverUser.user.email,
       user_name: naverUser.user.name,
+      user_sns: "true",
     };
 
     axios.post("/api/user", data).then(function (res) {

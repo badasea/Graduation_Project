@@ -41,6 +41,7 @@ export default function Google() {
               user_email: profile.getEmail(),
               user_name: profile.getName(),
               user_img: profile.getImageUrl(),
+              user_sns: "true",
             };
 
             //console.log(data);

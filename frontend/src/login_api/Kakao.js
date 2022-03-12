@@ -29,6 +29,7 @@ function LoginKaKao() {
       user_email: response.profile.kakao_account.email,
       user_name: response.profile.kakao_account.profile.nickname,
       user_img: response.profile.kakao_account.profile.profile_image_url,
+      user_sns: "true",
     };
 
     axios.post("/api/user", data).then(function (res) {

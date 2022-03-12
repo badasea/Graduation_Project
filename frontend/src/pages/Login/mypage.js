@@ -425,19 +425,34 @@ export default function PersistentDrawerLeft() {
                       onChange={onNameHandler}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      name="password"
-                      label="비밀번호"
-                      type="password"
-                      id="password"
-                      autoComplete="new-password"
-                      value={password}
-                      onChange={onPasswordHandler}
-                    />
-                  </Grid>
+                  {session.data.user_sns !== "true" ? (
+                    <Grid item xs={12}>
+                      <TextField
+                        required
+                        fullWidth
+                        name="password"
+                        label="비밀번호"
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                        value={password}
+                        onChange={onPasswordHandler}
+                      />
+                    </Grid>
+                  ) : (
+                    <Grid item xs={12}>
+                      <TextField
+                        disabled
+                        required
+                        fullWidth
+                        name="password"
+                        label="SNS 계정에서 비밀번호를 수정해주세요."
+                        type="password"
+                        id="password"
+                        autoComplete="new-password"
+                      />
+                    </Grid>
+                  )}
                   <Grid item xs={12}>
                     <TextField
                       required
