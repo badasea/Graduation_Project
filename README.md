@@ -374,7 +374,7 @@ API 테스트 - Postman
 
 디자인 툴 - Pigma
 
-font : Sans TTF
+font : Gmarket Sans TTF
 
 형상 관리 - Github
 
