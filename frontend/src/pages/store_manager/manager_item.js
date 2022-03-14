@@ -29,15 +29,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
 import axios from "axios";
-
-import Modal from "../../components/store/modal";
-import { Image, Video, Transformation } from "cloudinary-react";
+import { Input } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -152,8 +151,6 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
-
   if (session === null) {
     login = false;
   } else {
@@ -166,7 +163,7 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data[0]);
+        // console.log(response.data[0]);
         setUser_id(response.data[0].shop_id);
       })
       .catch(function (error) {
@@ -233,6 +230,7 @@ export default function PersistentDrawerLeft() {
       .get(url)
       .then(function (response) {
         setItem(response.data);
+        setSearchResults(response.data);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -243,6 +241,18 @@ export default function PersistentDrawerLeft() {
     searchitem();
     searchuser();
   }, []);
+
+  const [searchTerm, setSearchTerm] = useState();
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  useEffect(() => {
+    const results = item.filter((data) =>
+      data.item_name.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -369,6 +379,16 @@ export default function PersistentDrawerLeft() {
             등록 상품 :<span className="main_logo"> {item.length}개</span>
           </p>
         </Typography>
+        <div align="right">
+          <Input
+            type="text"
+            placeholder="상품 찾기"
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <SearchIcon />
+        </div>
+        <br />
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="customized table">
             <TableHead>
@@ -412,7 +432,7 @@ export default function PersistentDrawerLeft() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {item.map((items) => (
+              {searchResults.map((items) => (
                 <TableRow
                   key={items.item_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

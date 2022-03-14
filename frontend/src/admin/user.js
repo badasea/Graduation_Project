@@ -12,8 +12,16 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { Grid } from "@mui/material";
+import { TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 import Button from "@mui/material/Button";
 
@@ -22,6 +30,8 @@ import Link from "@mui/material/Link";
 import Side from "../components/menu/side_admin";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Input } from "@mui/material";
+import { Avatar } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -61,6 +71,16 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#A267E7",
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -94,13 +114,24 @@ export default function PersistentDrawerLeft() {
 
   const [tableData, setTableData] = useState([]);
 
-  function user_form() {
+  const item_remove = (id) => {
+    //console.log(item[index].itemId)
+    axios
+      .delete(process.env.REACT_APP_API_URL + "/api/user/" + id, {})
+      .then((res) => {
+        document.location.href = "/admin/user";
+      })
+      .catch();
+  };
+
+  const [user, setUser] = useState([]);
+  function searchUser() {
     const url = process.env.REACT_APP_API_URL + "/api/user";
     axios
       .get(url)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setTableData(response.data);
+        setUser(response.data);
+        setSearchResults(response.data);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -108,19 +139,27 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
-    user_form();
+    searchUser();
   }, []);
 
-  const columns = [
-    { field: "user_id", width: 90 },
-    { field: "user_name", width: 100 },
-    { field: "user_email", width: 100 },
-    { field: "user_password", width: 100 },
-    { field: "user_type", width: 100 },
-    { field: "user_like_place", width: 100 },
-    { field: "user_like_type", width: 100 },
-    { field: "user_img", width: 100 },
-  ];
+  const [searchTerm, setSearchTerm] = useState();
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  useEffect(() => {
+    const results = user.filter((data) =>
+      data.user_name.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const edit = (item, e) => {
+    var session_edit = item;
+    console.log(session_edit);
+    window.sessionStorage.setItem("user_edit", JSON.stringify(session_edit));
+    document.location.href = "/admin_edit_user";
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -191,15 +230,149 @@ export default function PersistentDrawerLeft() {
             <p>USER DATA</p>
           </Link>
         </Typography>
-        <div style={{ height: 700, width: "100%" }}>
-          <DataGrid
-            getRowId={(tableData) => tableData.user_id}
-            rows={tableData}
-            columns={columns}
-            pageSize={10}
-            components={{ Toolbar: GridToolbar }}
+        <div align="right">
+          <Input
+            type="text"
+            placeholder="유저 검색"
+            value={searchTerm}
+            onChange={handleChange}
           />
+          <SearchIcon />
         </div>
+        <br />
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>
+                  <Link color="common.white" underline="none">
+                    ID
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Link color="common.white" underline="none">
+                    프로필 사진
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell>
+                  <Link color="common.white" underline="none">
+                    이름
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    이메일
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    비밀번호
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    유저타입
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    관심지역
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    관심업종
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    SNS 계정 여부
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    수정
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    삭제
+                  </Link>{" "}
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {searchResults.map((items) => (
+                <TableRow
+                  key={items.user_id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell>
+                    <p>{items.user_id}</p>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Avatar src={items.user_img}></Avatar>
+                  </TableCell>
+                  <TableCell>
+                    <p>{items.user_name}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_email}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_password}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_type}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_like_place}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_like_type}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_sns}</p>
+                  </TableCell>
+
+                  <TableCell align="right">
+                    <Button
+                      sx={{
+                        backgroundColor: "#A267E7",
+                      }}
+                      variant="contained"
+                      onClick={(e) => {
+                        edit(items, e);
+                      }}
+                      // onClick={openModal}
+                    >
+                      <Link color="common.white" underline="none">
+                        수정
+                      </Link>
+                    </Button>
+                    {/* <Modal open={modalOpen} close={closeModal}></Modal> */}
+                  </TableCell>
+                  <TableCell align="right">
+                    <Button
+                      sx={{
+                        backgroundColor: "#F00",
+                      }}
+                      onClick={(e) => {
+                        item_remove(items.user_id, e);
+                      }}
+                      variant="contained"
+                    >
+                      <Link color="common.white" underline="none">
+                        삭제
+                      </Link>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br />
       </Main>
     </Box>
   );
