@@ -19,7 +19,7 @@ import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
-import Side from "../components/menu/side_admin";
+import Side from "../../components/menu/side_admin";
 
 const drawerWidth = 240;
 
@@ -160,13 +160,6 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <div style={{ height: 300, width: "100%" }}>
-          <DataGrid
-            {...data}
-            loading={loading}
-            components={{ Toolbar: GridToolbar }}
-          />
-        </div>
       </Main>
     </Box>
   );

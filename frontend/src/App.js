@@ -60,11 +60,16 @@ import Map from "./pages/Shopping/map";
 
 // 관리자 시스템
 import Admin from "./admin/main";
-import AdminUser from "./admin/user";
-import AdminShop from "./admin/shop";
-import AdminItem from "./admin/item";
-import AdminOrder from "./admin/order";
-import AdminHelp from "./admin/help";
+import AdminUser from "./admin/user/user";
+import AdminUserEdit from "./admin/user/edit";
+import AdminShop from "./admin/shop/shop";
+import AdminShopEdit from "./admin/shop/edit";
+import AdminItem from "./admin/item/item";
+import AdminItemEdit from "./admin/item/edit";
+import AdminOrder from "./admin/order/order";
+import AdminOrderEdit from "./admin/order/edit";
+import AdminHelp from "./admin/help/help";
+import AdminHelpEdit from "./admin/help/edit";
 
 // 테스트
 import Test from "./pages/test";
@@ -129,6 +134,31 @@ function App() {
             <Route path="/admin/item" exact element={<AdminItem />}></Route>
             <Route path="/admin/order" exact element={<AdminOrder />}></Route>
             <Route path="/admin/help" exact element={<AdminHelp />}></Route>
+            <Route
+              path="/admin/user/edit"
+              exact
+              element={<AdminUserEdit />}
+            ></Route>
+            <Route
+              path="/admin/shop/edit"
+              exact
+              element={<AdminShopEdit />}
+            ></Route>
+            <Route
+              path="/admin/item/edit"
+              exact
+              element={<AdminItemEdit />}
+            ></Route>
+            <Route
+              path="/admin/order/edit"
+              exact
+              element={<AdminOrderEdit />}
+            ></Route>
+            <Route
+              path="/admin/help/edit"
+              exact
+              element={<AdminHelpEdit />}
+            ></Route>
           </Routes>
         </BrowserRouter>
       </BrowserView>
@@ -190,6 +220,31 @@ function App() {
             <Route path="/admin/item" exact element={<AdminItem />}></Route>
             <Route path="/admin/order" exact element={<AdminOrder />}></Route>
             <Route path="/admin/help" exact element={<AdminHelp />}></Route>
+            <Route
+              path="/admin/user/edit"
+              exact
+              element={<AdminUserEdit />}
+            ></Route>
+            <Route
+              path="/admin/shop/edit"
+              exact
+              element={<AdminShopEdit />}
+            ></Route>
+            <Route
+              path="/admin/item/edit"
+              exact
+              element={<AdminItemEdit />}
+            ></Route>
+            <Route
+              path="/admin/order/edit"
+              exact
+              element={<AdminOrderEdit />}
+            ></Route>
+            <Route
+              path="/admin/help/edit"
+              exact
+              element={<AdminHelpEdit />}
+            ></Route> 
           </Routes>
         </BrowserRouter>
       </MobileView>

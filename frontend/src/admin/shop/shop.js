@@ -27,13 +27,26 @@ import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
-import Side from "../components/menu/side_admin";
+import Side from "../../components/menu/side_admin";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Input } from "@mui/material";
 import { Avatar } from "@mui/material";
+import Modal from "@mui/material/Modal";
 
 const drawerWidth = 240;
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -117,16 +130,16 @@ export default function PersistentDrawerLeft() {
   const item_remove = (id) => {
     //console.log(item[index].itemId)
     axios
-      .delete(process.env.REACT_APP_API_URL + "/api/user/" + id, {})
+      .delete(process.env.REACT_APP_API_URL + "/api/shop/" + id, {})
       .then((res) => {
-        document.location.href = "/admin/user";
+        document.location.href = "/admin/shop";
       })
       .catch();
   };
 
   const [user, setUser] = useState([]);
   function searchUser() {
-    const url = process.env.REACT_APP_API_URL + "/api/user";
+    const url = process.env.REACT_APP_API_URL + "/api/shop";
     axios
       .get(url)
       .then(function (response) {
@@ -149,7 +162,7 @@ export default function PersistentDrawerLeft() {
   };
   useEffect(() => {
     const results = user.filter((data) =>
-      data.user_name.toLowerCase().includes(searchTerm)
+      data.shop_name.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
   }, [searchTerm]);
@@ -157,8 +170,8 @@ export default function PersistentDrawerLeft() {
   const edit = (item, e) => {
     var session_edit = item;
     console.log(session_edit);
-    window.sessionStorage.setItem("user_edit", JSON.stringify(session_edit));
-    document.location.href = "/admin_edit_user";
+    window.sessionStorage.setItem("admin_shop", JSON.stringify(session_edit));
+    document.location.href = "/admin/shop/edit";
   };
 
   return (
@@ -225,15 +238,17 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <br />
         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           <Link color="common.black" underline="none">
-            <p>USER DATA</p>
+            <p>SHOP DATA</p>
           </Link>
         </Typography>
+
         <div align="right">
           <Input
             type="text"
-            placeholder="유저 검색"
+            placeholder="가게 검색"
             value={searchTerm}
             onChange={handleChange}
           />
@@ -251,42 +266,52 @@ export default function PersistentDrawerLeft() {
                 </StyledTableCell>
                 <StyledTableCell>
                   <Link color="common.white" underline="none">
-                    프로필 사진
+                    가게 이미지
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell>
                   <Link color="common.white" underline="none">
-                    이름
+                    가게명
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    이메일
+                    사업자번호
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    비밀번호
+                    업종
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    유저타입
+                    가게번호
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    관심지역
+                    가게지역
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    관심업종
+                    가게위치
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    SNS 계정 여부
+                    가게상세주소
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    가게설명
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
+                    유저 ID
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
@@ -304,35 +329,41 @@ export default function PersistentDrawerLeft() {
             <TableBody>
               {searchResults.map((items) => (
                 <TableRow
-                  key={items.user_id}
+                  key={items.shop_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell>
-                    <p>{items.user_id}</p>
+                    <p>{items.shop_id}</p>
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <Avatar src={items.user_img}></Avatar>
+                    <Avatar src={items.shop_image}></Avatar>
                   </TableCell>
                   <TableCell>
-                    <p>{items.user_name}</p>
+                    <p>{items.shop_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.user_email}</p>
+                    <p>{items.shop_registration_num}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.user_password}</p>
+                    <p>{items.shop_business_type}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.user_type}</p>
+                    <p>{items.shop_phone}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.user_like_place}</p>
+                    <p>{items.shop_region}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.user_like_type}</p>
+                    <p>{items.shop_address}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.user_sns}</p>
+                    <p>{items.shop_detail_address}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.shop_content}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_id}</p>
                   </TableCell>
 
                   <TableCell align="right">
