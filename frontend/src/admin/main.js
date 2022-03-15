@@ -12,14 +12,38 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import Grid from "@mui/material/Grid";
 
 import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
 import Side from "../components/menu/side_admin";
+import Avatar from "@mui/material/Avatar";
+import axios from "axios";
+import { useState, useEffect, useRef } from "react";
+// card
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+
+// icon
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import BrushIcon from "@mui/icons-material/Brush";
+import CheckroomIcon from "@mui/icons-material/Checkroom";
+import FoodBankIcon from "@mui/icons-material/FoodBank";
+import { deepPurple } from "@mui/material/colors";
+
+import { Chart, registerables } from "chart.js";
+Chart.register(...registerables);
+
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
+  >
+    •
+  </Box>
+);
 
 const drawerWidth = 240;
 
@@ -90,6 +114,116 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
   };
 
+  const [shop, setshop] = useState([]);
+  function searchshop() {
+    const url = process.env.REACT_APP_API_URL + "/api/shop";
+    axios
+      .get(url)
+      .then(function (response) {
+        setshop(response.data);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
+  useEffect(() => {
+    searchshop();
+  }, []);
+
+  var Seongbuk = 0;
+  var Jongno = 0;
+  var Yeongdeungpo = 0;
+
+  var Hanbok = 0;
+  var Restaurant = 0;
+  var Craftshop = 0;
+  var Guitar = 0;
+
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_region === "성북구") {
+      Seongbuk++;
+    }
+  }
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_region === "종로구") {
+      Jongno++;
+    }
+  }
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_region === "영등포구") {
+      Yeongdeungpo++;
+    }
+  }
+
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_business_type === "한복점") {
+      Hanbok++;
+    }
+  }
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_business_type === "음식점") {
+      Restaurant++;
+    }
+  }
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_business_type === "공방") {
+      Craftshop++;
+    }
+  }
+  for (var i = 0; i < shop.length; i++) {
+    if (shop[i].shop_business_type === "기타") {
+      Guitar++;
+    }
+  }
+
+  const canvasDom = useRef(null);
+  useEffect(() => {
+    const ctx = canvasDom.current.getContext("2d");
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["영등포구", "성북구", "종로구"],
+        datasets: [
+          {
+            data: [30, 50, 100],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      },
+    });
+  }, []);
+
+  const canvasDom2 = useRef(null);
+  useEffect(() => {
+    const ctx = canvasDom2.current.getContext("2d");
+
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["음식점", "한복점", "공방", "기타"],
+        datasets: [
+          {
+            data: [300, 50, 100, 200],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+              "#a267e7",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      },
+    });
+  }, []);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -154,6 +288,175 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <br />
+        <Typography variant="h5" component="div">
+          <p>지역구 별 입점 분석</p>
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>영등포구</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar src="../../img/Yeongdeungpo-gu.png"></Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Yeongdeungpo}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={4}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>종로구</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar src="../../img/Jongno.jpg"></Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Jongno}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={4}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>성북구</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar src="../../img/sb.jpg"></Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Seongbuk}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
+        {/* 업종 */}
+        <br />
+        <Typography variant="h5" component="div">
+          <p>업종 별 입점 분석</p>
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>음식점</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                      <FoodBankIcon />
+                    </Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Restaurant}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>한복점</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                      <CheckroomIcon />
+                    </Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Hanbok}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>공방</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                      <BrushIcon />
+                    </Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Craftshop}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Grid container spacing={3}>
+                  <Grid item xs={8}>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      <p>기타</p>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                      <MoreHorizIcon />
+                    </Avatar>
+                  </Grid>
+                </Grid>
+                <Typography variant="h5" component="div">
+                  <p>{Guitar}</p>
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
+        {/* 그래프 */}
+        <br />
+        <Typography variant="h5" component="div">
+          <p>그래프</p>
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <canvas ref={canvasDom} width="50%" height="50%"></canvas>
+          </Grid>
+          <Grid item xs={6}>
+            <canvas ref={canvasDom2} width="50%" height="50%"></canvas>
+          </Grid>
+        </Grid>
       </Main>
     </Box>
   );
