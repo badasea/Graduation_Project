@@ -46,6 +46,70 @@ Item.findById = function (id, result) {
   );
 };
 
+// 특정 업종 상품 검색1
+Item.findfood = function (id, result) {
+  mysql.query(
+    "Select t1.*, t2.*,t3.user_img from item t1, shop t2, user t3 where t1.shop_id = t2.shop_id and t2.user_id = t3.user_id and t2.shop_business_type = '음식점' and t2.shop_region = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 특정 업종 상품 검색2
+Item.findhanbok = function (id, result) {
+  mysql.query(
+    "Select t1.*, t2.*,t3.user_img from item t1, shop t2, user t3 where t1.shop_id = t2.shop_id and t2.user_id = t3.user_id and t2.shop_business_type = '한복점' and t2.shop_region = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 특정 업종 상품 검색3
+Item.findcraftshop = function (id, result) {
+  mysql.query(
+    "Select t1.*, t2.*,t3.user_img from item t1, shop t2, user t3 where t1.shop_id = t2.shop_id and t2.user_id = t3.user_id and t2.shop_business_type = '공방' and t2.shop_region = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 특정 업종 상품 검색4
+Item.findetc = function (id, result) {
+  mysql.query(
+    "Select t1.*, t2.*,t3.user_img from item t1, shop t2, user t3 where t1.shop_id = t2.shop_id and t2.user_id = t3.user_id and t2.shop_business_type = '기타' and t2.shop_region = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 특정 상품 검색
 Item.findItemId = function (id, result) {
   mysql.query("Select * from item where item_id = ?", id, function (err, res) {

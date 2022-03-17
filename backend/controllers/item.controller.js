@@ -11,6 +11,31 @@ exports.findAll = function (req, res) {
   });
 };
 
+exports.findfood = function (req, res) {
+  Item.findfood(req.params.id, function (err, item) {
+    if (err) res.send(err);
+    res.json(item);
+  });
+};
+exports.findhanbok = function (req, res) {
+  Item.findhanbok(req.params.id, function (err, item) {
+    if (err) res.send(err);
+    res.json(item);
+  });
+};
+exports.findcraftshop = function (req, res) {
+  Item.findcraftshop(req.params.id, function (err, item) {
+    if (err) res.send(err);
+    res.json(item);
+  });
+};
+exports.findetc = function (req, res) {
+  Item.findetc(req.params.id, function (err, item) {
+    if (err) res.send(err);
+    res.json(item);
+  });
+};
+
 exports.findById = function (req, res) {
   Item.findById(req.params.id, function (err, item) {
     if (err) res.send(err);

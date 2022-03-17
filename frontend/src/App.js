@@ -19,7 +19,16 @@ import Mypage from "./pages/Login/mypage";
 // 지역별 페이지
 import Local from "./pages/category/local";
 import MobileLocal from "./mobile_pages/category/local";
-import Food from "./pages/category/food";
+
+import Food from "./pages/category/detail/food";
+import Hanbok from "./pages/category/detail/hanbok";
+import Craftshop from "./pages/category/detail/craftshop";
+import Etc from "./pages/category/detail/etc";
+
+import MobileFood from "./mobile_pages/category/detail/food";
+import MobileHanbok from "./mobile_pages/category/detail/hanbok";
+import MobileCraftshop from "./mobile_pages/category/detail/craftshop";
+import MobileEtc from "./mobile_pages/category/detail/etc";
 
 // 업종별 페이지
 import Businesstype from "./pages/category/businesstype";
@@ -86,7 +95,11 @@ function App() {
             <Route path="/mypage" element={<Mypage />}></Route>
             <Route path="/local" element={<Local />}></Route>
             <Route path="/local/:id" element={<Local />}></Route>
+
             <Route path="/local/:id/food" element={<Food />}></Route>
+            <Route path="/local/:id/hanbok" element={<Hanbok />}></Route>
+            <Route path="/local/:id/craftshop" element={<Craftshop />}></Route>
+            <Route path="/local/:id/etc" element={<Etc />}></Route>
 
             <Route path="/businesstype" element={<Businesstype />}></Route>
             <Route path="/businesstype/:id" element={<Businesstype />}></Route>
@@ -172,6 +185,14 @@ function App() {
             <Route path="/local" element={<MobileLocal />}></Route>
             <Route path="/local/:id" element={<MobileLocal />}></Route>
 
+            <Route path="/local/:id/food" element={<MobileFood />}></Route>
+            <Route path="/local/:id/hanbok" element={<MobileHanbok />}></Route>
+            <Route
+              path="/local/:id/craftshop"
+              element={<MobileCraftshop />}
+            ></Route>
+            <Route path="/local/:id/etc" element={<MobileEtc />}></Route>
+
             <Route
               path="/businesstype"
               element={<MobileBusinesstype />}
@@ -244,7 +265,7 @@ function App() {
               path="/admin/help/edit"
               exact
               element={<AdminHelpEdit />}
-            ></Route> 
+            ></Route>
           </Routes>
         </BrowserRouter>
       </MobileView>

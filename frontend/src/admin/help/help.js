@@ -33,6 +33,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@mui/material";
 import { Avatar } from "@mui/material";
 import Modal from "@mui/material/Modal";
+import Pagination from "../../components/List/Pagination";
 
 const drawerWidth = 240;
 
@@ -174,6 +175,13 @@ export default function PersistentDrawerLeft() {
     document.location.href = "/admin/help/edit";
   };
 
+  const [limit, setLimit] = useState(8);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -298,7 +306,7 @@ export default function PersistentDrawerLeft() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {searchResults.map((items) => (
+              {searchResults.slice(offset, offset + limit).map((items) => (
                 <TableRow
                   key={items.help_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -356,6 +364,12 @@ export default function PersistentDrawerLeft() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Pagination
+          total={searchResults.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
         <br />
       </Main>
     </Box>
