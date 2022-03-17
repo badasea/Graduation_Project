@@ -21,7 +21,7 @@ function ItemCard() {
     axios
       .get(url)
       .then(function (response) {
-        //console.log(response.data);
+        console.log(response.data);
         setItem(response.data);
       })
       .catch(function (error) {
@@ -62,7 +62,7 @@ function ItemCard() {
             <Container fixed>
               <img
                 style={{ width: "100%", height: "100%" }}
-                src="../../img/test1.jpg"
+                src={items.item_img}
               />
               <Typography
                 sx={{ fontSize: 13 }}
@@ -77,6 +77,7 @@ function ItemCard() {
 
               <Stack direction="row" spacing={2}>
                 <Avatar
+                  src={items.user_img}
                   sx={{ width: 24, height: 24, bgcolor: deepPurple[500] }}
                 ></Avatar>
                 <Typography sx={{ fontSize: 14 }} color="#202121" gutterBottom>
