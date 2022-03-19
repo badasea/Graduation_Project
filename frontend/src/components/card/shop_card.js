@@ -108,7 +108,7 @@ function ShopCard() {
                   color="#A267E7"
                   underline="none"
                 >
-                  <p>2022 .05 .04 LIVE OPEN</p>
+                  <p>LIVE OPEN</p>
                 </Typography>
                 <Typography
                   sx={{ fontSize: 14 }}

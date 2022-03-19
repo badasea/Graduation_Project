@@ -34,6 +34,8 @@ import FoodBankIcon from "@mui/icons-material/FoodBank";
 import { deepPurple } from "@mui/material/colors";
 
 import { Chart, registerables } from "chart.js";
+
+import DonutChart from "../components/chart/DonutChart";
 Chart.register(...registerables);
 
 const bull = (
@@ -115,6 +117,7 @@ export default function PersistentDrawerLeft() {
   };
 
   const [shop, setshop] = useState([]);
+
   function searchshop() {
     const url = process.env.REACT_APP_API_URL + "/api/shop";
     axios
@@ -140,16 +143,26 @@ export default function PersistentDrawerLeft() {
   var Craftshop = 0;
   var Guitar = 0;
 
+  var donutData = [
+    { name: "영등포구", value: 10 },
+    { name: "성북구", value: 20 },
+    { name: "종로구", value: 30 },
+  ];
+
   for (var i = 0; i < shop.length; i++) {
     if (shop[i].shop_region === "성북구") {
       Seongbuk++;
+      donutData[0].value++;
     }
   }
+
+  console.log(donutData[0].value);
   for (var i = 0; i < shop.length; i++) {
     if (shop[i].shop_region === "종로구") {
       Jongno++;
     }
   }
+
   for (var i = 0; i < shop.length; i++) {
     if (shop[i].shop_region === "영등포구") {
       Yeongdeungpo++;
@@ -457,6 +470,7 @@ export default function PersistentDrawerLeft() {
             <canvas ref={canvasDom2} width="50%" height="50%"></canvas>
           </Grid>
         </Grid>
+        <DonutChart data={donutData} />
       </Main>
     </Box>
   );

@@ -263,11 +263,6 @@ export default function PersistentDrawerLeft() {
           {login === false ? (
             <div>
               <Button size="medium">
-                <Link href="/signup" color="common.black" underline="none">
-                  REGISTER
-                </Link>
-              </Button>
-              <Button size="medium">
                 <Link href="/login" color="common.black" underline="none">
                   LOG IN
                 </Link>
@@ -464,34 +459,66 @@ export default function PersistentDrawerLeft() {
                     >
                       <p>{items.item_price} 원</p>
                     </Typography>
-                    <Grid container spacing={3}>
-                      <Grid item xs={6}>
-                        <Button
-                          onClick={(e) => {
-                            detail_shop(items.shop_id, items.item_id, e);
-                          }}
-                          fullWidth
-                          color="secondary"
-                          variant="outlined"
-                        >
-                          <p>상품 구매하기</p>
-                        </Button>
+                    {login === false ? (
+                      <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                          <Button
+                            onClick={(e) => {
+                              detail_shop(items.shop_id, items.item_id, e);
+                            }}
+                            fullWidth
+                            color="secondary"
+                            variant="outlined"
+                          >
+                            <p>상품 구매하기</p>
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            disabled
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#A267E7",
+                            }}
+                            variant="contained"
+                            onClick={(e) => {
+                              webcam(items.user_id, e);
+                            }}
+                          >
+                            <p>로그인 후 소통해보세요.</p>
+                          </Button>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={6}>
-                        <Button
-                          fullWidth
-                          sx={{
-                            backgroundColor: "#A267E7",
-                          }}
-                          variant="contained"
-                          onClick={(e) => {
-                            webcam(items.shop_id, e);
-                          }}
-                        >
-                          <p>방송보기</p>
-                        </Button>
+                    ) : (
+                      <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                          <Button
+                            onClick={(e) => {
+                              detail_shop(items.shop_id, items.item_id, e);
+                            }}
+                            fullWidth
+                            color="secondary"
+                            variant="outlined"
+                          >
+                            <p>상품 구매하기</p>
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            fullWidth
+                            sx={{
+                              backgroundColor: "#A267E7",
+                            }}
+                            variant="contained"
+                            onClick={(e) => {
+                              webcam(items.user_id, e);
+                            }}
+                          >
+                            <p>방송보기</p>
+                          </Button>
+                        </Grid>
                       </Grid>
-                    </Grid>
+                    )}
                   </Container>
                   <br />
                 </Grid>

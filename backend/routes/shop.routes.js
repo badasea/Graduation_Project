@@ -7,14 +7,9 @@ router.get("/", ShopController.findAll);
 router.get("/:id", ShopController.findById);
 router.get("/user/:id", ShopController.findById2);
 
-router.get("/jongno/:id", ShopController.findByjongno);
-router.get("/seongbuck/:id", ShopController.findByseongbuck);
-router.get("/yeongdeungpo/:id", ShopController.findByyeongdeungpo);
-
-router.get("/craftshop/:id", ShopController.findBycraftshop);
-router.get("/etc/:id", ShopController.findByetc);
-router.get("/food/:id", ShopController.findByfood);
-router.get("/hanbok/:id", ShopController.findByhanbok);
+router.get("/jongno/:id", ShopController.findJongno);
+router.get("/seongbuck/:id", ShopController.findSeongbuk);
+router.get("/yeongdeungpo/:id", ShopController.findYeongdeungpo);
 
 router.post("/", ShopController.create);
 router.delete("/:id", ShopController.delete);

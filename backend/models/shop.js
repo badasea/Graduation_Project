@@ -57,6 +57,54 @@ Shop.findById2 = function (id, result) {
   });
 };
 
+// 영등포 가게 찾기
+Shop.findYeongdeungpo = function (id, result) {
+  mysql.query(
+    "Select t2.*,t3.user_img from shop t2, user t3 where t2.user_id = t3.user_id and t2.shop_region = '영등포구' and t2.shop_business_type = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 성북 가게 찾기
+Shop.findSeongbuk = function (id, result) {
+  mysql.query(
+    "Select t2.*,t3.user_img from shop t2, user t3 where t2.user_id = t3.user_id and t2.shop_region = '성북구' and t2.shop_business_type = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 종로 가게 찾기
+Shop.findJongno = function (id, result) {
+  mysql.query(
+    "Select t2.*,t3.user_img from shop t2, user t3 where t2.user_id = t3.user_id and t2.shop_region = '종로구' and t2.shop_business_type = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 가게 등록
 Shop.create = function (newEmp, result) {
   mysql.query("INSERT INTO shop set ?", newEmp, function (err, res) {
@@ -101,128 +149,6 @@ Shop.update = function (id, shop, result) {
       if (err) {
         console.log("error: ", err);
         result(null, err);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-// 지역 검색
-Shop.findByjongno = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_region = '종로구' and shop_business_type = ?",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-Shop.findByseongbuck = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_region = '성북구' and shop_business_type = ?",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-Shop.findByyeongdeungpo = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_region = '영등포구' and shop_business_type = ?",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-// 업종 검색
-Shop.findByfood = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_business_type = '음식점' and shop_region = ? ",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-Shop.findBycraftshop = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_business_type = '공방' and shop_region = ? ",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-Shop.findByetc = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_business_type = '기타' and shop_region = ? ",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-Shop.findByhanbok = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_business_type = 한복 and shop_region = ? ",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-      } else {
-        result(null, res);
-      }
-    }
-  );
-};
-
-Shop.findByhanbok = function (id, result) {
-  mysql.query(
-    "Select * from shop where shop_business_type = 한복 and shop_region = ? ",
-    id,
-    function (err, res) {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
       } else {
         result(null, res);
       }

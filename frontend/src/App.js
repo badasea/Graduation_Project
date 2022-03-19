@@ -20,6 +20,14 @@ import Mypage from "./pages/Login/mypage";
 import Local from "./pages/category/local";
 import MobileLocal from "./mobile_pages/category/local";
 
+import Jongno from "./pages/category/detail/jongno";
+import Seongbuck from "./pages/category/detail/seongbuck";
+import Yeongdeungpo from "./pages/category/detail/yeongdeungpo";
+
+import MobileJongno from "./mobile_pages/category/detail/jongno";
+import MobileSeongbuck from "./mobile_pages/category/detail/seongbuck";
+import MobileYeongdeungpo from "./mobile_pages/category/detail/yeongdeungpo";
+
 import Food from "./pages/category/detail/food";
 import Hanbok from "./pages/category/detail/hanbok";
 import Craftshop from "./pages/category/detail/craftshop";
@@ -104,8 +112,13 @@ function App() {
             <Route path="/businesstype" element={<Businesstype />}></Route>
             <Route path="/businesstype/:id" element={<Businesstype />}></Route>
             <Route
-              path="/businesstype/:id/:id"
-              element={<Businesstype />}
+              path="/businesstype/:id/seongbuck"
+              element={<Seongbuck />}
+            ></Route>
+            <Route path="/businesstype/:id/jongno" element={<Jongno />}></Route>
+            <Route
+              path="/businesstype/:id/yeongdeungpo"
+              element={<Yeongdeungpo />}
             ></Route>
 
             <Route path="/shop" element={<Shop />}></Route>
@@ -200,6 +213,18 @@ function App() {
             <Route
               path="/businesstype/:id"
               element={<MobileBusinesstype />}
+            ></Route>
+            <Route
+              path="/businesstype/:id/seongbuck"
+              element={<MobileSeongbuck />}
+            ></Route>
+            <Route
+              path="/businesstype/:id/jongno"
+              element={<MobileJongno />}
+            ></Route>
+            <Route
+              path="/businesstype/:id/yeongdeungpo"
+              element={<MobileYeongdeungpo />}
             ></Route>
 
             <Route path="/shop" element={<Shop />}></Route>

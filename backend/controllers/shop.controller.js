@@ -26,51 +26,22 @@ exports.findById2 = function (req, res) {
 };
 
 // 지역
-exports.findByjongno = function (req, res) {
-  Shop.findByjongno(req.params.id, function (err, shop) {
+exports.findJongno = function (req, res) {
+  Shop.findJongno(req.params.id, function (err, shop) {
     if (err) res.send(err);
     res.json(shop);
   });
 };
 
-exports.findByseongbuck = function (req, res) {
-  Shop.findByseongbuck(req.params.id, function (err, shop) {
+exports.findSeongbuk = function (req, res) {
+  Shop.findSeongbuk(req.params.id, function (err, shop) {
     if (err) res.send(err);
     res.json(shop);
   });
 };
 
-exports.findByyeongdeungpo = function (req, res) {
-  Shop.findByyeongdeungpo(req.params.id, function (err, shop) {
-    if (err) res.send(err);
-    res.json(shop);
-  });
-};
-
-// 업종
-exports.findByhanbok = function (req, res) {
-  Shop.findByhanbok(req.params.id, function (err, shop) {
-    if (err) res.send(err);
-    res.json(shop);
-  });
-};
-
-exports.findByetc = function (req, res) {
-  Shop.findByetc(req.params.id, function (err, shop) {
-    if (err) res.send(err);
-    res.json(shop);
-  });
-};
-
-exports.findByfood = function (req, res) {
-  Shop.findByfood(req.params.id, function (err, shop) {
-    if (err) res.send(err);
-    res.json(shop);
-  });
-};
-
-exports.findBycraftshop = function (req, res) {
-  Shop.findBycraftshop(req.params.id, function (err, shop) {
+exports.findYeongdeungpo = function (req, res) {
+  Shop.findYeongdeungpo(req.params.id, function (err, shop) {
     if (err) res.send(err);
     res.json(shop);
   });

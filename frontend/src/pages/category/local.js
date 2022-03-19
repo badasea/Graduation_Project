@@ -26,12 +26,6 @@ import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
-import ItemList from "../../components/card/item_card";
-
-import JongnoFoodList from "../../components/card/type/food/jongno";
-import YeongdeungpoFoodList from "../../components/card/type/food/yeongdeungpo";
-import SeongbuckFoodList from "../../components/card/type/food/seongbuck";
-
 import { Container } from "@mui/material";
 import { Paper } from "@mui/material";
 
@@ -338,9 +332,7 @@ export default function PersistentDrawerLeft() {
                   전체보기
                 </Link>
               </Grid>
-              <Grid item xs={10}>
-                <ItemList />
-              </Grid>
+              <Grid item xs={10}></Grid>
             </Grid>{" "}
             <Divider />
             <Typography variant="h6" color="common.white">
@@ -360,9 +352,7 @@ export default function PersistentDrawerLeft() {
                   전체보기
                 </Link>
               </Grid>
-              <Grid item xs={10}>
-                <ItemList />
-              </Grid>
+              <Grid item xs={10}></Grid>
             </Grid>{" "}
             <Divider />
             <Typography variant="h6" color="common.white">
@@ -384,9 +374,7 @@ export default function PersistentDrawerLeft() {
                   </Link>
                 </Typography>
               </Grid>
-              <Grid item xs={10}>
-                <ItemList />
-              </Grid>
+              <Grid item xs={10}></Grid>
             </Grid>{" "}
             <Divider />
           </Container>

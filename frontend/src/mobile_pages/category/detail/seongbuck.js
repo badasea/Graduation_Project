@@ -148,17 +148,20 @@ export default function PersistentDrawerLeft() {
   const place = window.location.href;
   //console.log(place);
   const arr = place.split("/");
-  // console.log(arr[4]);
+  //   console.log(arr[4]);
 
-  var api_location;
-  if (arr[4] === "seongbuck") {
-    api_location = "성북구";
+  var api_type;
+  if (arr[4] === "restaurant") {
+    api_type = "음식점";
   }
-  if (arr[4] === "yeongdeungpo") {
-    api_location = "영등포구";
+  if (arr[4] === "hanbok") {
+    api_type = "한복점";
   }
-  if (arr[4] === "jongno") {
-    api_location = "종로구";
+  if (arr[4] === "craftshop") {
+    api_type = "공방";
+  }
+  if (arr[4] === "etc") {
+    api_type = "기타";
   }
 
   var login;
@@ -173,34 +176,15 @@ export default function PersistentDrawerLeft() {
     login = true;
   }
 
-  // 배포
-  const webcam = (id, e) => {
-    e.preventDefault();
-    window.open(
-      "/webcam/" + id,
-      "",
-      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
-    );
-  };
-
-  const detail_shop = (shop_id, item_id, e) => {
-    e.preventDefault();
-    window.open(
-      "/detail_item/" + shop_id + "/" + item_id,
-      "",
-      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
-    );
-  };
-
-  const [item, setItem] = useState([]);
-  function searchitem() {
+  const [shop, setShop] = useState([]);
+  function searchshop() {
     const url =
-      process.env.REACT_APP_API_URL + "/api/item/craftshop/" + api_location;
+      process.env.REACT_APP_API_URL + "/api/shop/" + arr[5] + "/" + api_type;
     axios
       .get(url)
       .then(function (response) {
-        //console.log(response.data);
-        setItem(response.data);
+        console.log(response.data);
+        setShop(response.data);
         setSearchResults(response.data);
       })
       .catch(function (error) {
@@ -209,8 +193,27 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
-    searchitem();
+    searchshop();
   }, []);
+
+  // 배포
+  const webcam = (id, e) => {
+    e.preventDefault();
+    window.open(
+      "/webcam/" + id,
+      "",
+      "width=1200, height=1200, toolbar=no, menubar=no, resizable=yes"
+    );
+  };
+
+  const detail_shop = (id, e) => {
+    e.preventDefault();
+    window.open(
+      "/detail_shop/" + id,
+      "",
+      "width=600, height=800, toolbar=no, menubar=no, resizable=yes"
+    );
+  };
 
   const [searchTerm, setSearchTerm] = useState();
   const [searchResults, setSearchResults] = useState([]);
@@ -218,18 +221,17 @@ export default function PersistentDrawerLeft() {
     setSearchTerm(event.target.value);
   };
   useEffect(() => {
-    const results = item.filter((data) =>
-      data.item_name.toLowerCase().includes(searchTerm)
+    const results = shop.filter((data) =>
+      data.shop_name.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
   }, [searchTerm]);
 
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(4);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
   const handlePageChange = (page) => {
     setPage(page);
-    console.log(page);
   };
 
   https: return (
@@ -262,11 +264,6 @@ export default function PersistentDrawerLeft() {
           </Typography>
           {login === false ? (
             <div>
-              <Button size="medium">
-                <Link href="/signup" color="common.black" underline="none">
-                  REGISTER
-                </Link>
-              </Button>
               <Button size="medium">
                 <Link href="/login" color="common.black" underline="none">
                   LOG IN
@@ -355,26 +352,23 @@ export default function PersistentDrawerLeft() {
               <Link color="common.black" underline="none">
                 <p>
                   <span className="main_logo">LI.CO.</span> IN{" "}
-                  {arr[4] === "seongbuck" ? "성북" : <></>}
-                  {arr[4] === "yeongdeungpo" ? "영등포" : <></>}
-                  {arr[4] === "jongno" ? "종로" : <></>}
+                  {arr[5] === "seongbuck" ? "성북" : <></>}
+                  {arr[5] === "yeongdeungpo" ? "영등포" : <></>}
+                  {arr[5] === "jongno" ? "종로" : <></>}
                 </p>
               </Link>
             </Typography>
-            {/* <Typography variant="h6" color="common.white">
-              <Link color="common.black" underline="none">
-                <p>
-                  <span className="main_logo">LI.CO.</span> 음식점
-                </p>
-              </Link>
-            </Typography> */}
 
             <Grid container spacing={3}>
               <Grid item xs={2}>
                 <Typography variant="h8" color="common.white">
                   <Link color="common.black" underline="none">
                     <p>
-                      <span className="main_logo">LI.CO.</span> 공방
+                      <span className="main_logo">LI.CO. </span>
+                      {arr[4] === "restaurant" ? "음식점" : <></>}
+                      {arr[4] === "hanbok" ? "한복점" : <></>}
+                      {arr[4] === "craftshop" ? "공방" : <></>}
+                      {arr[4] === "etc" ? "기타" : <></>}
                     </p>
                   </Link>
                 </Typography>
@@ -400,7 +394,7 @@ export default function PersistentDrawerLeft() {
             <div align="right">
               <Input
                 type="text"
-                placeholder="상품 검색"
+                placeholder="가게 검색"
                 value={searchTerm}
                 onChange={handleChange}
               />
@@ -410,85 +404,74 @@ export default function PersistentDrawerLeft() {
             <Divider />
             <br />
             <Grid container spacing={2}>
-              {searchResults.slice(offset, offset + limit).map((items) => (
-                <Grid item xs={3}>
+              {searchResults.slice(offset, offset + limit).map((shops) => (
+                <Grid item xs={12}>
                   <Container fixed>
                     <img
                       style={{ width: "100%", height: "100%" }}
-                      src={items.item_img}
+                      src={shops.shop_image}
                     />
                     <Typography
-                      sx={{ fontSize: 13 }}
+                      sx={{ fontSize: 12 }}
                       align="right"
-                      color="#B2B2B2"
+                      color="#A267E7"
                       underline="none"
+                    ></Typography>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
                     >
-                      <p>{items.shop_address}</p>
+                      <Stack direction="row" spacing={2}>
+                        <Avatar
+                          src={shops.user_img}
+                          sx={{
+                            width: 24,
+                            height: 24,
+                          }}
+                        ></Avatar>
+                        <Link color="common.black" underline="none">
+                          {shops.shop_address}
+                        </Link>
+                      </Stack>
+                    </Typography>
+                    <Divider light />
+                    <Typography sx={{ fontSize: 18 }} underline="none">
+                      <p> {shops.shop_name}</p>
                     </Typography>
 
-                    <Stack direction="row" spacing={2}>
-                      <Avatar
-                        src={items.user_img}
-                        sx={{ width: 24, height: 24, bgcolor: deepPurple[500] }}
-                      ></Avatar>
-                      <Typography
-                        sx={{ fontSize: 14 }}
-                        color="#202121"
-                        gutterBottom
-                      >
-                        <Link color="common.black" underline="none">
-                          {items.shop_name}
-                        </Link>
-                      </Typography>
-                    </Stack>
-
-                    <Divider light />
                     <Typography
-                      sx={{ fontSize: 18 }}
+                      sx={{ fontSize: 14 }}
                       color="#202121"
                       underline="none"
                     >
-                      <p>{items.item_name}</p>
-                    </Typography>
-                    <Typography
-                      sx={{ fontSize: 14 }}
-                      color="#B2B2B2"
-                      underline="none"
-                    >
-                      <p>{items.item_content}</p>
-                    </Typography>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="#A267E7"
-                      underline="none"
-                    >
-                      <p>{items.item_price} 원</p>
+                      <p>{shops.shop_content}</p>
                     </Typography>
                     {login === false ? (
                       <Grid container spacing={3}>
                         <Grid item xs={6}>
                           <Button
                             onClick={(e) => {
-                              detail_shop(items.shop_id, items.item_id, e);
+                              detail_shop(shops.shop_id, e);
                             }}
                             fullWidth
                             color="secondary"
                             variant="outlined"
                           >
-                            <p>상품 구매하기</p>
+                            <p>가게 입장하기</p>
                           </Button>
                         </Grid>
                         <Grid item xs={6}>
                           <Button
                             disabled
+                            onClick={(e) => {
+                              webcam(shops.user_id, e);
+                            }}
                             fullWidth
                             sx={{
                               backgroundColor: "#A267E7",
                             }}
                             variant="contained"
-                            onClick={(e) => {
-                              webcam(items.user_id, e);
-                            }}
                           >
                             <p>로그인 후 소통해보세요.</p>
                           </Button>
@@ -499,25 +482,25 @@ export default function PersistentDrawerLeft() {
                         <Grid item xs={6}>
                           <Button
                             onClick={(e) => {
-                              detail_shop(items.shop_id, items.item_id, e);
+                              detail_shop(shops.shop_id, e);
                             }}
                             fullWidth
                             color="secondary"
                             variant="outlined"
                           >
-                            <p>상품 구매하기</p>
+                            <p>가게 입장하기</p>
                           </Button>
                         </Grid>
                         <Grid item xs={6}>
                           <Button
+                            onClick={(e) => {
+                              webcam(shops.user_id, e);
+                            }}
                             fullWidth
                             sx={{
                               backgroundColor: "#A267E7",
                             }}
                             variant="contained"
-                            onClick={(e) => {
-                              webcam(items.user_id, e);
-                            }}
                           >
                             <p>방송보기</p>
                           </Button>
