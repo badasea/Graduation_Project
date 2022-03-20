@@ -33,6 +33,23 @@ Shop.findAll = function (result) {
   );
 };
 
+// 지역 카운트
+Shop.findcount = function (id, result) {
+  mysql.query(
+    "SELECT shop_region as name, COUNT(*) as value FROM shop group by shop_region",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 특정 가게 검색
 Shop.findById = function (id, result) {
   mysql.query("Select * from shop where shop_id = ? ", id, function (err, res) {

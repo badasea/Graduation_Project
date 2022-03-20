@@ -11,6 +11,8 @@ router.get("/jongno/:id", ShopController.findJongno);
 router.get("/seongbuck/:id", ShopController.findSeongbuk);
 router.get("/yeongdeungpo/:id", ShopController.findYeongdeungpo);
 
+router.get("/count/:id", ShopController.findcount);
+
 router.post("/", ShopController.create);
 router.delete("/:id", ShopController.delete);
 router.put("/:id", ShopController.update);

@@ -35,6 +35,8 @@ import { deepPurple } from "@mui/material/colors";
 
 import { Chart, registerables } from "chart.js";
 
+import { useSelector } from "react-redux";
+
 import DonutChart from "../components/chart/DonutChart";
 Chart.register(...registerables);
 
@@ -95,6 +97,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  const state = useSelector((state) => state);
+
+  //액션(type을 가진 객체) 생성함수
+  //API를 호출해서 JSON데이터를 가져오고 리듀서에 해당 상태를 변화시키기 위한 TYPE을 지정해줌
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -133,6 +140,8 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     searchshop();
   }, []);
+
+  console.log(state.chart);
 
   var Seongbuk = 0;
   var Jongno = 0;
@@ -200,7 +209,7 @@ export default function PersistentDrawerLeft() {
         labels: ["영등포구", "성북구", "종로구"],
         datasets: [
           {
-            data: [30, 50, 100],
+            data: state.chart.place_data,
             backgroundColor: [
               "rgb(255, 99, 132)",
               "rgb(54, 162, 235)",
@@ -223,7 +232,7 @@ export default function PersistentDrawerLeft() {
         labels: ["음식점", "한복점", "공방", "기타"],
         datasets: [
           {
-            data: [300, 50, 100, 200],
+            data: state.chart.type_data,
             backgroundColor: [
               "rgb(255, 99, 132)",
               "rgb(54, 162, 235)",
@@ -470,7 +479,6 @@ export default function PersistentDrawerLeft() {
             <canvas ref={canvasDom2} width="50%" height="50%"></canvas>
           </Grid>
         </Grid>
-        <DonutChart data={donutData} />
       </Main>
     </Box>
   );
