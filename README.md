@@ -353,7 +353,7 @@ Dev.Ops : Docker, Docker Compose
 
 Package
 
-Front-End : Npm( React-router-dom,react-device-detect, cross-env, Material-Ui, axios, react-google-login, react-kakao-login, slick, chart.js... )
+Front-End : Npm( React-router-dom,react-device-detect, cross-env, Material-Ui, axios, react-google-login, react-kakao-login, slick, canvasjs... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan, cloudinary... )
 
