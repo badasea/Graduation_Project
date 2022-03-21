@@ -1,134 +1,71 @@
-import React, { Component } from "react";
-import * as d3 from "d3";
-const colors = [
-  "#8ce8ad",
-  "#57e188",
-  "#34c768",
-  "#2db757",
-  "#27acaa",
-  "#42c9c2",
-  "#60e6e1",
-  "#93f0e6",
-  "#87d3f2",
-  "#4ebeeb",
-  "#35a4e8",
-  "#188ce5",
-  "#542ea5",
-  "#724bc3",
-  "#9c82d4",
-  "#c981b2",
-  "#b14891",
-  "#ff6d00",
-  "#ff810a",
-  "#ff9831",
-  "#ffb46a",
-  "#ff9a91",
-  "#ff736a",
-  "#f95d54",
-  "#ff4136",
-  "#c4c4cd",
+import React, { PureComponent } from "react";
+import { useSelector } from "react-redux";
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+
+// const todoList = useSelector((state) => state.todoReducer);
+const todoList = (state) => ({
+  counter: state.counter,
+});
+const data = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
 ];
 
-class DonutChart extends Component {
-  constructor(props) {
-    super(props);
-    this.chRef = React.createRef();
-  }
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
-  // Chart load after component Mount
-  componentDidMount() {
-    this.drawChart();
-  }
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-  // DrawChart
-  drawChart() {
-    const { data } = this.props;
-    const svgContainer = d3.select(this.chRef.current).node();
-    const width = svgContainer.getBoundingClientRect().width;
-    const height = width;
-    const margin = 15;
-    let radius = Math.min(width, height) / 2 - margin;
-    // legend Position
-    let legendPosition = d3
-      .arc()
-      .innerRadius(radius / 1.75)
-      .outerRadius(radius);
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
-    // Create SVG
-    const svg = d3
-      .select(this.chRef.current)
-      .append("svg")
-      .attr("width", "100%")
-      .attr("height", "100%")
-      .attr("viewBox", "0 0 " + width + " " + width)
-      //.attr('preserveAspectRatio','xMinYMin')
-      .append("g")
-      .attr(
-        "transform",
-        "translate(" +
-          Math.min(width, height) / 2 +
-          "," +
-          Math.min(width, height) / 2 +
-          ")"
-      );
-
-    let pie = d3.pie().value((d) => d.value);
-    let data_ready = pie(data);
-
-    // Donut partition
-    svg
-      .selectAll("whatever")
-      .data(data_ready)
-      .enter()
-      .append("path")
-      .attr(
-        "d",
-        d3
-          .arc()
-          .innerRadius(radius / 1.75) // This is the size of the donut hole
-          .outerRadius(radius)
-      )
-      .attr("fill", (d) => colors[d.index])
-      .attr("stroke", "#fff")
-      .style("stroke-width", "2")
-      .style("opacity", "0.8");
-
-    // Legend group and legend name
-    svg
-      .selectAll("mySlices")
-      .data(data_ready)
-      .enter()
-      .append("g")
-      .attr("transform", (d) => `translate(${legendPosition.centroid(d)})`)
-      .attr("class", "legend-g")
-      .style("user-select", "none")
-      .append("text")
-      .text((d) => d.data.name)
-      .style("text-anchor", "middle")
-      .style("font-weight", 700)
-      .style("fill", "#222")
-      .style("font-size", 14);
-
-    //Label for value
-    svg
-      .selectAll(".legend-g")
-      .append("text")
-      .text((d) => {
-        return d.data.value;
-      })
-      .style("fill", "#444")
-      .style("font-size", 12)
-      .style("text-anchor", "middle")
-      .attr("y", 16);
-  }
-
+export default class Example extends PureComponent {
   render() {
     return (
-      <>
-        <div ref={this.chRef}></div>{" "}
-      </>
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart width={400} height={400}>
+          <Pie
+            data={todoList}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
     );
   }
 }
-
-export default DonutChart;

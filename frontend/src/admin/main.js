@@ -35,9 +35,12 @@ import { deepPurple } from "@mui/material/colors";
 
 import { Chart, registerables } from "chart.js";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { getList } from "./../redux/ChartReducer";
 
 import DonutChart from "../components/chart/DonutChart";
+
 Chart.register(...registerables);
 
 const bull = (
@@ -97,11 +100,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
-  const state = useSelector((state) => state);
-
-  //액션(type을 가진 객체) 생성함수
-  //API를 호출해서 JSON데이터를 가져오고 리듀서에 해당 상태를 변화시키기 위한 TYPE을 지정해줌
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -141,7 +139,9 @@ export default function PersistentDrawerLeft() {
     searchshop();
   }, []);
 
-  console.log(state.chart);
+  const todoList = useSelector((state) => state.todoReducer);
+
+  console.log(todoList);
 
   var Seongbuk = 0;
   var Jongno = 0;
@@ -152,20 +152,12 @@ export default function PersistentDrawerLeft() {
   var Craftshop = 0;
   var Guitar = 0;
 
-  var donutData = [
-    { name: "영등포구", value: 10 },
-    { name: "성북구", value: 20 },
-    { name: "종로구", value: 30 },
-  ];
-
   for (var i = 0; i < shop.length; i++) {
     if (shop[i].shop_region === "성북구") {
       Seongbuk++;
-      donutData[0].value++;
     }
   }
 
-  console.log(donutData[0].value);
   for (var i = 0; i < shop.length; i++) {
     if (shop[i].shop_region === "종로구") {
       Jongno++;
@@ -209,7 +201,7 @@ export default function PersistentDrawerLeft() {
         labels: ["영등포구", "성북구", "종로구"],
         datasets: [
           {
-            data: state.chart.place_data,
+            data: todoList.map((x) => x),
             backgroundColor: [
               "rgb(255, 99, 132)",
               "rgb(54, 162, 235)",
@@ -232,7 +224,7 @@ export default function PersistentDrawerLeft() {
         labels: ["음식점", "한복점", "공방", "기타"],
         datasets: [
           {
-            data: state.chart.type_data,
+            data: todoList.map((x) => x),
             backgroundColor: [
               "rgb(255, 99, 132)",
               "rgb(54, 162, 235)",
@@ -245,6 +237,8 @@ export default function PersistentDrawerLeft() {
       },
     });
   }, []);
+
+  // sample
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -479,6 +473,7 @@ export default function PersistentDrawerLeft() {
             <canvas ref={canvasDom2} width="50%" height="50%"></canvas>
           </Grid>
         </Grid>
+        {/* <DonutChart /> */}
       </Main>
     </Box>
   );
