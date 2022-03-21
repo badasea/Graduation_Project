@@ -18,7 +18,7 @@ import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 
-import Side from "../components/menu/side_admin";
+import Side from "../../components/menu/side_admin";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -35,8 +35,8 @@ import CheckroomIcon from "@mui/icons-material/Checkroom";
 import FoodBankIcon from "@mui/icons-material/FoodBank";
 import { deepPurple } from "@mui/material/colors";
 
-import DonutChart_place from "../components/chart/DonutChart_place";
-import DonutChart_type from "../components/chart/DonutChart_type";
+import DonutChart_place from "../../components/chart/DonutChart_place";
+import DonutChart_type from "../../components/chart/DonutChart_type";
 
 const drawerWidth = 240;
 
@@ -244,7 +244,7 @@ export default function PersistentDrawerLeft() {
         <DonutChart_place />
 
         <Grid container spacing={3}>
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid
@@ -289,7 +289,7 @@ export default function PersistentDrawerLeft() {
             </Card>
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid
@@ -333,7 +333,7 @@ export default function PersistentDrawerLeft() {
             </Card>
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid
@@ -385,7 +385,7 @@ export default function PersistentDrawerLeft() {
         <DonutChart_type />
 
         <Grid container spacing={3}>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid
@@ -430,7 +430,7 @@ export default function PersistentDrawerLeft() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid
@@ -474,7 +474,7 @@ export default function PersistentDrawerLeft() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid
@@ -519,7 +519,7 @@ export default function PersistentDrawerLeft() {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Card sx={{ height: "100%" }}>
               <CardContent>
                 <Grid

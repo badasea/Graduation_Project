@@ -18,6 +18,13 @@ exports.findcount = function (req, res) {
   });
 };
 
+exports.findcount2 = function (req, res) {
+  Shop.findcount2(req.params.id, function (err, shop) {
+    if (err) res.send(err);
+    res.json(shop);
+  });
+};
+
 exports.findById = function (req, res) {
   Shop.findById(req.params.id, function (err, shop) {
     if (err) res.send(err);

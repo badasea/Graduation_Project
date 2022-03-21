@@ -239,7 +239,9 @@ export default function PersistentDrawerLeft() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
+    if (pre_img === "") {
+      pre_img = session.data.user_img;
+    }
     let user = {
       user_password: data.get("password"),
       user_name: data.get("Name"),

@@ -36,7 +36,24 @@ Shop.findAll = function (result) {
 // 지역 카운트
 Shop.findcount = function (id, result) {
   mysql.query(
-    "SELECT shop_region as name, COUNT(*) as value FROM shop group by shop_region",
+    "SELECT shop_region as label, COUNT(*) as y FROM shop group by shop_region",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        console.log(res);
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 업종 카운트
+Shop.findcount2 = function (id, result) {
+  mysql.query(
+    "SELECT shop_business_type as label, COUNT(*) as y FROM shop group by shop_business_type",
     id,
     function (err, res) {
       if (err) {

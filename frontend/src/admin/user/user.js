@@ -405,6 +405,11 @@ export default function PersistentDrawerLeft() {
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
+                    주소
+                  </Link>{" "}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Link color="common.white" underline="none">
                     유저타입
                   </Link>{" "}
                 </StyledTableCell>
@@ -455,6 +460,9 @@ export default function PersistentDrawerLeft() {
                   </TableCell>
                   <TableCell align="right">
                     <p>{items.user_password}</p>
+                  </TableCell>
+                  <TableCell align="right">
+                    <p>{items.user_address}</p>
                   </TableCell>
                   <TableCell align="right">
                     <p>{items.user_type}</p>

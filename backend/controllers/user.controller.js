@@ -68,29 +68,60 @@ exports.update = function (req, res) {
 };
 
 exports.edit = async function (req, res) {
-  const img = await cloudinary.v2.uploader.upload(req.body.user_img, {
-    folder: "user/",
-  });
-  console.log("test :", img);
-  const new_user = new User({
-    user_name: req.body.user_name,
-    user_email: req.body.user_email,
-    user_password: req.body.user_password,
-    user_address: req.body.user_address,
-    user_type: req.body.user_type,
-    user_like_place: req.body.user_like_place,
-    user_like_type: req.body.user_like_type,
-    user_img: img.url,
-  });
-  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
-    res
-      .status(400)
-      .send({ error: true, message: "Please provide all required field" });
-  } else {
-    await User.edit(req.params.id, new_user, function (err, user) {
-      if (err) res.send(err);
-      res.json({ message: "User successfully updated" });
-    });
+  try {
+    var new_user;
+
+    if (req.body.user_img[0] === "h") {
+      new_user = new User({
+        user_name: req.body.user_name,
+        user_email: req.body.user_email,
+        user_password: req.body.user_password,
+        user_address: req.body.user_address,
+        user_type: req.body.user_type,
+        user_like_place: req.body.user_like_place,
+        user_like_type: req.body.user_like_type,
+        user_img: req.body.user_img,
+      });
+    }
+    if (req.body.user_img[0] === "") {
+      new_user = new User({
+        user_name: req.body.user_name,
+        user_email: req.body.user_email,
+        user_password: req.body.user_password,
+        user_address: req.body.user_address,
+        user_type: req.body.user_type,
+        user_like_place: req.body.user_like_place,
+        user_like_type: req.body.user_like_type,
+        user_img: req.body.user_img,
+      });
+    } else {
+      const img = await cloudinary.v2.uploader.upload(req.body.user_img, {
+        folder: "user/",
+      });
+      console.log("test :", img);
+      new_user = new User({
+        user_name: req.body.user_name,
+        user_email: req.body.user_email,
+        user_password: req.body.user_password,
+        user_address: req.body.user_address,
+        user_type: req.body.user_type,
+        user_like_place: req.body.user_like_place,
+        user_like_type: req.body.user_like_type,
+        user_img: img.url,
+      });
+    }
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+      res
+        .status(400)
+        .send({ error: true, message: "Please provide all required field" });
+    } else {
+      await User.edit(req.params.id, new_user, function (err, user) {
+        if (err) res.send(err);
+        res.json({ message: "User successfully updated" });
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 

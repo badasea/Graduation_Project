@@ -108,14 +108,16 @@ User.update = function (id, user, result) {
 
 User.edit = function (id, user, result) {
   mysql.query(
-    "UPDATE user SET user_name=?,user_password=?,user_address=?,user_like_place=?,user_like_type=?,user_img=? WHERE user_id = ?",
+    "UPDATE user SET user_name=?, user_email=?, user_password=?,user_address=?,user_like_place=?,user_like_type=?,user_img=?,user_type=? WHERE user_id = ?",
     [
       user.user_name,
+      user.user_email,
       user.user_password,
       user.user_address,
       user.user_like_place,
       user.user_like_type,
       user.user_img,
+      user.user_type,
       id,
     ],
     function (err, res) {

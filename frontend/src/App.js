@@ -88,6 +88,8 @@ import AdminOrderEdit from "./admin/order/edit";
 import AdminHelp from "./admin/help/help";
 import AdminHelpEdit from "./admin/help/edit";
 
+import MobileAdmin from "./mobile_pages/admin/main";
+
 // 테스트
 import Test from "./pages/test";
 
@@ -260,7 +262,7 @@ function App() {
             <Route path="/map/:roomId" element={<Map />} />
 
             {/* admin */}
-            <Route path="/admin" exact element={<Admin />}></Route>
+            <Route path="/admin" exact element={<MobileAdmin />}></Route>
             <Route path="/admin/user" exact element={<AdminUser />}></Route>
             <Route path="/admin/shop" exact element={<AdminShop />}></Route>
             <Route path="/admin/item" exact element={<AdminItem />}></Route>

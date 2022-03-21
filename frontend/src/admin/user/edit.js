@@ -17,21 +17,14 @@ import TextField from "@mui/material/TextField";
 import { ThemeProvider } from "@mui/material";
 import { Container } from "@mui/material";
 import { Avatar } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Link from "@mui/material/Link";
 
 import Side from "../../components/menu/side";
 
 //
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import ListItemText from "@mui/material/ListItemText";
-import Select from "@mui/material/Select";
 import axios from "axios";
 
 const drawerWidth = 240;
@@ -76,7 +69,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
@@ -90,10 +82,6 @@ const MenuProps = {
     },
   },
 };
-
-const locations = ["성북구", "영등포구", "종로구"];
-
-const likes = ["음식점", "한복", "공방", "기타"];
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
@@ -117,47 +105,34 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
   };
 
-  const logout = () => {
-    document.location.href = "/";
-  };
-
-  const mypage = () => {
-    document.location.href = "/mypage";
-  };
-
-  const cart = () => {
-    document.location.href = "/cart";
-  };
-
-  const buylist = () => {
-    document.location.href = "/buylist";
-  };
-  const help = () => {
-    document.location.href = "/help";
-  };
-  const manager_item = () => {
-    document.location.href = "/manager_item";
-  };
-
   var login;
 
   var img;
 
+  const back = () => {
+    document.location.href = "/admin/user";
+  };
   const session = JSON.parse(window.sessionStorage.getItem("data"));
-  const session_edit = JSON.parse(window.sessionStorage.getItem("edit"));
-
-  // console.log(session_edit);
+  const session_edit = JSON.parse(window.sessionStorage.getItem("admin_user"));
+  console.log(session_edit);
 
   const [user, setUser] = useState([]);
-  const [name, setName] = useState(session_edit.item_name);
-  const [password, setPassword] = useState(session_edit.item_content);
-  const [address, setAddress] = useState(session_edit.item_price);
-  const [like_place, setLike_place] = useState(session_edit.item_stock);
-  const [image, setImage] = useState(session_edit.item_img);
+  const [email, setemail] = useState(session_edit.user_email);
+  const [name, setName] = useState(session_edit.user_name);
+  const [password, setPassword] = useState(session_edit.user_password);
+  const [address, setAddress] = useState(session_edit.user_address);
+  const [like_place, setLike_place] = useState(session_edit.user_like_place);
+  const [like_type, setLike_type] = useState(session_edit.user_like_type);
+  const [type, settype] = useState(session_edit.user_type);
 
   // 이름
   const onNameHandler = (event) => {
     setName(event.currentTarget.value);
+  };
+
+  // 이메일
+  const onEmailHandler = (event) => {
+    setemail(event.currentTarget.value);
   };
 
   // 비밀번호
@@ -170,11 +145,22 @@ export default function PersistentDrawerLeft() {
     setAddress(event.currentTarget.value);
   };
 
-  // 스톡
+  // 관심 지역
   const onPlaceHandler = (event) => {
     setLike_place(event.currentTarget.value);
   };
-  var [shop_img, setshop_img] = useState();
+
+  // 관심 업종
+  const onTypeHandler = (event) => {
+    setLike_type(event.currentTarget.value);
+  };
+
+  // 유저 타입
+  const onSellerHandler = (event) => {
+    settype(event.currentTarget.value);
+  };
+
+  const [image, setImage] = useState(session_edit.user_img);
 
   var [pre_img, setPreviewImg] = useState("");
   const onimgHandler = (event) => {
@@ -196,26 +182,29 @@ export default function PersistentDrawerLeft() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (pre_img === "") {
-      pre_img = session_edit.item_img;
+      pre_img = session_edit.user_img;
     }
     var user = {
-      item_content: data.get("password"),
-      item_name: data.get("Name"),
-      item_price: data.get("address"),
-      item_stock: data.get("stock"),
-      item_img: pre_img,
-      shop_id: session_edit.shop_id,
+      user_password: data.get("password"),
+      user_name: data.get("Name"),
+      user_address: data.get("address"),
+      user_email: data.get("Email"),
+      user_like_place: data.get("stock"),
+      user_img: pre_img,
+      user_id: session_edit.user_id,
+      user_like_type: data.get("like_type"),
+      user_type: data.get("type"),
     };
     console.log(user);
     await axios
-      .put(
-        process.env.REACT_APP_API_URL + "/api/item/" + session_edit.item_id,
+      .post(
+        process.env.REACT_APP_API_URL + "/api/user/" + session_edit.user_id,
         user
       )
       .then((res) => {
         console.log(res.data);
-        alert("상품 정보가 수정 되었습니다.");
-        document.location.href = "/manager_item";
+        alert("유저 데이터가 수정 되었습니다.");
+        document.location.href = "/admin/user";
       })
       .catch();
   };
@@ -236,73 +225,20 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon color="secondary" />
           </IconButton>
-          <Typography
-            // textAlign={"center"}
-            variant="h5"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          >
-            <Link href="/" color="common.black" underline="none">
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            <Link href="/admin" color="common.black" underline="none">
               <p>
-                <span className="main_logo">LI.CO.</span> MARKET
+                <span className="main_logo">LI.CO.</span> MARKET ADMIN SYSTEM
               </p>
             </Link>
           </Typography>
-          {login === false ? (
-            <div>
-              <Button size="medium">
-                <Link href="/signup" color="common.black" underline="none">
-                  REGISTER
-                </Link>
-              </Button>
-              <Button size="medium">
-                <Link href="/login" color="common.black" underline="none">
-                  LOG IN
-                </Link>
-              </Button>
-            </div>
-          ) : (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="secondary"
-              >
-                {img !== undefined ? (
-                  <AccountCircleIcon
-                    sx={{ width: 46, height: 46 }}
-                    color="secondary"
-                  />
-                ) : (
-                  <Avatar src={session.data.user_img}></Avatar>
-                )}
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={mypage}>마이페이지</MenuItem>
-                <MenuItem onClick={cart}>장바구니</MenuItem>
-                <MenuItem onClick={buylist}>주문 목록</MenuItem>
-                <MenuItem onClick={help}>고객센터</MenuItem>
-                <MenuItem onClick={logout}>로그아웃</MenuItem>
-              </Menu>
-            </div>
-          )}
+          <div>
+            <Button size="medium">
+              <Link href="/" color="common.black" underline="none">
+                LOG OUT
+              </Link>
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -350,7 +286,7 @@ export default function PersistentDrawerLeft() {
               }}
             >
               <Typography component="h1" variant="h5">
-                <p>상품 수정</p>
+                <p>데이터 수정</p>
               </Typography>
               <Avatar sx={{ width: 100, height: 100 }} src={image}></Avatar>
 
@@ -360,19 +296,27 @@ export default function PersistentDrawerLeft() {
                 onSubmit={handleSubmit}
                 sx={{ mt: 3 }}
               >
-                <input
-                  align="right"
-                  accept="image/*"
-                  type="file"
-                  value={shop_img}
-                  onChange={onimgHandler}
-                />
+                <input align="right" accept="image/*" type="file" />
                 <br />
                 <br />
 
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <TextField
+                      label="이메일"
+                      autoComplete="given-name"
+                      name="Email"
+                      required
+                      fullWidth
+                      id="Email"
+                      autoFocus
+                      value={email}
+                      onChange={onEmailHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="이름"
                       autoComplete="given-name"
                       name="Name"
                       required
@@ -385,6 +329,7 @@ export default function PersistentDrawerLeft() {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      label="비밀번호"
                       required
                       fullWidth
                       name="password"
@@ -396,6 +341,7 @@ export default function PersistentDrawerLeft() {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      label="주소"
                       required
                       fullWidth
                       name="address"
@@ -406,6 +352,7 @@ export default function PersistentDrawerLeft() {
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
+                      label="관심지역"
                       required
                       fullWidth
                       name="stock"
@@ -413,6 +360,30 @@ export default function PersistentDrawerLeft() {
                       autoComplete="new-password"
                       value={like_place}
                       onChange={onPlaceHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="관심업종"
+                      required
+                      fullWidth
+                      name="like_type"
+                      id="like_type"
+                      autoComplete="new-password"
+                      value={like_type}
+                      onChange={onTypeHandler}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      label="유저타입"
+                      required
+                      fullWidth
+                      name="type"
+                      id="type"
+                      autoComplete="new-password"
+                      value={type}
+                      onChange={onSellerHandler}
                     />
                   </Grid>
                 </Grid>
@@ -423,11 +394,11 @@ export default function PersistentDrawerLeft() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2, backgroundColor: "#A267E7" }}
                 >
-                  <p>상품 수정 하기</p>
+                  <p>데이터 수정 하기</p>
                 </Button>
               </Box>
               <Button
-                onClick={manager_item}
+                onClick={back}
                 fullWidth
                 size="large"
                 variant="contained"
