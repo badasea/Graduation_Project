@@ -22,7 +22,7 @@ import { useState } from "react";
 
 import Link from "@mui/material/Link";
 
-import Side from "../../components/menu/side";
+import Side from "../../components/menu/side_admin";
 
 //
 import axios from "axios";
@@ -114,7 +114,7 @@ export default function PersistentDrawerLeft() {
   };
   const session = JSON.parse(window.sessionStorage.getItem("data"));
   const session_edit = JSON.parse(window.sessionStorage.getItem("admin_user"));
-  console.log(session_edit);
+  // console.log(session_edit);
 
   const [user, setUser] = useState([]);
   const [email, setemail] = useState(session_edit.user_email);
