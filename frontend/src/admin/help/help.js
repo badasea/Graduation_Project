@@ -284,7 +284,7 @@ export default function PersistentDrawerLeft() {
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    처리상태
+                    주문날짜
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
@@ -321,7 +321,7 @@ export default function PersistentDrawerLeft() {
                     <p>{items.help_content}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{items.help_state}</p>
+                    <p>{items.help_date}</p>
                   </TableCell>
                   <TableCell align="right">
                     <p>{items.help_user_id}</p>
@@ -350,7 +350,7 @@ export default function PersistentDrawerLeft() {
                         backgroundColor: "#F00",
                       }}
                       onClick={(e) => {
-                        item_remove(items.user_id, e);
+                        item_remove(items.help_id, e);
                       }}
                       variant="contained"
                     >

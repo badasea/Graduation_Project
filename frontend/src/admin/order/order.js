@@ -379,7 +379,7 @@ export default function PersistentDrawerLeft() {
                         backgroundColor: "#F00",
                       }}
                       onClick={(e) => {
-                        item_remove(items.user_id, e);
+                        item_remove(items.order_id, e);
                       }}
                       variant="contained"
                     >

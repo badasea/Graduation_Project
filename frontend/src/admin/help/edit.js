@@ -110,7 +110,7 @@ export default function PersistentDrawerLeft() {
   var img;
 
   const back = () => {
-    document.location.href = "/admin/item";
+    document.location.href = "/admin/help";
   };
   const session = JSON.parse(window.sessionStorage.getItem("data"));
   const session_edit = JSON.parse(window.sessionStorage.getItem("admin_help"));
@@ -119,12 +119,6 @@ export default function PersistentDrawerLeft() {
   const [title, settitle] = useState(session_edit.help_title);
 
   const [content, setcontent] = useState(session_edit.help_content);
-  const [state, setstate] = useState(session_edit.help_state);
-
-  // 상품 재고
-  const onStateHandler = (event) => {
-    setstate(event.currentTarget.value);
-  };
 
   // 상품 설명
   const onContentHandler = (event) => {
@@ -149,7 +143,6 @@ export default function PersistentDrawerLeft() {
     var user = {
       help_title: data.get("title"),
       help_content: data.get("content"),
-      help_state: data.get("state"),
       help_id: session_edit.help_id,
       help_user_id: session_edit.help_user_id,
     };
@@ -280,18 +273,6 @@ export default function PersistentDrawerLeft() {
                       id="content"
                       value={content}
                       onChange={onContentHandler}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <TextField
-                      label="상태"
-                      required
-                      fullWidth
-                      name="state"
-                      id="state"
-                      value={state}
-                      onChange={onStateHandler}
                     />
                   </Grid>
                 </Grid>
