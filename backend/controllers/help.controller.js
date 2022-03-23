@@ -18,7 +18,7 @@ exports.findById = function (req, res) {
 };
 
 exports.create = function (req, res) {
-  const new_user = new Order(req.body);
+  const new_user = new Help(req.body);
   //handles null error
 
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
@@ -52,7 +52,7 @@ exports.update = function (req, res) {
       .status(400)
       .send({ error: true, message: "Please provide all required field" });
   } else {
-    Help.update(req.params.id, new User(req.body), function (err, user) {
+    Help.update(req.params.id, new Help(req.body), function (err, user) {
       if (err) res.send(err);
       res.json({ message: "User successfully updated" });
     });

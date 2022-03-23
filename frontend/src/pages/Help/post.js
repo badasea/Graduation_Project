@@ -22,12 +22,9 @@ import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 
 //
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
@@ -149,8 +146,8 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-  const post = () => {
-    document.location.href = "/help/post";
+  const back = () => {
+    document.location.href = "/help";
   };
 
   var login;
@@ -159,60 +156,53 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
-
   if (session === null) {
     login = false;
   } else {
     login = true;
   }
 
-  const [helps, setHelp] = useState([]);
-  function searchhelp() {
-    const url = process.env.REACT_APP_API_URL + "/api/help";
-    axios
-      .get(url)
-      .then(function (response) {
-        setHelp(response.data);
-        setSearchResults(response.data);
+  const [title, settitle] = useState("");
+  const [content, setcontent] = useState("");
+  // 제목
+  const onTitleHandler = (event) => {
+    settitle(event.currentTarget.value);
+  };
+  // 내용
+  const onContentHandler = (event) => {
+    setcontent(event.currentTarget.value);
+  };
+
+  let today = new Date();
+
+  let year = today.getFullYear();
+  let month = ("0" + (today.getMonth() + 1)).slice(-2);
+  let day = ("0" + today.getDate()).slice(-2);
+
+  let dateString = year + "" + month + "" + day;
+
+  let hours = ("0" + today.getHours()).slice(-2);
+  let minutes = ("0" + today.getMinutes()).slice(-2);
+  let seconds = ("0" + today.getSeconds()).slice(-2);
+
+  let timeString = hours + ":" + minutes + ":" + seconds;
+
+  const post = async () => {
+    let help = {
+      help_title: title,
+      help_content: content,
+      help_user_id: session.data.user_id,
+      help_user_name: session.data.user_name,
+      help_date: dateString + " " + timeString,
+    };
+
+    await axios
+      .post(process.env.REACT_APP_API_URL + "/api/help", help, {})
+      .then((res) => {
+        //console.log(res.data);
+        document.location.href = "/help";
       })
-      .catch(function (error) {
-        //console.log("실패");
-      });
-  }
-
-  useEffect(() => {
-    searchhelp();
-  }, []);
-  const [searchTerm, setSearchTerm] = useState();
-  const [searchResults, setSearchResults] = useState([]);
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-  useEffect(() => {
-    const results = helps.filter((data) =>
-      data.help_title.toLowerCase().includes(searchTerm)
-    );
-    setSearchResults(results);
-  }, [searchTerm]);
-
-  const edit = (item, e) => {
-    var session_edit = item;
-    window.sessionStorage.setItem("help", JSON.stringify(session_edit));
-    document.location.href = "/help/edit";
-  };
-
-  const detail = (item, e) => {
-    var session_edit = item;
-    window.sessionStorage.setItem("help", JSON.stringify(session_edit));
-    document.location.href = "/help/detail";
-  };
-
-  const [limit, setLimit] = useState(8);
-  const [page, setPage] = useState(1);
-  const offset = (page - 1) * limit;
-  const handlePageChange = (page) => {
-    setPage(page);
+      .catch();
   };
   return (
     <Box sx={{ display: "flex" }}>
@@ -332,130 +322,59 @@ export default function PersistentDrawerLeft() {
       >
         <DrawerHeader />
         <Typography sx={{ fontSize: 36 }} color="#202121" underline="none">
-          <p>고객 센터</p>
+          <p>고객 센터 문의</p>
         </Typography>
-        <Typography sx={{ fontSize: 24 }} color="#202121" underline="none">
-          <p>
-            문의 :<span className="main_logo"> {helps.length}건</span>
-          </p>
-        </Typography>
-        <div align="right">
-          <Input
-            type="text"
-            placeholder="문의 검색"
-            value={searchTerm}
-            onChange={handleChange}
-          />
-          <SearchIcon />
-        </div>
-        <br />
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>
-                  <Link color="common.white" underline="none">
-                    제목
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Link color="common.white" underline="none">
-                    내용
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell>
-                  <Link color="common.white" underline="none">
-                    작성자
-                  </Link>{" "}
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    문의날짜
-                  </Link>{" "}
-                </StyledTableCell>
-
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    비고
-                  </Link>{" "}
-                </StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {searchResults.slice(offset, offset + limit).map((items) => (
-                <TableRow
-                  key={items.help_id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell>
-                    <Link
-                      href="/help/detail"
-                      onClick={(e) => {
-                        detail(items, e);
-                      }}
-                      color="common.black"
-                      underline="none"
-                    >
-                      <p>{items.help_title}</p>
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <p>{items.help_content}</p>
-                  </TableCell>
-                  <TableCell>
-                    <p>{items.help_user_name}</p>
-                  </TableCell>
-                  <TableCell align="right">
-                    <p>{items.help_date}</p>
-                  </TableCell>
-
-                  {session.data.user_id === items.help_user_id ? (
-                    <TableCell align="right">
-                      <Button
-                        sx={{
-                          backgroundColor: "#A267E7",
-                        }}
-                        variant="contained"
-                        onClick={(e) => {
-                          edit(items, e);
-                        }}
-                        // onClick={openModal}
-                      >
-                        <Link color="common.white" underline="none">
-                          수정
-                        </Link>
-                      </Button>
-                    </TableCell>
-                  ) : (
-                    <></>
-                  )}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Pagination
-          total={searchResults.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
+        <Typography sx={{ fontSize: 20 }} color="#202121" underline="none">
+          <p>제목 </p>
+        </Typography>{" "}
+        <TextField
+          id="outlined-basic"
+          label="제목을 입력해주세요."
+          variant="outlined"
+          style={{ width: "100%" }}
+          onChange={onTitleHandler}
+          value={title}
         />
         <br />
-
+        <Typography sx={{ fontSize: 20 }} color="#202121" underline="none">
+          <p>내용 </p>
+        </Typography>{" "}
+        <TextareaAutosize
+          aria-label="empty textarea"
+          placeholder="내용을 입력해주세요."
+          style={{ width: "100%", height: "100%" }}
+          onChange={onContentHandler}
+          value={content}
+        />
         <br />
-        <Box textAlign="center">
-          <Button
-            onClick={post}
-            type="submit"
-            sx={{
-              width: "50%",
-              backgroundColor: "#A267E7",
-            }}
-            variant="contained"
-          >
-            <p>문의 하기</p>
-          </Button>
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Button
+              onClick={post}
+              type="submit"
+              sx={{
+                width: "100%",
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+            >
+              <p>동록 하기</p>
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              onClick={back}
+              type="submit"
+              sx={{
+                width: "100%",
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+            >
+              <p>취소 하기</p>
+            </Button>
+          </Grid>
+        </Grid>
       </Main>
     </Box>
   );

@@ -21,7 +21,6 @@ import Button from "@mui/material/Button";
 
 //
 import { Container } from "@mui/material";
-import { Stack } from "@mui/material";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -34,10 +33,6 @@ import { Grid } from "@mui/material";
 
 import Link from "@mui/material/Link";
 import { useRef, useEffect } from "react";
-
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 
 import Side from "../../components/menu/side";
 import { Chart, registerables } from "chart.js";
@@ -419,38 +414,7 @@ export default function PersistentDrawerLeft() {
           </Grid>
         </Grid>
         <br />
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <FormControl sx={{ width: "20%" }}>
-              <InputLabel required id="demo-simple-select-label">
-                <Link color="common.black" underline="none">
-                  연도 선택하기
-                </Link>
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-              >
-                <MenuItem value={2022}>
-                  <Link color="common.black" underline="none">
-                    2022
-                  </Link>
-                </MenuItem>
-                <MenuItem value={2023}>
-                  <Link color="common.black" underline="none">
-                    2023
-                  </Link>
-                </MenuItem>
-                <MenuItem value={2024}>
-                  <Link color="common.black" underline="none">
-                    2024
-                  </Link>
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
-        <br />
+
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <canvas ref={canvasDom} width="50%" height="50%"></canvas>
@@ -472,37 +436,7 @@ export default function PersistentDrawerLeft() {
         <Typography sx={{ fontSize: 32 }} color="#202121" underline="none">
           <p>주문 목록</p>
         </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <FormControl sx={{ width: "20%" }}>
-              <InputLabel required id="demo-simple-select-label">
-                <Link color="common.black" underline="none">
-                  연도 선택하기
-                </Link>
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-              >
-                <MenuItem value={2022}>
-                  <Link color="common.black" underline="none">
-                    2022
-                  </Link>
-                </MenuItem>
-                <MenuItem value={2023}>
-                  <Link color="common.black" underline="none">
-                    2023
-                  </Link>
-                </MenuItem>
-                <MenuItem value={2024}>
-                  <Link color="common.black" underline="none">
-                    2024
-                  </Link>
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-        </Grid>
+
         <br />
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">

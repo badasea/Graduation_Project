@@ -6,8 +6,9 @@ let Help = function (help) {
   this.help_id = help.help_id;
   this.help_title = help.help_title;
   this.help_content = help.help_content;
-  this.help_state = help.help_state;
+  this.help_date = help.help_date;
   this.help_user_id = help.help_user_id;
+  this.help_user_name = help.help_user_name;
 };
 
 // 모든 사용자 검색
@@ -64,14 +65,15 @@ Help.delete = function (id, result) {
 };
 
 // 사용자 업데이트
-Help.update = function (id, user, result) {
+Help.update = function (id, help, result) {
   mysql.query(
-    "UPDATE help SET help_title=?,help_content=?,help_state=?,help_user_id=? WHERE order_id = ?",
+    "UPDATE help SET help_title=?,help_content=?,help_date=?,help_user_id=?,help_user_name=? WHERE help_id = ?",
     [
-      (help_title = help.help_title),
-      (help_content = help.help_content),
-      (help_state = help.help_state),
-      (help_user_id = help.help_user_id),
+      help.help_title,
+      help.help_content,
+      help.help_date,
+      help.help_user_id,
+      help.help_user_name,
       id,
     ],
     function (err, res) {

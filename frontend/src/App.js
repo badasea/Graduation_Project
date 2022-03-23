@@ -2,7 +2,9 @@
 import * as React from "react";
 import "./styles/video.css";
 
+// 라우터
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+// 운영체제 구분
 import { BrowserView, MobileView } from "react-device-detect";
 
 // 메인 페이지
@@ -67,6 +69,9 @@ import Ordersales from "./pages/store_manager/order_sales";
 
 // 고객 센터
 import Help from "./pages/Help/help";
+import HelpPost from "./pages/Help/post";
+import HelpEdit from "./pages/Help/edit";
+import HelpDetail from "./pages/Help/detail";
 
 // 소통
 import Video from "./pages/communication/webcam";
@@ -150,6 +155,9 @@ function App() {
             <Route path="/BuyList" element={<BuyList />}></Route>
 
             <Route path="/help" element={<Help />}></Route>
+            <Route path="/help/post" element={<HelpPost />}></Route>
+            <Route path="/help/edit" element={<HelpEdit />}></Route>
+            <Route path="/help/detail" element={<HelpDetail />}></Route>
 
             <Route path="/test" exact element={<Test />}></Route>
             <Route path="/webcam/:roomId" element={<Video />} />
@@ -256,6 +264,9 @@ function App() {
             <Route path="/BuyList" element={<BuyList />}></Route>
 
             <Route path="/help" element={<Help />}></Route>
+            <Route path="/help/post" element={<HelpPost />}></Route>
+            <Route path="/help/edit" element={<HelpEdit />}></Route>
+            <Route path="/help/detail" element={<HelpDetail />}></Route>
 
             <Route path="/test" exact element={<Test />}></Route>
             <Route path="/webcam/:roomId" element={<MobileVideo />} />

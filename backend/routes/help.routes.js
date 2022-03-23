@@ -7,6 +7,6 @@ router.get("/", HelpController.findAll);
 router.get("/:id", HelpController.findById);
 router.post("/", HelpController.create);
 router.delete("/:id", HelpController.delete);
-router.post("/:id", HelpController.update);
+router.put("/:id", HelpController.update);
 
 module.exports = router;
