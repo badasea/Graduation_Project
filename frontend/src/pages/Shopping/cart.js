@@ -166,7 +166,6 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        //console.log(response.data);
         setOrder(response.data);
         var price = 0;
         for (var i = 0; i < response.data.length; i++) {
@@ -186,6 +185,7 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     searchorder();
   }, []);
+  console.log(order);
 
   const item_remove = (id) => {
     //console.log(item[index].itemId)
@@ -198,26 +198,32 @@ export default function PersistentDrawerLeft() {
   };
 
   const buy = () => {
-    //console.log('click cart')
-    //console.log('itemId : ', item_data_session.item_data.itemId)
-    //console.log('count : ', number)
-    let data = {
-      order_date: dateString + " " + timeString,
-      order_state: "buy_ok",
-      // order_item_name: item.item_name,
-      // order_price: item.item_price,
-      // order_shop_name: shop.shop_name,
-      // order_stock: number,
-      // order_shop_id: arr[4],
-      // order_user_id: session.data.user_id,
-    };
+    let data = [];
+    for (var i = 0; i < order.length; i++) {
+      data[i] = {
+        order_date: dateString + " " + timeString,
+        order_state: "buy_ok",
+        order_item_name: order[i].order_item_name,
+        order_price: order[i].order_price,
+        order_shop_name: order[i].order_shop_name,
+        order_stock: order[i].order_stock,
+        order_shop_id: order[i].order_shop_id,
+        order_user_id: session.data.user_id,
+      };
+    }
     console.log(data);
     axios
-      .post(process.env.REACT_APP_API_URL + "/api/orders/", data, {
-        headers: {
-          "Content-type": "application/json; charset=utf-8",
-        },
-      })
+      .post(
+        process.env.REACT_APP_API_URL +
+          "/api/order/cartok/" +
+          session.data.user_id,
+        data,
+        {
+          headers: {
+            "Content-type": "application/json; charset=utf-8",
+          },
+        }
+      )
       .then((res) => {
         //console.log(res.data)
         alert("해당 상품이 결재되었습니다.");
@@ -473,19 +479,36 @@ export default function PersistentDrawerLeft() {
           </p>
         </Typography>
         <br />
-        <Box textAlign="center">
-          <Button
-            //fullWidth
-            sx={{
-              width: "50%",
-              backgroundColor: "#A267E7",
-            }}
-            variant="contained"
-            onClick={buy}
-          >
-            <p>주문하기</p>
-          </Button>
-        </Box>
+        {order.length === 0 ? (
+          <Box textAlign="center">
+            <Button
+              //fullWidth
+              sx={{
+                width: "50%",
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+              onClick={buy}
+              disabled
+            >
+              <p>주문하기</p>
+            </Button>
+          </Box>
+        ) : (
+          <Box textAlign="center">
+            <Button
+              //fullWidth
+              sx={{
+                width: "50%",
+                backgroundColor: "#A267E7",
+              }}
+              variant="contained"
+              onClick={buy}
+            >
+              <p>주문하기</p>
+            </Button>
+          </Box>
+        )}
       </Main>
     </Box>
   );

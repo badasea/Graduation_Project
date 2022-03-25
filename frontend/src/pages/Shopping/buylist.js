@@ -33,6 +33,8 @@ import Link from "@mui/material/Link";
 import Side from "../../components/menu/side";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Pagination from "../../components/List/Pagination";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -166,18 +168,38 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response);
+        // console.log(response.data);
         setOrder(response.data);
+        setSearchResults(response.data);
       })
       .catch(function (error) {
         //console.log("실패");
       });
   }
-  console.log(order);
+  // console.log(order);
 
   useEffect(() => {
     searchorder();
   }, []);
+
+  const [searchTerm, setSearchTerm] = useState();
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  useEffect(() => {
+    const results = order.filter((data) =>
+      data.order_name.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -336,7 +358,7 @@ export default function PersistentDrawerLeft() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {order.map((orders) => (
+              {searchResults.slice(offset, offset + limit).map((orders) => (
                 <TableRow
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
@@ -363,6 +385,12 @@ export default function PersistentDrawerLeft() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Pagination
+          total={searchResults.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
         <br />
         <Typography sx={{ fontSize: 12 }} color="#202121" underline="none">
           <p>- 리코마켓은 전 상품 무료 배송입니다.</p>

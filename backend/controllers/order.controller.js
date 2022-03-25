@@ -24,6 +24,13 @@ exports.findByUser = function (req, res) {
   });
 };
 
+exports.findUserok = function (req, res) {
+  Order.findUserok(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
 exports.findByCart = function (req, res) {
   Order.findByCart(req.params.id, function (err, user) {
     if (err) res.send(err);
@@ -66,7 +73,20 @@ exports.update = function (req, res) {
       .status(400)
       .send({ error: true, message: "Please provide all required field" });
   } else {
-    Order.update(req.params.id, new User(req.body), function (err, user) {
+    Order.update(req.params.id, new Order(req.body), function (err, user) {
+      if (err) res.send(err);
+      res.json({ message: "User successfully updated" });
+    });
+  }
+};
+
+exports.cartok = function (req, res) {
+  if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res
+      .status(400)
+      .send({ error: true, message: "Please provide all required field" });
+  } else {
+    Order.cartok(req.params.id, new Order(req.body), function (err, user) {
       if (err) res.send(err);
       res.json({ message: "User successfully updated" });
     });
@@ -85,5 +105,3 @@ exports.ok = function (req, res) {
     });
   }
 };
-
-

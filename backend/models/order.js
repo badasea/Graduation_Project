@@ -44,7 +44,7 @@ Order.findById = function (id, result) {
 };
 
 // 사용자 주문 정보 검색
-Order.findByUser = function (id, result) {
+Order.findUserok = function (id, result) {
   mysql.query(
     "Select * from `order` where order_state = 'buy_ok' and order_user_id = ?",
     id,
@@ -119,6 +119,22 @@ Order.update = function (id, user, result) {
       order.order_user_id,
       id,
     ],
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 결재 완료
+Order.cartok = function (id, user, result) {
+  mysql.query(
+    "UPDATE `order` SET order_state = 'buy_ok' WHERE order_user_id = ?",
+    id,
     function (err, res) {
       if (err) {
         console.log("error: ", err);

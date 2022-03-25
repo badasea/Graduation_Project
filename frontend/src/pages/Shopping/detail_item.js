@@ -94,7 +94,7 @@ export default function Shop() {
     //console.log('count : ', number)
     let data = {
       order_date: dateString + " " + timeString,
-      order_state: "buy_ok",
+      order_state: "cart",
       order_item_name: item.item_name,
       order_price: item.item_price,
       order_shop_name: shop.shop_name,
@@ -111,8 +111,8 @@ export default function Shop() {
       })
       .then((res) => {
         //console.log(res.data)
-        alert("해당 상품이 결재되었습니다.");
-        document.location.href = "/detail_shop/" + arr[4];
+        alert("장바구니에서 구매를 완료해주세요.");
+        window.close();
       })
       .catch();
   };
@@ -236,30 +236,57 @@ export default function Shop() {
           </Grid>
           {login === true ? (
             <div>
-              <Grid container spacing={3}>
-                <Grid item xs={6}>
-                  <Button
-                    onClick={cart}
-                    fullWidth
-                    color="secondary"
-                    variant="outlined"
-                  >
-                    <p>장바구니 넣기</p>
-                  </Button>
+              {number > 0 ? (
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <Button
+                      onClick={cart}
+                      fullWidth
+                      color="secondary"
+                      variant="outlined"
+                    >
+                      <p>장바구니 넣기</p>
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      sx={{
+                        backgroundColor: "#A267E7",
+                      }}
+                      variant="contained"
+                      onClick={buy}
+                    >
+                      <p>주문 하기</p>
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <Button
-                    fullWidth
-                    sx={{
-                      backgroundColor: "#A267E7",
-                    }}
-                    variant="contained"
-                    onClick={buy}
-                  >
-                    <p>주문 하기</p>
-                  </Button>
+              ) : (
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      color="secondary"
+                      variant="outlined"
+                      disabled
+                    >
+                      <p>장바구니 넣기</p>
+                    </Button>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Button
+                      fullWidth
+                      sx={{
+                        backgroundColor: "#A267E7",
+                      }}
+                      variant="contained"
+                      disabled
+                    >
+                      <p>주문 하기</p>
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
+              )}
               <br />
               <Grid container spacing={0.1}>
                 <Button
