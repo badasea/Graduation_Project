@@ -162,7 +162,7 @@ export default function PersistentDrawerLeft() {
   const [total_price, setTotal_price] = useState([]);
   function searchorder() {
     const url =
-      process.env.REACT_APP_API_URL + "/api/order/user/" + session.data.user_id;
+      process.env.REACT_APP_API_URL + "/api/order/find/" + session.data.user_id;
     axios
       .get(url)
       .then(function (response) {
@@ -367,7 +367,7 @@ export default function PersistentDrawerLeft() {
         <DrawerHeader />
         <Typography sx={{ fontSize: 18 }} color="#202121" underline="none">
           <p>
-            장바구니 <span className="main_logo">{order.length}</span>
+            장바구니 <span className="main_logo">{order.length} / 100</span>
           </p>
         </Typography>
         <TableContainer component={Paper}>
