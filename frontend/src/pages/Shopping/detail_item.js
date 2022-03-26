@@ -214,7 +214,13 @@ export default function Shop() {
             <Grid item xs={9}>
               <Typography sx={{ fontSize: 14 }} align="right" underline="none">
                 <p>
-                  <button onClick={onDecrease}>-</button>
+                  {number > 0 ? (
+                    <button onClick={onDecrease}>-</button>
+                  ) : (
+                    <button disabled onClick={onDecrease}>
+                      -
+                    </button>
+                  )}
                   <span>&nbsp;&nbsp; {number} &nbsp;&nbsp;</span>
                   <button onClick={onIncrease}>+</button>
                 </p>
