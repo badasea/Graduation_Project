@@ -18,6 +18,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //
 import { Container } from "@mui/material";
@@ -161,61 +164,49 @@ export default function PersistentDrawerLeft() {
     login = true;
   }
 
-  const canvasDom = useRef(null);
-  useEffect(() => {
-    const ctx = canvasDom.current.getContext("2d");
+  // const [shop, setShop] = useState();
+  const [order, setOrder] = useState();
 
-    new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        labels: ["Red", "Blue", "Yellow"],
-        datasets: [
-          {
-            label: "My First Dataset",
-            data: [300, 50, 100],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-            ],
-            hoverOffset: 4,
-          },
-        ],
-      },
-    });
-  }, []);
+  const shop = useSelector((state) => state);
 
-  const canvasDom2 = useRef(null);
+  console.log(shop);
+  // async function login_form() {
+  //   const url =
+  //     process.env.REACT_APP_API_URL + "/api/shop/user/" + session.data.user_id;
+  //   await axios
+  //     .get(url)
+  //     .then(function (response) {
+  //       console.log(response.data[0]);
+  //       setShop(response.data[0]);
+  //     })
+  //     .catch(function (error) {
+  //       //console.log("실패");
+  //     });
+  //   // await axios
+  //   //   .get(process.env.REACT_APP_API_URL + "/api/order/shop/" + shop.shop_id)
+  //   //   .then(function (response) {
+  //   //     console.log(response.data);
+  //   //     setOrder(response.data[0]);
+  //   //   })
+  //   //   .catch(function (error) {
+  //   //     //console.log("실패");
+  //   //   });
+  // }
+  async function order_form() {
+    await axios
+      .get(process.env.REACT_APP_API_URL + "/api/order/shop/" + shop.shop_id)
+      .then(function (response) {
+        console.log(response.data[0]);
+        setOrder(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
   useEffect(() => {
-    const ctx = canvasDom2.current.getContext("2d");
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: [
-          "1월",
-          "2월",
-          "3월",
-          "4월",
-          "5월",
-          "6월",
-          "7월",
-          "8월",
-          "9월",
-          "10월",
-          "11월",
-          "12월",
-        ],
-        datasets: [
-          {
-            label: "월별 매출",
-            data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40],
-            fill: false,
-            borderColor: "#A267E7",
-            tension: 0.1,
-          },
-        ],
-      },
-    });
+    // login_form();
+    order_form();
   }, []);
 
   return (
@@ -417,10 +408,10 @@ export default function PersistentDrawerLeft() {
 
         <Grid container spacing={3}>
           <Grid item xs={6}>
-            <canvas ref={canvasDom} width="50%" height="50%"></canvas>
+            {/* <canvas ref={canvasDom} width="50%" height="50%"></canvas> */}
           </Grid>
           <Grid item xs={6}>
-            <canvas ref={canvasDom2} width="50%" height="50%"></canvas>
+            {/* <canvas ref={canvasDom2} width="50%" height="50%"></canvas> */}
           </Grid>
         </Grid>
         <Grid container spacing={3}>

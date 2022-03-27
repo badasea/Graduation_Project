@@ -6,6 +6,9 @@ const OrderController = require("../controllers/order.controller");
 router.get("/", OrderController.findAll);
 router.get("/:id", OrderController.findById);
 router.get("/user/:id", OrderController.findUserok);
+
+router.get("/shop/:id", OrderController.findShopok);
+
 router.get("/find/:id", OrderController.findByUser);
 
 router.get("/cart/:id", OrderController.findByCart);

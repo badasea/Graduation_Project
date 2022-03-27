@@ -59,6 +59,22 @@ Order.findUserok = function (id, result) {
   );
 };
 
+//  가게 주문 정보 검색
+Order.findShopok = function (id, result) {
+  mysql.query(
+    "Select * from `order` where order_state = 'buy_ok' and order_shop_id = ?",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 사용자 장바구니 정보 검색
 Order.findByUser = function (id, result) {
   mysql.query(

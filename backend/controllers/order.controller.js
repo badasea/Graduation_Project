@@ -30,6 +30,12 @@ exports.findUserok = function (req, res) {
     res.json(user);
   });
 };
+exports.findShopok = function (req, res) {
+  Order.findShopok(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
 
 exports.findByCart = function (req, res) {
   Order.findByCart(req.params.id, function (err, user) {
