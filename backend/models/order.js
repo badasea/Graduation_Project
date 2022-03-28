@@ -91,6 +91,21 @@ Order.findByUser = function (id, result) {
   );
 };
 
+// 가게 사장 수주매출용 주문 리스트
+Order.findOrder = function (id, result) {
+  mysql.query(
+    "select t1.*, t2.user_name from `order` t1, user t2 where t1.order_user_id = t2.user_id and t1.order_state = 'buy_ok' and t1.order_shop_id in (select t1.shop_id from shop t1, user t2 where t1.user_id = t2.user_id and t2.user_id = ?)",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
 // 주문 등록
 Order.create = function (newEmp, result) {
   mysql.query("INSERT INTO `order` set ?", newEmp, function (err, res) {

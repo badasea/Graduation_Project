@@ -37,6 +37,13 @@ exports.findShopok = function (req, res) {
   });
 };
 
+exports.findOrder = function (req, res) {
+  Order.findOrder(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
 exports.findByCart = function (req, res) {
   Order.findByCart(req.params.id, function (err, user) {
     if (err) res.send(err);
