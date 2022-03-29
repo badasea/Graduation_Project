@@ -19,11 +19,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import Pagination from "../../components/List/Pagination";
 
 //
 import { Container } from "@mui/material";
+import { Input } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -35,7 +36,7 @@ import Paper from "@mui/material/Paper";
 import { Grid } from "@mui/material";
 
 import Link from "@mui/material/Link";
-import { useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Side from "../../components/menu/side";
 import { Chart, registerables } from "chart.js";
@@ -87,16 +88,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-// 제거 예정
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("광어", "바다", 10000, 10000, 1),
-  createData("도미", "준영", 20000, 40000, 2),
-  createData("한돈 앞다리살", "성민", 24000, 24000, 1),
-];
 //
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -164,40 +155,17 @@ export default function PersistentDrawerLeft() {
     login = true;
   }
 
-  // const [shop, setShop] = useState();
-  const [order, setOrder] = useState();
-
-  const shop = useSelector((state) => state);
-
-  console.log(shop);
-  // async function login_form() {
-  //   const url =
-  //     process.env.REACT_APP_API_URL + "/api/shop/user/" + session.data.user_id;
-  //   await axios
-  //     .get(url)
-  //     .then(function (response) {
-  //       console.log(response.data[0]);
-  //       setShop(response.data[0]);
-  //     })
-  //     .catch(function (error) {
-  //       //console.log("실패");
-  //     });
-  //   // await axios
-  //   //   .get(process.env.REACT_APP_API_URL + "/api/order/shop/" + shop.shop_id)
-  //   //   .then(function (response) {
-  //   //     console.log(response.data);
-  //   //     setOrder(response.data[0]);
-  //   //   })
-  //   //   .catch(function (error) {
-  //   //     //console.log("실패");
-  //   //   });
-  // }
-  async function order_form() {
-    await axios
-      .get(process.env.REACT_APP_API_URL + "/api/order/shop/" + shop.shop_id)
+  const [user, setUser] = useState([]);
+  function searchUser() {
+    const url =
+      process.env.REACT_APP_API_URL +
+      "/api/order/owner/" +
+      session.data.user_id;
+    axios
+      .get(url)
       .then(function (response) {
-        console.log(response.data[0]);
-        setOrder(response.data[0]);
+        setUser(response.data);
+        setSearchResults(response.data);
       })
       .catch(function (error) {
         //console.log("실패");
@@ -205,9 +173,27 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
-    // login_form();
-    order_form();
+    searchUser();
   }, []);
+
+  const [searchTerm, setSearchTerm] = useState();
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  useEffect(() => {
+    const results = user.filter((data) =>
+      data.order_item_name.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -427,10 +413,18 @@ export default function PersistentDrawerLeft() {
         <Typography sx={{ fontSize: 32 }} color="#202121" underline="none">
           <p>주문 목록</p>
         </Typography>
-
+        <div align="right">
+          <Input
+            type="text"
+            placeholder="주문 검색"
+            value={searchTerm}
+            onChange={handleChange}
+          />
+          <SearchIcon />
+        </div>
         <br />
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 650 }} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell>
@@ -438,19 +432,19 @@ export default function PersistentDrawerLeft() {
                     상품명
                   </Link>{" "}
                 </StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell>
                   <Link color="common.white" underline="none">
-                    고객명
+                    주문자명
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    판매가
+                    결재금액
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   <Link color="common.white" underline="none">
-                    수량
+                    주문량
                   </Link>{" "}
                 </StyledTableCell>
                 <StyledTableCell align="right">
@@ -458,42 +452,40 @@ export default function PersistentDrawerLeft() {
                     주문날짜
                   </Link>{" "}
                 </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Link color="common.white" underline="none">
-                    주문금액
-                  </Link>{" "}
-                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {searchResults.slice(offset, offset + limit).map((items) => (
                 <TableRow
-                  key={row.name}
+                  key={items.order_id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
-                    <p>{row.name}</p>
+                  <TableCell>
+                    <p>{items.order_item_name}</p>
+                  </TableCell>
+                  <TableCell>
+                    <p>{items.user_name}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.calories}</p>
+                    <p>{items.order_price}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.fat}</p>
+                    <p>{items.order_stock}</p>
                   </TableCell>
                   <TableCell align="right">
-                    <p>{row.protein}</p>
-                  </TableCell>
-                  <TableCell align="right">
-                    <p>2022. 01. 02</p>
-                  </TableCell>
-                  <TableCell align="right">
-                    <p>{row.carbs}</p>
+                    <p>{items.order_date}</p>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
+        <Pagination
+          total={searchResults.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
         <br />
       </Main>
     </Box>
