@@ -44,6 +44,20 @@ exports.findOrder = function (req, res) {
   });
 };
 
+exports.findChart1 = function (req, res) {
+  Order.findChart1(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
+exports.findmonthsales = function (req, res) {
+  Order.findmonthsales(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
 exports.findByCart = function (req, res) {
   Order.findByCart(req.params.id, function (err, user) {
     if (err) res.send(err);

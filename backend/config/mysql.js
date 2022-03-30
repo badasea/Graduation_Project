@@ -7,6 +7,7 @@ var connection = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB,
   multipleStatements: true,
+  dateStrings: "date",
 });
 
 // 배포
@@ -16,6 +17,7 @@ var connection = mysql.createConnection({
 //   password: process.env.HEROKU_DB_PASSWORD,
 //   database: process.env.HEROKU_DB,
 //   multipleStatements: true,
+//   dateStrings: "date",
 // });
 
 connection.connect(function (err) {

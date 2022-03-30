@@ -88,12 +88,20 @@ export default function Shop() {
 
   console.log(dateString + " " + timeString);
 
+  var formatedMysqlString = new Date(
+    new Date(new Date(new Date()).toISOString()).getTime() -
+      new Date().getTimezoneOffset() * 60000
+  )
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
+
   const buy = () => {
     //console.log('click cart')
     //console.log('itemId : ', item_data_session.item_data.itemId)
     //console.log('count : ', number)
     let data = {
-      order_date: dateString + " " + timeString,
+      order_date: formatedMysqlString,
       order_state: "cart",
       order_item_name: item.item_name,
       order_price: item.item_price,

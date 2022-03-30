@@ -197,11 +197,19 @@ export default function PersistentDrawerLeft() {
       .catch();
   };
 
+  var formatedMysqlString = new Date(
+    new Date(new Date(new Date()).toISOString()).getTime() -
+      new Date().getTimezoneOffset() * 60000
+  )
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
+
   const buy = () => {
     let data = [];
     for (var i = 0; i < order.length; i++) {
       data[i] = {
-        order_date: dateString + " " + timeString,
+        order_date: formatedMysqlString,
         order_state: "buy_ok",
         order_item_name: order[i].order_item_name,
         order_price: order[i].order_price,

@@ -106,6 +106,39 @@ Order.findOrder = function (id, result) {
     }
   );
 };
+
+// 상품 판매 비율
+Order.findChart1 = function (id, result) {
+  mysql.query(
+    "select t1.order_item_name as label, SUM(t1.order_stock) as y from `order` t1, user t2 where t1.order_user_id = t2.user_id and t1.order_state = 'buy_ok' and t1.order_shop_id in (select t1.shop_id from shop t1, user t2 where t1.user_id = t2.user_id and t2.user_id = ?) group by t1.order_item_name;",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
+// 이번달 매출 비율
+Order.findmonthsales = function (id, result) {
+  mysql.query(
+    "SELECT SUM(t1.order_price) as order_price FROM `order` t1, user t2 where t1.order_user_id = t2.user_id and t1.order_state = 'buy_ok' and t1.order_shop_id in (select t1.shop_id from shop t1, user t2 where t1.user_id = t2.user_id and t2.user_id = ?) and t1.order_date >= DATE_ADD(NOW(), INTERVAL -1 MONTH);",
+    id,
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+      } else {
+        result(null, res);
+      }
+    }
+  );
+};
+
 // 주문 등록
 Order.create = function (newEmp, result) {
   mysql.query("INSERT INTO `order` set ?", newEmp, function (err, res) {
