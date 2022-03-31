@@ -5,7 +5,7 @@ import axios from "axios";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-class PieChart extends Component {
+class SplineChart extends Component {
   state = {
     persons: [],
   };
@@ -14,7 +14,7 @@ class PieChart extends Component {
     axios
       .get(
         process.env.REACT_APP_API_URL +
-          "/api/order/chart1/" +
+          "/api/order/chart2/" +
           session.data.user_id
       )
       .then((res) => {
@@ -26,20 +26,22 @@ class PieChart extends Component {
 
   render() {
     const options = {
-      exportEnabled: true,
       animationEnabled: true,
       title: {
-        text: "이번 달 상품 판매 비율",
+        text: "월간 매출 그래프",
+      },
+      axisX: {
+        valueFormatString: "MMM",
+      },
+      axisY: {
+        prefix: "",
+        includeZero: false,
       },
       data: [
         {
-          type: "pie",
-          startAngle: 75,
-          toolTipContent: "<b>{label}</b>: {y}개",
-          showInLegend: "true",
-          legendText: "{label}",
-          indexLabelFontSize: 16,
-          indexLabel: "{label}",
+          yValueFormatString: "#,###",
+          xValueFormatString: "MMMM",
+          type: "spline",
           dataPoints: this.state.persons,
         },
       ],
@@ -53,4 +55,4 @@ class PieChart extends Component {
   }
 }
 
-export default PieChart;
+export default SplineChart;

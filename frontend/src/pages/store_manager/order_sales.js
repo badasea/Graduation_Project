@@ -40,6 +40,7 @@ import { useEffect, useState } from "react";
 
 import Side from "../../components/menu/side";
 import DonutChart from "../../components/chart/order_DonutChart";
+import LineChart from "../../components/chart/Line Chart";
 
 const drawerWidth = 240;
 
@@ -147,7 +148,7 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  // console.log(session);
 
   if (session === null) {
     login = false;
@@ -188,12 +189,30 @@ export default function PersistentDrawerLeft() {
       });
   }
 
+  const [hit, sethit] = useState([]);
+  function searchhit() {
+    const url =
+      process.env.REACT_APP_API_URL + "/api/order/hit/" + session.data.user_id;
+    axios
+      .get(url)
+      .then(function (response) {
+        sethit(response.data[0]);
+      })
+      .catch(function (error) {
+        //console.log("실패");
+      });
+  }
+
   useEffect(() => {
     searchUser();
   }, []);
 
   useEffect(() => {
     searchmonthsales();
+  }, []);
+
+  useEffect(() => {
+    searchhit();
   }, []);
 
   const [searchTerm, setSearchTerm] = useState();
@@ -352,15 +371,25 @@ export default function PersistentDrawerLeft() {
                     이번 달 HIT 상품
                   </Link>
                 </Typography>
-
-                <Typography
-                  textAlign={"center"}
-                  sx={{ fontSize: 24 }}
-                  color="#A267E7"
-                  underline="none"
-                >
-                  <p>총 {monthsales.order_price}원 달성</p>
-                </Typography>
+                {hit.label !== null ? (
+                  <Typography
+                    textAlign={"center"}
+                    sx={{ fontSize: 24 }}
+                    color="#A267E7"
+                    underline="none"
+                  >
+                    <p>{hit.label}</p>
+                  </Typography>
+                ) : (
+                  <Typography
+                    textAlign={"center"}
+                    sx={{ fontSize: 24 }}
+                    color="#A267E7"
+                    underline="none"
+                  >
+                    <p>이번달 판매 물품이 없습니다.</p>
+                  </Typography>
+                )}
               </Paper>
             </Container>
           </Grid>
@@ -409,7 +438,7 @@ export default function PersistentDrawerLeft() {
             <DonutChart />
           </Grid>
           <Grid item xs={6}>
-            {/* <canvas ref={canvasDom2} width="50%" height="50%"></canvas> */}
+            <LineChart />
           </Grid>
         </Grid>
         <Grid container spacing={3}>
@@ -417,7 +446,7 @@ export default function PersistentDrawerLeft() {
             <p>(상품 판매 비율)</p>
           </Grid>
           <Grid item xs={6} align="right">
-            <p>단위: 십만원(월 매출)</p>
+            <p>단위: 원(월 매출)</p>
           </Grid>
         </Grid>
         <br />

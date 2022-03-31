@@ -14,8 +14,10 @@ router.get("/find/:id", OrderController.findByUser);
 router.get("/cart/:id", OrderController.findByCart);
 router.get("/owner/:id", OrderController.findOrder);
 router.get("/chart1/:id", OrderController.findChart1);
+router.get("/chart2/:id", OrderController.findChart2);
 
 router.get("/monthsales/:id", OrderController.findmonthsales);
+router.get("/hit/:id", OrderController.findhit);
 
 router.post("/", OrderController.create);
 router.delete("/:id", OrderController.delete);

@@ -51,8 +51,22 @@ exports.findChart1 = function (req, res) {
   });
 };
 
+exports.findChart2 = function (req, res) {
+  Order.findChart2(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
 exports.findmonthsales = function (req, res) {
   Order.findmonthsales(req.params.id, function (err, user) {
+    if (err) res.send(err);
+    res.json(user);
+  });
+};
+
+exports.findhit = function (req, res) {
+  Order.findhit(req.params.id, function (err, user) {
     if (err) res.send(err);
     res.json(user);
   });
