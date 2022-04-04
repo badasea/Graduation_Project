@@ -66,6 +66,7 @@ import Detailshop from "./pages/Shopping/detail_shop";
 
 // 수주 매출 페이지
 import Ordersales from "./pages/store_manager/order_sales";
+import MobileOrdersales from "./mobile_pages/store_manager/order_sales";
 
 // 고객 센터
 import Help from "./pages/Help/help";
@@ -258,7 +259,7 @@ function App() {
             <Route path="/manager_item" element={<ManagerItem />}></Route>
             <Route path="/edit_item" element={<EditItem />}></Route>
 
-            <Route path="/order_sales" element={<Ordersales />}></Route>
+            <Route path="/order_sales" element={<MobileOrdersales />}></Route>
 
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/BuyList" element={<BuyList />}></Route>
