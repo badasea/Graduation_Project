@@ -29,7 +29,7 @@ class PieChart extends Component {
       exportEnabled: true,
       animationEnabled: true,
       title: {
-        text: "이번 달 상품 판매 비율",
+        text: "최근 한달 상품 판매 비율",
       },
       data: [
         {

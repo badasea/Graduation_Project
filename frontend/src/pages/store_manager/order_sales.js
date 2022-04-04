@@ -173,16 +173,25 @@ export default function PersistentDrawerLeft() {
       });
   }
 
+  let today = new Date();
+
+  let year = today.getFullYear(); // 년도
+  let month = ("0" + (today.getMonth() + 1)).slice(-2); // 월
+
   const [monthsales, setmonthsales] = useState([]);
   function searchmonthsales() {
     const url =
       process.env.REACT_APP_API_URL +
-      "/api/order/monthsales/" +
+      "/api/order/chart2/" +
       session.data.user_id;
     axios
       .get(url)
       .then(function (response) {
-        setmonthsales(response.data[0]);
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].label === year + "-" + month) {
+            setmonthsales(response.data[i]);
+          }
+        }
       })
       .catch(function (error) {
         //console.log("실패");
@@ -368,7 +377,7 @@ export default function PersistentDrawerLeft() {
                   sx={{ flexGrow: 1 }}
                 >
                   <Link color="common.black" underline="none">
-                    이번 달 HIT 상품
+                    최근 한달 HIT 상품
                   </Link>
                 </Typography>
                 {hit.label !== null ? (
@@ -410,13 +419,13 @@ export default function PersistentDrawerLeft() {
                     이번달 매출
                   </Link>
                 </Typography>
-                {monthsales.order_price > 0 ? (
+                {monthsales.y > 0 ? (
                   <Typography
                     sx={{ fontSize: 24 }}
                     color="#A267E7"
                     underline="none"
                   >
-                    <p>총 {monthsales.order_price}원 달성</p>
+                    <p>총 {monthsales.y}원 달성</p>
                   </Typography>
                 ) : (
                   <Typography

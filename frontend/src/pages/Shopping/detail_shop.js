@@ -70,7 +70,7 @@ export default function Shop() {
 
   const detail_item = (id, e) => {
     e.preventDefault();
-    document.location.href = "/detail_item/s" + arr[4] + "/" + id;
+    document.location.href = "/detail_item/" + arr[4] + "/" + id;
   };
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
