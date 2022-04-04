@@ -218,7 +218,7 @@ export default function PersistentDrawerLeft() {
       shop_image: pre_img,
       shop_content: shop_content,
     };
-    console.log(shop);
+    // console.log(shop);
 
     await axios
       .post(process.env.REACT_APP_API_URL + "/api/shop/", shop, {

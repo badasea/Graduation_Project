@@ -23,14 +23,14 @@ export default function Shop() {
 
   const place = window.location.href;
   const arr = place.split("/");
-  console.log(arr[5]);
+  // console.log(arr[5]);
   const [item, setItem] = useState([]);
   function searchitem() {
     const url = process.env.REACT_APP_API_URL + "/api/item/item/" + arr[5];
     axios
       .get(url)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setItem(response.data[0]);
       })
       .catch(function (error) {
@@ -44,14 +44,14 @@ export default function Shop() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setShop(response.data[0]);
       })
       .catch(function (error) {
         //console.log("실패");
       });
   }
-  console.log(shop);
+  // console.log(shop);
   useEffect(() => {
     searchitem();
     searchshop();
@@ -86,7 +86,7 @@ export default function Shop() {
 
   let timeString = hours + ":" + minutes + ":" + seconds;
 
-  console.log(dateString + " " + timeString);
+  // console.log(dateString + " " + timeString);
 
   var formatedMysqlString = new Date(
     new Date(new Date(new Date()).toISOString()).getTime() -
@@ -110,7 +110,7 @@ export default function Shop() {
       order_shop_id: arr[4],
       order_user_id: session.data.user_id,
     };
-    console.log(data);
+    // console.log(data);
     axios
       .post(process.env.REACT_APP_API_URL + "/api/order/", data, {
         headers: {
@@ -139,7 +139,7 @@ export default function Shop() {
       order_shop_id: arr[4],
       order_user_id: session.data.user_id,
     };
-    console.log(data);
+    // console.log(data);
     axios
       .post(process.env.REACT_APP_API_URL + "/api/order/", data, {
         headers: {

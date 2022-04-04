@@ -200,7 +200,7 @@ export default function PersistentDrawerLeft() {
       shop_id: user_id,
     };
 
-    console.log(item_data);
+    // console.log(item_data);
 
     axios
       .post(process.env.REACT_APP_API_URL + "/api/item", item_data, {})

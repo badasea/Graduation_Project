@@ -185,7 +185,7 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     searchorder();
   }, []);
-  console.log(order);
+  // console.log(order);
 
   const item_remove = (id) => {
     //console.log(item[index].itemId)
@@ -219,7 +219,7 @@ export default function PersistentDrawerLeft() {
         order_user_id: session.data.user_id,
       };
     }
-    console.log(data);
+    // console.log(data);
     axios
       .post(
         process.env.REACT_APP_API_URL +

@@ -168,7 +168,7 @@ export default function PersistentDrawerLeft() {
     fileReader.readAsDataURL(event.currentTarget.files[0]);
     fileReader.onload = function (e) {
       setPreviewImg(e.target.result);
-      console.log(e.target.result);
+      // console.log(e.target.result);
     };
   };
 
@@ -195,14 +195,14 @@ export default function PersistentDrawerLeft() {
       user_like_type: data.get("like_type"),
       user_type: data.get("type"),
     };
-    console.log(user);
+    // console.log(user);
     await axios
       .post(
         process.env.REACT_APP_API_URL + "/api/user/" + session_edit.user_id,
         user
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         alert("유저 데이터가 수정 되었습니다.");
         document.location.href = "/admin/user";
       })

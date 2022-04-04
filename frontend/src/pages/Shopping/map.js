@@ -19,8 +19,8 @@ const theme = createTheme();
 const MapContainer = () => {
   const session = JSON.parse(window.sessionStorage.getItem("map"));
 
-  console.log(session);
-  console.log("test");
+  // console.log(session);
+  // console.log("test");
 
   const { kakao } = window;
   const place = window.location.href;

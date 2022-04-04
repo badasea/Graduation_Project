@@ -145,7 +145,7 @@ class Video extends React.Component {
       this.setState({ connecting: false, waiting: false });
     });
     peer.on("error", function (err) {
-      console.log(err);
+      // console.log(err);
     });
   };
 

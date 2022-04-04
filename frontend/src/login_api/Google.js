@@ -18,7 +18,7 @@ export default function Google() {
   //SDK 초기 설정 및 내 API초기화
   const googleSDK = () => {
     window.googleSDKLoaded = () => {
-      console.log(window.gapi);
+      // console.log(window.gapi);
       window.gapi.load("auth2", () => {
         const auth2 = window.gapi.auth2.init({
           client_id: clientId,
@@ -30,7 +30,7 @@ export default function Google() {
           {},
           (googleUser) => {
             const profile = googleUser.getBasicProfile();
-            console.log(profile);
+            // console.log(profile);
             // console.log(`Token || ${googleUser.getAuthResponse().id_token}`);
             setToken(googleUser.getAuthResponse().id_token);
             // console.log(`ID: ${profile.getId()}`);
@@ -46,7 +46,7 @@ export default function Google() {
 
             //console.log(data);
             axios.post("/api/user", data).then(function (res) {
-              console.log(res.data);
+              // console.log(res.data);
             });
             var url =
               process.env.REACT_APP_API_URL +
@@ -55,7 +55,7 @@ export default function Google() {
             axios
               .get(url)
               .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 const session = response.data[0];
                 const userObj = { data: session };
                 window.sessionStorage.setItem("data", JSON.stringify(userObj));
@@ -137,7 +137,7 @@ const GoogleBtn = styled.div`
 `;
 
 const onSuccess = (response) => {
-  console.log(response.profileObj);
+  // console.log(response.profileObj);
   let data = {
     user_email: response.profileObj.email,
     user_name: response.profileObj.name,
@@ -145,14 +145,14 @@ const onSuccess = (response) => {
   };
 
   axios.post("/api/user", data).then(function (res) {
-    console.log(res.data);
+    // console.log(res.data);
   });
   var url =
     process.env.REACT_APP_API_URL + "/api/user/login/" + data.user_email;
   axios
     .get(url)
     .then(function (response) {
-      console.log(response.data);
+      // console.log(response.data);
       const session = response.data[0];
       const userObj = { data: session };
       window.sessionStorage.setItem("data", JSON.stringify(userObj));

@@ -170,7 +170,7 @@ export default function PersistentDrawerLeft() {
 
   const edit = (item, e) => {
     var session_edit = item;
-    console.log(session_edit);
+    // console.log(session_edit);
     window.sessionStorage.setItem("admin_shop", JSON.stringify(session_edit));
     document.location.href = "/admin/shop/edit";
   };

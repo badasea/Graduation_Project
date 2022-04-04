@@ -124,7 +124,7 @@ export default function PersistentDrawerLeft() {
   const place = window.location.href;
   //console.log(place);
   const arr = place.split("/");
-  console.log(arr[4]);
+  // console.log(arr[4]);
 
   var login;
 
@@ -132,7 +132,7 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  // console.log(session);
 
   if (session === null) {
     login = false;

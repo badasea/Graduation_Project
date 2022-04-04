@@ -13,7 +13,7 @@ class PieChart extends Component {
     axios
       .get(process.env.REACT_APP_API_URL + "/api/shop/count/1")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const persons = res.data;
         this.setState({ persons });
       });

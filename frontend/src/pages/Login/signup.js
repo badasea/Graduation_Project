@@ -33,7 +33,7 @@ export default function SignUp() {
     axios
       .post(process.env.REACT_APP_API_URL + "/api/user", user, {})
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data === undefined) {
           // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
           alert("이미 등록된 이메일 계정입니다.");

@@ -121,7 +121,7 @@ export default function PersistentDrawerLeft() {
   const help = () => {
     document.location.href = "/help";
   };
-  console.log(window.location.href);
+  // console.log(window.location.href);
 
   var login;
 
@@ -129,7 +129,7 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  // console.log(session);
 
   if (session === null) {
     login = false;

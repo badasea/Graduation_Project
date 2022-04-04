@@ -143,7 +143,7 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data[0]);
+        // console.log(response.data[0]);
         setShop_id(response.data[0].shop_id);
         setShop_name(response.data[0].shop_name);
         setShop_address(response.data[0].shop_address);
@@ -239,7 +239,7 @@ export default function PersistentDrawerLeft() {
       shop_id: shop_id,
       shop_content: shop_content,
     };
-    console.log(shop);
+    // console.log(shop);
 
     axios
       .put(process.env.REACT_APP_API_URL + "/api/shop/" + shop_id, shop, {
@@ -248,7 +248,7 @@ export default function PersistentDrawerLeft() {
         // },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         alert("가게 정보가 수정되었습니다.");
         document.location.href = "/";
       })

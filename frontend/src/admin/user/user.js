@@ -171,7 +171,7 @@ export default function PersistentDrawerLeft() {
 
   const edit = (item, e) => {
     var session_edit = item;
-    console.log(session_edit);
+    // console.log(session_edit);
     window.sessionStorage.setItem("admin_user", JSON.stringify(session_edit));
     document.location.href = "/admin/user/edit";
   };
@@ -193,7 +193,7 @@ export default function PersistentDrawerLeft() {
     axios
       .post(process.env.REACT_APP_API_URL + "/api/user", user, {})
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data === undefined) {
           // id 일치하지 않는 경우 userId = undefined, msg = '입력하신 id 가 일치하지 않습니다.'
           alert("존재하는 이메일 계정입니다.");

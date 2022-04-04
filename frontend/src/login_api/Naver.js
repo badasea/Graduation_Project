@@ -31,7 +31,7 @@ function LoginNaver() {
   }, []);
 
   function login(naverUser) {
-    console.log(naverUser.user);
+    // console.log(naverUser.user);
     let data = {
       user_email: naverUser.user.email,
       user_name: naverUser.user.name,
@@ -39,14 +39,14 @@ function LoginNaver() {
     };
 
     axios.post("/api/user", data).then(function (res) {
-      console.log(res.data);
+      // console.log(res.data);
     });
     var url =
       process.env.REACT_APP_API_URL + "/api/user/login/" + data.user_email;
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         // setCookie("cookie", response.data[0].user_name, 1);
         const session = response.data[0];
         const userObj = { data: session };

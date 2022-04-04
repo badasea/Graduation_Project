@@ -175,7 +175,7 @@ export default function PersistentDrawerLeft() {
     fileReader.readAsDataURL(event.currentTarget.files[0]);
     fileReader.onload = function (e) {
       setPreviewImg(e.target.result);
-      console.log(e.target.result);
+      // console.log(e.target.result);
     };
   };
 
@@ -204,14 +204,14 @@ export default function PersistentDrawerLeft() {
       shop_registration_num: data.get("num"),
       user_id: session_edit.user_id,
     };
-    console.log(user);
+    // console.log(user);
     await axios
       .post(
         process.env.REACT_APP_API_URL + "/api/shop/" + session_edit.shop_id,
         user
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         alert("가게 데이터가 수정 되었습니다.");
         document.location.href = "/admin/shop";
       })

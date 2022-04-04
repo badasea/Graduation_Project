@@ -183,7 +183,7 @@ export default function PersistentDrawerLeft() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         setShop(response.data);
         setSearchResults(response.data);
       })

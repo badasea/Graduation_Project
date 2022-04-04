@@ -229,7 +229,7 @@ export default function PersistentDrawerLeft() {
   const offset = (page - 1) * limit;
   const handlePageChange = (page) => {
     setPage(page);
-    console.log(page);
+    // console.log(page);
   };
 
   https: return (

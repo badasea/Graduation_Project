@@ -52,7 +52,7 @@ function ShopCard() {
       });
   }
 
-  console.log(item);
+  // console.log(item);
 
   useEffect(() => {
     searchitem();

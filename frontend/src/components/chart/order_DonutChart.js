@@ -18,7 +18,7 @@ class PieChart extends Component {
           session.data.user_id
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const persons = res.data;
         this.setState({ persons });
       });

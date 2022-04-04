@@ -159,7 +159,7 @@ export default function PersistentDrawerLeft() {
 
   const session = JSON.parse(window.sessionStorage.getItem("data"));
 
-  console.log(session);
+  // console.log(session);
 
   if (session === null) {
     login = false;

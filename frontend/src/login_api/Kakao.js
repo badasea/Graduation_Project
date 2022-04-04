@@ -24,7 +24,7 @@ const buttonBlock = {
 
 function LoginKaKao() {
   function login(response) {
-    console.log(response);
+    // console.log(response);
     let data = {
       user_email: response.profile.kakao_account.email,
       user_name: response.profile.kakao_account.profile.nickname,
@@ -33,14 +33,14 @@ function LoginKaKao() {
     };
 
     axios.post("/api/user", data).then(function (res) {
-      console.log(res.data);
+      // console.log(res.data);
     });
     var url =
       process.env.REACT_APP_API_URL + "/api/user/login/" + data.user_email;
     axios
       .get(url)
       .then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         const session = response.data[0];
         const userObj = { data: session };
         window.sessionStorage.setItem("data", JSON.stringify(userObj));

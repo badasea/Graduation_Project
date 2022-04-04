@@ -36,7 +36,7 @@ export default function Shop() {
         //console.log("실패");
       });
   }
-  console.log(shop);
+  // console.log(shop);
 
   const [item, setItem] = useState([]);
   function searchitem() {
@@ -44,7 +44,7 @@ export default function Shop() {
     axios
       .get(url)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
         setItem(response.data);
       })
       .catch(function (error) {

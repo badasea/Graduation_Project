@@ -146,14 +146,14 @@ export default function PersistentDrawerLeft() {
       help_id: session_edit.help_id,
       help_user_id: session_edit.help_user_id,
     };
-    console.log(user);
+    // console.log(user);
     await axios
       .post(
         process.env.REACT_APP_API_URL + "/api/item/" + session_edit.item_id,
         user
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         alert("상품 데이터가 수정 되었습니다.");
         document.location.href = "/admin/item";
       })

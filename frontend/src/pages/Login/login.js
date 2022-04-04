@@ -30,7 +30,7 @@ export default function SignInSide() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log(user);
+    // console.log(user);
     //setCookie("cookie", data.get("email"), 1);
     var url = process.env.REACT_APP_API_URL + "/api/user/login/" + user.email;
     axios
