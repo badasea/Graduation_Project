@@ -41,17 +41,9 @@
 - 접근 불가능한 브라우저
   (카카오에서 구글 로그인시)
 
-### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 4월 4일 기준)
+### 현재 개발 스터디 및 설계 고려가 필요한 부분(22년 4월 5일 기준)
 
-1. 파이썬 django로 머신 러닝 서버 -> 사용자들 취향에 맞는 추천 시스템 알고리즘 스터디 시작 (22. 03.07.)
-
-추천 시스템 도입
-
-- a. 콘텐츠 기반 필터링 (Content-base-filterling)
-
-2. 데이터 잇슈 (공공데이터 활용 or 가상 데이터 생성)
-
-3. 지역 및 업종 처음 화면 리스트
+1. 지역 및 업종 카테고리 화면 리스트
 
 # 🖥 화면 정의서 (~ing)
 
@@ -129,9 +121,11 @@ PC - Mobile(Android) web
 <br/>
 <br/>
 
-# ⚙ 시스템 아키텍처 (~ing 2022. 03. 21)
+# ⚙ 시스템 아키텍처
 
-![image](https://user-images.githubusercontent.com/57929751/159270648-e99ed8f6-4732-47f4-bd55-e040def0dc1f.png)
+![image](https://user-images.githubusercontent.com/57929751/161754957-c104bdda-b80d-4c36-9022-cf3701713948.png)
+
+
 
 # 📌 요구 사항 분석
 
@@ -154,11 +148,6 @@ PC - Mobile(Android) web
 - chart canvasjs
 - 웹캠 화면 구성
 - 구글, 카카오, 네이버 로그인
-
-### 머신러닝
-
-- Django REST API Server
-- 상점 추천 알고리즘
 
 ### 클라우드
 
@@ -309,7 +298,6 @@ PaasTa, Heroku, docker image로 앱 배포
 - [x] 메인 화면 구성
 - [x] 가게 랜덤 출력
 - [x] 상품 랜덤 출력
-- [ ] 콘텐츠 기반 필터링 기능 (유저 취향에 따라)
 - [x] 메인 화면 광고 배너 프로그래스바 기능
 - [x] 고객 센터 기능 (게시판기능)
 - [x] 사용자 개인 메뉴 사이드바
@@ -340,13 +328,11 @@ PaasTa, Heroku, docker image로 앱 배포
 
 # ⚙ 기술 스택
 
-개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js, python3, java8
+개발언어 : CSS3, HTML5, JAVASCRIPT(ECMAScript6), REACTJS(JSX), Node.js, java8
 
 Front-End : REACT(Spring Maven)
 
 Back-End : Express(Node.js v16.13.1)
-
-ML : Django
 
 Dev.Ops : Docker, Docker Compose
 
@@ -355,8 +341,6 @@ Package
 Front-End : Npm( React-router-dom,react-device-detect, cross-env, Material-Ui, axios, react-google-login, react-kakao-login, slick, canvasjs... )
 
 Back-End : Npm( Express, mysql, socket.io, dotenv, cors, morgan, cloudinary... )
-
-ML : pip(django, djangorestframework, mysqlclient, django-cors-headers, pymysql...)
 
 API - google-login, kakao-login, kakao-map, naver-login
 
