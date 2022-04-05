@@ -18,7 +18,7 @@
 
 **Front-End : React**
 
-**Back-End : Express, Django**
+**Back-End : Express**
 
 **DB : Mysql**
 
@@ -124,8 +124,6 @@ PC - Mobile(Android) web
 # ⚙ 시스템 아키텍처
 
 ![image](https://user-images.githubusercontent.com/57929751/161754957-c104bdda-b80d-4c36-9022-cf3701713948.png)
-
-
 
 # 📌 요구 사항 분석
 
@@ -279,7 +277,7 @@ PaasTa, Heroku, docker image로 앱 배포
 - 수정 기능
 - 삭제 기능
 
-# ✔ 요구사항 체크리스트
+<!-- # ✔ 요구사항 체크리스트
 
 - 개발자 관점
 - [ ] 소스 코드 정리 (직관적인지)
@@ -324,7 +322,7 @@ PaasTa, Heroku, docker image로 앱 배포
 - [x] 가게 관리 페이지
 - [x] 상품 관리 페이지
 - [x] 주문 관리 페이지
-- [x] 고객센터 관리 페이지
+- [x] 고객센터 관리 페이지 -->
 
 # ⚙ 기술 스택
 
@@ -362,6 +360,4 @@ font : Gmarket Sans TTF
 
 # ⚙ ERD
 
-![image](https://user-images.githubusercontent.com/57929751/160775459-8ef87771-5cc2-4c02-a08f-d84d38506a64.png)
-
-# 📑 상세기술 정의서
+![image](https://user-images.githubusercontent.com/57929751/161764564-b997b887-0a3e-4635-97c7-37cdb0fae5d5.png)
