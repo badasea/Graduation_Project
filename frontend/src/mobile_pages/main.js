@@ -268,7 +268,7 @@ export default function PersistentDrawerLeft() {
           </Link>
         </Typography>
         <ItemList />
-        <Typography variant="h6" color="common.white">
+        {/* <Typography variant="h6" color="common.white">
           <Link color="common.black" underline="none">
             <p>
               <span className="main_logo">LI.CO.</span> MARKET 알고리즘 추천
@@ -310,7 +310,7 @@ export default function PersistentDrawerLeft() {
           <div>
             <ItemList />
           </div>
-        )}
+        )} */}
       </Main>
     </Box>
   );

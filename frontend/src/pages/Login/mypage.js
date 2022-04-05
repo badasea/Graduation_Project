@@ -466,7 +466,7 @@ export default function PersistentDrawerLeft() {
                       onChange={onAddressHandler}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-multiple-checkbox-label">
                         <Link color="common.black" underline="none">
@@ -490,15 +490,15 @@ export default function PersistentDrawerLeft() {
                         ))}
                       </Select>
                     </FormControl>
-                  </Grid>
-                  <Grid item xs={12}>
+                  </Grid> */}
+                  {/* <Grid item xs={12}>
                     <Typography component="h1" variant="h6">
                       <Link color="common.black" underline="none">
                         현재 관심 지역 : {user.user_like_place}
                       </Link>
                     </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
+                  </Grid> */}
+                  {/* <Grid item xs={12}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-multiple-checkbox-label">
                         <Link color="common.black" underline="none">
@@ -518,20 +518,20 @@ export default function PersistentDrawerLeft() {
                       >
                         {likes.map((liked) => (
                           <MenuItem key={liked} value={liked}>
-                            {liked}
-                            {/* <ListItemText primary={liked} /> */}
-                          </MenuItem>
+                            {liked} */}
+                  {/* <ListItemText primary={liked} /> */}
+                  {/* </MenuItem>
                         ))}
                       </Select>
                     </FormControl>
-                  </Grid>
-                  <Grid item xs={12}>
+                  </Grid> */}
+                  {/* <Grid item xs={12}>
                     <Typography component="h1" variant="h6">
                       <Link color="common.black" underline="none">
                         현재 관심 업종 : {user.user_like_type}
                       </Link>
                     </Typography>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
                 <Button
                   type="submit"
