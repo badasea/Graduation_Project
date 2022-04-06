@@ -207,7 +207,7 @@ function App() {
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/mypage" element={<Mypage />}></Route>
             <Route path="/local" element={<MobileLocal />}></Route>
-            <Route path="/local/:id" element={<MobileLocal />}></Route>
+            <Route path="/local/:id" element={<Local />}></Route>
 
             <Route path="/local/:id/food" element={<MobileFood />}></Route>
             <Route path="/local/:id/hanbok" element={<MobileHanbok />}></Route>
@@ -221,10 +221,7 @@ function App() {
               path="/businesstype"
               element={<MobileBusinesstype />}
             ></Route>
-            <Route
-              path="/businesstype/:id"
-              element={<MobileBusinesstype />}
-            ></Route>
+            <Route path="/businesstype/:id" element={<Businesstype />}></Route>
             <Route
               path="/businesstype/:id/seongbuck"
               element={<MobileSeongbuck />}
