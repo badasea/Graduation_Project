@@ -1,7 +1,5 @@
 # 👨‍🎓 Graduation_Project
 
-(Lico market Beta. V1.1.3 )
-
 # 링크 : https://licomarket.paas-ta.org/
 
 <div align="center">
