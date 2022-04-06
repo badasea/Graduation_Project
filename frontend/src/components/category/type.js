@@ -16,7 +16,7 @@ const images = [
     width: "33%",
   },
   {
-    url: "../img/jongno.jpg",
+    url: "../img/localjongno.png",
     title: "종로구",
     width: "33%",
   },
