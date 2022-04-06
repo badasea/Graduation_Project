@@ -191,11 +191,11 @@ export default function PersistentDrawerLeft() {
           </Typography>
           {login === false ? (
             <div>
-              <Button size="medium">
+              {/* <Button size="medium">
                 <Link href="/signup" color="common.black" underline="none">
                   REGISTER
                 </Link>
-              </Button>
+              </Button> */}
               <Button size="medium">
                 <Link href="/login" color="common.black" underline="none">
                   LOG IN
@@ -281,8 +281,8 @@ export default function PersistentDrawerLeft() {
         <br />
         <br />
         <br />
-        <Paper variant="outlined" square>
-          <Container maxWidth="sx">
+        {/* <Paper variant="outlined" square> */}
+          {/* <Container maxWidth="sx"> */}
             <Typography variant="h4" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
@@ -362,8 +362,8 @@ export default function PersistentDrawerLeft() {
             </Grid>
             <Divider /> */}
             <br />
-          </Container>
-        </Paper>
+          {/* </Container> */}
+        {/* </Paper> */}
       </Main>
     </Box>
   );
