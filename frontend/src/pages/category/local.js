@@ -30,6 +30,7 @@ import { Container } from "@mui/material";
 import { Paper } from "@mui/material";
 
 import axios from "axios";
+import Choice from "../../components/category/local";
 
 const drawerWidth = 240;
 
@@ -278,6 +279,8 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <br />
+        <br />
         <Paper variant="outlined" square>
           <Container maxWidth="sx">
             <Typography variant="h4" color="common.white">
@@ -290,7 +293,8 @@ export default function PersistentDrawerLeft() {
                 </p>
               </Link>
             </Typography>
-            <Typography variant="h6" color="common.white">
+            <Choice />
+            {/* <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
                   <span className="main_logo">LI.CO.</span> 음식점
@@ -307,14 +311,14 @@ export default function PersistentDrawerLeft() {
                   전체보기
                 </Link>
               </Grid>
-              <Grid item xs={10}>
-                {/* {arr[4] === "seongbuck" ? <SeongbuckFoodList /> : <div></div>} */}
-                {/* {arr[4] === "yeongdeungpo" ? <YeongdeungpoFoodList /> : <></>} */}
-                {/* {arr[4] === "jongno" ? <JongnoFoodList /> : <></>} */}
-                {/* <ItemList /> */}
-              </Grid>
-            </Grid>
-            <Divider />
+              <Grid item xs={10}> */}
+            {/* {arr[4] === "seongbuck" ? <SeongbuckFoodList /> : <div></div>} */}
+            {/* {arr[4] === "yeongdeungpo" ? <YeongdeungpoFoodList /> : <></>} */}
+            {/* {arr[4] === "jongno" ? <JongnoFoodList /> : <></>} */}
+            {/* <ItemList /> */}
+            {/* </Grid>
+            </Grid> */}
+            {/* <Divider />
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
@@ -333,8 +337,8 @@ export default function PersistentDrawerLeft() {
                 </Link>
               </Grid>
               <Grid item xs={10}></Grid>
-            </Grid>{" "}
-            <Divider />
+            </Grid>{" "} */}
+            {/* <Divider />
             <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
@@ -361,8 +365,8 @@ export default function PersistentDrawerLeft() {
                   <span className="main_logo">LI.CO.</span> 기타 업종
                 </p>
               </Link>
-            </Typography>
-            <Grid container spacing={3}>
+            </Typography> */}
+            {/* <Grid container spacing={3}>
               <Grid item xs={2}>
                 <Typography sx={{ fontSize: 18 }} align="left" underline="none">
                   <Link
@@ -375,7 +379,8 @@ export default function PersistentDrawerLeft() {
                 </Typography>
               </Grid>
               <Grid item xs={10}></Grid>
-            </Grid>{" "}
+            </Grid>{" "} */}
+            <br />
             <Divider />
           </Container>
         </Paper>

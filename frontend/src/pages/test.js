@@ -27,6 +27,8 @@ import axios from "axios";
 
 import Map from "./Shopping/map";
 
+import IM from "../components/category/type";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -296,7 +298,10 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
-        <Map />
+        <br />
+        <br />
+        <br />
+        <IM />
       </Main>
     </Box>
   );

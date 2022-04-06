@@ -32,6 +32,7 @@ import ShopList from "../../components/card/shop_card";
 import { Container } from "@mui/material";
 import { Paper } from "@mui/material";
 import axios from "axios";
+import Choice from "../../components/category/type";
 
 const drawerWidth = 240;
 
@@ -277,6 +278,9 @@ export default function PersistentDrawerLeft() {
         open={open}
       >
         <DrawerHeader />
+        <br />
+        <br />
+        <br />
         <Paper variant="outlined" square>
           <Container maxWidth="sx">
             <Typography variant="h4" color="common.white">
@@ -290,7 +294,8 @@ export default function PersistentDrawerLeft() {
                 </p>
               </Link>
             </Typography>
-            <Typography variant="h6" color="common.white">
+            <Choice />
+            {/* <Typography variant="h6" color="common.white">
               <Link color="common.black" underline="none">
                 <p>
                   <span className="main_logo">LI.CO.</span> IN 성북
@@ -355,7 +360,8 @@ export default function PersistentDrawerLeft() {
                 <ShopList />
               </Grid>
             </Grid>
-            <Divider />
+            <Divider /> */}
+            <br />
           </Container>
         </Paper>
       </Main>
