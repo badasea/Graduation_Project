@@ -78,8 +78,6 @@ exports.edit = async function (req, res) {
         user_password: req.body.user_password,
         user_address: req.body.user_address,
         user_type: req.body.user_type,
-        user_like_place: req.body.user_like_place,
-        user_like_type: req.body.user_like_type,
         user_img: req.body.user_img,
       });
     }
@@ -90,8 +88,6 @@ exports.edit = async function (req, res) {
         user_password: req.body.user_password,
         user_address: req.body.user_address,
         user_type: req.body.user_type,
-        user_like_place: req.body.user_like_place,
-        user_like_type: req.body.user_like_type,
         user_img: req.body.user_img,
       });
     } else {
@@ -105,8 +101,6 @@ exports.edit = async function (req, res) {
         user_password: req.body.user_password,
         user_address: req.body.user_address,
         user_type: req.body.user_type,
-        user_like_place: req.body.user_like_place,
-        user_like_type: req.body.user_like_type,
         user_img: img.url,
       });
     }

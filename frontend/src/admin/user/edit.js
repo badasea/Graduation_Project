@@ -121,8 +121,6 @@ export default function PersistentDrawerLeft() {
   const [name, setName] = useState(session_edit.user_name);
   const [password, setPassword] = useState(session_edit.user_password);
   const [address, setAddress] = useState(session_edit.user_address);
-  const [like_place, setLike_place] = useState(session_edit.user_like_place);
-  const [like_type, setLike_type] = useState(session_edit.user_like_type);
   const [type, settype] = useState(session_edit.user_type);
 
   // 이름
@@ -143,16 +141,6 @@ export default function PersistentDrawerLeft() {
   // 주소
   const onAddressHandler = (event) => {
     setAddress(event.currentTarget.value);
-  };
-
-  // 관심 지역
-  const onPlaceHandler = (event) => {
-    setLike_place(event.currentTarget.value);
-  };
-
-  // 관심 업종
-  const onTypeHandler = (event) => {
-    setLike_type(event.currentTarget.value);
   };
 
   // 유저 타입
@@ -189,10 +177,8 @@ export default function PersistentDrawerLeft() {
       user_name: data.get("Name"),
       user_address: data.get("address"),
       user_email: data.get("Email"),
-      user_like_place: data.get("stock"),
       user_img: pre_img,
       user_id: session_edit.user_id,
-      user_like_type: data.get("like_type"),
       user_type: data.get("type"),
     };
     // console.log(user);
@@ -350,30 +336,7 @@ export default function PersistentDrawerLeft() {
                       onChange={onAddressHandler}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="관심지역"
-                      required
-                      fullWidth
-                      name="stock"
-                      id="stock"
-                      autoComplete="new-password"
-                      value={like_place}
-                      onChange={onPlaceHandler}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      label="관심업종"
-                      required
-                      fullWidth
-                      name="like_type"
-                      id="like_type"
-                      autoComplete="new-password"
-                      value={like_type}
-                      onChange={onTypeHandler}
-                    />
-                  </Grid>
+
                   <Grid item xs={12}>
                     <TextField
                       label="유저타입"
